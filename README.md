@@ -1,0 +1,2 @@
+# DeepGaming
+Projekti i diplomes
