@@ -36,7 +36,7 @@ public class GpuArchitecture {
 	 */
 	private Integer idGpuArchitecture;
 
-	@Column(name = "gpu_architecture_name", nullable = false, length = 50)
+	@Column(name = "gpu_architecture_name", unique = true, nullable = false, length = 50)
 	/**
 	 * This variable is mapped to the "gpu_architecture_name" field in the
 	 * "gpu_architecture" table in the database which contains the name of the

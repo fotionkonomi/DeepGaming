@@ -36,7 +36,7 @@ public class GpuFamily {
 	 */
 	private Integer idGpuFamily;
 
-	@Column(name = "gpu_family_name", nullable = false, length = 50)
+	@Column(name = "gpu_family_name", unique = true, nullable = false, length = 50)
 	/**
 	 * This variable is mapped to the "gpu_family_name" field in the "gpu_family"
 	 * table in the database which contains information regarding the GPU family's

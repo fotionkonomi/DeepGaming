@@ -1,6 +1,8 @@
 package al.edu.fti.deep_gaming.models;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -13,6 +15,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -35,7 +38,7 @@ public class Chipset {
 	 */
 	private Integer idChipset;
 
-	@Column(name = "chipset_name", nullable = false, length = 50)
+	@Column(name = "chipset_name", unique = true, nullable = false, length = 50)
 	/**
 	 * This variable is mapped to the "chipset_name" field in the "chipset" table in
 	 * the database which contains the name of the CPU chipset. Has to be 50 or less
@@ -59,4 +62,7 @@ public class Chipset {
 	
 	@ManyToMany(mappedBy = "chipsetsThatSupportThisCpu")
 	private Set<CPU> cpusThatAreSupportedByThisChipset = new HashSet<CPU>();
+	
+	@OneToMany(mappedBy = "chipsetOfThisMotherboard")
+	private List<Motherboard> motherboardsThatHaveThisChipset = new ArrayList<Motherboard>();
 }

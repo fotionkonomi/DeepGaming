@@ -34,7 +34,7 @@ public class Company {
 	 */
 	private Integer idCompany;
 
-	@Column(name = "company_name", nullable = false, length = 100)
+	@Column(name = "company_name", nullable = false, length = 50, unique = true)
 	/**
 	 * Variabli lidhet me fushen "company_name" ne bazen e te dhenave, e cila mban
 	 * informacion rreth emrit te kompanise
@@ -96,6 +96,21 @@ public class Company {
 
 	@OneToMany(mappedBy = "companyThatCreatedThisChipset")
 	private List<Chipset> chipsetsOfThisCompany = new ArrayList<>();
+
+	@OneToMany(mappedBy = "companyOfThisMotherboard")
+	private List<Motherboard> motherboardsOfThisCompany = new ArrayList<Motherboard>();
+
+	@OneToMany(mappedBy = "companyOfThisPowerSupply")
+	private List<PowerSupply> powerSuppliesOfThisCompany = new ArrayList<PowerSupply>();
+
+	@OneToMany(mappedBy = "companyOfThisStorage")
+	private List<Storage> storagesOfThisCompany = new ArrayList<Storage>();
+
+	@OneToMany(mappedBy = "ramSticksCompany")
+	private List<Ram> ramsOfThisCompany = new ArrayList<Ram>();
+
+	@OneToMany(mappedBy = "companyOfThisOS")
+	private List<OperatingSystemType> operatingSystemsOfThisCompany = new ArrayList<OperatingSystemType>();
 	/* Konstruktor me parametra */
 	// ----------
 	// ----------

@@ -32,7 +32,7 @@ public class Role {
 	 */
 	private Integer roleId;
 
-	@Column(name = "role_name", nullable = false, length = 50)
+	@Column(name = "role_name", unique = true, nullable = false, length = 50)
 	/**
 	 * This variable is mapped to the "role_name" field in the "role" table in the
 	 * database which contains the names of different roles of the system

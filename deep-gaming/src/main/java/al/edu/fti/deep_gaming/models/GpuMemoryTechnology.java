@@ -31,7 +31,7 @@ public class GpuMemoryTechnology {
 	 */
 	private Integer idGpuMemoryTechnology;
 
-	@Column(name = "gpu_memory_technology_name", nullable = false, length = 50)
+	@Column(name = "gpu_memory_technology_name", unique = true, nullable = false, length = 50)
 	/**
 	 * Variabli lidhet me fushen "gpu_memory_technology_name" ne tabelen
 	 * "gpu_memory_technology" ne bazen e te dhenave, e cila mban informacion ne

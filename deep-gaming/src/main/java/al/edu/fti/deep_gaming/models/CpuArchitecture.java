@@ -35,7 +35,7 @@ public class CpuArchitecture {
 	 */
 	private Integer idCpuArchitecture;
 
-	@Column(name = "cpu_architecture_name", nullable = false, length = 50)
+	@Column(name = "cpu_architecture_name", unique = true, nullable = false, length = 50)
 	/**
 	 * This variable is mapped to the "cpu_architecture_name" field in the
 	 * "cpu_architecture" table in the database which contains information regarding

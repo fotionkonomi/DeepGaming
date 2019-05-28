@@ -1,13 +1,16 @@
 package al.edu.fti.deep_gaming.models;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -31,7 +34,7 @@ public class GpuSlot {
 	 */
 	private Integer idGpuSlot;
 
-	@Column(name = "gpu_slot_name", nullable = false, length = 50)
+	@Column(name = "gpu_slot_name", unique = true, nullable = false, length = 50)
 	/**
 	 * This variable is mapped to the "gpu_slot_name" field of the "gpu_slot" table
 	 * in the database which contains information about the slot's name
@@ -51,6 +54,8 @@ public class GpuSlot {
 	@OneToMany(mappedBy = "gpuSlotOfThisGpu")
 	private List<GPU> gpusThatHaveThisSlot = new ArrayList<GPU>();
 
+	@ManyToMany(mappedBy = "gpuSlotsOfThisMotherborad")
+	private Set<Motherboard> motherboardsThatHaveThisGpuSlot = new HashSet<Motherboard>();
 	/* Konstruktor me parametra */
 	// ----------
 	// ----------

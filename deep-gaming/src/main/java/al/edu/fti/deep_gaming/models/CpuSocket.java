@@ -35,7 +35,7 @@ public class CpuSocket {
 	 */
 	private Integer idCpuSocket;
 
-	@Column(name = "socket_name", nullable = false, length = 50)
+	@Column(name = "socket_name", unique = true, nullable = false, length = 50)
 	/**
 	 * This variable is mapped to the "socket_name" field in the "cpu_socket" table
 	 * in the database which contains the name of the CPU sockets. Has to be 50 or
@@ -59,8 +59,11 @@ public class CpuSocket {
 	 * The company which created this socket
 	 */
 	private Company companyThatCreatedThisSocket;
-	
+
 	@OneToMany(mappedBy = "socketForThisCpu")
 	private List<CPU> cpusForThisSocket = new ArrayList<CPU>();
+
+	@OneToMany(mappedBy = "cpuSocketOfThisMotherboard")
+	private List<Motherboard> motherboardsThatHaveThisSocket = new ArrayList<Motherboard>();
 
 }

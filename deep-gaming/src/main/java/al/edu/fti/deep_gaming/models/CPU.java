@@ -76,4 +76,13 @@ public class CPU extends Product {
 
 	@OneToMany(mappedBy = "cpuThatHasBeenTested")
 	private List<CpuBenchmark> benchmarksOfThisCpu = new ArrayList<CpuBenchmark>();
+
+	@OneToMany(mappedBy = "cpuLow")
+	private List<Game> gamesWhereThisCpuIsLow = new ArrayList<Game>();
+	
+	@OneToMany(mappedBy = "cpuMedium")
+	private List<Game> gamesWhereThisCpuIsMedium = new ArrayList<Game>();
+	
+	@OneToMany(mappedBy = "cpuHigh")
+	private List<Game> gamesWhereThisCpuIsHigh = new ArrayList<Game>();
 }

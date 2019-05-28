@@ -31,7 +31,7 @@ public class CpuBenchmarkType {
 	 */
 	private Integer idCpuBenchmarkType;
 
-	@Column(name = "cpu_benchmark_type_name", nullable = false, length = 50)
+	@Column(name = "cpu_benchmark_type_name", unique = true, nullable = false, length = 50)
 	/**
 	 * This variable is mapped to the "cpu_benchmark_type_name" field in the
 	 * "cpu_benchmark_type" table in the database which contains information

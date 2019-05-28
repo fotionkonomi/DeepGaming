@@ -96,4 +96,17 @@ public class GPU extends Product {
 
 	@OneToMany(mappedBy = "gpuOfHisComputer")
 	private List<User> usersThatHaveThisGpu = new ArrayList<User>();
+	
+	@OneToMany(mappedBy = "gpuThatHasBeenTested")
+	private List<GpuBenchmark> benchmarksOfThisGpu = new ArrayList<GpuBenchmark>();
+
+	@OneToMany(mappedBy = "gpuLow")
+	private List<Game> gamesWhereThisGpuIsLow = new ArrayList<Game>();
+	
+	@OneToMany(mappedBy = "gpuMedium")
+	private List<Game> gamesWhereThisGpuIsMedium = new ArrayList<Game>();
+	
+	@OneToMany(mappedBy = "gpuHigh")
+	private List<Game> gamesWhereThisGpuIsHigh = new ArrayList<Game>();
+	
 }

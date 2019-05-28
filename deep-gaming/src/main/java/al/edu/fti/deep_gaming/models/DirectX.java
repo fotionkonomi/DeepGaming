@@ -30,7 +30,7 @@ public class DirectX {
 	 */
 	private Integer idDirectX;
 
-	@Column(name = "direct_x_type", nullable = false, length = 50)
+	@Column(name = "direct_x_type", unique = true, nullable = false, length = 50)
 	/**
 	 * Variabli ben lidhjen me fushen "direct_x_type" te tabeles "direct_x" ne bazen
 	 * e te dhenave e cila mban informacion rreth emrit te tipit te direct_x
@@ -47,6 +47,9 @@ public class DirectX {
 
 	@OneToMany(mappedBy = "maximumDirectXSupportedByThisGpu")
 	private List<GPU> gpusOfThisDirectX = new ArrayList<GPU>();
+	
+	@OneToMany(mappedBy = "directXMinimum")
+	private List<Game> gamesThatHaveThisDirectXAsMinimum = new ArrayList<Game>();
 
 	/* Konstruktor me parametra */
 	// ----------

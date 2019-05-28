@@ -1,16 +1,21 @@
 package al.edu.fti.deep_gaming.models;
 
 import javax.persistence.Table;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 @Table(name = "ram_memory_technology")
 /**
- * Klasa qe mban informacione rreth teknologjive te memories ram 
+ * Klasa qe mban informacione rreth teknologjive te memories ram
  * 
  * @author kfotj
  *
@@ -25,7 +30,7 @@ public class RamMemoryTechnology {
 	 */
 	private Integer idRamMemoryTechnology;
 
-	@Column(name = "ram_memory_technology_name", nullable = false, length = 50)
+	@Column(name = "ram_memory_technology_name", nullable = false, unique = true, length = 50)
 	/**
 	 * Variabli lidhet me fushen "ram_memory_technology_name" ne tabelen
 	 * "memory_technology" ne bazen e te dhenave, e cila mban informacion ne lidhje
@@ -40,8 +45,12 @@ public class RamMemoryTechnology {
 	 * pershkruan kete lloj teknologjie
 	 */
 	private String ramMemoryTechnologyDescription;
-	
-	
+
+	@OneToMany(mappedBy = "memoryTechnologyOfThisMotherboard")
+	private List<Motherboard> motherboardsThatHaveThisRamMemoryTechnology = new ArrayList<Motherboard>();
+
+	@OneToMany(mappedBy = "technologyOfThisRamStick")
+	private List<Ram> ramsOfThisTechnology = new ArrayList<Ram>();
 
 	/* Konstruktor me parametra */
 	// ----------
@@ -54,7 +63,6 @@ public class RamMemoryTechnology {
 	// ----------
 	// ----------
 	/* Konstruktori pa parametra */
-	
 
 	/* Getter setterat */
 	// ----------

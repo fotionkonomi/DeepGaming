@@ -36,7 +36,7 @@ public class CpuFamily {
 	 */
 	private Integer idCpuFamily;
 
-	@Column(name = "cpu_family_name", nullable = false, length = 50)
+	@Column(name = "cpu_family_name", unique = true, nullable = false, length = 50)
 	/**
 	 * This variable is mapped to the "cpu_family_name" field in the "cpu_family"
 	 * table in the database which contains information regarding the CPU family's
