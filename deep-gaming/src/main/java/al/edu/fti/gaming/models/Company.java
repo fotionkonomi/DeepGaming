@@ -1,0 +1,401 @@
+package al.edu.fti.gaming.models;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+@Entity
+@Table(name = "company")
+/**
+ * Klasa Company sherben per te specifikuar cila kompani ka krijuar nje prej
+ * produkteve qe ndodhen ne sistem
+ * 
+ * @author kfotj
+ *
+ */
+public class Company implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6246367071634836278L;
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_company", nullable = false)
+	/**
+	 * Çelesi primar ne tabelen "company" ne bazen e te dhenave, i cili
+	 * autoinkrementohet
+	 */
+	private Integer idCompany;
+
+	@Column(name = "company_name", nullable = false, length = 50, unique = true)
+	/**
+	 * Variabli lidhet me fushen "company_name" ne bazen e te dhenave, e cila mban
+	 * informacion rreth emrit te kompanise
+	 */
+	private String companyName;
+
+	@Column(name = "company_description", nullable = false, length = 65535)
+	/**
+	 * Variabli lidhet me fushen "company_description" ne bazen e te dhenave, e cila
+	 * mban informacion per te pershkruar kompanine
+	 */
+	private String companyDescription;
+
+	@Column(name = "date_of_creation", nullable = false, columnDefinition = "DATETIME")
+	@Temporal(TemporalType.TIMESTAMP)
+	/**
+	 * Variabli lidhet me fushen "date_of_creation" ne bazen e te dhenave, e cila
+	 * mban informacion rreth dates kur kompania eshte formuar
+	 */
+	private Date dateOfCreation;
+
+	@Column(name = "hyperlink", nullable = false, length = 255)
+	/**
+	 * Variabli lidhet me fushen "hyperlink" ne bazen e te dhenave dhe mban nje link
+	 * qe perdoruesi mund ta perdore per te pare me shume informacion rreth
+	 * kompanise se ajo e ofruar ne sistemin tone
+	 */
+	private String hyperlink;
+
+	@OneToMany(mappedBy = "companyOfThisCpuFamily")
+	/**
+	 * CPU Families that are created by this company
+	 */
+	private List<CpuFamily> cpuFamiliesOfThisCompany = new ArrayList<>();
+
+	@OneToMany(mappedBy = "companyOfThisGpuFamily")
+	/**
+	 * GPU Families that are created by this company
+	 */
+	private List<GpuFamily> gpuFamiliesOfThisCompany = new ArrayList<>();
+
+	@OneToMany(mappedBy = "companyOfThisCpuArchitecture")
+	/**
+	 * CPU architectures that are created by this company
+	 */
+	private List<CpuArchitecture> cpuArchitecturesOfThisCompany = new ArrayList<>();
+
+	@OneToMany(mappedBy = "companyOfThisGpuArchitecture")
+	/**
+	 * GPU architectures that are created by this company
+	 */
+	private List<GpuArchitecture> gpuArchitecturesOfThisCompany = new ArrayList<>();
+
+	@OneToMany(mappedBy = "companyThatCreatedThisSocket")
+	/**
+	 * CPU sockets that are created by this company
+	 */
+	private List<CpuSocket> cpuSocketsOfThisCompany = new ArrayList<>();
+
+	@OneToMany(mappedBy = "companyThatCreatedThisChipset")
+	private List<Chipset> chipsetsOfThisCompany = new ArrayList<>();
+
+	@OneToMany(mappedBy = "companyOfThisMotherboard")
+	private List<Motherboard> motherboardsOfThisCompany = new ArrayList<Motherboard>();
+
+	@OneToMany(mappedBy = "companyOfThisPowerSupply")
+	private List<PowerSupply> powerSuppliesOfThisCompany = new ArrayList<PowerSupply>();
+
+	@OneToMany(mappedBy = "companyOfThisStorage")
+	private List<Storage> storagesOfThisCompany = new ArrayList<Storage>();
+
+	@OneToMany(mappedBy = "ramSticksCompany")
+	private List<Ram> ramsOfThisCompany = new ArrayList<Ram>();
+
+	@OneToMany(mappedBy = "companyOfThisOS")
+	private List<OperatingSystemType> operatingSystemsOfThisCompany = new ArrayList<OperatingSystemType>();
+
+	public Company(Integer idCompany, String companyName, String companyDescription, Date dateOfCreation,
+			String hyperlink, List<CpuFamily> cpuFamiliesOfThisCompany, List<GpuFamily> gpuFamiliesOfThisCompany,
+			List<CpuArchitecture> cpuArchitecturesOfThisCompany, List<GpuArchitecture> gpuArchitecturesOfThisCompany,
+			List<CpuSocket> cpuSocketsOfThisCompany, List<Chipset> chipsetsOfThisCompany,
+			List<Motherboard> motherboardsOfThisCompany, List<PowerSupply> powerSuppliesOfThisCompany,
+			List<Storage> storagesOfThisCompany, List<Ram> ramsOfThisCompany,
+			List<OperatingSystemType> operatingSystemsOfThisCompany) {
+		super();
+		this.idCompany = idCompany;
+		this.companyName = companyName;
+		this.companyDescription = companyDescription;
+		this.dateOfCreation = dateOfCreation;
+		this.hyperlink = hyperlink;
+		this.cpuFamiliesOfThisCompany = cpuFamiliesOfThisCompany;
+		this.gpuFamiliesOfThisCompany = gpuFamiliesOfThisCompany;
+		this.cpuArchitecturesOfThisCompany = cpuArchitecturesOfThisCompany;
+		this.gpuArchitecturesOfThisCompany = gpuArchitecturesOfThisCompany;
+		this.cpuSocketsOfThisCompany = cpuSocketsOfThisCompany;
+		this.chipsetsOfThisCompany = chipsetsOfThisCompany;
+		this.motherboardsOfThisCompany = motherboardsOfThisCompany;
+		this.powerSuppliesOfThisCompany = powerSuppliesOfThisCompany;
+		this.storagesOfThisCompany = storagesOfThisCompany;
+		this.ramsOfThisCompany = ramsOfThisCompany;
+		this.operatingSystemsOfThisCompany = operatingSystemsOfThisCompany;
+	}
+	
+	public Company() {
+		
+	}
+
+	public Integer getIdCompany() {
+		return idCompany;
+	}
+
+	public void setIdCompany(Integer idCompany) {
+		this.idCompany = idCompany;
+	}
+
+	public String getCompanyName() {
+		return companyName;
+	}
+
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
+	}
+
+	public String getCompanyDescription() {
+		return companyDescription;
+	}
+
+	public void setCompanyDescription(String companyDescription) {
+		this.companyDescription = companyDescription;
+	}
+
+	public Date getDateOfCreation() {
+		return dateOfCreation;
+	}
+
+	public void setDateOfCreation(Date dateOfCreation) {
+		this.dateOfCreation = dateOfCreation;
+	}
+
+	public String getHyperlink() {
+		return hyperlink;
+	}
+
+	public void setHyperlink(String hyperlink) {
+		this.hyperlink = hyperlink;
+	}
+
+	public List<CpuFamily> getCpuFamiliesOfThisCompany() {
+		return cpuFamiliesOfThisCompany;
+	}
+
+	public void setCpuFamiliesOfThisCompany(List<CpuFamily> cpuFamiliesOfThisCompany) {
+		this.cpuFamiliesOfThisCompany = cpuFamiliesOfThisCompany;
+	}
+
+	public List<GpuFamily> getGpuFamiliesOfThisCompany() {
+		return gpuFamiliesOfThisCompany;
+	}
+
+	public void setGpuFamiliesOfThisCompany(List<GpuFamily> gpuFamiliesOfThisCompany) {
+		this.gpuFamiliesOfThisCompany = gpuFamiliesOfThisCompany;
+	}
+
+	public List<CpuArchitecture> getCpuArchitecturesOfThisCompany() {
+		return cpuArchitecturesOfThisCompany;
+	}
+
+	public void setCpuArchitecturesOfThisCompany(List<CpuArchitecture> cpuArchitecturesOfThisCompany) {
+		this.cpuArchitecturesOfThisCompany = cpuArchitecturesOfThisCompany;
+	}
+
+	public List<GpuArchitecture> getGpuArchitecturesOfThisCompany() {
+		return gpuArchitecturesOfThisCompany;
+	}
+
+	public void setGpuArchitecturesOfThisCompany(List<GpuArchitecture> gpuArchitecturesOfThisCompany) {
+		this.gpuArchitecturesOfThisCompany = gpuArchitecturesOfThisCompany;
+	}
+
+	public List<CpuSocket> getCpuSocketsOfThisCompany() {
+		return cpuSocketsOfThisCompany;
+	}
+
+	public void setCpuSocketsOfThisCompany(List<CpuSocket> cpuSocketsOfThisCompany) {
+		this.cpuSocketsOfThisCompany = cpuSocketsOfThisCompany;
+	}
+
+	public List<Chipset> getChipsetsOfThisCompany() {
+		return chipsetsOfThisCompany;
+	}
+
+	public void setChipsetsOfThisCompany(List<Chipset> chipsetsOfThisCompany) {
+		this.chipsetsOfThisCompany = chipsetsOfThisCompany;
+	}
+
+	public List<Motherboard> getMotherboardsOfThisCompany() {
+		return motherboardsOfThisCompany;
+	}
+
+	public void setMotherboardsOfThisCompany(List<Motherboard> motherboardsOfThisCompany) {
+		this.motherboardsOfThisCompany = motherboardsOfThisCompany;
+	}
+
+	public List<PowerSupply> getPowerSuppliesOfThisCompany() {
+		return powerSuppliesOfThisCompany;
+	}
+
+	public void setPowerSuppliesOfThisCompany(List<PowerSupply> powerSuppliesOfThisCompany) {
+		this.powerSuppliesOfThisCompany = powerSuppliesOfThisCompany;
+	}
+
+	public List<Storage> getStoragesOfThisCompany() {
+		return storagesOfThisCompany;
+	}
+
+	public void setStoragesOfThisCompany(List<Storage> storagesOfThisCompany) {
+		this.storagesOfThisCompany = storagesOfThisCompany;
+	}
+
+	public List<Ram> getRamsOfThisCompany() {
+		return ramsOfThisCompany;
+	}
+
+	public void setRamsOfThisCompany(List<Ram> ramsOfThisCompany) {
+		this.ramsOfThisCompany = ramsOfThisCompany;
+	}
+
+	public List<OperatingSystemType> getOperatingSystemsOfThisCompany() {
+		return operatingSystemsOfThisCompany;
+	}
+
+	public void setOperatingSystemsOfThisCompany(List<OperatingSystemType> operatingSystemsOfThisCompany) {
+		this.operatingSystemsOfThisCompany = operatingSystemsOfThisCompany;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((chipsetsOfThisCompany == null) ? 0 : chipsetsOfThisCompany.hashCode());
+		result = prime * result + ((companyDescription == null) ? 0 : companyDescription.hashCode());
+		result = prime * result + ((companyName == null) ? 0 : companyName.hashCode());
+		result = prime * result
+				+ ((cpuArchitecturesOfThisCompany == null) ? 0 : cpuArchitecturesOfThisCompany.hashCode());
+		result = prime * result + ((cpuFamiliesOfThisCompany == null) ? 0 : cpuFamiliesOfThisCompany.hashCode());
+		result = prime * result + ((cpuSocketsOfThisCompany == null) ? 0 : cpuSocketsOfThisCompany.hashCode());
+		result = prime * result + ((dateOfCreation == null) ? 0 : dateOfCreation.hashCode());
+		result = prime * result
+				+ ((gpuArchitecturesOfThisCompany == null) ? 0 : gpuArchitecturesOfThisCompany.hashCode());
+		result = prime * result + ((gpuFamiliesOfThisCompany == null) ? 0 : gpuFamiliesOfThisCompany.hashCode());
+		result = prime * result + ((hyperlink == null) ? 0 : hyperlink.hashCode());
+		result = prime * result + ((idCompany == null) ? 0 : idCompany.hashCode());
+		result = prime * result + ((motherboardsOfThisCompany == null) ? 0 : motherboardsOfThisCompany.hashCode());
+		result = prime * result
+				+ ((operatingSystemsOfThisCompany == null) ? 0 : operatingSystemsOfThisCompany.hashCode());
+		result = prime * result + ((powerSuppliesOfThisCompany == null) ? 0 : powerSuppliesOfThisCompany.hashCode());
+		result = prime * result + ((ramsOfThisCompany == null) ? 0 : ramsOfThisCompany.hashCode());
+		result = prime * result + ((storagesOfThisCompany == null) ? 0 : storagesOfThisCompany.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Company other = (Company) obj;
+		if (chipsetsOfThisCompany == null) {
+			if (other.chipsetsOfThisCompany != null)
+				return false;
+		} else if (!chipsetsOfThisCompany.equals(other.chipsetsOfThisCompany))
+			return false;
+		if (companyDescription == null) {
+			if (other.companyDescription != null)
+				return false;
+		} else if (!companyDescription.equals(other.companyDescription))
+			return false;
+		if (companyName == null) {
+			if (other.companyName != null)
+				return false;
+		} else if (!companyName.equals(other.companyName))
+			return false;
+		if (cpuArchitecturesOfThisCompany == null) {
+			if (other.cpuArchitecturesOfThisCompany != null)
+				return false;
+		} else if (!cpuArchitecturesOfThisCompany.equals(other.cpuArchitecturesOfThisCompany))
+			return false;
+		if (cpuFamiliesOfThisCompany == null) {
+			if (other.cpuFamiliesOfThisCompany != null)
+				return false;
+		} else if (!cpuFamiliesOfThisCompany.equals(other.cpuFamiliesOfThisCompany))
+			return false;
+		if (cpuSocketsOfThisCompany == null) {
+			if (other.cpuSocketsOfThisCompany != null)
+				return false;
+		} else if (!cpuSocketsOfThisCompany.equals(other.cpuSocketsOfThisCompany))
+			return false;
+		if (dateOfCreation == null) {
+			if (other.dateOfCreation != null)
+				return false;
+		} else if (!dateOfCreation.equals(other.dateOfCreation))
+			return false;
+		if (gpuArchitecturesOfThisCompany == null) {
+			if (other.gpuArchitecturesOfThisCompany != null)
+				return false;
+		} else if (!gpuArchitecturesOfThisCompany.equals(other.gpuArchitecturesOfThisCompany))
+			return false;
+		if (gpuFamiliesOfThisCompany == null) {
+			if (other.gpuFamiliesOfThisCompany != null)
+				return false;
+		} else if (!gpuFamiliesOfThisCompany.equals(other.gpuFamiliesOfThisCompany))
+			return false;
+		if (hyperlink == null) {
+			if (other.hyperlink != null)
+				return false;
+		} else if (!hyperlink.equals(other.hyperlink))
+			return false;
+		if (idCompany == null) {
+			if (other.idCompany != null)
+				return false;
+		} else if (!idCompany.equals(other.idCompany))
+			return false;
+		if (motherboardsOfThisCompany == null) {
+			if (other.motherboardsOfThisCompany != null)
+				return false;
+		} else if (!motherboardsOfThisCompany.equals(other.motherboardsOfThisCompany))
+			return false;
+		if (operatingSystemsOfThisCompany == null) {
+			if (other.operatingSystemsOfThisCompany != null)
+				return false;
+		} else if (!operatingSystemsOfThisCompany.equals(other.operatingSystemsOfThisCompany))
+			return false;
+		if (powerSuppliesOfThisCompany == null) {
+			if (other.powerSuppliesOfThisCompany != null)
+				return false;
+		} else if (!powerSuppliesOfThisCompany.equals(other.powerSuppliesOfThisCompany))
+			return false;
+		if (ramsOfThisCompany == null) {
+			if (other.ramsOfThisCompany != null)
+				return false;
+		} else if (!ramsOfThisCompany.equals(other.ramsOfThisCompany))
+			return false;
+		if (storagesOfThisCompany == null) {
+			if (other.storagesOfThisCompany != null)
+				return false;
+		} else if (!storagesOfThisCompany.equals(other.storagesOfThisCompany))
+			return false;
+		return true;
+	}
+
+}
