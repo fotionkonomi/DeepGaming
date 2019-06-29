@@ -237,4 +237,163 @@ public class GpuDTO extends ProductDTO {
 		this.cpuRecommendedForThisGpu = cpuRecommendedForThisGpu;
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + ((architectureOfThisGpu == null) ? 0 : architectureOfThisGpu.hashCode());
+		result = prime * result + ((boostClock == null) ? 0 : boostClock.hashCode());
+		result = prime * result + ((cache == null) ? 0 : cache.hashCode());
+		result = prime * result + ((coreSpeed == null) ? 0 : coreSpeed.hashCode());
+		result = prime * result + ((cpuRecommendedForThisGpu == null) ? 0 : cpuRecommendedForThisGpu.hashCode());
+		result = prime * result + ((driverSupport == null) ? 0 : driverSupport.hashCode());
+		result = prime * result + ((familyOfThisGpu == null) ? 0 : familyOfThisGpu.hashCode());
+		result = prime * result + ((gpuSlotOfThisGpu == null) ? 0 : gpuSlotOfThisGpu.hashCode());
+		result = prime * result
+				+ ((maximumDirectXSupportedByThisGpu == null) ? 0 : maximumDirectXSupportedByThisGpu.hashCode());
+		result = prime * result + ((memoryBandwidth == null) ? 0 : memoryBandwidth.hashCode());
+		result = prime * result + ((memorySize == null) ? 0 : memorySize.hashCode());
+		result = prime * result + ((memorySpeed == null) ? 0 : memorySpeed.hashCode());
+		result = prime * result + ((memoryTechnologyOfThisGpu == null) ? 0 : memoryTechnologyOfThisGpu.hashCode());
+		result = prime * result + ((openGL == null) ? 0 : openGL.hashCode());
+		result = prime * result + ((pixelRate == null) ? 0 : pixelRate.hashCode());
+		result = prime * result + ((rayTracingCores == null) ? 0 : rayTracingCores.hashCode());
+		result = prime * result + ((rop == null) ? 0 : rop.hashCode());
+		result = prime * result + ((shader == null) ? 0 : shader.hashCode());
+		result = prime * result + ((shaderProcessingUnits == null) ? 0 : shaderProcessingUnits.hashCode());
+		result = prime * result + ((tdp == null) ? 0 : tdp.hashCode());
+		result = prime * result + ((tensorCores == null) ? 0 : tensorCores.hashCode());
+		result = prime * result + ((textureRate == null) ? 0 : textureRate.hashCode());
+		result = prime * result + ((tmu == null) ? 0 : tmu.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		GpuDTO other = (GpuDTO) obj;
+		if (architectureOfThisGpu == null) {
+			if (other.architectureOfThisGpu != null)
+				return false;
+		} else if (!architectureOfThisGpu.equals(other.architectureOfThisGpu))
+			return false;
+		if (boostClock == null) {
+			if (other.boostClock != null)
+				return false;
+		} else if (!boostClock.equals(other.boostClock))
+			return false;
+		if (cache == null) {
+			if (other.cache != null)
+				return false;
+		} else if (!cache.equals(other.cache))
+			return false;
+		if (coreSpeed == null) {
+			if (other.coreSpeed != null)
+				return false;
+		} else if (!coreSpeed.equals(other.coreSpeed))
+			return false;
+		if (cpuRecommendedForThisGpu == null) {
+			if (other.cpuRecommendedForThisGpu != null)
+				return false;
+		} else if (!cpuRecommendedForThisGpu.equals(other.cpuRecommendedForThisGpu))
+			return false;
+		if (driverSupport == null) {
+			if (other.driverSupport != null)
+				return false;
+		} else if (!driverSupport.equals(other.driverSupport))
+			return false;
+		if (familyOfThisGpu == null) {
+			if (other.familyOfThisGpu != null)
+				return false;
+		} else if (!familyOfThisGpu.equals(other.familyOfThisGpu))
+			return false;
+		if (gpuSlotOfThisGpu == null) {
+			if (other.gpuSlotOfThisGpu != null)
+				return false;
+		} else if (!gpuSlotOfThisGpu.equals(other.gpuSlotOfThisGpu))
+			return false;
+		if (maximumDirectXSupportedByThisGpu == null) {
+			if (other.maximumDirectXSupportedByThisGpu != null)
+				return false;
+		} else if (!maximumDirectXSupportedByThisGpu.equals(other.maximumDirectXSupportedByThisGpu))
+			return false;
+		if (memoryBandwidth == null) {
+			if (other.memoryBandwidth != null)
+				return false;
+		} else if (!memoryBandwidth.equals(other.memoryBandwidth))
+			return false;
+		if (memorySize == null) {
+			if (other.memorySize != null)
+				return false;
+		} else if (!memorySize.equals(other.memorySize))
+			return false;
+		if (memorySpeed == null) {
+			if (other.memorySpeed != null)
+				return false;
+		} else if (!memorySpeed.equals(other.memorySpeed))
+			return false;
+		if (memoryTechnologyOfThisGpu == null) {
+			if (other.memoryTechnologyOfThisGpu != null)
+				return false;
+		} else if (!memoryTechnologyOfThisGpu.equals(other.memoryTechnologyOfThisGpu))
+			return false;
+		if (openGL == null) {
+			if (other.openGL != null)
+				return false;
+		} else if (!openGL.equals(other.openGL))
+			return false;
+		if (pixelRate == null) {
+			if (other.pixelRate != null)
+				return false;
+		} else if (!pixelRate.equals(other.pixelRate))
+			return false;
+		if (rayTracingCores == null) {
+			if (other.rayTracingCores != null)
+				return false;
+		} else if (!rayTracingCores.equals(other.rayTracingCores))
+			return false;
+		if (rop == null) {
+			if (other.rop != null)
+				return false;
+		} else if (!rop.equals(other.rop))
+			return false;
+		if (shader == null) {
+			if (other.shader != null)
+				return false;
+		} else if (!shader.equals(other.shader))
+			return false;
+		if (shaderProcessingUnits == null) {
+			if (other.shaderProcessingUnits != null)
+				return false;
+		} else if (!shaderProcessingUnits.equals(other.shaderProcessingUnits))
+			return false;
+		if (tdp == null) {
+			if (other.tdp != null)
+				return false;
+		} else if (!tdp.equals(other.tdp))
+			return false;
+		if (tensorCores == null) {
+			if (other.tensorCores != null)
+				return false;
+		} else if (!tensorCores.equals(other.tensorCores))
+			return false;
+		if (textureRate == null) {
+			if (other.textureRate != null)
+				return false;
+		} else if (!textureRate.equals(other.textureRate))
+			return false;
+		if (tmu == null) {
+			if (other.tmu != null)
+				return false;
+		} else if (!tmu.equals(other.tmu))
+			return false;
+		return true;
+	}
+
+	
 }

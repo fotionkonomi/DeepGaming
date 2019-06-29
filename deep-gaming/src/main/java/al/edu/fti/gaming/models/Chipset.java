@@ -28,7 +28,7 @@ import javax.persistence.Table;
  * @author kfotj
  *
  */
-public class Chipset implements Serializable {
+public class Chipset implements IModel, Serializable {
 
 	/**
 	 * 

@@ -22,7 +22,7 @@ import javax.persistence.OneToMany;
  * @author kfotj
  *
  */
-public class GpuMemoryTechnology implements Serializable {
+public class GpuMemoryTechnology implements Serializable, IModel {
 
 	/**
 	 * 

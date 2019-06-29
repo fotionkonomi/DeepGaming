@@ -14,7 +14,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "storage_type")
-public class StorageType implements Serializable {
+public class StorageType implements Serializable, IModel{
 
 	/**
 	 * 

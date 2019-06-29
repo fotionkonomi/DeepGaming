@@ -26,7 +26,7 @@ import javax.persistence.Table;
  * @author kfotj
  *
  */
-public class GpuArchitecture implements Serializable {
+public class GpuArchitecture implements Serializable, IModel {
 
 	/**
 	 * 

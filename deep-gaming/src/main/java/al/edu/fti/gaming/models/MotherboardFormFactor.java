@@ -14,7 +14,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "motherboard_form_factor")
-public class MotherboardFormFactor implements Serializable {
+public class MotherboardFormFactor implements Serializable, IModel {
 
 	/**
 	 * 

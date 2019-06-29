@@ -15,7 +15,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "gpu_benchmark")
-public class GpuBenchmark implements Serializable {
+public class GpuBenchmark implements Serializable, IModel {
 
 	/**
 	 * 

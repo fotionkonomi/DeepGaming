@@ -15,7 +15,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "operating_system")
-public class OperatingSystem implements Serializable {
+public class OperatingSystem implements Serializable, IModel {
 
 	/**
 	 * 

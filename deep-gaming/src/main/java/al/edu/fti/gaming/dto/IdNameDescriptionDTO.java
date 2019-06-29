@@ -1,12 +1,16 @@
 package al.edu.fti.gaming.dto;
 
-public class IdNameDescriptionDTO {
+import org.springframework.web.multipart.MultipartFile;
+
+public class IdNameDescriptionDTO implements IDto {
 
 	private Integer id;
 
 	private String name;
 
 	private String description;
+	
+	private MultipartFile image;
 
 	public IdNameDescriptionDTO() {
 
@@ -71,6 +75,14 @@ public class IdNameDescriptionDTO {
 		} else if (!name.equals(other.name))
 			return false;
 		return true;
+	}
+
+	public MultipartFile getImage() {
+		return image;
+	}
+
+	public void setImage(MultipartFile image) {
+		this.image = image;
 	}
 
 }

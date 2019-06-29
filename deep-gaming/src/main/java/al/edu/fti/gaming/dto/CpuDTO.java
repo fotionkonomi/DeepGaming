@@ -136,4 +136,103 @@ public class CpuDTO extends ProductDTO {
 		this.integratedGpuOfThisCpu = integratedGpuOfThisCpu;
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + ((architectureOfThisCpu == null) ? 0 : architectureOfThisCpu.hashCode());
+		result = prime * result + ((bitWidth == null) ? 0 : bitWidth.hashCode());
+		result = prime * result + ((cpuSpeed == null) ? 0 : cpuSpeed.hashCode());
+		result = prime * result + ((familyOfThisCpu == null) ? 0 : familyOfThisCpu.hashCode());
+		result = prime * result + ((integratedGpuOfThisCpu == null) ? 0 : integratedGpuOfThisCpu.hashCode());
+		result = prime * result + ((l1Cache == null) ? 0 : l1Cache.hashCode());
+		result = prime * result + ((l2Cache == null) ? 0 : l2Cache.hashCode());
+		result = prime * result + ((l3Cache == null) ? 0 : l3Cache.hashCode());
+		result = prime * result + ((physicalCores == null) ? 0 : physicalCores.hashCode());
+		result = prime * result + ((socketOfThisCpu == null) ? 0 : socketOfThisCpu.hashCode());
+		result = prime * result + ((tdp == null) ? 0 : tdp.hashCode());
+		result = prime * result + ((threads == null) ? 0 : threads.hashCode());
+		result = prime * result + ((turboSpeed == null) ? 0 : turboSpeed.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		CpuDTO other = (CpuDTO) obj;
+		if (architectureOfThisCpu == null) {
+			if (other.architectureOfThisCpu != null)
+				return false;
+		} else if (!architectureOfThisCpu.equals(other.architectureOfThisCpu))
+			return false;
+		if (bitWidth == null) {
+			if (other.bitWidth != null)
+				return false;
+		} else if (!bitWidth.equals(other.bitWidth))
+			return false;
+		if (cpuSpeed == null) {
+			if (other.cpuSpeed != null)
+				return false;
+		} else if (!cpuSpeed.equals(other.cpuSpeed))
+			return false;
+		if (familyOfThisCpu == null) {
+			if (other.familyOfThisCpu != null)
+				return false;
+		} else if (!familyOfThisCpu.equals(other.familyOfThisCpu))
+			return false;
+		if (integratedGpuOfThisCpu == null) {
+			if (other.integratedGpuOfThisCpu != null)
+				return false;
+		} else if (!integratedGpuOfThisCpu.equals(other.integratedGpuOfThisCpu))
+			return false;
+		if (l1Cache == null) {
+			if (other.l1Cache != null)
+				return false;
+		} else if (!l1Cache.equals(other.l1Cache))
+			return false;
+		if (l2Cache == null) {
+			if (other.l2Cache != null)
+				return false;
+		} else if (!l2Cache.equals(other.l2Cache))
+			return false;
+		if (l3Cache == null) {
+			if (other.l3Cache != null)
+				return false;
+		} else if (!l3Cache.equals(other.l3Cache))
+			return false;
+		if (physicalCores == null) {
+			if (other.physicalCores != null)
+				return false;
+		} else if (!physicalCores.equals(other.physicalCores))
+			return false;
+		if (socketOfThisCpu == null) {
+			if (other.socketOfThisCpu != null)
+				return false;
+		} else if (!socketOfThisCpu.equals(other.socketOfThisCpu))
+			return false;
+		if (tdp == null) {
+			if (other.tdp != null)
+				return false;
+		} else if (!tdp.equals(other.tdp))
+			return false;
+		if (threads == null) {
+			if (other.threads != null)
+				return false;
+		} else if (!threads.equals(other.threads))
+			return false;
+		if (turboSpeed == null) {
+			if (other.turboSpeed != null)
+				return false;
+		} else if (!turboSpeed.equals(other.turboSpeed))
+			return false;
+		return true;
+	}
+	
+	
+
 }

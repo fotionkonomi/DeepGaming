@@ -14,7 +14,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "esrb_ratings")
-public class EsrbRatings implements Serializable {
+public class EsrbRatings implements Serializable, IModel {
 
 	/**
 	 * 

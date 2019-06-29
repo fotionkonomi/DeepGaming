@@ -26,7 +26,7 @@ import javax.persistence.OneToMany;
  * @author kfotj
  *
  */
-public class CpuFamily implements Serializable {
+public class CpuFamily implements Serializable, IModel {
 
 	/**
 	 * 

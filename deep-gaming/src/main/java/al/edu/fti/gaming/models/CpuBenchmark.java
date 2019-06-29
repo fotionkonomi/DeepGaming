@@ -1,5 +1,7 @@
 package al.edu.fti.gaming.models;
 
+import java.io.Serializable;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,7 +15,12 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "cpu_benchmark")
-public class CpuBenchmark {
+public class CpuBenchmark implements Serializable, IModel {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1234799528112445002L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

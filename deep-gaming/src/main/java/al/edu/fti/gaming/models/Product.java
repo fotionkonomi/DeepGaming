@@ -21,7 +21,7 @@ import javax.persistence.TemporalType;
 @Entity
 @Table(name = "product")
 @Inheritance(strategy = InheritanceType.JOINED)
-public class Product implements Serializable {
+public class Product implements Serializable, IModel {
 
 	/**
 	 * 

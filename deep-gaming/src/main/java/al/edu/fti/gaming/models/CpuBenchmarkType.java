@@ -21,7 +21,7 @@ import javax.persistence.Table;
  * @author kfotj
  *
  */
-public class CpuBenchmarkType implements Serializable {
+public class CpuBenchmarkType implements Serializable, IModel {
 
 	/**
 	 * 

@@ -16,6 +16,23 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "motherboard")
 public class Motherboard extends Product {
+	// MOS HARROOO
+	// Motherboard_storage
+	// Motherboard_storage
+	// Motherboard_storage
+	// Motherboard_storage
+	// Motherboard_storage
+	// Motherboard_storage
+	// Motherboard_storage
+	// Motherboard_storage
+	// Motherboard_storage
+	// Motherboard_storage
+	// Motherboard_storage
+	// Motherboard_storage
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5258804225255359490L;
 
 	@Column(name = "maximum_ram_capacity", nullable = false)
 	private Double maximumRamCapacity;
@@ -44,11 +61,10 @@ public class Motherboard extends Product {
 	private MotherboardFormFactor formFactorOfThisMotherboard;
 
 	@ManyToMany(cascade = { CascadeType.ALL })
-	@JoinTable(name = "motherboard_gpu_slot", joinColumns = { @JoinColumn(name = "id_motherboard") }, inverseJoinColumns = {
-			@JoinColumn(name = "id_gpu_slot") })
+	@JoinTable(name = "motherboard_gpu_slot", joinColumns = {
+			@JoinColumn(name = "id_motherboard") }, inverseJoinColumns = { @JoinColumn(name = "id_gpu_slot") })
 	private Set<GpuSlot> gpuSlotsOfThisMotherborad = new HashSet<GpuSlot>();
-	
-	//Motherboard_Storage
-	
-	
+
+	// Motherboard_Storage
+
 }

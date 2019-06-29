@@ -25,7 +25,7 @@ import javax.persistence.Table;
  * @author kfotj
  *
  */
-public class CpuArchitecture implements Serializable {
+public class CpuArchitecture implements Serializable, IModel {
 
 	/**
 	 * 

@@ -22,7 +22,7 @@ import javax.persistence.Table;
  * @author kfotj
  *
  */
-public class Role implements Serializable {
+public class Role implements Serializable, IModel {
 
 	/**
 	 * 

@@ -14,7 +14,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "storage_port")
-public class StoragePort implements Serializable {
+public class StoragePort implements Serializable, IModel{
 
 	// MOS HARROOO
 	// Motherboard_storage

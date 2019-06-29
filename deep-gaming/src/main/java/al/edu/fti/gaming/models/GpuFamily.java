@@ -26,7 +26,7 @@ import javax.persistence.OneToMany;
  * @author kfotj
  *
  */
-public class GpuFamily implements Serializable {
+public class GpuFamily implements Serializable, IModel {
 
 	/**
 	 * 

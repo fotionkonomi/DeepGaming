@@ -21,7 +21,7 @@ import javax.persistence.Table;
  * @author kfotj
  *
  */
-public class DirectX implements Serializable {
+public class DirectX implements Serializable, IModel {
 
 	/**
 	 * 

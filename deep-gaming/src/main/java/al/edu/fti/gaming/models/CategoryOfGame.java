@@ -14,7 +14,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "category_of_name")
-public class CategoryOfGame implements Serializable {
+public class CategoryOfGame implements Serializable, IModel {
 
 	/**
 	 * 

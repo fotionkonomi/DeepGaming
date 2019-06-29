@@ -24,7 +24,7 @@ import javax.persistence.Table;
  * @author kfotj
  *
  */
-public class GpuSlot implements Serializable {
+public class GpuSlot implements Serializable, IModel {
 
 	/**
 	 * 

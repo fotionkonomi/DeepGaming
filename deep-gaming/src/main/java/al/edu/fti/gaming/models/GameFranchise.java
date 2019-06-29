@@ -15,7 +15,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "game_franchise")
-public class GameFranchise implements Serializable {
+public class GameFranchise implements Serializable, IModel {
 
 	/**
 	 * 

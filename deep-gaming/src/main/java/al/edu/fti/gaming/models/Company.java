@@ -2,7 +2,6 @@ package al.edu.fti.gaming.models;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -12,8 +11,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "company")
@@ -24,7 +21,7 @@ import javax.persistence.TemporalType;
  * @author kfotj
  *
  */
-public class Company implements Serializable {
+public class Company implements IModel, Serializable {
 
 	/**
 	 * 
@@ -33,7 +30,7 @@ public class Company implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_company", nullable = false)
+	@Column(name = "id_company")
 	/**
 	 * Çelesi primar ne tabelen "company" ne bazen e te dhenave, i cili
 	 * autoinkrementohet
@@ -53,14 +50,6 @@ public class Company implements Serializable {
 	 * mban informacion per te pershkruar kompanine
 	 */
 	private String companyDescription;
-
-	@Column(name = "date_of_creation", nullable = false, columnDefinition = "DATETIME")
-	@Temporal(TemporalType.TIMESTAMP)
-	/**
-	 * Variabli lidhet me fushen "date_of_creation" ne bazen e te dhenave, e cila
-	 * mban informacion rreth dates kur kompania eshte formuar
-	 */
-	private Date dateOfCreation;
 
 	@Column(name = "hyperlink", nullable = false, length = 255)
 	/**
@@ -118,8 +107,8 @@ public class Company implements Serializable {
 	@OneToMany(mappedBy = "companyOfThisOS")
 	private List<OperatingSystemType> operatingSystemsOfThisCompany = new ArrayList<OperatingSystemType>();
 
-	public Company(Integer idCompany, String companyName, String companyDescription, Date dateOfCreation,
-			String hyperlink, List<CpuFamily> cpuFamiliesOfThisCompany, List<GpuFamily> gpuFamiliesOfThisCompany,
+	public Company(Integer idCompany, String companyName, String companyDescription, String hyperlink,
+			List<CpuFamily> cpuFamiliesOfThisCompany, List<GpuFamily> gpuFamiliesOfThisCompany,
 			List<CpuArchitecture> cpuArchitecturesOfThisCompany, List<GpuArchitecture> gpuArchitecturesOfThisCompany,
 			List<CpuSocket> cpuSocketsOfThisCompany, List<Chipset> chipsetsOfThisCompany,
 			List<Motherboard> motherboardsOfThisCompany, List<PowerSupply> powerSuppliesOfThisCompany,
@@ -129,7 +118,6 @@ public class Company implements Serializable {
 		this.idCompany = idCompany;
 		this.companyName = companyName;
 		this.companyDescription = companyDescription;
-		this.dateOfCreation = dateOfCreation;
 		this.hyperlink = hyperlink;
 		this.cpuFamiliesOfThisCompany = cpuFamiliesOfThisCompany;
 		this.gpuFamiliesOfThisCompany = gpuFamiliesOfThisCompany;
@@ -143,9 +131,9 @@ public class Company implements Serializable {
 		this.ramsOfThisCompany = ramsOfThisCompany;
 		this.operatingSystemsOfThisCompany = operatingSystemsOfThisCompany;
 	}
-	
+
 	public Company() {
-		
+
 	}
 
 	public Integer getIdCompany() {
@@ -170,14 +158,6 @@ public class Company implements Serializable {
 
 	public void setCompanyDescription(String companyDescription) {
 		this.companyDescription = companyDescription;
-	}
-
-	public Date getDateOfCreation() {
-		return dateOfCreation;
-	}
-
-	public void setDateOfCreation(Date dateOfCreation) {
-		this.dateOfCreation = dateOfCreation;
 	}
 
 	public String getHyperlink() {
@@ -291,7 +271,6 @@ public class Company implements Serializable {
 				+ ((cpuArchitecturesOfThisCompany == null) ? 0 : cpuArchitecturesOfThisCompany.hashCode());
 		result = prime * result + ((cpuFamiliesOfThisCompany == null) ? 0 : cpuFamiliesOfThisCompany.hashCode());
 		result = prime * result + ((cpuSocketsOfThisCompany == null) ? 0 : cpuSocketsOfThisCompany.hashCode());
-		result = prime * result + ((dateOfCreation == null) ? 0 : dateOfCreation.hashCode());
 		result = prime * result
 				+ ((gpuArchitecturesOfThisCompany == null) ? 0 : gpuArchitecturesOfThisCompany.hashCode());
 		result = prime * result + ((gpuFamiliesOfThisCompany == null) ? 0 : gpuFamiliesOfThisCompany.hashCode());
@@ -344,11 +323,6 @@ public class Company implements Serializable {
 			if (other.cpuSocketsOfThisCompany != null)
 				return false;
 		} else if (!cpuSocketsOfThisCompany.equals(other.cpuSocketsOfThisCompany))
-			return false;
-		if (dateOfCreation == null) {
-			if (other.dateOfCreation != null)
-				return false;
-		} else if (!dateOfCreation.equals(other.dateOfCreation))
 			return false;
 		if (gpuArchitecturesOfThisCompany == null) {
 			if (other.gpuArchitecturesOfThisCompany != null)

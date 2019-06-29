@@ -1,6 +1,6 @@
 package al.edu.fti.gaming.dto;
 
-public class CategoryOfGameDTO extends IdNameDescriptionDTO {
+public class CategoryOfGameDTO extends IdNameDescriptionDTO  {
 	
 	public CategoryOfGameDTO() {
 		super();

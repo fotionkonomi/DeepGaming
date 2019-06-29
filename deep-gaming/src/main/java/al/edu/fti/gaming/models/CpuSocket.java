@@ -1,5 +1,6 @@
 package al.edu.fti.gaming.models;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,7 +25,12 @@ import javax.persistence.Table;
  * @author kfotj
  *
  */
-public class CpuSocket {
+public class CpuSocket implements Serializable, IModel{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 902789566462473069L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
