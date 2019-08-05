@@ -1,7 +1,12 @@
 package al.edu.fti.gaming.dto;
 
+import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.URL;
+
 public class CompanyDTO extends IdNameDescriptionDTO {
 
+	@NotBlank(message = "{Pattern.Hyperlink.Validation}")
+	@URL(message = "{Pattern.Hyperlink.Validation}")
 	private String hyperlink;
 
 	public CompanyDTO() {

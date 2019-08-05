@@ -20,18 +20,49 @@ $(".input-file-trigger").click(function(event) {
 	return false;
 });
 
-$(".input-file")
-		.change(
-				function(event) {
-					if ($(".input-file").val().indexOf(".png") > -1) {
+//$(".input-file").change(function(event) {
+//
+//	if ($(".input-file").val().indexOf(".png") > -1  || $(".input-file").val().indexOf(".jpg") > -1 ) {
+//		$(".file-return").css("color", "green");
+//		$(".file-return").attr("hidden", false);
+//		$(".file-return-error").attr("hidden", true);
+//	} else {
+//			
+//		$(".file-return-error").css("color", "red");
+//		$(".file-return-error").attr("hidden", false);
+//		$(".file-return").attr("hidden", true);
+//	}
+//});
 
-						$(".file-return").html("Image uploaded successfully");
-					} else {
-						var text = "<spring:message code='al.edu.fti.gaming.validator.image' />";
-						$(".file-return")
-								.html("");
-						$(".file-return")
-						.append(text);
-						$(".file-return").css("color", "red");
-					}
-				});
+$('#companyImage').bind('change', function() {
+	var validSizeOrNot;
+	if(this.files[0].size > 1000000) {
+		validSizeOrNot = false;
+	} else {
+		validSizeOrNot = true;
+	}
+	if ($("#companyImage").val().indexOf(".png") > -1  || $("#companyImage").val().indexOf(".jpg") > -1 ) {
+		if(validSizeOrNot == true) {
+			$(".file-return").css("color", "green");
+			$(".file-return").attr("hidden", false);
+			$(".file-return-error").attr("hidden", true);
+			$(".file-return-size-error").attr("hidden", true);
+			$(".text-danger").text('');
+		} else {
+			$(".file-return-size-error").css("color", "red");
+			$(".file-return").attr("hidden", true);
+			$(".file-return-error").attr("hidden", true);
+			$(".file-return-size-error").attr("hidden", false);
+		}
+	} else {
+			
+		$(".file-return-error").css("color", "red");	
+		$(".file-return-error").attr("hidden", false);
+		$(".file-return").attr("hidden", true);
+		$(".file-return-size-error").attr("hidden", true);
+
+	}
+});
+
+
+

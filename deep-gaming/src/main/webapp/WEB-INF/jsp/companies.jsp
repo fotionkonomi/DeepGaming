@@ -13,42 +13,43 @@
 			</div>
 		</div>
 	</section>
-	<c:forEach items="${companies}" var="company">
+	<div class="col-md-12">
+		<div class="row">
+			<div class="products-tabs">
+				<!-- tab -->
+				<div id="tab2" class="tab-pane fade in active">
+					<div class="products-slick" data-nav="#slick-nav-2">
+						<c:forEach items="${companies}" var="company">
 
-		<section class="container">
-			<div class="row">
-				<div class="col-sm-6 col-md-3" style="padding- bottom: 15px">
-					<div class="thumbnail">
-						<div class="caption">
-							<div class="col-sm-6 col-md-3">
-								<div class="thumbnail" style="width: 300px; height: auto">
-									<img class="img-thumbnail" style="width: 300px; height: 200px;"
+							<div class="product">
+								<div class="product-img">
+									<img width="200px" height="200px"
 										src="<c:url value="/img/company${company.name}.png">
  </c:url>"
-										alt="image" />
-
-									<div class="caption">
-										<h3>${company.name}</h3>
-										<p>${company.description}</p>
-										<p>${company.hyperlink}</p>
-										<%-- 										<p>Available ${product.unitsInStock} units in stock</p> --%>
-										<!-- 										<p> -->
-										<!-- 											<a -->
-										<%-- 												href=" <spring:url value="/market/product?id=${product.productId}" /> " --%>
-										<!-- 												class="btn btn-primary"> <span -->
-										<!-- 												class="glyphicon-info-sign glyphicon" /></span> Details -->
-										<!-- 											</a> -->
-										<!-- 										</p> -->
+										alt="">
+									<div class="product-label">
+										<span class="sale">-30%</span> <span class="new">NEW</span>
 									</div>
 								</div>
+								<div class="product-body">
+									<p class="product-category">Category</p>
+									<h3 class="product-name">
+										<a href="#">${company.name}</a>
+									</h3>
+									<h4 class="product-price">
+										$980.00
+										<del class="product-old-price">$990.00</del>
+									</h4>
+									<div class="product-rating"></div>
+								</div>
 							</div>
-						</div>
+						</c:forEach>
 					</div>
 				</div>
 			</div>
-		</section>
+		</div>
+	</div>
 
-	</c:forEach>
 
 
 	<jsp:include page="scripts.jsp" />
