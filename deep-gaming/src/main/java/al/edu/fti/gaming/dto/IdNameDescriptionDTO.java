@@ -16,6 +16,7 @@ public class IdNameDescriptionDTO implements IDto {
 	@Size(min = 2, max = 65535, message = "{Size.Description.Validation}")
 	private String description;
 	
+
 	@Image
 	private MultipartFile image;
 

@@ -9,4 +9,8 @@ public interface CompanyService {
 	boolean add(CompanyDTO companyDTO);
 	
 	List<CompanyDTO> getAllCompanies();
+	
+	CompanyDTO getCompanyById(int id);
+	
+	boolean update(CompanyDTO companyDTO);
 }

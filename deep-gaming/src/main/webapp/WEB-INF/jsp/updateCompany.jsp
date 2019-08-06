@@ -23,10 +23,11 @@
 		<form:errors path="*" cssClass="alert alert-danger" element="div" />
 
 		<form:form class="form-horizontal" method="POST"
-			modelAttribute="newCompany" enctype="multipart/form-data">
+			modelAttribute="company" enctype="multipart/form-data">
 			<fieldset>
-				<legend style="padding-top: 20px; font-size: 37px;"><spring:message
-							code="addCompany.form.legend" /></legend>
+				<legend style="padding-top: 20px; font-size: 37px;">
+					<spring:message code="addCompany.form.legend" />
+				</legend>
 
 				<spring:message code="addCompany.form.name.placeholder"
 					var="namePlaceholder" />
@@ -91,8 +92,8 @@
 						</label> <span class="file-return" hidden="true"><spring:message
 								code="addCompany.form.image.success" /></span> <span
 							class="file-return-error" hidden="true"><spring:message
-								code="addCompany.form.image.error" /></span>
-								<span class="file-return-size-error" hidden="true"><spring:message
+								code="addCompany.form.image.error" /></span> <span
+							class="file-return-size-error" hidden="true"><spring:message
 								code="addCompany.form.image.error.size" /></span>
 						<form:errors path="image" cssClass="text-danger" />
 						<c:if test="${not empty errors}">
@@ -124,6 +125,6 @@
 
 
 	<script src="<c:url value="/js/fileupload.js"></c:url>"></script>
-	
+
 </body>
 </html>

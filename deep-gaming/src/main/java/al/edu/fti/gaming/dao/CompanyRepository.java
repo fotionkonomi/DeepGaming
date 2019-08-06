@@ -9,4 +9,8 @@ public interface CompanyRepository {
 	boolean add(Company company);
 	
 	List<Company> getAllCompanies();
+	
+	Company getCompanyById(int id);
+	
+	boolean update(Company company);
 }

@@ -47,4 +47,30 @@ public class CompanyRepositoryImpl implements CompanyRepository {
 		return query.list();
 	}
 
+	@Override
+	public Company getCompanyById(int id) {
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session.createQuery("Select c from Company c where c.idCompany = :id");
+		query.setInteger("id", id);
+		return (Company) query.uniqueResult();
+	}
+
+	@Override
+	public boolean update(Company company) {
+		Session session = sessionFactory.openSession();
+		boolean successfulOrNot;
+		try {
+			session.getTransaction().begin();
+			session.update(company);
+			session.getTransaction().commit();
+			successfulOrNot = true;
+		} catch (HibernateException e) {
+			session.getTransaction().rollback();
+			successfulOrNot = false;
+		} finally {
+			session.close();
+		}
+		return successfulOrNot;
+	}
+
 }
