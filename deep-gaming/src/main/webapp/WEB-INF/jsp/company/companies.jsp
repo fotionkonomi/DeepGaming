@@ -3,14 +3,14 @@
 
 <html>
 <head>
-<jsp:include page="head.jsp" />
+<jsp:include page="/WEB-INF/jsp/head.jsp" />
 </head>
 <body>
-	<jsp:include page="body.jsp"></jsp:include>
+	<jsp:include page="/WEB-INF/jsp/body.jsp"></jsp:include>
 	<a href="?language=en">English</a>|
 	<a href="?language=al">Albanian</a>
 
-	<jsp:include page="navigation.jsp"></jsp:include>
+	<jsp:include page="/WEB-INF/jsp/navigation.jsp"></jsp:include>
 
 	<section>
 		<div
@@ -31,7 +31,7 @@
 							<div class="product">
 								<div class="product-img">
 									<img width="320px" height="270px"
-										src="<c:url value="/img/company${company.name}.png">
+										src="<c:url value="/img/company${company.id}.png">
  </c:url>"
 										alt="${company.name}">
 
@@ -59,10 +59,10 @@
 
 
 
-	<jsp:include page="scripts.jsp" />
+	<jsp:include page="/WEB-INF/jsp/scripts.jsp" />
 
 	<h6 style="opacity: 0;;">aaa</h6>
 </body>
-<jsp:include page="footer.jsp" />
+<jsp:include page="/WEB-INF/jsp/footer.jsp" />
 
 </html>

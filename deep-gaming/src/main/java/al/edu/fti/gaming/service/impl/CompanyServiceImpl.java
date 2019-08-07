@@ -1,5 +1,6 @@
 package al.edu.fti.gaming.service.impl;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -8,7 +9,9 @@ import java.util.logging.Logger;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import al.edu.fti.gaming.converter.Converter;
 import al.edu.fti.gaming.dao.CompanyRepository;
@@ -27,11 +30,17 @@ public class CompanyServiceImpl implements CompanyService {
 	private CompanyRepository companyRepository;
 
 	@Autowired
+	@Qualifier("companyConverter")
 	private Converter companyConverter;
 
 	@Override
-	public boolean add(CompanyDTO companyDTO) {
-		return this.companyRepository.add((Company) companyConverter.toModel(companyDTO));
+	public int add(CompanyDTO companyDTO) {
+		Company company = (Company) companyConverter.toModel(companyDTO);
+		int retVal = this.companyRepository.add(company);
+		if (retVal != 0) {
+			companyDTO.setId(retVal);
+		}
+		return retVal;
 	}
 
 	public CompanyRepository getCompanyRepository() {
@@ -58,8 +67,8 @@ public class CompanyServiceImpl implements CompanyService {
 		for (Company company : companyModels) {
 			CompanyDTO companyDTO = (CompanyDTO) companyConverter.toDTO(company);
 			if (companyDTO != null) {
-				companyDTOs.add(companyDTO);
 				LOGGER.log(Level.INFO, companyDTO.getName() + " was converted and added to the list");
+				companyDTOs.add(companyDTO);
 			} else {
 				LOGGER.log(Level.SEVERE, "One object couldn't be converted, process aborted!");
 				return null;

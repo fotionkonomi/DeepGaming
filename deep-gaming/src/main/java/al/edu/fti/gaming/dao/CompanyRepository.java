@@ -6,11 +6,17 @@ import al.edu.fti.gaming.models.Company;
 
 public interface CompanyRepository {
 
-	boolean add(Company company);
-	
+	/**
+	 * Returns id of the persisted object or 0 if the operation was not successful
+	 * 
+	 * @param company
+	 * @return
+	 */
+	int add(Company company);
+
 	List<Company> getAllCompanies();
-	
+
 	Company getCompanyById(int id);
-	
+
 	boolean update(Company company);
 }

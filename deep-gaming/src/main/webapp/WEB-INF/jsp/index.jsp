@@ -10,6 +10,7 @@
 	<jsp:include page="body.jsp"></jsp:include>
 	<jsp:include page="navigation.jsp"></jsp:include>
 
+	
 
 	<jsp:include page="footer.jsp"></jsp:include>
 

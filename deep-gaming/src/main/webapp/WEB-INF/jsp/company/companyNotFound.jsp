@@ -6,17 +6,17 @@
 <head>
 
 
-<jsp:include page="head.jsp" />
+<jsp:include page="/WEB-INF/jsp/head.jsp" />
 <link type="text/css" rel="stylesheet"
 	href="<c:url value="/css/fileupload.css"/>" />
 
 </head>
 <body>
-	<jsp:include page="body.jsp"></jsp:include>
+	<jsp:include page="/WEB-INF/jsp/body.jsp"></jsp:include>
 	<a href="?id=${id }&language=en">English</a>|
 	<a href="?id=${id }&language=al">Albanian</a>
 
-	<jsp:include page="navigation.jsp"></jsp:include>
+	<jsp:include page="/WEB-INF/jsp/navigation.jsp"></jsp:include>
 
 	<h1 style="text-align: center; color: #D10024;">
 		Error 404:
@@ -32,9 +32,9 @@
 	</center>
 	<br />
 	<br />
-	<jsp:include page="footer.jsp"></jsp:include>
+	<jsp:include page="/WEB-INF/jsp/footer.jsp"></jsp:include>
 
-	<jsp:include page="scripts.jsp" />
+	<jsp:include page="/WEB-INF/jsp/scripts.jsp" />
 
 
 	<script src="<c:url value="/js/fileupload.js"></c:url>"></script>

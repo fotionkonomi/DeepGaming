@@ -3,36 +3,36 @@
 
 <html>
 <head>
-<jsp:include page="head.jsp" />
+<jsp:include page="/WEB-INF/jsp/head.jsp" />
 </head>
 <body>
-	<jsp:include page="body.jsp"></jsp:include>
+	<jsp:include page="/WEB-INF/jsp/body.jsp"></jsp:include>
 	<a href="?id=${company.id }&language=en">English</a>|
 	<a href="?id=${company.id }&language=al">Albanian</a>
 
-	<jsp:include page="navigation.jsp"></jsp:include>
+	<jsp:include page="/WEB-INF/jsp/navigation.jsp"></jsp:include>
 
 	<div class="section">
 		<!-- container -->
 		<div class="container">
-			<!-- row -->
-
-			<!-- Product main img -->
 			<div class="col-md-5 col-md-push-2" style="left: 0.5%">
 				<div class="product-preview">
 					<img width="300px" height="300px"
-						src="<c:url value="/img/company${company.name}.png">
+						src="<c:url value="/img/company${company.id}.png">
  </c:url>"
-						alt="${company.name}"> <br />
-					<br />
+						alt="${company.name}"> <br /> <br />
+					<p>
+						<spring:message code="company.details.moreInformation" />
+						<a href="${company.hyperlink }"> <spring:message
+								code="company.details.clickHere" />
+						</a>
+					</p>
 					<a style="text-align: center;"
 						href="<spring:url value="/company/update?id=${company.id }" />"
 						class="btn btn-primary"> <spring:message
 							code="company.details.update" />
 					</a>
 				</div>
-
-
 			</div>
 			<!-- /Product main img -->
 
@@ -45,19 +45,14 @@
 					<div></div>
 					<div></div>
 					<p>${company.description }</p>
-
-
-
-
-
 				</div>
 			</div>
 		</div>
 	</div>
 
-	<jsp:include page="scripts.jsp" />
+	<jsp:include page="/WEB-INF/jsp/scripts.jsp" />
 
 </body>
-<jsp:include page="footer.jsp" />
+<jsp:include page="/WEB-INF/jsp/footer.jsp" />
 
 </html>

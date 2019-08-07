@@ -6,17 +6,17 @@
 <head>
 
 
-<jsp:include page="head.jsp" />
+<jsp:include page="/WEB-INF/jsp/head.jsp" />
 <link type="text/css" rel="stylesheet"
 	href="<c:url value="/css/fileupload.css"/>" />
 
 </head>
 <body>
-	<jsp:include page="body.jsp"></jsp:include>
+	<jsp:include page="/WEB-INF/jsp/body.jsp"></jsp:include>
 	<a href="?language=en">English</a>|
 	<a href="?language=al">Albanian</a>
 
-	<jsp:include page="navigation.jsp"></jsp:include>
+	<jsp:include page="/WEB-INF/jsp/navigation.jsp"></jsp:include>
 
 
 	<section class="container">
@@ -28,11 +28,11 @@
 				<legend style="padding-top: 20px; font-size: 37px;"><spring:message
 							code="addCompany.form.legend" /></legend>
 
-				<spring:message code="addCompany.form.name.placeholder"
+				<spring:message code="add.form.name.placeholder"
 					var="namePlaceholder" />
 				<div class="form-group">
 					<label class="control-label col-lg-2 col-lg-2" for="name"><spring:message
-							code="addCompany.form.name.label" /></label>
+							code="add.form.name.label" /></label>
 					<div class="col-lg-10">
 						<form:input id="name" maxlength="50"
 							placeholder="${namePlaceholder}" path="name" type="text"
@@ -46,12 +46,12 @@
 					</div>
 				</div>
 
-				<spring:message code="addCompany.form.description.placeholder"
+				<spring:message code="add.form.description.placeholder"
 					var="descriptionPlaceholder" />
 
 				<div class="form-group">
 					<label class="control-label col-lg-2 col-lg-2" for="description"><spring:message
-							code="addCompany.form.description.label" /></label>
+							code="add.form.description.label" /></label>
 					<div class="col-lg-10">
 						<form:textarea id="description"
 							placeholder="${descriptionPlaceholder}" path="description"
@@ -61,13 +61,13 @@
 					</div>
 				</div>
 
-				<spring:message code="addCompany.form.hyperlink.placeholder"
+				<spring:message code="add.form.hyperlink.placeholder"
 					var="hyperlinkPlaceholder" />
 
 
 				<div class="form-group">
 					<label class="control-label col-lg-2 col-lg-2" for="hyperlink"><spring:message
-							code="addCompany.form.hyperlink.label" /></label>
+							code="add.form.hyperlink.label" /></label>
 					<div class="col-lg-10">
 						<form:input id="hyperlink" path="hyperlink"
 							placeholder="${hyperlinkPlaceholder}" type="text"
@@ -87,13 +87,13 @@
 						<form:input id="companyImage" path="image" type="file"
 							class="input-file" />
 						<label tabindex="0" for="companyImage" class="input-file-trigger">
-							<spring:message code="addCompany.form.companyImage.imageUpload" />
+							<spring:message code="add.form.companyImage.imageUpload" />
 						</label> <span class="file-return" hidden="true"><spring:message
-								code="addCompany.form.image.success" /></span> <span
+								code="add.form.image.success" /></span> <span
 							class="file-return-error" hidden="true"><spring:message
-								code="addCompany.form.image.error" /></span>
+								code="add.form.image.error" /></span>
 								<span class="file-return-size-error" hidden="true"><spring:message
-								code="addCompany.form.image.error.size" /></span>
+								code="add.form.image.error.size" /></span>
 						<form:errors path="image" cssClass="text-danger" />
 						<c:if test="${not empty errors}">
 							<span style="color: red;"> ${errors } </span>
@@ -108,7 +108,7 @@
 						<input type="submit" id="btnAdd" class="btn
  btn-primary"
 							value="<spring:message
-							code="addCompany.form.submit.label" />" />
+							code="add.form.submit.label" />" />
 					</div>
 				</div>
 
@@ -118,9 +118,9 @@
 		</form:form>
 	</section>
 
-	<jsp:include page="footer.jsp"></jsp:include>
+	<jsp:include page="/WEB-INF/jsp/footer.jsp"></jsp:include>
 
-	<jsp:include page="scripts.jsp" />
+	<jsp:include page="/WEB-INF/jsp/scripts.jsp" />
 
 
 	<script src="<c:url value="/js/fileupload.js"></c:url>"></script>
