@@ -34,14 +34,14 @@ $(".input-file-trigger").click(function(event) {
 //	}
 //});
 
-$('#companyImage').bind('change', function() {
+$('#image').bind('change', function() {
 	var validSizeOrNot;
 	if(this.files[0].size > 1000000) {
 		validSizeOrNot = false;
 	} else {
 		validSizeOrNot = true;
 	}
-	if ($("#companyImage").val().indexOf(".png") > -1  || $("#companyImage").val().indexOf(".jpg") > -1 ) {
+	if ($("#image").val().indexOf(".png") > -1  || $("#image").val().indexOf(".jpg") > -1 ) {
 		if(validSizeOrNot == true) {
 			$(".file-return").css("color", "green");
 			$(".file-return").attr("hidden", false);

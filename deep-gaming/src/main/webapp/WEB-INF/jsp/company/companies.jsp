@@ -30,7 +30,7 @@
 
 							<div class="product">
 								<div class="product-img">
-									<img width="320px" height="270px"
+									<img width="420px" height="240px"
 										src="<c:url value="/img/company${company.id}.png">
  </c:url>"
 										alt="${company.name}">

@@ -53,7 +53,7 @@
 					<label class="control-label col-lg-2 col-lg-2" for="description"><spring:message
 							code="add.form.description.label" /></label>
 					<div class="col-lg-10">
-						<form:textarea id="description"
+						<form:textarea  id="description"
 							placeholder="${descriptionPlaceholder}" path="description"
 							type="text" class="form-control" />
 						<form:errors path="description" cssClass="text-danger" />
@@ -80,14 +80,14 @@
 
 
 				<div class="form-group">
-					<label class="control-label col-lg-2" for="companyImage"> <spring:message
+					<label class="control-label col-lg-2" for="image"> <spring:message
 							code="addCompany.form.companyImage.label" />
 					</label>
 					<div class="input-file-container">
-						<form:input id="companyImage" path="image" type="file"
+						<form:input id="image" path="image" type="file"
 							class="input-file" />
-						<label tabindex="0" for="companyImage" class="input-file-trigger">
-							<spring:message code="add.form.companyImage.imageUpload" />
+						<label tabindex="0" for="image" class="input-file-trigger">
+							<spring:message code="add.form.image.imageUpload" />
 						</label> <span class="file-return" hidden="true"><spring:message
 								code="add.form.image.success" /></span> <span
 							class="file-return-error" hidden="true"><spring:message
@@ -108,7 +108,7 @@
 						<input type="submit" id="btnAdd" class="btn
  btn-primary"
 							value="<spring:message
-							code="updateCompany.form.submit.label" />" />
+							code="update.form.submit.label" />" />
 					</div>
 				</div>
 

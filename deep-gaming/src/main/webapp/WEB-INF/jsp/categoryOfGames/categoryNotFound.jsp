@@ -13,19 +13,23 @@
 </head>
 <body>
 	<jsp:include page="/WEB-INF/jsp/body.jsp"></jsp:include>
-
+	<a href="?id=${id }&language=en">English</a>|
+	<a href="?id=${id }&language=al">Albanian</a>
 
 	<jsp:include page="/WEB-INF/jsp/navigation.jsp"></jsp:include>
 
 	<h1 style="text-align: center; color: #D10024;">
-		<spring:message code="error.genericError" />
+		Error 404:
+		<spring:message code="category.categoryNotFound" />
 	</h1>
-
-	<h3 style="text-align: center; color: black;">
-		<spring:message code="error.genericError.sorry" />
-	</h3>
 	<br />
-
+	<center>
+		<a style="text-align: center;"
+			href="<spring:url value="/categoryOfGames/categories" />"
+			class="btn btn-primary"> <spring:message
+				code="error.notFound.goBack" />
+		</a>
+	</center>
 	<br />
 	<br />
 	<jsp:include page="/WEB-INF/jsp/footer.jsp"></jsp:include>

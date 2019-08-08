@@ -9,7 +9,7 @@ public class MotherboardDTO extends ProductDTO {
 	private ChipsetDTO chipsetOfThisMotherboard;
 	private RamMemoryTechnologyDTO memoryTechnologyOfThisMotherboard;
 	private MotherboardFormFactorDTO formFactorOfThisMotherboard;
-
+	
 	public MotherboardDTO() {
 		super();
 	}

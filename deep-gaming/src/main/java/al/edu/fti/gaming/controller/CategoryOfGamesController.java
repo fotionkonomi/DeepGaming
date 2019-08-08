@@ -1,6 +1,7 @@
 package al.edu.fti.gaming.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -55,8 +57,8 @@ public class CategoryOfGamesController implements HandlerExceptionResolver {
 			return "/categoryOfGames/addCategory";
 		} else {
 			if (categoryOfGameService.add(categoryOfGameDTO) != 0) {
-				generalService.imageProcessing(categoryOfGameDTO, categoryOfGameDTO.getImage(),
-						categoryOfGameDTO.getId(), request.getSession().getServletContext().getRealPath("/"), true);
+				generalService.imageProcessing(categoryOfGameDTO,
+						request.getSession().getServletContext().getRealPath("/"), true);
 
 				return "redirect:/categoryOfGames/categories";
 			} else {
@@ -82,13 +84,31 @@ public class CategoryOfGamesController implements HandlerExceptionResolver {
 		model.addAttribute("category", categoryOfGameService.getCategoryById(categoryId));
 		return "/categoryOfGames/updateCategory";
 	}
-	
-//	@RequestMapping(value = "/update", method = RequestMethod.POST)
-//	public String updateCategory(@ModelAttribute("category") @Valid CategoryOfGameDTO categoryOfGameDTO, BindingResult result,
-//			HttpServletRequest request) {
-//		
-//	}
-//	
+
+	@RequestMapping(value = "/update", method = RequestMethod.POST)
+	public String updateCategory(@ModelAttribute("category") @Valid CategoryOfGameDTO categoryOfGameDTO,
+			BindingResult result, HttpServletRequest request) {
+		List<ObjectError> listOfErrorsWithoutImageError = generalService.listOfErrorsWithoutImageError(
+				result.getAllErrors(), categoryOfGameDTO.getImage(), messages.get("al.edu.fti.gaming.validator.image"));
+		if (!listOfErrorsWithoutImageError.isEmpty()) {
+			return "/categoryOfGames/updateCategory";
+		} else {
+			if (listOfErrorsWithoutImageError.size() == result.getAllErrors().size()) {
+				generalService.imageProcessing(categoryOfGameDTO,
+						request.getSession().getServletContext().getRealPath("/"), false);
+			}
+
+			boolean updatedOrNot = categoryOfGameService.update(categoryOfGameDTO);
+			if (updatedOrNot == true) {
+				return "redirect:/categoryOfGames/details?id=" + categoryOfGameDTO.getId();
+			} else {
+				return "redirect:/categoryOfGames/update?id=" + categoryOfGameDTO.getId() + "&error";
+			}
+
+		}
+
+	}
+
 	@ExceptionHandler(CategoryOfGameNotFoundException.class)
 	public ModelAndView handleError(HttpServletRequest req, CategoryOfGameNotFoundException exception) {
 		ModelAndView mav = new ModelAndView();
@@ -106,23 +126,23 @@ public class CategoryOfGamesController implements HandlerExceptionResolver {
 		return mav;
 
 	}
-	
+
 	@Override
 	public ModelAndView resolveException(HttpServletRequest request, HttpServletResponse response, Object handler,
 			Exception exception) {
 		Map<String, Object> model = new HashMap<String, Object>();
 		if (exception instanceof MaxUploadSizeExceededException) {
 			model.put("errors", messages.get("add.form.image.error.size.afterSubmit"));
-			CompanyDTO companyDTO = new CompanyDTO();
-			model.put("newCompany", companyDTO);
-			return new ModelAndView("/company/addCompany", model);
+			CategoryOfGameDTO companyOfGameDTO = new CategoryOfGameDTO();
+			model.put("newCompany", companyOfGameDTO);
+			return new ModelAndView("/categoryOfGames/addCategory", model);
 		} else {
+			exception.printStackTrace();
 			model.put("error", messages.get("error.genericError"));
 			model.put("sorry", messages.get("error.genericError.sorry"));
 			return new ModelAndView("genericError", model);
 		}
 
-		// Vendos nje faqe per erroret
 	}
 
 	public CategoryOfGameService getCategoryOfGameService() {

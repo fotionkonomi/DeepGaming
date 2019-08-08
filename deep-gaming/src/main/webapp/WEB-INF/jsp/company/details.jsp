@@ -22,15 +22,15 @@
  </c:url>"
 						alt="${company.name}"> <br /> <br />
 					<p>
-						<spring:message code="company.details.moreInformation" />
+						<spring:message code="details.moreInformation" />
 						<a href="${company.hyperlink }"> <spring:message
-								code="company.details.clickHere" />
+								code="details.clickHere" />
 						</a>
 					</p>
 					<a style="text-align: center;"
 						href="<spring:url value="/company/update?id=${company.id }" />"
 						class="btn btn-primary"> <spring:message
-							code="company.details.update" />
+							code="details.update" />
 					</a>
 				</div>
 			</div>

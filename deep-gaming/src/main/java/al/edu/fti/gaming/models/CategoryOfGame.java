@@ -13,7 +13,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "category_of_name")
+@Table(name = "category_of_game")
 public class CategoryOfGame implements Serializable, IModel {
 
 	/**

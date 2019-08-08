@@ -1,6 +1,5 @@
 package al.edu.fti.gaming.controller;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -57,8 +56,7 @@ public class CompanyController implements HandlerExceptionResolver {
 		}
 		if (companyService.add(companyDTO) != 0) {
 
-			generalService.imageProcessing(companyDTO, companyDTO.getImage(), companyDTO.getId(),
-					request.getSession().getServletContext().getRealPath("/"), true);
+			generalService.imageProcessing(companyDTO, request.getSession().getServletContext().getRealPath("/"), true);
 
 			return "redirect:/company/companies";
 		} else {
@@ -116,7 +114,6 @@ public class CompanyController implements HandlerExceptionResolver {
 			return new ModelAndView("genericError", model);
 		}
 
-		// Vendos nje faqe per erroret
 	}
 
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
@@ -127,19 +124,20 @@ public class CompanyController implements HandlerExceptionResolver {
 
 		if (!listOfErrorsWithoutImageError.isEmpty()) {
 			return "/company/updateCompany";
-		}
-
-		if (listOfErrorsWithoutImageError.size() == result.getAllErrors().size()) {
-			generalService.imageProcessing(companyDTO, companyDTO.getImage(), companyDTO.getId(),
-					request.getSession().getServletContext().getRealPath("/"), false);
-		}
-		boolean updatedOrNot = companyService.update(companyDTO);
-		if (updatedOrNot == true) {
-			return "redirect:/company/details?id=" + companyDTO.getId();
 		} else {
-			return "redirect:/company/update?id=" + companyDTO.getId() + "&error";
-		}
 
+			if (listOfErrorsWithoutImageError.size() == result.getAllErrors().size()) {
+				generalService.imageProcessing(companyDTO, request.getSession().getServletContext().getRealPath("/"),
+						false);
+			}
+			boolean updatedOrNot = companyService.update(companyDTO);
+			if (updatedOrNot == true) {
+				return "redirect:/company/details?id=" + companyDTO.getId();
+			} else {
+				return "redirect:/company/update?id=" + companyDTO.getId() + "&error";
+			}
+
+		}
 	}
 
 	public CompanyService getCompanyService() {

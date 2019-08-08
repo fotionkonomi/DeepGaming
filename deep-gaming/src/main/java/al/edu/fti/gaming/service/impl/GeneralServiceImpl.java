@@ -8,23 +8,25 @@ import org.springframework.stereotype.Service;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.multipart.MultipartFile;
 
+import al.edu.fti.gaming.dto.IdNameDescriptionDTO;
 import al.edu.fti.gaming.service.GeneralService;
 
 @Service
 public class GeneralServiceImpl implements GeneralService {
 
 	@Override
-	public void imageProcessing(Object object, MultipartFile companyImage, int id, String path, boolean addOrUpdate) {
-		String nameOfClass = object.getClass().getSimpleName().toLowerCase();
+	public void imageProcessing(IdNameDescriptionDTO dtoObject, String path, boolean addOrUpdate) {
+		String nameOfClass = dtoObject.getClass().getSimpleName().toLowerCase();
 		int indexOfDTO = nameOfClass.indexOf("dto");
 		nameOfClass = nameOfClass.substring(0, indexOfDTO);
-		String imageLocation = path + "resources\\img\\" + nameOfClass + id + ".png";
+		System.out.println(nameOfClass);
+		String imageLocation = path + "resources\\img\\" + nameOfClass + dtoObject.getId() + ".png";
 		try {
 			if (addOrUpdate == false) {
 				File existingImage = new File(imageLocation);
 				existingImage.delete();
 			}
-			companyImage.transferTo(new File(imageLocation));
+			dtoObject.getImage().transferTo(new File(imageLocation));
 		} catch (Exception e) {
 			throw new RuntimeException("Image saving failed");
 		}

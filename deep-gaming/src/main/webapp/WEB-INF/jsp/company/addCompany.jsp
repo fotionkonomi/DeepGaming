@@ -87,7 +87,7 @@
 						<form:input id="companyImage" path="image" type="file"
 							class="input-file" />
 						<label tabindex="0" for="companyImage" class="input-file-trigger">
-							<spring:message code="add.form.companyImage.imageUpload" />
+							<spring:message code="add.form.image.imageUpload" />
 						</label> <span class="file-return" hidden="true"><spring:message
 								code="add.form.image.success" /></span> <span
 							class="file-return-error" hidden="true"><spring:message

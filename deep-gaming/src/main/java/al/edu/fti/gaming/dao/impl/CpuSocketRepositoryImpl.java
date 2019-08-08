@@ -10,11 +10,11 @@ import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import al.edu.fti.gaming.dao.CategoryOfGameRepository;
-import al.edu.fti.gaming.models.CategoryOfGame;
+import al.edu.fti.gaming.dao.CpuSocketRepository;
+import al.edu.fti.gaming.models.CpuSocket;
 
 @Repository
-public class CategoryOfGameRepositoryImpl implements CategoryOfGameRepository {
+public class CpuSocketRepositoryImpl implements CpuSocketRepository {
 
 	@Autowired
 	private SessionFactory sessionFactory;
@@ -24,15 +24,15 @@ public class CategoryOfGameRepositoryImpl implements CategoryOfGameRepository {
 	}
 
 	@Override
-	public int add(CategoryOfGame categoryOfGame) {
+	public int add(CpuSocket cpuSocket) {
 		Session session = sessionFactory.openSession();
 		int idOrNotSuccessful;
 		Transaction tx = session.getTransaction();
 		try {
 			tx.begin();
-			session.save(categoryOfGame);
+			session.save(cpuSocket);
 			tx.commit();
-			idOrNotSuccessful = categoryOfGame.getIdCategory();
+			idOrNotSuccessful = cpuSocket.getIdCpuSocket();
 		} catch (HibernateException e) {
 			tx.rollback();
 			idOrNotSuccessful = 0;
@@ -43,33 +43,31 @@ public class CategoryOfGameRepositoryImpl implements CategoryOfGameRepository {
 	}
 
 	@Override
-	public List<CategoryOfGame> getAllCategories() {
+	public List<CpuSocket> getAllCpuSockets() {
 		Session session = sessionFactory.getCurrentSession();
-		Query query = session.createQuery("Select c from CategoryOfGame c order by c.id desc");
+		Query query = session.createQuery("Select cs FROM CpuSocket cs");
 		return query.list();
-
 	}
 
 	@Override
-	public CategoryOfGame getCategoryById(int id) {
+	public CpuSocket getCpuSocketById(int id) {
 		Session session = sessionFactory.getCurrentSession();
-		Query query = session.createQuery("Select c from CategoryOfGame c where c.id = :id");
+		Query query = session.createQuery("SELECT cs FROM CpuSocket cs WHERE cs.idCpuSocket = :id");
 		query.setInteger("id", id);
-		return (CategoryOfGame) query.uniqueResult();
+		return (CpuSocket) query.uniqueResult();
 	}
 
 	@Override
-	public boolean update(CategoryOfGame categoryOfGame) {
+	public boolean update(CpuSocket cpuSocket) {
 		Session session = sessionFactory.openSession();
 		boolean successfulOrNot;
-		Transaction tx = session.getTransaction();
 		try {
-			tx.begin();
-			session.update(categoryOfGame);
-			tx.commit();
+			session.getTransaction().begin();
+			session.update(cpuSocket);
+			session.getTransaction().commit();
 			successfulOrNot = true;
 		} catch (HibernateException e) {
-			tx.rollback();
+			session.getTransaction().rollback();
 			successfulOrNot = false;
 		} finally {
 			session.close();

@@ -47,7 +47,7 @@ public class CategoryOfGamesConverter implements Converter {
 
 	@Override
 	public IDto toDTO(IModel modelObject) {
-		if (modelObject.getClass() != Company.class) {
+		if (modelObject.getClass() != CategoryOfGame.class) {
 			LOGGER.log(Level.SEVERE, "Model object of class " + modelObject.getClass().getName()
 					+ " cannot be converted to an object of the type " + CategoryOfGameDTO.class.getName());
 			return null;

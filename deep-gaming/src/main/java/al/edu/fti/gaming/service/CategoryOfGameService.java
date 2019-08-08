@@ -13,6 +13,4 @@ public interface CategoryOfGameService {
 	CategoryOfGameDTO getCategoryById(int id);
 	
 	boolean update(CategoryOfGameDTO categoryOfGameDTO);
-	
-	
 }

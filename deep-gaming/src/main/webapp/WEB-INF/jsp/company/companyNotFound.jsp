@@ -27,7 +27,7 @@
 		<a style="text-align: center;"
 			href="<spring:url value="/company/companies" />"
 			class="btn btn-primary"> <spring:message
-				code="company.companyNotFound.goBack" />
+				code="error.notFound.goBack" />
 		</a>
 	</center>
 	<br />
