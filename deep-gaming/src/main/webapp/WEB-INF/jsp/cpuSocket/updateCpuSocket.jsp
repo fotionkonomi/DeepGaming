@@ -13,9 +13,8 @@
 </head>
 <body>
 	<jsp:include page="/WEB-INF/jsp/body.jsp"></jsp:include>
-	<a href="?language=en">English</a>|
-	<a href="?language=al">Albanian</a>
-
+	<a href="?id=${cpuSocket.id }&language=en">English</a>|
+	<a href="?id=${cpuSocket.id }&language=al">Albanian</a>
 	<jsp:include page="/WEB-INF/jsp/navigation.jsp"></jsp:include>
 
 
@@ -23,10 +22,11 @@
 		<form:errors path="*" cssClass="alert alert-danger" element="div" />
 
 		<form:form class="form-horizontal" method="POST"
-			modelAttribute="newCompany" enctype="multipart/form-data">
+			modelAttribute="cpuSocket" enctype="multipart/form-data">
 			<fieldset>
-				<legend style="padding-top: 20px; font-size: 37px;"><spring:message
-							code="addCompany.form.legend" /></legend>
+				<legend style="padding-top: 20px; font-size: 37px;">
+					<spring:message code="updateCpuSocket.form.legend" /> ${cpuSocket.name}
+				</legend> 
 
 				<spring:message code="add.form.name.placeholder"
 					var="namePlaceholder" />
@@ -39,7 +39,7 @@
 							class="form-control" />
 						<c:if test="${param.error != null}">
 							<span style="color: red;"><spring:message
-									code="addCompany.form.name.error" /></span>
+									code="addCpuSocket.form.name.error" /></span>
 						</c:if>
 						<form:errors path="name" cssClass="text-danger" />
 
@@ -53,7 +53,7 @@
 					<label class="control-label col-lg-2 col-lg-2" for="description"><spring:message
 							code="add.form.description.label" /></label>
 					<div class="col-lg-10">
-						<form:textarea id="description"
+						<form:textarea  id="description"
 							placeholder="${descriptionPlaceholder}" path="description"
 							type="text" class="form-control" />
 						<form:errors path="description" cssClass="text-danger" />
@@ -65,34 +65,44 @@
 					var="hyperlinkPlaceholder" />
 
 
-				<div class="form-group">
-					<label class="control-label col-lg-2 col-lg-2" for="hyperlink"><spring:message
-							code="add.form.hyperlink.label" /></label>
+					<div class="form-group">
+					<label class="control-label col-lg-2 col-lg-2" for="laptopOrDesktop"><spring:message
+							code="addCpuSocket.form.laptop/desktop.label" /></label>
 					<div class="col-lg-10">
-						<form:input id="hyperlink" path="hyperlink"
-							placeholder="${hyperlinkPlaceholder}" type="text"
-							class="form-control" />
-						<form:errors path="hyperlink" cssClass="text-danger" />
+						<form:radiobutton id="laptopOrDesktop" path="laptopOrDesktop" value="true" />
+						&nbsp;Laptop
+						<form:radiobutton id="laptopOrDesktop" path="laptopOrDesktop" value="false" />
+						Desktop
 
 					</div>
 				</div>
 
 
+				<div class="form-group">
+					<label class="control-label col-lg-2 col-lg-2"><spring:message
+							code="addCpuSocket.form.company.label" /></label>
+					<div class="col-lg-10">
+						<form:select path="companyOfThisSocket" class="form-control">
+							<form:options items="${allCompanies}" />
+						</form:select>
+					</div>
+				</div>
+
 
 				<div class="form-group">
 					<label class="control-label col-lg-2" for="image"> <spring:message
-							code="addCompany.form.companyImage.label" />
+							code="addCpuSocket.form.image.label" />
 					</label>
 					<div class="input-file-container">
 						<form:input id="image" path="image" type="file"
 							class="input-file" />
-						<label tabindex="0" for="companyImage" class="input-file-trigger">
+						<label tabindex="0" for="image" class="input-file-trigger">
 							<spring:message code="add.form.image.imageUpload" />
 						</label> <span class="file-return" hidden="true"><spring:message
 								code="add.form.image.success" /></span> <span
 							class="file-return-error" hidden="true"><spring:message
-								code="add.form.image.error" /></span>
-								<span class="file-return-size-error" hidden="true"><spring:message
+								code="add.form.image.error" /></span> <span
+							class="file-return-size-error" hidden="true"><spring:message
 								code="add.form.image.error.size" /></span>
 						<form:errors path="image" cssClass="text-danger" />
 						<c:if test="${not empty errors}">
@@ -108,7 +118,7 @@
 						<input type="submit" id="btnAdd" class="btn
  btn-primary"
 							value="<spring:message
-							code="add.form.submit.label" />" />
+							code="update.form.submit.label" />" />
 					</div>
 				</div>
 
@@ -124,6 +134,6 @@
 
 
 	<script src="<c:url value="/js/fileupload.js"></c:url>"></script>
-	
+
 </body>
 </html>

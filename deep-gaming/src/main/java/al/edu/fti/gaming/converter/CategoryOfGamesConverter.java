@@ -18,54 +18,42 @@ public class CategoryOfGamesConverter implements Converter {
 
 	@Override
 	public IModel toModel(IDto dtoObject) {
-		if (dtoObject.getClass() != CategoryOfGameDTO.class) {
-			LOGGER.log(Level.SEVERE, "Dto object of class " + dtoObject.getClass().getName()
-					+ " cannot be converted to an object of the type " + CategoryOfGame.class.getName());
-			return null;
+		CategoryOfGame categoryOfGame = new CategoryOfGame();
+		CategoryOfGameDTO categoryOfGameDTO = (CategoryOfGameDTO) dtoObject;
+		LOGGER.log(Level.INFO, "Starting the conversion from CategoryOfGameDTO to CategoryOfGame:\n");
+		LOGGER.log(Level.INFO, "|----------------------------------------------------------------------");
+		if (categoryOfGameDTO.getId() != null) {
+			categoryOfGame.setIdCategory(categoryOfGameDTO.getId());
+			LOGGER.log(Level.INFO, "1) The id has been converted.");
 		} else {
-			CategoryOfGame categoryOfGame = new CategoryOfGame();
-			CategoryOfGameDTO categoryOfGameDTO = (CategoryOfGameDTO) dtoObject;
-			LOGGER.log(Level.INFO, "Starting the conversion from CategoryOfGameDTO to CategoryOfGame:\n");
-			LOGGER.log(Level.INFO, "|----------------------------------------------------------------------");
-			if (categoryOfGameDTO.getId() != null) {
-				categoryOfGame.setIdCategory(categoryOfGameDTO.getId());
-				LOGGER.log(Level.INFO, "1) The id has been converted.");
-			} else {
-				LOGGER.log(Level.INFO, "1) The id in the dto object was null, so an auto-increment will happen.");
-			}
-			categoryOfGame.setCategoryName(categoryOfGameDTO.getName());
-			LOGGER.log(Level.INFO, "2) The name has been converted.");
-			categoryOfGame.setCategoryDescription(categoryOfGameDTO.getDescription());
-			LOGGER.log(Level.INFO, "3) The description has been converted.");
-
-			LOGGER.log(Level.INFO, "The conversion has finished successfully!");
-			LOGGER.log(Level.INFO, "-----------------------------------------------------------------------|");
-
-			return categoryOfGame;
+			LOGGER.log(Level.INFO, "1) The id in the dto object was null, so an auto-increment will happen.");
 		}
+		categoryOfGame.setCategoryName(categoryOfGameDTO.getName());
+		LOGGER.log(Level.INFO, "2) The name has been converted.");
+		categoryOfGame.setCategoryDescription(categoryOfGameDTO.getDescription());
+		LOGGER.log(Level.INFO, "3) The description has been converted.");
+
+		LOGGER.log(Level.INFO, "The conversion has finished successfully!");
+		LOGGER.log(Level.INFO, "-----------------------------------------------------------------------|");
+
+		return categoryOfGame;
 	}
 
 	@Override
 	public IDto toDTO(IModel modelObject) {
-		if (modelObject.getClass() != CategoryOfGame.class) {
-			LOGGER.log(Level.SEVERE, "Model object of class " + modelObject.getClass().getName()
-					+ " cannot be converted to an object of the type " + CategoryOfGameDTO.class.getName());
-			return null;
-		} else {
-			CategoryOfGameDTO categoryOfGameDTO = new CategoryOfGameDTO();
-			CategoryOfGame categoryOfGame = (CategoryOfGame) modelObject;
-			LOGGER.log(Level.INFO, "Starting the conversion from CategoryOfGame to CategoryOfGameDTO:");
-			LOGGER.log(Level.INFO, "|----------------------------------------------------------------------");
-			categoryOfGameDTO.setId(categoryOfGame.getIdCategory());
-			LOGGER.log(Level.INFO, "1) The id has been converted.");
-			categoryOfGameDTO.setName(categoryOfGame.getCategoryName());
-			LOGGER.log(Level.INFO, "2) The name has been converted.");
-			categoryOfGameDTO.setDescription(categoryOfGame.getCategoryDescription());
-			LOGGER.log(Level.INFO, "3) The description has been converted");
+		CategoryOfGameDTO categoryOfGameDTO = new CategoryOfGameDTO();
+		CategoryOfGame categoryOfGame = (CategoryOfGame) modelObject;
+		LOGGER.log(Level.INFO, "Starting the conversion from CategoryOfGame to CategoryOfGameDTO:");
+		LOGGER.log(Level.INFO, "|----------------------------------------------------------------------");
+		categoryOfGameDTO.setId(categoryOfGame.getIdCategory());
+		LOGGER.log(Level.INFO, "1) The id has been converted.");
+		categoryOfGameDTO.setName(categoryOfGame.getCategoryName());
+		LOGGER.log(Level.INFO, "2) The name has been converted.");
+		categoryOfGameDTO.setDescription(categoryOfGame.getCategoryDescription());
+		LOGGER.log(Level.INFO, "3) The description has been converted");
 
-			LOGGER.log(Level.INFO, "The conversion has finished successfully");
-			LOGGER.log(Level.INFO, "---------------------------------------------------------------------|.");
-			return categoryOfGameDTO;
-		}
+		LOGGER.log(Level.INFO, "The conversion has finished successfully");
+		LOGGER.log(Level.INFO, "---------------------------------------------------------------------|.");
+		return categoryOfGameDTO;
 	}
 }

@@ -100,6 +100,7 @@ public class CompanyController implements HandlerExceptionResolver {
 
 	}
 
+	@Override
 	public ModelAndView resolveException(HttpServletRequest request, HttpServletResponse response, Object handler,
 			Exception exception) {
 		Map<String, Object> model = new HashMap<String, Object>();

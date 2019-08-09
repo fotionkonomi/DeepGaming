@@ -1,9 +1,20 @@
 package al.edu.fti.gaming.dto;
 
-public class CpuSocketDTO extends IdNameDescriptionDTO {
+import java.io.Serializable;
 
+import javax.validation.constraints.NotNull;
+
+public class CpuSocketDTO extends IdNameDescriptionDTO implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 604063025090500086L;
+
+	@NotNull(message = "{Pattern.CompanyOfObject.Validation}")
 	private CompanyDTO companyOfThisSocket;
 
+	@NotNull(message = "{Pattern.laptop/desktop.Validation}")
 	private Boolean laptopOrDesktop;
 
 	public CpuSocketDTO() {
@@ -57,5 +68,4 @@ public class CpuSocketDTO extends IdNameDescriptionDTO {
 		return true;
 	}
 
-	
 }

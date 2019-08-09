@@ -1,10 +1,16 @@
 package al.edu.fti.gaming.dto;
 
+import java.io.Serializable;
+
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.URL;
 
-public class CompanyDTO extends IdNameDescriptionDTO {
+public class CompanyDTO extends IdNameDescriptionDTO implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5919058361078571414L;
 	@NotBlank(message = "{Pattern.Hyperlink.Validation}")
 	@URL(message = "{Pattern.Hyperlink.Validation}")
 	private String hyperlink;
