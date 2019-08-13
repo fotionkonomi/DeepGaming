@@ -18,12 +18,12 @@
 			<div class="col-md-5 col-md-push-2" style="left: 0.5%">
 				<div class="product-preview">
 					<img width="300px" height="300px"
-						src="<c:url value="/img/categoryofgame${category.id}.png">
+						src="<c:url value="/img/category${category.id}.png">
  </c:url>"
 						alt="${category.name}"> <br /> <br />
 					
 					<a style="text-align: center;"
-						href="<spring:url value="/categoryOfGames/update?id=${category.id }" />"
+						href="<spring:url value="/categoryofgames/update?id=${category.id }" />"
 						class="btn btn-primary"> <spring:message
 							code="details.update" />
 					</a>

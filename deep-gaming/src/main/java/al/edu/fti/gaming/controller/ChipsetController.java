@@ -13,38 +13,57 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MaxUploadSizeExceededException;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.ModelAndView;
 
 import al.edu.fti.gaming.dto.ChipsetDTO;
+import al.edu.fti.gaming.dto.CompanyDTO;
 import al.edu.fti.gaming.exception.ChipsetNotFoundException;
 import al.edu.fti.gaming.service.ChipsetService;
+import al.edu.fti.gaming.service.CompanyService;
 import al.edu.fti.gaming.service.GeneralService;
+import al.edu.fti.gaming.utils.CompanyEditor;
 import al.edu.fti.gaming.utils.Messages;
 
 @Controller
 @RequestMapping(value = "/chipset")
+@SessionAttributes("allCompanies")
 public class ChipsetController implements HandlerExceptionResolver {
 
 	@Autowired
 	private ChipsetService chipsetService;
+	
+	@Autowired
+	private CompanyService companyService;
 
 	@Autowired
 	private GeneralService generalService;
 
 	@Autowired
 	private Messages messages;
+	
+	@Autowired
+	private CompanyEditor editor;
 
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public String addChipsetForm(Model model) {
 		ChipsetDTO chipsetDTO = new ChipsetDTO();
 		model.addAttribute("newChipset", chipsetDTO);
+		List<CompanyDTO> allCompaniesList = companyService.getAllCompanies();
+		Map<Integer, String> allCompanies = new HashMap<Integer, String>();
+		for (CompanyDTO companyDTO : allCompaniesList) {
+			allCompanies.put(companyDTO.getId(), companyDTO.getName());
+		}
+		model.addAttribute("allCompanies", allCompanies);
 		return "/chipset/addChipset";
 	}
 
@@ -52,7 +71,7 @@ public class ChipsetController implements HandlerExceptionResolver {
 	public String processForm(@ModelAttribute("newChipset") @Valid ChipsetDTO chipsetDTO, BindingResult result,
 			HttpServletRequest request) {
 		if (result.hasErrors()) {
-			return "/categoryOfGames/addCategory";
+			return "/chipset/addChipset";
 		} else {
 			if (chipsetService.add(chipsetDTO) != 0) {
 				generalService.imageProcessing(chipsetDTO, request.getSession().getServletContext().getRealPath("/"),
@@ -105,6 +124,11 @@ public class ChipsetController implements HandlerExceptionResolver {
 			}
 
 		}
+	}
+	
+	@InitBinder
+	public void initBinder(WebDataBinder binder) {
+		binder.registerCustomEditor(CompanyDTO.class, this.editor);
 	}
 
 	@ExceptionHandler(ChipsetNotFoundException.class)

@@ -25,8 +25,9 @@
 		<form:form class="form-horizontal" method="POST"
 			modelAttribute="newChipset" enctype="multipart/form-data">
 			<fieldset>
-				<legend style="padding-top: 20px; font-size: 37px;"><spring:message
-							code="addChipset.form.legend" /></legend>
+				<legend style="padding-top: 20px; font-size: 37px;">
+					<spring:message code="addChipset.form.legend" />
+				</legend>
 
 				<spring:message code="add.form.name.placeholder"
 					var="namePlaceholder" />
@@ -61,21 +62,31 @@
 					</div>
 				</div>
 
+				<div class="form-group">
+					<label class="control-label col-lg-2 col-lg-2"><spring:message
+							code="addCpuSocket.form.company.label" /></label>
+					<div class="col-lg-10">
+						<form:select path="companyOfThisChipset" class="form-control">
+							<form:options items="${allCompanies}" />
+						</form:select>
+						<form:errors path="companyOfThisChipset" cssClass="text-danger" />
+
+					</div>
+				</div>
 
 				<div class="form-group">
 					<label class="control-label col-lg-2" for="image"> <spring:message
 							code="addChipset.form.image.label" />
 					</label>
 					<div class="input-file-container">
-						<form:input id="image" path="image" type="file"
-							class="input-file" />
+						<form:input id="image" path="image" type="file" class="input-file" />
 						<label tabindex="0" for="image" class="input-file-trigger">
 							<spring:message code="add.form.image.imageUpload" />
 						</label> <span class="file-return" hidden="true"><spring:message
 								code="add.form.image.success" /></span> <span
 							class="file-return-error" hidden="true"><spring:message
-								code="add.form.image.error" /></span>
-								<span class="file-return-size-error" hidden="true"><spring:message
+								code="add.form.image.error" /></span> <span
+							class="file-return-size-error" hidden="true"><spring:message
 								code="add.form.image.error.size" /></span>
 						<form:errors path="image" cssClass="text-danger" />
 						<c:if test="${not empty errors}">
@@ -107,6 +118,6 @@
 
 
 	<script src="<c:url value="/js/fileupload.js"></c:url>"></script>
-	
+
 </body>
 </html>
