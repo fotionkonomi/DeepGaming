@@ -1,5 +1,6 @@
 package al.edu.fti.gaming.dao.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.HibernateException;
@@ -73,6 +74,13 @@ public class CompanyRepositoryImpl implements CompanyRepository {
 			session.close();
 		}
 		return successfulOrNot;
+	}
+
+	@Override
+	public List<Company> getAllCompaniesThatHaveCpuSockets() {
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session.createQuery("SELECT DISTINCT c FROM Company c INNER JOIN c.cpuSocketsOfThisCompany");
+		return query.list();
 	}
 
 }

@@ -39,7 +39,7 @@
 							class="form-control" />
 						<c:if test="${param.error != null}">
 							<span style="color: red;"><spring:message
-									code="addCpuSocket.form.name.error" /></span>
+									code="addChipset.form.name.error" /></span>
 						</c:if>
 						<form:errors path="name" cssClass="text-danger" />
 
@@ -65,16 +65,7 @@
 					var="hyperlinkPlaceholder" />
 
 
-					<div class="form-group">
-					<label class="control-label col-lg-2 col-lg-2" for="laptopOrDesktop"><spring:message
-							code="addCpuSocket.form.laptop/desktop.label" /></label>
-					<div class="col-lg-10">
-						<form:radiobutton id="laptopOrDesktop" path="laptopOrDesktop" value="true" />
-						&nbsp;Laptop
-						<form:radiobutton id="laptopOrDesktop" path="laptopOrDesktop" value="false" />
-						Desktop
-
-					</div>
+			
 				</div>
 
 
@@ -82,7 +73,7 @@
 					<label class="control-label col-lg-2 col-lg-2"><spring:message
 							code="addCpuSocket.form.company.label" /></label>
 					<div class="col-lg-10">
-						<form:select path="companyOfThisSocket" class="form-control">
+						<form:select path="companyOfThisChipset" class="form-control">
 							<form:options items="${allCompanies}" />
 						</form:select>
 					</div>
@@ -91,7 +82,7 @@
 
 				<div class="form-group">
 					<label class="control-label col-lg-2" for="image"> <spring:message
-							code="addCpuSocket.form.image.label" />
+							code="addChipset.form.image.label" />
 					</label>
 					<div class="input-file-container">
 						<form:input id="image" path="image" type="file"

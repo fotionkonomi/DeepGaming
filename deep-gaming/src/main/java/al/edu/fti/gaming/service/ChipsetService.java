@@ -13,4 +13,6 @@ public interface ChipsetService {
 	ChipsetDTO getChipsetById(int id);
 	
 	boolean update(ChipsetDTO chipsetDTO);
+	
+	List<ChipsetDTO> getChipsetsByCompany(String companyName);
 }

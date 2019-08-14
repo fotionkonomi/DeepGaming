@@ -20,7 +20,7 @@
 					<img width="300px" height="300px"
 						src="<c:url value="/img/cpusocket${cpuSocket.id}.png">
  </c:url>"
-						alt="${cpuSocket.name}"> <br /> <br />
+						alt="${cpuSocket.companyOfThisSocket.name} ${cpuSocket.name}"> <br /> <br />
 					<p>
 						<spring:message code="details.company" />
 						<a href="/deep-gaming/company/details?id=${cpuSocket.companyOfThisSocket.id }">${cpuSocket.companyOfThisSocket.name}
@@ -38,7 +38,7 @@
 			<!-- Product details -->
 			<div class="col-md-5" style="width: 58%">
 				<div class="product-details">
-					<h2 style="color: #D10024;" class="product-name">${cpuSocket.name }</h2>
+					<h2 style="color: #D10024;" class="product-name">${cpuSocket.companyOfThisSocket.name} ${cpuSocket.name }</h2>
 
 					<div></div>
 					<div></div>

@@ -1,9 +1,16 @@
 package al.edu.fti.gaming.dto;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+
 public class CpuArchitectureDTO extends IdNameDescriptionDTO {
 
+	@Min(0)
+	@Max(127)
 	private Byte cpuProcessNanometers;
 
+	@NotNull(message = "{Pattern.CompanyOfObject.Validation}")
 	private CompanyDTO companyOfThisCpuArchitecture;
 
 	public CpuArchitectureDTO() {

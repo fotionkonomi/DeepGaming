@@ -17,6 +17,7 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -28,6 +29,7 @@ import org.springframework.web.servlet.ModelAndView;
 import al.edu.fti.gaming.dto.CompanyDTO;
 import al.edu.fti.gaming.dto.CpuSocketDTO;
 import al.edu.fti.gaming.exception.CpuSocketNotFoundException;
+import al.edu.fti.gaming.exception.NoCpuSocketsFoundForCompanyException;
 import al.edu.fti.gaming.service.CompanyService;
 import al.edu.fti.gaming.service.CpuSocketService;
 import al.edu.fti.gaming.service.GeneralService;
@@ -91,6 +93,15 @@ public class CpuSocketController implements HandlerExceptionResolver {
 	@RequestMapping(value = "/cpuSockets", method = RequestMethod.GET)
 	public String allCpuSockets(Model model) {
 		model.addAttribute("cpuSockets", cpuSocketService.getAllCpuSockets());
+		List<CompanyDTO> companiesThatHaveCpuSockets = companyService.getAllCompaniesThatHaveCpuSockets();
+ 		model.addAttribute("companies", companiesThatHaveCpuSockets );
+		return "/cpuSocket/cpuSockets";
+	}
+
+	@RequestMapping(value = "/cpuSockets/{company}")
+	public String getCpuSocketsByCompany(Model model, @PathVariable("company") String company) {
+		List<CpuSocketDTO> cpuSockets = cpuSocketService.getCpuSocketsByCompany(company);
+		model.addAttribute("cpuSockets", cpuSockets);
 		return "/cpuSocket/cpuSockets";
 	}
 
@@ -153,6 +164,12 @@ public class CpuSocketController implements HandlerExceptionResolver {
 		String id = queryString.substring(3);
 		mav.addObject("id", id);
 		return mav;
+
+	}
+	
+	@ExceptionHandler(NoCpuSocketsFoundForCompanyException.class)
+	public String handleNoCpuSocketFoundForCompany(Model model, HttpServletRequest req, NoCpuSocketsFoundForCompanyException exception) {
+		return "cpuSocket/NoCpuSocketForCompany";
 
 	}
 

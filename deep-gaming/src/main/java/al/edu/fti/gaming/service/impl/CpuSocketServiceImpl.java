@@ -12,6 +12,7 @@ import al.edu.fti.gaming.converter.Converter;
 import al.edu.fti.gaming.dao.CpuSocketRepository;
 import al.edu.fti.gaming.dto.CpuSocketDTO;
 import al.edu.fti.gaming.exception.CpuSocketNotFoundException;
+import al.edu.fti.gaming.exception.NoCpuSocketsFoundForCompanyException;
 import al.edu.fti.gaming.models.CpuSocket;
 import al.edu.fti.gaming.service.CpuSocketService;
 
@@ -39,16 +40,7 @@ public class CpuSocketServiceImpl implements CpuSocketService {
 	@Override
 	public List<CpuSocketDTO> getAllCpuSockets() {
 		List<CpuSocket> cpuSocketModels = cpuSocketRepository.getAllCpuSockets();
-		List<CpuSocketDTO> cpuSocketDTOs = new ArrayList<CpuSocketDTO>();
-		for (CpuSocket cpuSocket : cpuSocketModels) {
-			CpuSocketDTO cpuSocketDTO = (CpuSocketDTO) cpuSocketConverter.toDTO(cpuSocket);
-			if (cpuSocketDTO != null) {
-				cpuSocketDTOs.add(cpuSocketDTO);
-			} else {
-				return null;
-			}
-		}
-		return cpuSocketDTOs;
+		return convertList(cpuSocketModels);
 	}
 
 	@Override
@@ -66,4 +58,25 @@ public class CpuSocketServiceImpl implements CpuSocketService {
 		return this.cpuSocketRepository.update((CpuSocket) cpuSocketConverter.toModel(cpuSocketDTO));
 	}
 
+	@Override
+	public List<CpuSocketDTO> getCpuSocketsByCompany(String companyName) {
+		List<CpuSocket> cpuSocketModels = cpuSocketRepository.getCpuSocketsByCompany(companyName);
+		if (cpuSocketModels == null || cpuSocketModels.isEmpty()) {
+			throw new NoCpuSocketsFoundForCompanyException(companyName);
+		}
+		return convertList(cpuSocketModels);
+	}
+
+	private List<CpuSocketDTO> convertList(List<CpuSocket> cpuSocketModels) {
+		List<CpuSocketDTO> cpuSocketDTOs = new ArrayList<CpuSocketDTO>();
+		for(CpuSocket cpuSocket : cpuSocketModels) {
+			CpuSocketDTO cpuSocketDTO = (CpuSocketDTO) cpuSocketConverter.toDTO(cpuSocket);
+			if (cpuSocketDTO != null) {
+				cpuSocketDTOs.add(cpuSocketDTO);
+			} else {
+				return null;
+			}
+		}
+		return cpuSocketDTOs;
+	}
 }

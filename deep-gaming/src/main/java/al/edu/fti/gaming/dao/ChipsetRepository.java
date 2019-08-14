@@ -13,4 +13,6 @@ public interface ChipsetRepository {
 	Chipset getChipsetById(int id);
 	
 	boolean update(Chipset chipset);
+	
+	List<Chipset> getChipsetsByCompany(String companyName);
 }

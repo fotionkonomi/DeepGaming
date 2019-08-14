@@ -75,4 +75,13 @@ public class ChipsetRepositoryImpl implements ChipsetRepository {
 		return successfulOrNot;
 	}
 
+	@Override
+	public List<Chipset> getChipsetsByCompany(String companyName) {
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session.createQuery(
+				"SELECT ch FROM Chipset ch INNER JOIN ch.companyThatCreatedThisChipset c where c.companyName = :companyName ");
+		query.setString("companyName", companyName);
+		return query.list();
+	}
+
 }

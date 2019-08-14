@@ -62,4 +62,9 @@ public class ChipsetServiceImpl implements ChipsetService {
 		return this.chipsetRepository.update((Chipset) chipsetConverter.toModel(chipsetDTO));
 	}
 
+	@Override
+	public List<ChipsetDTO> getChipsetsByCompany(String companyName) {
+		return null;
+	}
+
 }

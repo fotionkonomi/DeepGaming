@@ -13,4 +13,7 @@ public interface CpuSocketRepository {
 	CpuSocket getCpuSocketById(int id);
 	
 	boolean update(CpuSocket cpuSocket);
+	
+	List<CpuSocket> getCpuSocketsByCompany(String companyName);
+	
 }

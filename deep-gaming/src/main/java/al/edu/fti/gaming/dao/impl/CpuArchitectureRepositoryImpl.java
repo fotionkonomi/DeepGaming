@@ -10,29 +10,24 @@ import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import al.edu.fti.gaming.dao.CpuSocketRepository;
-import al.edu.fti.gaming.models.CpuSocket;
+import al.edu.fti.gaming.dao.CpuArchitectureRepository;
+import al.edu.fti.gaming.models.CpuArchitecture;
 
 @Repository
-public class CpuSocketRepositoryImpl implements CpuSocketRepository {
-
+public class CpuArchitectureRepositoryImpl implements CpuArchitectureRepository {
 	@Autowired
 	private SessionFactory sessionFactory;
 
-	public void setSessionFactory(SessionFactory sf) {
-		this.sessionFactory = sf;
-	}
-
 	@Override
-	public int add(CpuSocket cpuSocket) {
+	public int add(CpuArchitecture cpuArchitecture) {
 		Session session = sessionFactory.openSession();
 		int idOrNotSuccessful;
 		Transaction tx = session.getTransaction();
 		try {
 			tx.begin();
-			session.save(cpuSocket);
+			session.save(cpuArchitecture);
 			tx.commit();
-			idOrNotSuccessful = cpuSocket.getIdCpuSocket();
+			idOrNotSuccessful = cpuArchitecture.getIdCpuArchitecture();
 		} catch (HibernateException e) {
 			tx.rollback();
 			idOrNotSuccessful = 0;
@@ -43,27 +38,27 @@ public class CpuSocketRepositoryImpl implements CpuSocketRepository {
 	}
 
 	@Override
-	public List<CpuSocket> getAllCpuSockets() {
+	public List<CpuArchitecture> getAllCpuArchitectures() {
 		Session session = sessionFactory.getCurrentSession();
-		Query query = session.createQuery("Select cs FROM CpuSocket cs");
+		Query query = session.createQuery("Select ca FROM CpuArchitecture ca");
 		return query.list();
 	}
 
 	@Override
-	public CpuSocket getCpuSocketById(int id) {
+	public CpuArchitecture getCpuArchitectureById(int id) {
 		Session session = sessionFactory.getCurrentSession();
-		Query query = session.createQuery("SELECT cs FROM CpuSocket cs WHERE cs.idCpuSocket = :id");
+		Query query = session.createQuery("SELECT ca FROM CpuArchitecture ca WHERE ca.idCpuArchitecture = :id");
 		query.setInteger("id", id);
-		return (CpuSocket) query.uniqueResult();
+		return (CpuArchitecture) query.uniqueResult();
 	}
 
 	@Override
-	public boolean update(CpuSocket cpuSocket) {
+	public boolean update(CpuArchitecture cpuArchitecture) {
 		Session session = sessionFactory.openSession();
 		boolean successfulOrNot;
 		try {
 			session.getTransaction().begin();
-			session.update(cpuSocket);
+			session.update(cpuArchitecture);
 			session.getTransaction().commit();
 			successfulOrNot = true;
 		} catch (HibernateException e) {
@@ -73,15 +68,6 @@ public class CpuSocketRepositoryImpl implements CpuSocketRepository {
 			session.close();
 		}
 		return successfulOrNot;
-	}
-
-	@Override
-	public List<CpuSocket> getCpuSocketsByCompany(String companyName) {
-		Session session = sessionFactory.getCurrentSession();
-		Query query = session.createQuery(
-				"SELECT cs FROM CpuSocket cs INNER JOIN cs.companyThatCreatedThisSocket c where c.companyName = :companyName");
-		query.setString("companyName", companyName);
-		return query.list();
 	}
 
 }

@@ -99,7 +99,13 @@ public class ChipsetController implements HandlerExceptionResolver {
 	@RequestMapping(value = "/update")
 	public String updateAChipset(@RequestParam("id") int chipsetId, Model model) {
 		model.addAttribute("chipset", chipsetService.getChipsetById(chipsetId));
-		return "/chipset/details";
+		List<CompanyDTO> allCompaniesList = companyService.getAllCompanies();
+		Map<Integer, String> allCompanies = new HashMap<Integer, String>();
+		for (CompanyDTO companyDTO : allCompaniesList) {
+			allCompanies.put(companyDTO.getId(), companyDTO.getName());
+		}
+		model.addAttribute("allCompanies", allCompanies);
+		return "/chipset/updateChipset";
 	}
 
 	@RequestMapping(value = "/update", method = RequestMethod.POST)

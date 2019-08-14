@@ -61,21 +61,8 @@ public class CompanyServiceImpl implements CompanyService {
 
 	@Override
 	public List<CompanyDTO> getAllCompanies() {
-		LOGGER.log(Level.INFO, "Getting all the company models by calling the repository");
 		List<Company> companyModels = companyRepository.getAllCompanies();
-		List<CompanyDTO> companyDTOs = new ArrayList<CompanyDTO>();
-		for (Company company : companyModels) {
-			CompanyDTO companyDTO = (CompanyDTO) companyConverter.toDTO(company);
-			if (companyDTO != null) {
-				LOGGER.log(Level.INFO, companyDTO.getName() + " was converted and added to the list");
-				companyDTOs.add(companyDTO);
-			} else {
-				LOGGER.log(Level.SEVERE, "One object couldn't be converted, process aborted!");
-				return null;
-			}
-		}
-		LOGGER.log(Level.INFO, "Process was finished successfully!");
-		return companyDTOs;
+		return convertList(companyModels);
 	}
 
 	public static Logger getLogger() {
@@ -95,6 +82,29 @@ public class CompanyServiceImpl implements CompanyService {
 	@Override
 	public boolean update(CompanyDTO companyDTO) {
 		return this.companyRepository.update((Company) companyConverter.toModel(companyDTO));
+	}
+
+	@Override
+	public List<CompanyDTO> getAllCompaniesThatHaveCpuSockets() {
+		List<Company> companyModels = companyRepository.getAllCompaniesThatHaveCpuSockets();
+		return convertList(companyModels);
+	}
+	
+	private List<CompanyDTO> convertList(List<Company> companyModels) {
+		LOGGER.log(Level.INFO, "Getting all the company models by calling the repository");
+		List<CompanyDTO> companyDTOs = new ArrayList<CompanyDTO>();
+		for (Company company : companyModels) {
+			CompanyDTO companyDTO = (CompanyDTO) companyConverter.toDTO(company);
+			if (companyDTO != null) {
+				LOGGER.log(Level.INFO, companyDTO.getName() + " was converted and added to the list");
+				companyDTOs.add(companyDTO);
+			} else {
+				LOGGER.log(Level.SEVERE, "One object couldn't be converted, process aborted!");
+				return null;
+			}
+		}
+		LOGGER.log(Level.INFO, "Process was finished successfully!");
+		return companyDTOs;
 	}
 
 }

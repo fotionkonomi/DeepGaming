@@ -39,7 +39,7 @@
 			<!-- Product details -->
 			<div class="col-md-5" style="width: 58%">
 				<div class="product-details">
-					<h2 style="color: #D10024;" class="product-name">${chipset.name }</h2>
+					<h2 style="color: #D10024;" class="product-name">${chipset.companyOfThisChipset.name} ${chipset.name }</h2>
 
 					<div></div>
 					<div></div>

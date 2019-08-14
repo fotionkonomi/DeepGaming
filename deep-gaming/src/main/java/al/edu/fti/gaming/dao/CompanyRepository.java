@@ -19,4 +19,6 @@ public interface CompanyRepository {
 	Company getCompanyById(int id);
 
 	boolean update(Company company);
+	
+	List<Company> getAllCompaniesThatHaveCpuSockets();
 }

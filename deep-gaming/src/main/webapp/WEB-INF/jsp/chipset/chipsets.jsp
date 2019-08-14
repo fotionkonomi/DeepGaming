@@ -40,7 +40,7 @@
 									<br />
 									<h2 class="product-name">
 										<a style="font-size: 20px;"
-											href="<spring:url value="/chipset/details?id=${chipset.id}" />">${chipset.name}</a>
+											href="<spring:url value="/chipset/details?id=${chipset.id}" />">${chipset.companyOfThisChipset.name} ${chipset.name}</a>
 									</h2>
 
 								</div>
