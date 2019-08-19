@@ -1,20 +1,16 @@
 package al.edu.fti.gaming.exception;
 
-public class CompanyNotFoundException extends RuntimeException {
+public class CompanyNotFoundException extends ObjectNotFoundException {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -2691604647400090608L;
 
-	private int companyId;
-
 	public CompanyNotFoundException(int companyId) {
-		this.companyId = companyId;
+		super(companyId);
 	}
 
-	public int getCompanyId() {
-		return companyId;
-	}
+	
 
 }

@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 
 import al.edu.fti.gaming.dao.CompanyRepository;
 import al.edu.fti.gaming.models.Company;
+import al.edu.fti.gaming.models.CpuArchitecture;
 
 @Repository
 public class CompanyRepositoryImpl implements CompanyRepository {
@@ -80,6 +81,20 @@ public class CompanyRepositoryImpl implements CompanyRepository {
 	public List<Company> getAllCompaniesThatHaveCpuSockets() {
 		Session session = sessionFactory.getCurrentSession();
 		Query query = session.createQuery("SELECT DISTINCT c FROM Company c INNER JOIN c.cpuSocketsOfThisCompany");
+		return query.list();
+	}
+
+	@Override
+	public List<Company> getAllCompaniesThatHaveChipsets() {
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session.createQuery("SELECT DISTINCT c FROM Company c INNER JOIN c.chipsetsOfThisCompany");
+		return query.list();
+	}
+
+	@Override
+	public List<Company> getAllCompaniesThatHaveCpuArchitectures() {
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session.createQuery("SELECT DISTINCT c FROM Company c INNER JOIN c.cpuArchitecturesOfThisCompany");
 		return query.list();
 	}
 

@@ -1,6 +1,5 @@
 package al.edu.fti.gaming.service.impl;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -11,7 +10,6 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import al.edu.fti.gaming.converter.Converter;
 import al.edu.fti.gaming.dao.CompanyRepository;
@@ -89,7 +87,19 @@ public class CompanyServiceImpl implements CompanyService {
 		List<Company> companyModels = companyRepository.getAllCompaniesThatHaveCpuSockets();
 		return convertList(companyModels);
 	}
-	
+
+	@Override
+	public List<CompanyDTO> getAllCompaniesThatHaveChipsets() {
+		List<Company> companyModels = companyRepository.getAllCompaniesThatHaveChipsets();
+		return convertList(companyModels);
+	}
+
+	@Override
+	public List<CompanyDTO> getAllCompaniesThatHaveCpuArchitectures() {
+		List<Company> companyModels = companyRepository.getAllCompaniesThatHaveCpuArchitectures();
+		return convertList(companyModels);
+	}
+
 	private List<CompanyDTO> convertList(List<Company> companyModels) {
 		LOGGER.log(Level.INFO, "Getting all the company models by calling the repository");
 		List<CompanyDTO> companyDTOs = new ArrayList<CompanyDTO>();

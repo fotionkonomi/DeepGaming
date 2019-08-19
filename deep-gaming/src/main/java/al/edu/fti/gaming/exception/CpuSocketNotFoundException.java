@@ -1,20 +1,14 @@
 package al.edu.fti.gaming.exception;
 
-public class CpuSocketNotFoundException extends RuntimeException {
-
+public class CpuSocketNotFoundException extends ObjectNotFoundException {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -5737121007294053786L;
-	
-	private int cpuSocketId;
 
 	public CpuSocketNotFoundException(int cpuSocketId) {
-		this.cpuSocketId = cpuSocketId;
+		super(cpuSocketId);
 	}
 
-	public int getcpuSocketId() {
-		return cpuSocketId;
-	}
 }

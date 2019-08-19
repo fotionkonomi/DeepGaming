@@ -2,18 +2,26 @@ package al.edu.fti.gaming.service.impl;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.multipart.MultipartFile;
 
+import al.edu.fti.gaming.dto.CompanyDTO;
 import al.edu.fti.gaming.dto.IdNameDescriptionDTO;
+import al.edu.fti.gaming.service.CompanyService;
 import al.edu.fti.gaming.service.GeneralService;
 
 @Service
 public class GeneralServiceImpl implements GeneralService {
 
+	@Autowired
+	private CompanyService companyService;
+	
 	@Override
 	public void imageProcessing(IdNameDescriptionDTO dtoObject, String path, boolean addOrUpdate) {
 		String nameOfClass = dtoObject.getClass().getSimpleName().toLowerCase();
@@ -48,6 +56,16 @@ public class GeneralServiceImpl implements GeneralService {
 		} else {
 			return errorsFromValidation;
 		}
+	}
+	
+	@Override
+	public Map<Integer, String> getAllCompaniesMap() {
+		List<CompanyDTO> allCompaniesList = companyService.getAllCompanies();
+		Map<Integer, String> allCompanies = new HashMap<Integer, String>();
+		for (CompanyDTO companyDTO : allCompaniesList) {
+			allCompanies.put(companyDTO.getId(), companyDTO.getName());
+		}
+		return allCompanies;
 	}
 
 }

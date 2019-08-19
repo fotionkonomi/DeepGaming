@@ -17,4 +17,8 @@ public interface CompanyService {
 	boolean update(CompanyDTO companyDTO);
 	
 	List<CompanyDTO> getAllCompaniesThatHaveCpuSockets();
+	
+	List<CompanyDTO> getAllCompaniesThatHaveChipsets();
+	
+	List<CompanyDTO> getAllCompaniesThatHaveCpuArchitectures();
 }

@@ -3,11 +3,13 @@ package al.edu.fti.gaming.dto;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 public class CpuArchitectureDTO extends IdNameDescriptionDTO {
 
-	@Min(0)
-	@Max(127)
+	@Min(value = 1, message = "{addCpuArchitecture.form.cpuProcessNanometer.error}")
+	@Max(value = 127, message = "{addCpuArchitecture.form.cpuProcessNanometer.error}")
+	@NotNull(message = "{addCpuArchitecture.form.cpuProcessNanometer.required}")
 	private Byte cpuProcessNanometers;
 
 	@NotNull(message = "{Pattern.CompanyOfObject.Validation}")

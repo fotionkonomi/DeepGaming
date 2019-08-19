@@ -1,6 +1,7 @@
 package al.edu.fti.gaming.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.validation.ObjectError;
 import org.springframework.web.multipart.MultipartFile;
@@ -20,4 +21,6 @@ public interface GeneralService {
 
 	List<ObjectError> listOfErrorsWithoutImageError(List<ObjectError> errorsFromValidation, MultipartFile image,
 			String errorMessage);
+	
+	Map<Integer, String> getAllCompaniesMap();
 }

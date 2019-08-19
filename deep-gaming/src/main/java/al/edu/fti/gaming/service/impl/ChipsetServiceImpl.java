@@ -11,8 +11,11 @@ import org.springframework.transaction.annotation.Transactional;
 import al.edu.fti.gaming.converter.Converter;
 import al.edu.fti.gaming.dao.ChipsetRepository;
 import al.edu.fti.gaming.dto.ChipsetDTO;
+import al.edu.fti.gaming.dto.CpuSocketDTO;
 import al.edu.fti.gaming.exception.ChipsetNotFoundException;
+import al.edu.fti.gaming.exception.NoChipsetsFoundForCompanyException;
 import al.edu.fti.gaming.models.Chipset;
+import al.edu.fti.gaming.models.CpuSocket;
 import al.edu.fti.gaming.service.ChipsetService;
 
 @Service
@@ -39,12 +42,7 @@ public class ChipsetServiceImpl implements ChipsetService {
 	@Override
 	public List<ChipsetDTO> getAllChipsets() {
 		List<Chipset> chipsetModels = chipsetRepository.getAllChipsets();
-		List<ChipsetDTO> chipsetDTOs = new ArrayList<ChipsetDTO>();
-		for (Chipset chipset : chipsetModels) {
-			ChipsetDTO chipsetDTO = (ChipsetDTO) chipsetConverter.toDTO(chipset);
-			chipsetDTOs.add(chipsetDTO);
-		}
-		return chipsetDTOs;
+		return convertList(chipsetModels);
 	}
 
 	@Override
@@ -64,7 +62,25 @@ public class ChipsetServiceImpl implements ChipsetService {
 
 	@Override
 	public List<ChipsetDTO> getChipsetsByCompany(String companyName) {
-		return null;
+		List<Chipset> chipsetModels = chipsetRepository.getChipsetsByCompany(companyName);
+		if(chipsetModels == null || chipsetModels.isEmpty()) {
+			throw new NoChipsetsFoundForCompanyException(companyName);
+		} else {
+			return convertList(chipsetModels);
+		}
+	}
+	
+	private List<ChipsetDTO> convertList(List<Chipset> chipsetModels) {
+		List<ChipsetDTO> chipsetDTOs = new ArrayList<ChipsetDTO>();
+		for(Chipset chipset : chipsetModels) {
+			ChipsetDTO chipsetDTO = (ChipsetDTO) chipsetConverter.toDTO(chipset);
+			if (chipsetDTO != null) {
+				chipsetDTOs.add(chipsetDTO);
+			} else {
+				return null;
+			}
+		}
+		return chipsetDTOs;
 	}
 
 }

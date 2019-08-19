@@ -31,7 +31,7 @@ public class CpuArchitectureServiceImpl implements CpuArchitectureService {
 
 	@Autowired
 	private CompanyRepository companyRepository;
-	
+
 	@Override
 	public int add(CpuArchitectureDTO cpuArchitectureDTO) {
 		CpuArchitecture cpuArchitecture = (CpuArchitecture) cpuArchitectureConverter.toModel(cpuArchitectureDTO);
@@ -45,17 +45,7 @@ public class CpuArchitectureServiceImpl implements CpuArchitectureService {
 	@Override
 	public List<CpuArchitectureDTO> getAllCpuArchitectures() {
 		List<CpuArchitecture> cpuArchitectureModels = cpuArchitectureRepository.getAllCpuArchitectures();
-		List<CpuArchitectureDTO> cpuArchitectureDTOs = new ArrayList<CpuArchitectureDTO>();
-		for (CpuArchitecture cpuArchitecture : cpuArchitectureModels) {
-			CpuArchitectureDTO cpuArchitectureDTO = (CpuArchitectureDTO) cpuArchitectureConverter
-					.toDTO(cpuArchitecture);
-			if (cpuArchitectureDTO != null) {
-				cpuArchitectureDTOs.add(cpuArchitectureDTO);
-			} else {
-				return null;
-			}
-		}
-		return cpuArchitectureDTOs;
+		return convertList(cpuArchitectureModels);
 	}
 
 	@Override
@@ -73,7 +63,27 @@ public class CpuArchitectureServiceImpl implements CpuArchitectureService {
 		return this.cpuArchitectureRepository
 				.update((CpuArchitecture) cpuArchitectureConverter.toModel(cpuArchitectureDTO));
 	}
-	
-	
+
+	@Override
+	public List<CpuArchitectureDTO> getCpuArchitecturesByCompany(String companyName) {
+		List<CpuArchitecture> cpuArchitectureModels = cpuArchitectureRepository
+				.getCpuArchitecturesByCompany(companyName);
+		return convertList(cpuArchitectureModels);
+	}
+
+	private List<CpuArchitectureDTO> convertList(List<CpuArchitecture> cpuArchitectureModels) {
+		List<CpuArchitectureDTO> cpuArchitectureDTOs = new ArrayList<CpuArchitectureDTO>();
+		for (CpuArchitecture cpuArchitecture : cpuArchitectureModels) {
+			CpuArchitectureDTO cpuArchitectureDTO = (CpuArchitectureDTO) cpuArchitectureConverter
+					.toDTO(cpuArchitecture);
+			if (cpuArchitectureDTO != null) {
+				cpuArchitectureDTOs.add(cpuArchitectureDTO);
+			} else {
+				return null;
+			}
+		}
+		return cpuArchitectureDTOs;
+
+	}
 
 }

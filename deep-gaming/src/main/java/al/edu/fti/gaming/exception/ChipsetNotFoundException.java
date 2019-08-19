@@ -1,19 +1,14 @@
 package al.edu.fti.gaming.exception;
 
-public class ChipsetNotFoundException extends RuntimeException {
+public class ChipsetNotFoundException extends ObjectNotFoundException {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 5647379937314523692L;
 
-	private int idChipset;
-
 	public ChipsetNotFoundException(int idChipset) {
-		this.idChipset = idChipset;
+		super(idChipset);
 	}
 
-	public int getIdChipset() {
-		return idChipset;
-	}
 }

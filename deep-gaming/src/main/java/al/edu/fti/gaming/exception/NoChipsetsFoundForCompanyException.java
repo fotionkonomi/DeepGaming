@@ -1,20 +1,14 @@
 package al.edu.fti.gaming.exception;
 
-public class NoChipsetsFoundForCompanyException extends RuntimeException {
+public class NoChipsetsFoundForCompanyException extends NoObjectFoundForCompanyException {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -2643711669806631791L;
 
-	private String companyName;
-
 	public NoChipsetsFoundForCompanyException(String companyName) {
-		this.companyName = companyName;
-	}
-
-	public String getCompanyName() {
-		return companyName;
+		super(companyName);
 	}
 
 }

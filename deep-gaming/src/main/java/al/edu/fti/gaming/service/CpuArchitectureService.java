@@ -13,4 +13,6 @@ public interface CpuArchitectureService {
 	CpuArchitectureDTO getCpuArchitectureById(int id);
 
 	boolean update(CpuArchitectureDTO cpuArchitectureDTO);
+	
+	List<CpuArchitectureDTO> getCpuArchitecturesByCompany(String companyName);
 }

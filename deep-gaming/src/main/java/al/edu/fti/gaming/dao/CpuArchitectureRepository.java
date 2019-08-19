@@ -14,4 +14,6 @@ public interface CpuArchitectureRepository {
 	CpuArchitecture getCpuArchitectureById(int id);
 
 	boolean update(CpuArchitecture cpuArchitecture);
+	
+	List<CpuArchitecture> getCpuArchitecturesByCompany(String companyName);
 }

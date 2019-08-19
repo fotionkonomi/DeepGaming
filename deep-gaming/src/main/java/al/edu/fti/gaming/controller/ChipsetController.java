@@ -17,6 +17,7 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -28,6 +29,7 @@ import org.springframework.web.servlet.ModelAndView;
 import al.edu.fti.gaming.dto.ChipsetDTO;
 import al.edu.fti.gaming.dto.CompanyDTO;
 import al.edu.fti.gaming.exception.ChipsetNotFoundException;
+import al.edu.fti.gaming.exception.NoChipsetsFoundForCompanyException;
 import al.edu.fti.gaming.service.ChipsetService;
 import al.edu.fti.gaming.service.CompanyService;
 import al.edu.fti.gaming.service.GeneralService;
@@ -58,12 +60,7 @@ public class ChipsetController implements HandlerExceptionResolver {
 	public String addChipsetForm(Model model) {
 		ChipsetDTO chipsetDTO = new ChipsetDTO();
 		model.addAttribute("newChipset", chipsetDTO);
-		List<CompanyDTO> allCompaniesList = companyService.getAllCompanies();
-		Map<Integer, String> allCompanies = new HashMap<Integer, String>();
-		for (CompanyDTO companyDTO : allCompaniesList) {
-			allCompanies.put(companyDTO.getId(), companyDTO.getName());
-		}
-		model.addAttribute("allCompanies", allCompanies);
+		model.addAttribute("allCompanies", generalService.getAllCompaniesMap());
 		return "/chipset/addChipset";
 	}
 
@@ -87,9 +84,18 @@ public class ChipsetController implements HandlerExceptionResolver {
 	@RequestMapping(value = "/chipsets", method = RequestMethod.GET)
 	public String allChipsets(Model model) {
 		model.addAttribute("chipsets", chipsetService.getAllChipsets());
+		List<CompanyDTO> companiesThatHaveChipsets = companyService.getAllCompaniesThatHaveChipsets();
+		model.addAttribute("companies", companiesThatHaveChipsets);
 		return "/chipset/chipsets";
 	}
 
+	@RequestMapping(value = "/chipsets/{company}")
+	public String getChipsetsByCompany(Model model, @PathVariable("company") String company) {
+		List<ChipsetDTO> chipsets = chipsetService.getChipsetsByCompany(company);
+		model.addAttribute("chipsets", chipsets);
+		return "/chipset/chipsets";
+	}
+	
 	@RequestMapping(value = "/details")
 	public String detailsOfAChipset(@RequestParam("id") int chipsetId, Model model) {
 		model.addAttribute("chipset", chipsetService.getChipsetById(chipsetId));
@@ -99,12 +105,8 @@ public class ChipsetController implements HandlerExceptionResolver {
 	@RequestMapping(value = "/update")
 	public String updateAChipset(@RequestParam("id") int chipsetId, Model model) {
 		model.addAttribute("chipset", chipsetService.getChipsetById(chipsetId));
-		List<CompanyDTO> allCompaniesList = companyService.getAllCompanies();
-		Map<Integer, String> allCompanies = new HashMap<Integer, String>();
-		for (CompanyDTO companyDTO : allCompaniesList) {
-			allCompanies.put(companyDTO.getId(), companyDTO.getName());
-		}
-		model.addAttribute("allCompanies", allCompanies);
+		model.addAttribute("allCompanies", generalService.getAllCompaniesMap());
+
 		return "/chipset/updateChipset";
 	}
 
@@ -154,6 +156,12 @@ public class ChipsetController implements HandlerExceptionResolver {
 		return mav;
 
 	}
+	
+	@ExceptionHandler(NoChipsetsFoundForCompanyException.class)
+	public String handleNoCpuSocketFoundForCompany(Model model, HttpServletRequest req, NoChipsetsFoundForCompanyException exception) {
+		return "chipset/NoChipsetForCompany";
+
+	}
 
 	@Override
 	public ModelAndView resolveException(HttpServletRequest request, HttpServletResponse response, Object handler,
@@ -163,7 +171,7 @@ public class ChipsetController implements HandlerExceptionResolver {
 			model.put("errors", messages.get("add.form.image.error.size.afterSubmit"));
 			ChipsetDTO chipsetDTO = new ChipsetDTO();
 			model.put("newChipset", chipsetDTO);
-			return new ModelAndView("/company/addCompany", model);
+			return new ModelAndView("/chipset/addChipset", model);
 		} else {
 			model.put("error", messages.get("error.genericError"));
 			model.put("sorry", messages.get("error.genericError.sorry"));

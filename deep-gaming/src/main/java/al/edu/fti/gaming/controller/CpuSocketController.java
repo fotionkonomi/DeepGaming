@@ -60,12 +60,7 @@ public class CpuSocketController implements HandlerExceptionResolver {
 	public String addCpuSocketForm(Model model) {
 		CpuSocketDTO cpuSocketDTO = new CpuSocketDTO();
 		model.addAttribute("newCpuSocket", cpuSocketDTO);
-		List<CompanyDTO> allCompaniesList = companyService.getAllCompanies();
-		Map<Integer, String> allCompanies = new HashMap<Integer, String>();
-		for (CompanyDTO companyDTO : allCompaniesList) {
-			allCompanies.put(companyDTO.getId(), companyDTO.getName());
-		}
-		model.addAttribute("allCompanies", allCompanies);
+		model.addAttribute("allCompanies", generalService.getAllCompaniesMap());
 		return "/cpuSocket/addCpuSocket";
 	}
 
@@ -115,12 +110,8 @@ public class CpuSocketController implements HandlerExceptionResolver {
 	@RequestMapping("/update")
 	public String updateCpuSocket(@RequestParam("id") int cpuSocketId, Model model) {
 		model.addAttribute("cpuSocket", cpuSocketService.getCpuSocketById(cpuSocketId));
-		List<CompanyDTO> allCompaniesList = companyService.getAllCompanies();
-		Map<Integer, String> allCompanies = new HashMap<Integer, String>();
-		for (CompanyDTO companyDTO : allCompaniesList) {
-			allCompanies.put(companyDTO.getId(), companyDTO.getName());
-		}
-		model.addAttribute("allCompanies", allCompanies);
+		
+		model.addAttribute("allCompanies", generalService.getAllCompaniesMap());
 
 		return "/cpuSocket/updateCpuSocket";
 	}
@@ -181,7 +172,7 @@ public class CpuSocketController implements HandlerExceptionResolver {
 			model.put("errors", messages.get("add.form.image.error.size.afterSubmit"));
 			CpuSocketDTO cpuSocketDTO = new CpuSocketDTO();
 			model.put("newCpuSocket", cpuSocketDTO);
-			return new ModelAndView("/company/addCompany", model);
+			return new ModelAndView("/cpuSocket/addCpuSocket", model);
 		} else {
 			model.put("error", messages.get("error.genericError"));
 			model.put("sorry", messages.get("error.genericError.sorry"));

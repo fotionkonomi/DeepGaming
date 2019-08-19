@@ -70,4 +70,13 @@ public class CpuArchitectureRepositoryImpl implements CpuArchitectureRepository 
 		return successfulOrNot;
 	}
 
+	@Override
+	public List<CpuArchitecture> getCpuArchitecturesByCompany(String companyName) {
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session.createQuery(
+				"SELECT ca FROM CpuArchitecture ca INNER JOIN ca.companyOfThisCpuArchitecture c where c.companyName = :companyName");
+		query.setString("companyName", companyName);
+		return query.list();
+	}
+
 }

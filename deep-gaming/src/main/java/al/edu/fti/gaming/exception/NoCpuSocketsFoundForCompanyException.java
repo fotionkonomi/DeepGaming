@@ -1,19 +1,14 @@
 package al.edu.fti.gaming.exception;
 
-public class NoCpuSocketsFoundForCompanyException extends RuntimeException {
+public class NoCpuSocketsFoundForCompanyException extends NoObjectFoundForCompanyException {
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 6340863832684044060L;
+	private static final long serialVersionUID = -8098063237444727576L;
 
-	private String companyName;
-	
 	public NoCpuSocketsFoundForCompanyException(String companyName) {
-		this.companyName = companyName;
+		super(companyName);
 	}
-	
-	public String getCompanyName() {
-		return companyName;
-	}
+
 }
