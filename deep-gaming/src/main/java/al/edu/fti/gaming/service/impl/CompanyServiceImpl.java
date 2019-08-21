@@ -99,6 +99,12 @@ public class CompanyServiceImpl implements CompanyService {
 		List<Company> companyModels = companyRepository.getAllCompaniesThatHaveCpuArchitectures();
 		return convertList(companyModels);
 	}
+	
+	@Override
+	public List<CompanyDTO> getAllCompaniesThatHaveCpuFamilies() {
+		List<Company> companyModels = companyRepository.getAllCompaniesThatHaveCpuFamilies();
+		return convertList(companyModels);
+	}
 
 	private List<CompanyDTO> convertList(List<Company> companyModels) {
 		LOGGER.log(Level.INFO, "Getting all the company models by calling the repository");
@@ -116,5 +122,7 @@ public class CompanyServiceImpl implements CompanyService {
 		LOGGER.log(Level.INFO, "Process was finished successfully!");
 		return companyDTOs;
 	}
+
+
 
 }

@@ -26,4 +26,6 @@ public interface CompanyRepository {
 	List<Company> getAllCompaniesThatHaveChipsets();
 	
 	List<Company> getAllCompaniesThatHaveCpuArchitectures();
+	
+	List<Company> getAllCompaniesThatHaveCpuFamilies();
 }

@@ -19,14 +19,16 @@
 	<jsp:include page="/WEB-INF/jsp/navigation.jsp"></jsp:include>
 
 	<h1 style="text-align: center; color: #D10024;">
-		Error 404: <span>${errors }</span>
-		
+		Error 404:
+		<spring:message code="CpuArchitecture.ByCompany.NotFound" />
 	</h1>
 	<br />
 	<center>
-		<button style="text-align: center;" onclick="goBack();" class="btn btn-primary"> <spring:message
+		<a style="text-align: center;"
+			href="<spring:url value="/cpuArchitecture/cpuArchitectures" />"
+			class="btn btn-primary"> <spring:message
 				code="error.notFound.goBack" />
-		</button>
+		</a>
 	</center>
 	<br />
 	<br />
@@ -36,10 +38,6 @@
 
 
 	<script src="<c:url value="/js/fileupload.js"></c:url>"></script>
-	<script>
-		function goBack() {
-			window.history.back();
-		}
-	</script>
+
 </body>
 </html>

@@ -21,4 +21,6 @@ public interface CompanyService {
 	List<CompanyDTO> getAllCompaniesThatHaveChipsets();
 	
 	List<CompanyDTO> getAllCompaniesThatHaveCpuArchitectures();
+	
+	List<CompanyDTO> getAllCompaniesThatHaveCpuFamilies();
 }

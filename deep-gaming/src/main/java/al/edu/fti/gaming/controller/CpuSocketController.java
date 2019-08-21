@@ -166,18 +166,15 @@ public class CpuSocketController implements HandlerExceptionResolver {
 
 	@Override
 	public ModelAndView resolveException(HttpServletRequest request, HttpServletResponse response, Object handler,
-			Exception exception) {
+			Exception ex) {
 		Map<String, Object> model = new HashMap<String, Object>();
-		if (exception instanceof MaxUploadSizeExceededException) {
+		if (ex instanceof MaxUploadSizeExceededException) {
 			model.put("errors", messages.get("add.form.image.error.size.afterSubmit"));
-			CpuSocketDTO cpuSocketDTO = new CpuSocketDTO();
-			model.put("newCpuSocket", cpuSocketDTO);
-			return new ModelAndView("/cpuSocket/addCpuSocket", model);
+			return new ModelAndView("error", model);
 		} else {
 			model.put("error", messages.get("error.genericError"));
 			model.put("sorry", messages.get("error.genericError.sorry"));
-			return new ModelAndView("genericError", model);
+			return new ModelAndView("error", model);
 		}
-
 	}
 }

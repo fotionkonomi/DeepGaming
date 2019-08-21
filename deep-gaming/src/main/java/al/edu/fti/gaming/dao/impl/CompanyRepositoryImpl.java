@@ -98,4 +98,11 @@ public class CompanyRepositoryImpl implements CompanyRepository {
 		return query.list();
 	}
 
+	@Override
+	public List<Company> getAllCompaniesThatHaveCpuFamilies() {
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session.createQuery("SELECT DISTINCT c FROM Company c INNER JOIN c.cpuFamiliesOfThisCompany");
+		return query.list();
+	}
+
 }

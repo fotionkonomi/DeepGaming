@@ -165,19 +165,16 @@ public class ChipsetController implements HandlerExceptionResolver {
 
 	@Override
 	public ModelAndView resolveException(HttpServletRequest request, HttpServletResponse response, Object handler,
-			Exception exception) {
+			Exception ex) {
 		Map<String, Object> model = new HashMap<String, Object>();
-		if (exception instanceof MaxUploadSizeExceededException) {
+		if (ex instanceof MaxUploadSizeExceededException) {
 			model.put("errors", messages.get("add.form.image.error.size.afterSubmit"));
-			ChipsetDTO chipsetDTO = new ChipsetDTO();
-			model.put("newChipset", chipsetDTO);
-			return new ModelAndView("/chipset/addChipset", model);
+			return new ModelAndView("error", model);
 		} else {
 			model.put("error", messages.get("error.genericError"));
 			model.put("sorry", messages.get("error.genericError.sorry"));
-			return new ModelAndView("genericError", model);
+			return new ModelAndView("error", model);
 		}
-
 	}
 
 }

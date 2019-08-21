@@ -13,20 +13,22 @@
 </head>
 <body>
 	<jsp:include page="/WEB-INF/jsp/body.jsp"></jsp:include>
-	<a href="?id=${chipset.id }&language=en">English</a>|
-	<a href="?id=${chipset.id }&language=al">Albanian</a>
+	<a href="?language=en">English</a>|
+	<a href="?language=al">Albanian</a>
+
 	<jsp:include page="/WEB-INF/jsp/navigation.jsp"></jsp:include>
 
 
 	<section class="container">
 		<form:errors path="*" cssClass="alert alert-danger" element="div" />
 
-		<form:form class="form-horizontal" method="POST"
-			modelAttribute="chipset" enctype="multipart/form-data">
+		<form:form class="form-horizontal" commandName="newCpuFamily"
+			method="POST" modelAttribute="newCpuFamily"
+			enctype="multipart/form-data">
 			<fieldset>
 				<legend style="padding-top: 20px; font-size: 37px;">
-					<spring:message code="updateChipset.form.legend" /> ${cpuSocket.name}
-				</legend> 
+					<spring:message code="addCpuFamily.form.legend" />
+				</legend>
 
 				<spring:message code="add.form.name.placeholder"
 					var="namePlaceholder" />
@@ -39,7 +41,7 @@
 							class="form-control" />
 						<c:if test="${param.error != null}">
 							<span style="color: red;"><spring:message
-									code="addChipset.form.name.error" /></span>
+									code="addCpuFamily.form.name.error" /></span>
 						</c:if>
 						<form:errors path="name" cssClass="text-danger" />
 
@@ -53,34 +55,33 @@
 					<label class="control-label col-lg-2 col-lg-2" for="description"><spring:message
 							code="add.form.description.label" /></label>
 					<div class="col-lg-10">
-						<form:textarea  id="description"
+						<form:textarea id="description"
 							placeholder="${descriptionPlaceholder}" path="description"
 							type="text" class="form-control" />
 						<form:errors path="description" cssClass="text-danger" />
 
 					</div>
 				</div>
-
-
+		
 
 				<div class="form-group">
 					<label class="control-label col-lg-2 col-lg-2"><spring:message
-							code="addCpuSocket.form.company.label" /></label>
+							code="addCpuFamily.form.company.label" /></label>
 					<div class="col-lg-10">
-						<form:select path="companyOfThisChipset" class="form-control">
+						<form:select path="companyOfThisCpuFamily" class="form-control">
 							<form:options items="${allCompanies}" />
 						</form:select>
+						<form:errors path="companyOfThisCpuFamily" cssClass="text-danger" />
+
 					</div>
 				</div>
 
-
 				<div class="form-group">
 					<label class="control-label col-lg-2" for="image"> <spring:message
-							code="addChipset.form.image.label" />
+							code="addCpuFamily.form.image.label" />
 					</label>
 					<div class="input-file-container">
-						<form:input id="image" path="image" type="file"
-							class="input-file" />
+						<form:input id="image" path="image" type="file" class="input-file" />
 						<label tabindex="0" for="image" class="input-file-trigger">
 							<spring:message code="add.form.image.imageUpload" />
 						</label> <span class="file-return" hidden="true"><spring:message
@@ -103,7 +104,7 @@
 						<input type="submit" id="btnAdd" class="btn
  btn-primary"
 							value="<spring:message
-							code="update.form.submit.label" />" />
+							code="add.form.submit.label" />" />
 					</div>
 				</div>
 
@@ -116,7 +117,6 @@
 	<jsp:include page="/WEB-INF/jsp/footer.jsp"></jsp:include>
 
 	<jsp:include page="/WEB-INF/jsp/scripts.jsp" />
-
 
 	<script src="<c:url value="/js/fileupload.js"></c:url>"></script>
 

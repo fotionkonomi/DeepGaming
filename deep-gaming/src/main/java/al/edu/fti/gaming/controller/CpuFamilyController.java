@@ -28,22 +28,24 @@ import org.springframework.web.servlet.ModelAndView;
 
 import al.edu.fti.gaming.dto.CompanyDTO;
 import al.edu.fti.gaming.dto.CpuArchitectureDTO;
-import al.edu.fti.gaming.exception.CategoryOfGameNotFoundException;
+import al.edu.fti.gaming.dto.CpuFamilyDTO;
 import al.edu.fti.gaming.exception.CpuArchitectureNotFoundException;
+import al.edu.fti.gaming.exception.CpuFamilyNotFoundException;
 import al.edu.fti.gaming.exception.NoCpuArchitecturesFoundForCompanyException;
+import al.edu.fti.gaming.exception.NoCpuFamilyFoundForCompanyException;
 import al.edu.fti.gaming.service.CompanyService;
-import al.edu.fti.gaming.service.CpuArchitectureService;
+import al.edu.fti.gaming.service.CpuFamilyService;
 import al.edu.fti.gaming.service.GeneralService;
 import al.edu.fti.gaming.utils.CompanyEditor;
 import al.edu.fti.gaming.utils.Messages;
 
 @Controller
-@RequestMapping(value = "/cpuArchitecture")
+@RequestMapping(value = "/cpuFamily")
 @SessionAttributes("allCompanies")
-public class CpuArchitectureController implements HandlerExceptionResolver {
+public class CpuFamilyController implements HandlerExceptionResolver {
 
 	@Autowired
-	private CpuArchitectureService cpuArchitectureService;
+	private CpuFamilyService cpuFamilyService;
 
 	@Autowired
 	private CompanyService companyService;
@@ -64,78 +66,80 @@ public class CpuArchitectureController implements HandlerExceptionResolver {
 
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public String addForm(Model model) {
-		CpuArchitectureDTO cpuArchitectureDTO = new CpuArchitectureDTO();
-		model.addAttribute("newCpuArchitecture", cpuArchitectureDTO);
+		CpuFamilyDTO cpuFamilyDTO = new CpuFamilyDTO();
+		model.addAttribute("newCpuFamily", cpuFamilyDTO);
 		model.addAttribute("allCompanies", generalService.getAllCompaniesMap());
-		return "cpuArchitecture/addCpuArchitecture";
+		return "cpuFamily/addCpuFamily";
 	}
 
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public String processForm(@ModelAttribute("newCpuArchitecture") @Valid CpuArchitectureDTO cpuArchitectureDTO,
-			BindingResult result, HttpServletRequest request) {
-		if (result.hasErrors()) {
-			return "cpuArchitecture/addCpuArchitecture";
+	public String processForm(@ModelAttribute("newCpuFamily") @Valid CpuFamilyDTO cpuFamilyDTO, BindingResult result,
+			HttpServletRequest request) {
+		if(result.hasErrors()) {
+			return "cpuFamily/addCpuFamily";
 		}
-		if (cpuArchitectureService.add(cpuArchitectureDTO) != 0) {
-			generalService.imageProcessing(cpuArchitectureDTO,
-					request.getSession().getServletContext().getRealPath("/"), true);
-			return "redirect:/cpuArchitecture/cpuArchitectures";
+		if(cpuFamilyService.add(cpuFamilyDTO) != 0) {
+			generalService.imageProcessing(cpuFamilyDTO,
+					request.getSession().getServletContext().getRealPath("/"), true);	
+			return "redirect:/cpuFamily/cpuFamilies";
 		} else {
-			return "redirect:/cpuArchitecture/add?error";
+			return "redirect:/cpuFamily/add?error";
 		}
+		
 	}
 
-	@RequestMapping(value = "/cpuArchitectures")
+	@RequestMapping(value = "/cpuFamilies")
 	public String list(Model model) {
-		model.addAttribute("cpuArchitectures", cpuArchitectureService.getAllCpuArchitectures());
-		List<CompanyDTO> companiesThatHaveCpuArchitectures = companyService.getAllCompaniesThatHaveCpuArchitectures();
-		model.addAttribute("companies", companiesThatHaveCpuArchitectures);
-		return "cpuArchitecture/cpuArchitectures";
+		model.addAttribute("cpuFamilies", cpuFamilyService.getAllCpuFamilies());
+		List<CompanyDTO> companiesThatHaveCpuFamilies = companyService.getAllCompaniesThatHaveCpuFamilies();
+		model.addAttribute("companies", companiesThatHaveCpuFamilies);
+		return "cpuFamily/cpuFamilies";
 	}
-
-	@RequestMapping(value = "/cpuArchitectures/{company}")
+	
+	@RequestMapping(value = "/cpuFamilies/{company}")
 	public String listByCompany(Model model, @PathVariable("company") String company) {
-		List<CpuArchitectureDTO> cpuArchitectures = cpuArchitectureService.getCpuArchitecturesByCompany(company);
-		model.addAttribute("cpuArchitectures", cpuArchitectures);
-		return "cpuArchitecture/cpuArchitectures";
+		List<CpuFamilyDTO> cpuFamilies = cpuFamilyService.getCpuFamiliesByCompany(company);
+		model.addAttribute("cpuFamilies", cpuFamilies);
+		return "cpuFamily/cpuFamilies";
 	}
-
+	
 	@RequestMapping("/details")
-	public String details(@RequestParam("id") int cpuArchitectureId, Model model) {
-		CpuArchitectureDTO cpuArchitectureDTO = cpuArchitectureService.getCpuArchitectureById(cpuArchitectureId);
-		model.addAttribute("cpuArchitecture", cpuArchitectureDTO);
-		return "cpuArchitecture/details";
+	public String details(@RequestParam("id") int cpuFamilyId, Model model) {
+		CpuFamilyDTO cpuFamilyDTO = cpuFamilyService.getCpuFamilyById(cpuFamilyId);
+		model.addAttribute("cpuFamily", cpuFamilyDTO);
+		return "cpuFamily/details";
 	}
-
+	
 	@RequestMapping("/update")
-	public String update(@RequestParam("id") int cpuArchitectureId, Model model) {
-		model.addAttribute("cpuArchitecture", cpuArchitectureService.getCpuArchitectureById(cpuArchitectureId));
+	public String update(@RequestParam("id") int cpuFamilyId, Model model) {
+		CpuFamilyDTO cpuFamilyDTO = cpuFamilyService.getCpuFamilyById(cpuFamilyId);
+		model.addAttribute("cpuFamily", cpuFamilyDTO);
 		model.addAttribute("allCompanies", generalService.getAllCompaniesMap());
-		return "/cpuArchitecture/updateCpuArchitecture";
-	}
-
+		return "cpuFamily/updateCpuFamily";
+	}	
+	
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
-	public String processUpdateForm(@ModelAttribute("cpuArchitecture") @Valid CpuArchitectureDTO cpuArchitectureDTO,
+	public String processUpdateForm(@ModelAttribute("cpuFamily") @Valid CpuFamilyDTO cpuFamilyDTO,
 			BindingResult result, HttpServletRequest request) {
 		List<ObjectError> listOfErrorsWithoutImageError = generalService.listOfErrorsWithoutImageError(
-				result.getAllErrors(), cpuArchitectureDTO.getImage(),
+				result.getAllErrors(), cpuFamilyDTO.getImage(),
 				messages.get("al.edu.fti.gaming.validator.image"));
 		if (!listOfErrorsWithoutImageError.isEmpty()) {
-			return "cpuArchitecture/updateCpuArchitecture";
+			return "cpuFamily/updateCpuFamily";
 		} else {
 			if (listOfErrorsWithoutImageError.size() == result.getAllErrors().size()) {
-				generalService.imageProcessing(cpuArchitectureDTO,
+				generalService.imageProcessing(cpuFamilyDTO,
 						request.getSession().getServletContext().getRealPath("/"), false);
 			}
-			boolean updatedOrNot = cpuArchitectureService.update(cpuArchitectureDTO);
+			boolean updatedOrNot = cpuFamilyService.update(cpuFamilyDTO);
 			if (updatedOrNot == true) {
-				return "redirect:/cpuArchitecture/details?id=" + cpuArchitectureDTO.getId();
+				return "redirect:/cpuFamily/details?id=" + cpuFamilyDTO.getId();
 			} else {
-				return "redirect:/cpuArchitecture/update?id=" + cpuArchitectureDTO.getId() + "?error";
+				return "redirect:/cpuFamily/update?id=" + cpuFamilyDTO.getId() + "?error";
 			}
 		}
 	}
-
+	
 	@Override
 	public ModelAndView resolveException(HttpServletRequest request, HttpServletResponse response, Object handler,
 			Exception ex) {
@@ -150,15 +154,8 @@ public class CpuArchitectureController implements HandlerExceptionResolver {
 		}
 	}
 	
-	@ExceptionHandler(NoCpuArchitecturesFoundForCompanyException.class)
-	public String handleNoCpuArchitectureFoundForCompany(Model model, HttpServletRequest req, NoCpuArchitecturesFoundForCompanyException exception) {
-		return "cpuArchitecture/NoCpuArchitectureForCompany";
-
-	}
-	
-	
-	@ExceptionHandler(CpuArchitectureNotFoundException.class)
-	public ModelAndView handleError(HttpServletRequest req, CpuArchitectureNotFoundException exception) {
+	@ExceptionHandler(CpuFamilyNotFoundException.class)
+	public ModelAndView handleError(HttpServletRequest req, CpuFamilyNotFoundException exception) {
 		ModelAndView mav = new ModelAndView();
 		String queryString = req.getQueryString();
 		if (queryString.contains("&")) {
@@ -168,11 +165,18 @@ public class CpuArchitectureController implements HandlerExceptionResolver {
 		}
 
 		mav.addObject("url", req.getRequestURL() + "?" + queryString);
-		mav.setViewName("/cpuArchitecture/cpuArchitectureNotFound");
+		mav.setViewName("/cpuFamily/cpuFamilyNotFound");
 		String id = queryString.substring(3);
 		mav.addObject("id", id);
 		return mav;
 
 	}
+
+	@ExceptionHandler(NoCpuFamilyFoundForCompanyException.class)
+	public String handleNoCpuArchitectureFoundForCompany(Model model, HttpServletRequest req, NoCpuFamilyFoundForCompanyException exception) {
+		return "cpuFamily/NoCpuFamilyForCompany";
+
+	}
+	
 
 }

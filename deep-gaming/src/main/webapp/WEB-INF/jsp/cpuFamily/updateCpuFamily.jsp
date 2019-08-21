@@ -13,8 +13,8 @@
 </head>
 <body>
 	<jsp:include page="/WEB-INF/jsp/body.jsp"></jsp:include>
-	<a href="?id=${chipset.id }&language=en">English</a>|
-	<a href="?id=${chipset.id }&language=al">Albanian</a>
+	<a href="?id=${cpuFamily.id }&language=en">English</a>|
+	<a href="?id=${cpuFamily.id }&language=al">Albanian</a>
 	<jsp:include page="/WEB-INF/jsp/navigation.jsp"></jsp:include>
 
 
@@ -22,10 +22,10 @@
 		<form:errors path="*" cssClass="alert alert-danger" element="div" />
 
 		<form:form class="form-horizontal" method="POST"
-			modelAttribute="chipset" enctype="multipart/form-data">
+			modelAttribute="cpuFamily" enctype="multipart/form-data">
 			<fieldset>
 				<legend style="padding-top: 20px; font-size: 37px;">
-					<spring:message code="updateChipset.form.legend" /> ${cpuSocket.name}
+					<spring:message code="updateCpuFamily.form.legend" /> ${cpuFamily.name}
 				</legend> 
 
 				<spring:message code="add.form.name.placeholder"
@@ -39,7 +39,7 @@
 							class="form-control" />
 						<c:if test="${param.error != null}">
 							<span style="color: red;"><spring:message
-									code="addChipset.form.name.error" /></span>
+									code="addCpuFamily.form.name.error" /></span>
 						</c:if>
 						<form:errors path="name" cssClass="text-danger" />
 
@@ -60,14 +60,14 @@
 
 					</div>
 				</div>
-
+			
 
 
 				<div class="form-group">
 					<label class="control-label col-lg-2 col-lg-2"><spring:message
-							code="addCpuSocket.form.company.label" /></label>
+							code="addCpuFamily.form.company.label" /></label>
 					<div class="col-lg-10">
-						<form:select path="companyOfThisChipset" class="form-control">
+						<form:select path="companyOfThisCpuFamily" class="form-control">
 							<form:options items="${allCompanies}" />
 						</form:select>
 					</div>
@@ -76,7 +76,7 @@
 
 				<div class="form-group">
 					<label class="control-label col-lg-2" for="image"> <spring:message
-							code="addChipset.form.image.label" />
+							code="addCpuFamily.form.image.label" />
 					</label>
 					<div class="input-file-container">
 						<form:input id="image" path="image" type="file"
