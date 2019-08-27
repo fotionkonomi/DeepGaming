@@ -1,7 +1,11 @@
 package al.edu.fti.gaming.dto;
 
+import javax.validation.constraints.NotNull;
+
 public class OperatingSystemTypeDTO extends IdNameDescriptionDTO{
 
+	
+	@NotNull(message = "{Pattern.CompanyOfObject.Validation}")
 	private CompanyDTO companyOfThisOS;
 
 	public OperatingSystemTypeDTO() {

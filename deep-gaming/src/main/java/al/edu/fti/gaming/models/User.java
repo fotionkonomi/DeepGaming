@@ -3,7 +3,6 @@ package al.edu.fti.gaming.models;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -17,7 +16,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -25,6 +23,11 @@ import javax.persistence.TemporalType;
 @Entity
 @Table(name = "user")
 public class User implements Serializable, IModel {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5204101086984279131L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -76,39 +79,6 @@ public class User implements Serializable, IModel {
 	@JoinTable(name = "user_role", joinColumns = { @JoinColumn(name = "id_user") }, inverseJoinColumns = {
 			@JoinColumn(name = "id_role") })
 	private Set<Role> roles = new HashSet<Role>();
-
-	@OneToMany(mappedBy = "suggestedBy")
-	private List<Product> productsSuggested;
-
-	@OneToMany(mappedBy = "approvedBy")
-	private List<Product> productsApproved;
-
-	public User(Integer idUser, String firstName, String lastName, String email, String username, String password,
-			Boolean gender, Date dateOfBirth, Date dateRegistered, Date dateEdited, CPU cpuOfHisComputer,
-			GPU gpuOfHisComputer, Double ramSizeOfHisComputer, Set<Role> roles, List<Product> productsSuggested,
-			List<Product> productsApproved) {
-		super();
-		this.idUser = idUser;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.email = email;
-		this.username = username;
-		this.password = password;
-		this.gender = gender;
-		this.dateOfBirth = dateOfBirth;
-		this.dateRegistered = dateRegistered;
-		this.dateEdited = dateEdited;
-		this.cpuOfHisComputer = cpuOfHisComputer;
-		this.gpuOfHisComputer = gpuOfHisComputer;
-		this.ramSizeOfHisComputer = ramSizeOfHisComputer;
-		this.roles = roles;
-		this.productsSuggested = productsSuggested;
-		this.productsApproved = productsApproved;
-	}
-
-	public User() {
-		super();
-	}
 
 	public Integer getIdUser() {
 		return idUser;
@@ -222,22 +192,6 @@ public class User implements Serializable, IModel {
 		this.roles = roles;
 	}
 
-	public List<Product> getProductsSuggested() {
-		return productsSuggested;
-	}
-
-	public void setProductsSuggested(List<Product> productsSuggested) {
-		this.productsSuggested = productsSuggested;
-	}
-
-	public List<Product> getProductsApproved() {
-		return productsApproved;
-	}
-
-	public void setProductsApproved(List<Product> productsApproved) {
-		this.productsApproved = productsApproved;
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -253,8 +207,6 @@ public class User implements Serializable, IModel {
 		result = prime * result + ((idUser == null) ? 0 : idUser.hashCode());
 		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
 		result = prime * result + ((password == null) ? 0 : password.hashCode());
-		result = prime * result + ((productsApproved == null) ? 0 : productsApproved.hashCode());
-		result = prime * result + ((productsSuggested == null) ? 0 : productsSuggested.hashCode());
 		result = prime * result + ((ramSizeOfHisComputer == null) ? 0 : ramSizeOfHisComputer.hashCode());
 		result = prime * result + ((roles == null) ? 0 : roles.hashCode());
 		result = prime * result + ((username == null) ? 0 : username.hashCode());
@@ -325,16 +277,6 @@ public class User implements Serializable, IModel {
 				return false;
 		} else if (!password.equals(other.password))
 			return false;
-		if (productsApproved == null) {
-			if (other.productsApproved != null)
-				return false;
-		} else if (!productsApproved.equals(other.productsApproved))
-			return false;
-		if (productsSuggested == null) {
-			if (other.productsSuggested != null)
-				return false;
-		} else if (!productsSuggested.equals(other.productsSuggested))
-			return false;
 		if (ramSizeOfHisComputer == null) {
 			if (other.ramSizeOfHisComputer != null)
 				return false;
@@ -351,6 +293,15 @@ public class User implements Serializable, IModel {
 		} else if (!username.equals(other.username))
 			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "User [idUser=" + idUser + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
+				+ ", username=" + username + ", gender=" + gender + ", dateOfBirth=" + dateOfBirth + ", dateRegistered="
+				+ dateRegistered + ", dateEdited=" + dateEdited + ", cpuOfHisComputer=" + cpuOfHisComputer
+				+ ", gpuOfHisComputer=" + gpuOfHisComputer + ", ramSizeOfHisComputer=" + ramSizeOfHisComputer
+				+ ", roles=" + roles + "]";
 	}
 
 }

@@ -43,12 +43,6 @@ public class Storage extends Product {
 	@ManyToMany(mappedBy = "storagesOfThisComputer")
 	private Set<Computer> computersWithThisStorage = new HashSet<Computer>();
 
-	public Storage(Integer idProduct, String productName, String productDescription, Date releaseDate, Integer price,
-			Integer quantity, Date uploadDate, Date editedDate, User suggestedBy, User approvedBy, String hyperlink) {
-		super(idProduct, productName, productDescription, releaseDate, price, quantity, uploadDate, editedDate,
-				suggestedBy, approvedBy, hyperlink);
-	}
-
 	public Double getWriteSpeed() {
 		return writeSpeed;
 	}

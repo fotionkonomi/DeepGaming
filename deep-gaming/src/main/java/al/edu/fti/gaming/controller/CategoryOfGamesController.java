@@ -131,10 +131,12 @@ public class CategoryOfGamesController implements HandlerExceptionResolver {
 	public ModelAndView resolveException(HttpServletRequest request, HttpServletResponse response, Object handler,
 			Exception ex) {
 		Map<String, Object> model = new HashMap<String, Object>();
+		
 		if (ex instanceof MaxUploadSizeExceededException) {
 			model.put("errors", messages.get("add.form.image.error.size.afterSubmit"));
 			return new ModelAndView("error", model);
 		} else {
+			ex.printStackTrace();
 			model.put("error", messages.get("error.genericError"));
 			model.put("sorry", messages.get("error.genericError.sorry"));
 			return new ModelAndView("error", model);

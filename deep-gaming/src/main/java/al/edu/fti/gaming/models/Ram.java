@@ -39,18 +39,6 @@ public class Ram extends Product {
 	@OneToMany(mappedBy = "ramOfThisComputer")
 	private List<Computer> computersThatHaveThisRam = new ArrayList<Computer>();
 
-	public Ram(Integer idProduct, String productName, String productDescription, Date releaseDate, Integer price,
-			Integer quantity, Date uploadDate, Date editedDate, User suggestedBy, User approvedBy, String hyperlink,
-			Double capacity, Integer frequency, Company ramSticksCompany,
-			RamMemoryTechnology technologyOfThisRamStick) {
-		super(idProduct, productName, productDescription, releaseDate, price, quantity, uploadDate, editedDate,
-				suggestedBy, approvedBy, hyperlink);
-		this.capacity = capacity;
-		this.frequency = frequency;
-		this.ramSticksCompany = ramSticksCompany;
-		this.technologyOfThisRamStick = technologyOfThisRamStick;
-	}
-
 	public Ram() {
 		super();
 	}

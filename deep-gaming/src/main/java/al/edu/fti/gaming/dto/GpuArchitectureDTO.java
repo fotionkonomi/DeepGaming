@@ -1,19 +1,37 @@
 package al.edu.fti.gaming.dto;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+
 public class GpuArchitectureDTO extends IdNameDescriptionDTO {
 
-	private CompanyDTO companyOfThisGpuArchitectureType;
+	@NotNull(message = "{Pattern.CompanyOfObject.Validation}")
+	private CompanyDTO companyOfThisGpuArchitecture;
+
+	@Min(value = 1, message = "{addArchitecture.form.processNanometer.error}")
+	@Max(value = 127, message = "{addArchitecture.form.processNanometer.error}")
+	@NotNull(message = "{addArchitecture.form.processNanometer.required}")
+	private Byte gpuProcessNanometers;
 
 	public GpuArchitectureDTO() {
 		super();
 	}
 
-	public CompanyDTO getCompanyOfThisGpuArchitectureType() {
-		return companyOfThisGpuArchitectureType;
+	public CompanyDTO getCompanyOfThisGpuArchitecture() {
+		return companyOfThisGpuArchitecture;
 	}
 
-	public void setCompanyOfThisGpuArchitectureType(CompanyDTO companyOfThisGpuArchitectureType) {
-		this.companyOfThisGpuArchitectureType = companyOfThisGpuArchitectureType;
+	public void setCompanyOfThisGpuArchitecture(CompanyDTO companyOfThisGpuArchitecture) {
+		this.companyOfThisGpuArchitecture = companyOfThisGpuArchitecture;
+	}
+
+	public Byte getGpuProcessNanometers() {
+		return gpuProcessNanometers;
+	}
+
+	public void setGpuProcessNanometers(Byte gpuProcessNanometers) {
+		this.gpuProcessNanometers = gpuProcessNanometers;
 	}
 
 	@Override
@@ -21,7 +39,8 @@ public class GpuArchitectureDTO extends IdNameDescriptionDTO {
 		final int prime = 31;
 		int result = super.hashCode();
 		result = prime * result
-				+ ((companyOfThisGpuArchitectureType == null) ? 0 : companyOfThisGpuArchitectureType.hashCode());
+				+ ((companyOfThisGpuArchitecture == null) ? 0 : companyOfThisGpuArchitecture.hashCode());
+		result = prime * result + ((gpuProcessNanometers == null) ? 0 : gpuProcessNanometers.hashCode());
 		return result;
 	}
 
@@ -34,10 +53,15 @@ public class GpuArchitectureDTO extends IdNameDescriptionDTO {
 		if (getClass() != obj.getClass())
 			return false;
 		GpuArchitectureDTO other = (GpuArchitectureDTO) obj;
-		if (companyOfThisGpuArchitectureType == null) {
-			if (other.companyOfThisGpuArchitectureType != null)
+		if (companyOfThisGpuArchitecture == null) {
+			if (other.companyOfThisGpuArchitecture != null)
 				return false;
-		} else if (!companyOfThisGpuArchitectureType.equals(other.companyOfThisGpuArchitectureType))
+		} else if (!companyOfThisGpuArchitecture.equals(other.companyOfThisGpuArchitecture))
+			return false;
+		if (gpuProcessNanometers == null) {
+			if (other.gpuProcessNanometers != null)
+				return false;
+		} else if (!gpuProcessNanometers.equals(other.gpuProcessNanometers))
 			return false;
 		return true;
 	}

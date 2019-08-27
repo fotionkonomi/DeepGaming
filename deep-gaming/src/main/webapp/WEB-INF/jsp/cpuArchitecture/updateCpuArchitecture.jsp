@@ -61,12 +61,12 @@
 					</div>
 				</div>
 
-			  <spring:message code="addCpuArchitecture.form.process.placeholder"
+			  <spring:message code="addArchitecture.form.process.placeholder"
 					var="processNanometerPlaceholder" />
 				
 				<div class="form-group">
 					<label class="control-label col-lg-2 col-lg-2" for="cpuProcessNanometers"><spring:message
-							code="addCpuArchitecture.form.process.label" /></label>
+							code="addArchitecture.form.process.label" /></label>
 					<div class="col-lg-10">
 						<form:input  id="cpuProcessNanometers"
 							placeholder="${processNanometerPlaceholder}" path="cpuProcessNanometers"

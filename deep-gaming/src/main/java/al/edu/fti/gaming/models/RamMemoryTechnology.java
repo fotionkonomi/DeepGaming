@@ -21,7 +21,7 @@ import javax.persistence.OneToMany;
  * @author kfotj
  *
  */
-public class RamMemoryTechnology implements Serializable {
+public class RamMemoryTechnology implements Serializable , IModel{
 
 	/**
 	 * 

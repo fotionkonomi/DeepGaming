@@ -1,7 +1,6 @@
 package al.edu.fti.gaming.models;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -91,39 +90,7 @@ public class CPU extends Product {
 
 	@OneToMany(mappedBy = "cpuHigh")
 	private List<Game> gamesWhereThisCpuIsHigh = new ArrayList<Game>();
-
-	public CPU(Integer idProduct, String productName, String productDescription, Date releaseDate, Integer price,
-			Integer quantity, Date uploadDate, Date editedDate, User suggestedBy, User approvedBy, String hyperlink,
-			Double cpuSpeed, Double turboSpeed, Byte physicalCores, Byte threads, Integer tdp, Integer bitWidth,
-			Integer l1Cache, Integer l2Cache, Integer l3Cache, CpuFamily familyOfThisCpu, CpuSocket socketForThisCpu,
-			CpuArchitecture architectureOfThisCpu, GPU integratedGpuOfThisCpu, List<GPU> gpusThatRecommendThisCpu,
-			List<User> usersThatHaveThisCpu, Set<Chipset> chipsetsThatSupportThisCpu,
-			List<CpuBenchmark> benchmarksOfThisCpu, List<Game> gamesWhereThisCpuIsLow,
-			List<Game> gamesWhereThisCpuIsMedium, List<Game> gamesWhereThisCpuIsHigh) {
-		super(idProduct, productName, productDescription, releaseDate, price, quantity, uploadDate, editedDate,
-				suggestedBy, approvedBy, hyperlink);
-		this.cpuSpeed = cpuSpeed;
-		this.turboSpeed = turboSpeed;
-		this.physicalCores = physicalCores;
-		this.threads = threads;
-		this.tdp = tdp;
-		this.bitWidth = bitWidth;
-		this.l1Cache = l1Cache;
-		this.l2Cache = l2Cache;
-		this.l3Cache = l3Cache;
-		this.familyOfThisCpu = familyOfThisCpu;
-		this.socketForThisCpu = socketForThisCpu;
-		this.architectureOfThisCpu = architectureOfThisCpu;
-		this.integratedGpuOfThisCpu = integratedGpuOfThisCpu;
-		this.gpusThatRecommendThisCpu = gpusThatRecommendThisCpu;
-		this.usersThatHaveThisCpu = usersThatHaveThisCpu;
-		this.chipsetsThatSupportThisCpu = chipsetsThatSupportThisCpu;
-		this.benchmarksOfThisCpu = benchmarksOfThisCpu;
-		this.gamesWhereThisCpuIsLow = gamesWhereThisCpuIsLow;
-		this.gamesWhereThisCpuIsMedium = gamesWhereThisCpuIsMedium;
-		this.gamesWhereThisCpuIsHigh = gamesWhereThisCpuIsHigh;
-	}
-
+	
 	public CPU() {
 		super();
 	}

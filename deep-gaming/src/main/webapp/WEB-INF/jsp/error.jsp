@@ -19,13 +19,20 @@
 	<jsp:include page="/WEB-INF/jsp/navigation.jsp"></jsp:include>
 
 	<h1 style="text-align: center; color: #D10024;">
-		Error 404: <span>${errors }</span>
-		
+		Error 404:
+		<c:if test="${error != null}">
+			<span>${error }</span>
+			<h3>${sorry }</h3>
+		</c:if>
+		<c:if test="${errors != null}">
+			<span>${errors }</span>
+		</c:if>
 	</h1>
 	<br />
 	<center>
-		<button style="text-align: center;" onclick="goBack();" class="btn btn-primary"> <spring:message
-				code="error.notFound.goBack" />
+		<button style="text-align: center;" onclick="goBack();"
+			class="btn btn-primary">
+			<spring:message code="error.notFound.goBack" />
 		</button>
 	</center>
 	<br />

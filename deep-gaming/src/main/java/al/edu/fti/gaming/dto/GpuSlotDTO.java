@@ -1,7 +1,17 @@
 package al.edu.fti.gaming.dto;
 
-public class GpuSlotDTO extends IdNameDescriptionDTO {
+import java.io.Serializable;
 
+import javax.validation.constraints.NotNull;
+
+public class GpuSlotDTO extends IdNameDescriptionDTO implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2589040333052651352L;
+	
+	@NotNull(message = "{Pattern.laptop/desktop.Validation}")
 	private Boolean laptopOrDesktop;
 
 	public GpuSlotDTO() {

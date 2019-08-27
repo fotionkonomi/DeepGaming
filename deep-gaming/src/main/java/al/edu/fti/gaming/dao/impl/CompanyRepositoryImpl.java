@@ -105,4 +105,25 @@ public class CompanyRepositoryImpl implements CompanyRepository {
 		return query.list();
 	}
 
+	@Override
+	public List<Company> getAllCompaniesThatHaveGpuArchitectures() {
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session.createQuery("SELECT DISTINCT c FROM Company c INNER JOIN c.gpuArchitecturesOfThisCompany");
+		return query.list();
+	}
+
+	@Override
+	public List<Company> getAllCompaniesThatHaveGpuFamilies() {
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session.createQuery("SELECT DISTINCT c FROM Company c INNER JOIN c.gpuFamiliesOfThisCompany");
+		return query.list();
+	}
+
+	@Override
+	public List<Company> getAllCompaniesThatHaveOS() {
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session.createQuery("SELECT DISTINCT c FROM Company c INNER JOIN c.operatingSystemsOfThisCompany");
+		return query.list();
+	}
+
 }

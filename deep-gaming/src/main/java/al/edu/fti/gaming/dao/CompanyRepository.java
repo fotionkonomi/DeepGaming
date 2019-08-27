@@ -28,4 +28,11 @@ public interface CompanyRepository {
 	List<Company> getAllCompaniesThatHaveCpuArchitectures();
 	
 	List<Company> getAllCompaniesThatHaveCpuFamilies();
+	
+    List<Company> getAllCompaniesThatHaveGpuArchitectures();
+	
+	List<Company> getAllCompaniesThatHaveGpuFamilies();
+	
+	List<Company> getAllCompaniesThatHaveOS();
+	
 }

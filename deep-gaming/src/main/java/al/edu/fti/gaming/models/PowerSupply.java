@@ -26,14 +26,7 @@ public class PowerSupply extends Product {
 	@JoinColumn(name = "id_company", nullable = false)
 	private Company companyOfThisPowerSupply;
 
-	public PowerSupply(Integer idProduct, String productName, String productDescription, Date releaseDate,
-			Integer price, Integer quantity, Date uploadDate, Date editedDate, User suggestedBy, User approvedBy,
-			String hyperlink, Integer powerCapacity, Company companyOfThisPowerSupply) {
-		super(idProduct, productName, productDescription, releaseDate, price, quantity, uploadDate, editedDate,
-				suggestedBy, approvedBy, hyperlink);
-		this.powerCapacity = powerCapacity;
-		this.companyOfThisPowerSupply = companyOfThisPowerSupply;
-	}
+	
 
 	public Integer getPowerCapacity() {
 		return powerCapacity;

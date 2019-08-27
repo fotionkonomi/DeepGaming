@@ -2,18 +2,17 @@ package al.edu.fti.gaming.models;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -57,32 +56,19 @@ public class Product implements Serializable, IModel {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date editedDate;
 
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
-	@JoinColumn(name = "suggested_by")
-	private User suggestedBy;
-
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
-	@JoinColumn(name = "approved_by")
-	private User approvedBy;
+//	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+//	@JoinColumn(name = "suggested_by")
+//	private User suggestedBy;
+//
+//	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+//	@JoinColumn(name = "approved_by")
+//	private User approvedBy;
 
 	@Column(name = "hyperlink", nullable = false, length = 255)
 	private String hyperlink;
 
-	public Product(Integer idProduct, String productName, String productDescription, Date releaseDate, Integer price,
-			Integer quantity, Date uploadDate, Date editedDate, User suggestedBy, User approvedBy, String hyperlink) {
-		super();
-		this.idProduct = idProduct;
-		this.productName = productName;
-		this.productDescription = productDescription;
-		this.releaseDate = releaseDate;
-		this.price = price;
-		this.quantity = quantity;
-		this.uploadDate = uploadDate;
-		this.editedDate = editedDate;
-		this.suggestedBy = suggestedBy;
-		this.approvedBy = approvedBy;
-		this.hyperlink = hyperlink;
-	}
+	@ManyToMany(mappedBy = "products")
+	private Set<ProductType> productTypes = new HashSet<ProductType>();
 
 	public Product() {
 		super();
@@ -152,22 +138,6 @@ public class Product implements Serializable, IModel {
 		this.editedDate = editedDate;
 	}
 
-	public User getSuggestedBy() {
-		return suggestedBy;
-	}
-
-	public void setSuggestedBy(User suggestedBy) {
-		this.suggestedBy = suggestedBy;
-	}
-
-	public User getApprovedBy() {
-		return approvedBy;
-	}
-
-	public void setApprovedBy(User approvedBy) {
-		this.approvedBy = approvedBy;
-	}
-
 	public String getHyperlink() {
 		return hyperlink;
 	}
@@ -176,20 +146,27 @@ public class Product implements Serializable, IModel {
 		this.hyperlink = hyperlink;
 	}
 
+	public Set<ProductType> getProductTypes() {
+		return productTypes;
+	}
+
+	public void setProductTypes(Set<ProductType> productTypes) {
+		this.productTypes = productTypes;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((approvedBy == null) ? 0 : approvedBy.hashCode());
 		result = prime * result + ((editedDate == null) ? 0 : editedDate.hashCode());
 		result = prime * result + ((hyperlink == null) ? 0 : hyperlink.hashCode());
 		result = prime * result + ((idProduct == null) ? 0 : idProduct.hashCode());
 		result = prime * result + ((price == null) ? 0 : price.hashCode());
 		result = prime * result + ((productDescription == null) ? 0 : productDescription.hashCode());
 		result = prime * result + ((productName == null) ? 0 : productName.hashCode());
+		result = prime * result + ((productTypes == null) ? 0 : productTypes.hashCode());
 		result = prime * result + ((quantity == null) ? 0 : quantity.hashCode());
 		result = prime * result + ((releaseDate == null) ? 0 : releaseDate.hashCode());
-		result = prime * result + ((suggestedBy == null) ? 0 : suggestedBy.hashCode());
 		result = prime * result + ((uploadDate == null) ? 0 : uploadDate.hashCode());
 		return result;
 	}
@@ -203,11 +180,6 @@ public class Product implements Serializable, IModel {
 		if (getClass() != obj.getClass())
 			return false;
 		Product other = (Product) obj;
-		if (approvedBy == null) {
-			if (other.approvedBy != null)
-				return false;
-		} else if (!approvedBy.equals(other.approvedBy))
-			return false;
 		if (editedDate == null) {
 			if (other.editedDate != null)
 				return false;
@@ -238,6 +210,11 @@ public class Product implements Serializable, IModel {
 				return false;
 		} else if (!productName.equals(other.productName))
 			return false;
+		if (productTypes == null) {
+			if (other.productTypes != null)
+				return false;
+		} else if (!productTypes.equals(other.productTypes))
+			return false;
 		if (quantity == null) {
 			if (other.quantity != null)
 				return false;
@@ -248,17 +225,20 @@ public class Product implements Serializable, IModel {
 				return false;
 		} else if (!releaseDate.equals(other.releaseDate))
 			return false;
-		if (suggestedBy == null) {
-			if (other.suggestedBy != null)
-				return false;
-		} else if (!suggestedBy.equals(other.suggestedBy))
-			return false;
 		if (uploadDate == null) {
 			if (other.uploadDate != null)
 				return false;
 		} else if (!uploadDate.equals(other.uploadDate))
 			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Product [idProduct=" + idProduct + ", productName=" + productName + ", productDescription="
+				+ productDescription + ", releaseDate=" + releaseDate + ", price=" + price + ", quantity=" + quantity
+				+ ", uploadDate=" + uploadDate + ", editedDate=" + editedDate + ", hyperlink=" + hyperlink
+				+ ", productTypes=" + productTypes + "]";
 	}
 
 }

@@ -23,4 +23,10 @@ public interface CompanyService {
 	List<CompanyDTO> getAllCompaniesThatHaveCpuArchitectures();
 	
 	List<CompanyDTO> getAllCompaniesThatHaveCpuFamilies();
+	
+	List<CompanyDTO> getAllCompaniesThatHaveGpuArchitectures();
+	
+	List<CompanyDTO> getAllCompaniesThatHaveGpuFamilies();
+
+	List<CompanyDTO> getAllCompaniesThatHaveOS();
 }
