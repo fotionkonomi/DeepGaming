@@ -2,8 +2,15 @@ package al.edu.fti.gaming.dto;
 
 import java.util.Date;
 
+import javax.validation.constraints.Pattern;
+
+import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.NotEmpty;
+import org.hibernate.validator.constraints.URL;
+
 public class ProductDTO extends IdNameDescriptionDTO {
 
+	
 	private Date releaseDate;
 
 	private Integer price;
@@ -14,10 +21,24 @@ public class ProductDTO extends IdNameDescriptionDTO {
 
 	private Date editedDate;
 
+	@NotBlank(message = "{Pattern.Hyperlink.Validation}")
+	@URL(message = "{Pattern.Hyperlink.Validation}")
 	private String hyperlink;
+
+	@Pattern(regexp = "(20\\d{2})-(\\d{2})-(\\d{2})", message = "{date.validator}")
+	@NotEmpty(message = "{validation.field.required}")
+	private String date;
 
 	public ProductDTO() {
 		super();
+	}
+
+	public String getDate() {
+		return date;
+	}
+
+	public void setDate(String date) {
+		this.date = date;
 	}
 
 	public Date getReleaseDate() {

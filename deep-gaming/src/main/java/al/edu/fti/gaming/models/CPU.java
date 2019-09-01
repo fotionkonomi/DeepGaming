@@ -1,17 +1,13 @@
 package al.edu.fti.gaming.models;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -74,11 +70,6 @@ public class CPU extends Product {
 	@OneToMany(mappedBy = "cpuOfHisComputer")
 	private List<User> usersThatHaveThisCpu = new ArrayList<User>();
 
-	@ManyToMany(cascade = { CascadeType.ALL })
-	@JoinTable(name = "cpu_chipset", joinColumns = { @JoinColumn(name = "id_cpu") }, inverseJoinColumns = {
-			@JoinColumn(name = "id_chipset") })
-	private Set<Chipset> chipsetsThatSupportThisCpu = new HashSet<Chipset>();
-
 	@OneToMany(mappedBy = "cpuThatHasBeenTested")
 	private List<CpuBenchmark> benchmarksOfThisCpu = new ArrayList<CpuBenchmark>();
 
@@ -90,7 +81,10 @@ public class CPU extends Product {
 
 	@OneToMany(mappedBy = "cpuHigh")
 	private List<Game> gamesWhereThisCpuIsHigh = new ArrayList<Game>();
-	
+
+	@Column(name = "id_to_map", nullable = false)
+	private Integer idToMap;
+
 	public CPU() {
 		super();
 	}
@@ -215,14 +209,6 @@ public class CPU extends Product {
 		this.usersThatHaveThisCpu = usersThatHaveThisCpu;
 	}
 
-	public Set<Chipset> getChipsetsThatSupportThisCpu() {
-		return chipsetsThatSupportThisCpu;
-	}
-
-	public void setChipsetsThatSupportThisCpu(Set<Chipset> chipsetsThatSupportThisCpu) {
-		this.chipsetsThatSupportThisCpu = chipsetsThatSupportThisCpu;
-	}
-
 	public List<CpuBenchmark> getBenchmarksOfThisCpu() {
 		return benchmarksOfThisCpu;
 	}
@@ -255,6 +241,14 @@ public class CPU extends Product {
 		this.gamesWhereThisCpuIsHigh = gamesWhereThisCpuIsHigh;
 	}
 
+	public Integer getIdToMap() {
+		return idToMap;
+	}
+
+	public void setIdToMap(Integer idToMap) {
+		this.idToMap = idToMap;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -262,13 +256,13 @@ public class CPU extends Product {
 		result = prime * result + ((architectureOfThisCpu == null) ? 0 : architectureOfThisCpu.hashCode());
 		result = prime * result + ((benchmarksOfThisCpu == null) ? 0 : benchmarksOfThisCpu.hashCode());
 		result = prime * result + ((bitWidth == null) ? 0 : bitWidth.hashCode());
-		result = prime * result + ((chipsetsThatSupportThisCpu == null) ? 0 : chipsetsThatSupportThisCpu.hashCode());
 		result = prime * result + ((cpuSpeed == null) ? 0 : cpuSpeed.hashCode());
 		result = prime * result + ((familyOfThisCpu == null) ? 0 : familyOfThisCpu.hashCode());
 		result = prime * result + ((gamesWhereThisCpuIsHigh == null) ? 0 : gamesWhereThisCpuIsHigh.hashCode());
 		result = prime * result + ((gamesWhereThisCpuIsLow == null) ? 0 : gamesWhereThisCpuIsLow.hashCode());
 		result = prime * result + ((gamesWhereThisCpuIsMedium == null) ? 0 : gamesWhereThisCpuIsMedium.hashCode());
 		result = prime * result + ((gpusThatRecommendThisCpu == null) ? 0 : gpusThatRecommendThisCpu.hashCode());
+		result = prime * result + ((idToMap == null) ? 0 : idToMap.hashCode());
 		result = prime * result + ((integratedGpuOfThisCpu == null) ? 0 : integratedGpuOfThisCpu.hashCode());
 		result = prime * result + ((l1Cache == null) ? 0 : l1Cache.hashCode());
 		result = prime * result + ((l2Cache == null) ? 0 : l2Cache.hashCode());
@@ -306,11 +300,6 @@ public class CPU extends Product {
 				return false;
 		} else if (!bitWidth.equals(other.bitWidth))
 			return false;
-		if (chipsetsThatSupportThisCpu == null) {
-			if (other.chipsetsThatSupportThisCpu != null)
-				return false;
-		} else if (!chipsetsThatSupportThisCpu.equals(other.chipsetsThatSupportThisCpu))
-			return false;
 		if (cpuSpeed == null) {
 			if (other.cpuSpeed != null)
 				return false;
@@ -340,6 +329,11 @@ public class CPU extends Product {
 			if (other.gpusThatRecommendThisCpu != null)
 				return false;
 		} else if (!gpusThatRecommendThisCpu.equals(other.gpusThatRecommendThisCpu))
+			return false;
+		if (idToMap == null) {
+			if (other.idToMap != null)
+				return false;
+		} else if (!idToMap.equals(other.idToMap))
 			return false;
 		if (integratedGpuOfThisCpu == null) {
 			if (other.integratedGpuOfThisCpu != null)
@@ -392,6 +386,19 @@ public class CPU extends Product {
 		} else if (!usersThatHaveThisCpu.equals(other.usersThatHaveThisCpu))
 			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "CPU [cpuSpeed=" + cpuSpeed + ", turboSpeed=" + turboSpeed + ", physicalCores=" + physicalCores
+				+ ", threads=" + threads + ", tdp=" + tdp + ", bitWidth=" + bitWidth + ", l1Cache=" + l1Cache
+				+ ", l2Cache=" + l2Cache + ", l3Cache=" + l3Cache + ", familyOfThisCpu=" + familyOfThisCpu
+				+ ", socketForThisCpu=" + socketForThisCpu + ", architectureOfThisCpu=" + architectureOfThisCpu
+				+ ", integratedGpuOfThisCpu=" + integratedGpuOfThisCpu + ", gpusThatRecommendThisCpu="
+				+ gpusThatRecommendThisCpu + ", usersThatHaveThisCpu=" + usersThatHaveThisCpu + ", benchmarksOfThisCpu="
+				+ benchmarksOfThisCpu + ", gamesWhereThisCpuIsLow=" + gamesWhereThisCpuIsLow
+				+ ", gamesWhereThisCpuIsMedium=" + gamesWhereThisCpuIsMedium + ", gamesWhereThisCpuIsHigh="
+				+ gamesWhereThisCpuIsHigh + ", idToMap=" + idToMap + " Product = [ " + super.toString() + " ]]";
 	}
 
 }

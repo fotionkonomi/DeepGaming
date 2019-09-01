@@ -66,23 +66,9 @@ public class Chipset implements IModel, Serializable {
 	 */
 	private Company companyThatCreatedThisChipset;
 	
-	@ManyToMany(mappedBy = "chipsetsThatSupportThisCpu")
-	private Set<CPU> cpusThatAreSupportedByThisChipset = new HashSet<CPU>();
 	
 	@OneToMany(mappedBy = "chipsetOfThisMotherboard")
 	private List<Motherboard> motherboardsThatHaveThisChipset = new ArrayList<Motherboard>();
-
-	public Chipset(Integer idChipset, String chipsetName, String chipsetDescription,
-			Company companyThatCreatedThisChipset, Set<CPU> cpusThatAreSupportedByThisChipset,
-			List<Motherboard> motherboardsThatHaveThisChipset) {
-		super();
-		this.idChipset = idChipset;
-		this.chipsetName = chipsetName;
-		this.chipsetDescription = chipsetDescription;
-		this.companyThatCreatedThisChipset = companyThatCreatedThisChipset;
-		this.cpusThatAreSupportedByThisChipset = cpusThatAreSupportedByThisChipset;
-		this.motherboardsThatHaveThisChipset = motherboardsThatHaveThisChipset;
-	}
 
 	public Chipset() {
 		
@@ -120,14 +106,6 @@ public class Chipset implements IModel, Serializable {
 		this.companyThatCreatedThisChipset = companyThatCreatedThisChipset;
 	}
 
-	public Set<CPU> getCpusThatAreSupportedByThisChipset() {
-		return cpusThatAreSupportedByThisChipset;
-	}
-
-	public void setCpusThatAreSupportedByThisChipset(Set<CPU> cpusThatAreSupportedByThisChipset) {
-		this.cpusThatAreSupportedByThisChipset = cpusThatAreSupportedByThisChipset;
-	}
-
 	public List<Motherboard> getMotherboardsThatHaveThisChipset() {
 		return motherboardsThatHaveThisChipset;
 	}
@@ -148,9 +126,7 @@ public class Chipset implements IModel, Serializable {
 		result = prime * result + ((chipsetName == null) ? 0 : chipsetName.hashCode());
 		result = prime * result
 				+ ((companyThatCreatedThisChipset == null) ? 0 : companyThatCreatedThisChipset.hashCode());
-		result = prime * result
-				+ ((cpusThatAreSupportedByThisChipset == null) ? 0 : cpusThatAreSupportedByThisChipset.hashCode());
-		result = prime * result + ((idChipset == null) ? 0 : idChipset.hashCode());
+			result = prime * result + ((idChipset == null) ? 0 : idChipset.hashCode());
 		result = prime * result
 				+ ((motherboardsThatHaveThisChipset == null) ? 0 : motherboardsThatHaveThisChipset.hashCode());
 		return result;
@@ -179,11 +155,6 @@ public class Chipset implements IModel, Serializable {
 			if (other.companyThatCreatedThisChipset != null)
 				return false;
 		} else if (!companyThatCreatedThisChipset.equals(other.companyThatCreatedThisChipset))
-			return false;
-		if (cpusThatAreSupportedByThisChipset == null) {
-			if (other.cpusThatAreSupportedByThisChipset != null)
-				return false;
-		} else if (!cpusThatAreSupportedByThisChipset.equals(other.cpusThatAreSupportedByThisChipset))
 			return false;
 		if (idChipset == null) {
 			if (other.idChipset != null)

@@ -29,7 +29,7 @@ public class Product implements Serializable, IModel {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_product", nullable = false)
+	@Column(name = "id_product")
 	private Integer idProduct;
 
 	@Column(name = "product_name", nullable = false, length = 100)

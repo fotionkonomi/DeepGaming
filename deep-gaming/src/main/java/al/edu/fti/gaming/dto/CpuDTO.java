@@ -1,23 +1,34 @@
 package al.edu.fti.gaming.dto;
 
+import javax.validation.constraints.NotNull;
+
 public class CpuDTO extends ProductDTO {
 
+	@NotNull(message = "{validation.field.required}")
 	private Double cpuSpeed;
 
+	@NotNull(message = "{validation.field.required}")
 	private Double turboSpeed;
 
+	@NotNull(message = "{validation.field.required}")
 	private Byte physicalCores;
 
+	@NotNull(message = "{validation.field.required}")
 	private Byte threads;
 
+	@NotNull(message = "{validation.field.required}")
 	private Integer tdp;
 
+	@NotNull(message = "{validation.field.required}")
 	private Integer bitWidth;
 
+	@NotNull(message = "{validation.field.required}")
 	private Integer l1Cache;
 
+	@NotNull(message = "{validation.field.required}")
 	private Integer l2Cache;
 
+	@NotNull(message = "{validation.field.required}")
 	private Integer l3Cache;
 
 	private CpuFamilyDTO familyOfThisCpu;
@@ -27,6 +38,8 @@ public class CpuDTO extends ProductDTO {
 	private CpuArchitectureDTO architectureOfThisCpu;
 
 	private GpuDTO integratedGpuOfThisCpu;
+
+	private Integer idToMap;
 
 	public CpuDTO() {
 		super();
@@ -136,6 +149,14 @@ public class CpuDTO extends ProductDTO {
 		this.integratedGpuOfThisCpu = integratedGpuOfThisCpu;
 	}
 
+	public Integer getIdToMap() {
+		return idToMap;
+	}
+
+	public void setIdToMap(Integer idToMap) {
+		this.idToMap = idToMap;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -144,6 +165,7 @@ public class CpuDTO extends ProductDTO {
 		result = prime * result + ((bitWidth == null) ? 0 : bitWidth.hashCode());
 		result = prime * result + ((cpuSpeed == null) ? 0 : cpuSpeed.hashCode());
 		result = prime * result + ((familyOfThisCpu == null) ? 0 : familyOfThisCpu.hashCode());
+		result = prime * result + ((idToMap == null) ? 0 : idToMap.hashCode());
 		result = prime * result + ((integratedGpuOfThisCpu == null) ? 0 : integratedGpuOfThisCpu.hashCode());
 		result = prime * result + ((l1Cache == null) ? 0 : l1Cache.hashCode());
 		result = prime * result + ((l2Cache == null) ? 0 : l2Cache.hashCode());
@@ -184,6 +206,11 @@ public class CpuDTO extends ProductDTO {
 			if (other.familyOfThisCpu != null)
 				return false;
 		} else if (!familyOfThisCpu.equals(other.familyOfThisCpu))
+			return false;
+		if (idToMap == null) {
+			if (other.idToMap != null)
+				return false;
+		} else if (!idToMap.equals(other.idToMap))
 			return false;
 		if (integratedGpuOfThisCpu == null) {
 			if (other.integratedGpuOfThisCpu != null)
@@ -232,7 +259,15 @@ public class CpuDTO extends ProductDTO {
 			return false;
 		return true;
 	}
-	
-	
+
+	@Override
+	public String toString() {
+		return "CpuDTO [cpuSpeed=" + cpuSpeed + ", turboSpeed=" + turboSpeed + ", physicalCores=" + physicalCores
+				+ ", threads=" + threads + ", tdp=" + tdp + ", bitWidth=" + bitWidth + ", l1Cache=" + l1Cache
+				+ ", l2Cache=" + l2Cache + ", l3Cache=" + l3Cache + ", familyOfThisCpu=" + familyOfThisCpu
+				+ ", socketOfThisCpu=" + socketOfThisCpu + ", architectureOfThisCpu=" + architectureOfThisCpu
+				+ ", integratedGpuOfThisCpu=" + integratedGpuOfThisCpu + ", idToMap=" + idToMap + "]"
+				+ "\nProductDTO[ name = " + super.getName() + " description + " + super.getDescription();
+	}
 
 }

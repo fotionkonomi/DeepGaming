@@ -30,7 +30,8 @@ public class CompanyServiceImpl implements CompanyService {
 	@Autowired
 	@Qualifier("companyConverter")
 	private Converter companyConverter;
-
+	
+	
 	@Override
 	public int add(CompanyDTO companyDTO) {
 		Company company = (Company) companyConverter.toModel(companyDTO);

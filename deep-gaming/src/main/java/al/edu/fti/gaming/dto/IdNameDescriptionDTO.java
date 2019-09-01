@@ -2,6 +2,7 @@ package al.edu.fti.gaming.dto;
 
 import javax.validation.constraints.Size;
 
+import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.web.multipart.MultipartFile;
 
 import al.edu.fti.gaming.validator.Image;
@@ -10,12 +11,13 @@ public class IdNameDescriptionDTO implements IDto {
 
 	private Integer id;
 
-	@Size(min = 2, max = 50, message = "{Size.Name.Validation}")
+	@Size(max = 50, message = "{Size.Name.Validation}")
+	@NotEmpty(message = "{Size.Name.Validation}")
 	private String name;
 
-	@Size(min = 2, max = 65535, message = "{Size.Description.Validation}")
+	@Size(max = 65535, message = "{Size.Description.Validation}")
+	@NotEmpty(message = "{Size.Description.Validation}")
 	private String description;
-	
 
 	@Image
 	private MultipartFile image;
@@ -91,6 +93,12 @@ public class IdNameDescriptionDTO implements IDto {
 
 	public void setImage(MultipartFile image) {
 		this.image = image;
+	}
+
+	@Override
+	public String toString() {
+		return "IdNameDescriptionDTO [id=" + id + ", name=" + name + ", description=" + description + ", image=" + image
+				+ "]";
 	}
 
 }

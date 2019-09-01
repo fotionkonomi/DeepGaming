@@ -138,6 +138,77 @@ public class CpuSocket implements Serializable, IModel{
 	public void setMotherboardsThatHaveThisSocket(List<Motherboard> motherboardsThatHaveThisSocket) {
 		this.motherboardsThatHaveThisSocket = motherboardsThatHaveThisSocket;
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
+				+ ((companyThatCreatedThisSocket == null) ? 0 : companyThatCreatedThisSocket.hashCode());
+		result = prime * result + ((cpusForThisSocket == null) ? 0 : cpusForThisSocket.hashCode());
+		result = prime * result + ((idCpuSocket == null) ? 0 : idCpuSocket.hashCode());
+		result = prime * result + ((laptopOrDesktop == null) ? 0 : laptopOrDesktop.hashCode());
+		result = prime * result
+				+ ((motherboardsThatHaveThisSocket == null) ? 0 : motherboardsThatHaveThisSocket.hashCode());
+		result = prime * result + ((socketDescription == null) ? 0 : socketDescription.hashCode());
+		result = prime * result + ((socketName == null) ? 0 : socketName.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		CpuSocket other = (CpuSocket) obj;
+		if (companyThatCreatedThisSocket == null) {
+			if (other.companyThatCreatedThisSocket != null)
+				return false;
+		} else if (!companyThatCreatedThisSocket.equals(other.companyThatCreatedThisSocket))
+			return false;
+		if (cpusForThisSocket == null) {
+			if (other.cpusForThisSocket != null)
+				return false;
+		} else if (!cpusForThisSocket.equals(other.cpusForThisSocket))
+			return false;
+		if (idCpuSocket == null) {
+			if (other.idCpuSocket != null)
+				return false;
+		} else if (!idCpuSocket.equals(other.idCpuSocket))
+			return false;
+		if (laptopOrDesktop == null) {
+			if (other.laptopOrDesktop != null)
+				return false;
+		} else if (!laptopOrDesktop.equals(other.laptopOrDesktop))
+			return false;
+		if (motherboardsThatHaveThisSocket == null) {
+			if (other.motherboardsThatHaveThisSocket != null)
+				return false;
+		} else if (!motherboardsThatHaveThisSocket.equals(other.motherboardsThatHaveThisSocket))
+			return false;
+		if (socketDescription == null) {
+			if (other.socketDescription != null)
+				return false;
+		} else if (!socketDescription.equals(other.socketDescription))
+			return false;
+		if (socketName == null) {
+			if (other.socketName != null)
+				return false;
+		} else if (!socketName.equals(other.socketName))
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "CpuSocket [idCpuSocket=" + idCpuSocket + ", socketName=" + socketName + ", socketDescription="
+				+ socketDescription + ", laptopOrDesktop=" + laptopOrDesktop + ", companyThatCreatedThisSocket="
+				+ companyThatCreatedThisSocket + ", cpusForThisSocket=" + cpusForThisSocket
+				+ ", motherboardsThatHaveThisSocket=" + motherboardsThatHaveThisSocket + "]";
+	}
 	
 	
 

@@ -8,13 +8,11 @@ import al.edu.fti.gaming.dto.CpuArchitectureDTO;
 import al.edu.fti.gaming.dto.CpuDTO;
 import al.edu.fti.gaming.dto.CpuFamilyDTO;
 import al.edu.fti.gaming.dto.CpuSocketDTO;
-import al.edu.fti.gaming.dto.GpuDTO;
 import al.edu.fti.gaming.dto.IDto;
 import al.edu.fti.gaming.models.CPU;
 import al.edu.fti.gaming.models.CpuArchitecture;
 import al.edu.fti.gaming.models.CpuFamily;
 import al.edu.fti.gaming.models.CpuSocket;
-import al.edu.fti.gaming.models.GPU;
 import al.edu.fti.gaming.models.IModel;
 
 @Component
@@ -72,6 +70,8 @@ public class CpuConverter implements Converter {
 		// cpu.setIntegratedGpuOfThisCpu((GPU)
 		// gpuConverter.toModel(cpuDTO.getIntegratedGpuOfThisCpu()));
 
+		cpu.setIdToMap(cpuDTO.getIdToMap());
+
 		return cpu;
 	}
 
@@ -101,9 +101,11 @@ public class CpuConverter implements Converter {
 		cpuDTO.setSocketOfThisCpu((CpuSocketDTO) cpuSocketConverter.toDTO(cpu.getSocketForThisCpu()));
 		cpuDTO.setArchitectureOfThisCpu(
 				(CpuArchitectureDTO) cpuArchitectureConverter.toDTO(cpu.getArchitectureOfThisCpu()));
-
+		
 		// cpuDTO.setIntegratedGpuOfThisCpu((GpuDTO)
 		// gpuConverter.toDTO(cpu.getIntegratedGpuOfThisCpu()));
+
+		cpuDTO.setIdToMap(cpu.getIdToMap());
 
 		return cpuDTO;
 	}

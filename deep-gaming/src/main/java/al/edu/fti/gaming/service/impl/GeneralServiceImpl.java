@@ -1,7 +1,11 @@
 package al.edu.fti.gaming.service.impl;
 
 import java.io.File;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import al.edu.fti.gaming.dto.CompanyDTO;
 import al.edu.fti.gaming.dto.IdNameDescriptionDTO;
+import al.edu.fti.gaming.dto.ProductDTO;
 import al.edu.fti.gaming.service.CompanyService;
 import al.edu.fti.gaming.service.GeneralService;
 
@@ -21,7 +26,7 @@ public class GeneralServiceImpl implements GeneralService {
 
 	@Autowired
 	private CompanyService companyService;
-	
+
 	@Override
 	public void imageProcessing(IdNameDescriptionDTO dtoObject, String path, boolean addOrUpdate) {
 		String nameOfClass = dtoObject.getClass().getSimpleName().toLowerCase();
@@ -57,7 +62,7 @@ public class GeneralServiceImpl implements GeneralService {
 			return errorsFromValidation;
 		}
 	}
-	
+
 	@Override
 	public Map<Integer, String> getAllCompaniesMap() {
 		List<CompanyDTO> allCompaniesList = companyService.getAllCompanies();
@@ -66,6 +71,13 @@ public class GeneralServiceImpl implements GeneralService {
 			allCompanies.put(companyDTO.getId(), companyDTO.getName());
 		}
 		return allCompanies;
+	}
+
+	@Override
+	public void convertStringToDate(ProductDTO productDTO) throws ParseException {
+		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		Date date = dateFormat.parse(productDTO.getDate());
+		productDTO.setReleaseDate(date);
 	}
 
 }
