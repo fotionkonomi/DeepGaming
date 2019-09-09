@@ -26,15 +26,14 @@
 
 
 				<div class="form-group">
-				<br/>
-					<label class="control-label col-lg-2 col-lg-2" for="name"><spring:message
+					<br /> <label class="control-label col-lg-2 col-lg-2" for="name"><spring:message
 							code="add.form.chooseCompany.cpu.label" /></label>
 					<div class="col-lg-10">
 						<select id="select" class="form-control">
-						<option><spring:message
-							code="add.form.chooseCompany.default" /></option>
+							<option value=""><spring:message
+									code="add.form.chooseCompany.default" /></option>
 							<c:forEach items="${companies }" var="company">
-								
+
 								<option>${company.name }</option>
 							</c:forEach>
 						</select>
@@ -43,10 +42,12 @@
 
 
 				<div class="form-group">
-				<br/><br/>
+					<br />
+					<br />
 					<div class="col-lg-offset-2 col-lg-10 float-right">
-						<a id="a" href="" id="btnAdd" class="btn btn-primary"> <spring:message
-							code="add.form.next" /> </a>
+						<a id="a" id="btnAdd" class="btn btn-primary disabled">
+							<spring:message code="add.form.next" />
+						</a>
 					</div>
 				</div>
 			</fieldset>
@@ -60,9 +61,24 @@
 	<jsp:include page="/WEB-INF/jsp/scripts.jsp" />
 
 	<script>
+		$('document').ready(function() {
+			if($('#select').val()) {
+				var action = $('#select').val();
+				$('#a').attr('href', "chooseSocketArchitectureFamily?company=" + action);
+				$('#a').attr('class', "btn btn-primary");
+			}
+		});
+	
 		$('#select').change(function() {
-			var action = $(this).val();
-			$('#a').attr('href', "add?company=" + action);
+			if ( $(this).val() != "") {
+				var action = $(this).val();
+				$('#a').attr('href', "chooseSocketArchitectureFamily?company=" + action);
+				$('#a').attr('class', "btn btn-primary");
+			} else {
+				$('#a').removeAttr('href');
+				$('#a').attr('class', "btn btn-primary disabled");
+
+			}
 		});
 	</script>
 </body>

@@ -48,6 +48,9 @@ public class CPU extends Product {
 	@Column(name = "l3_cache", nullable = false)
 	private Integer l3Cache;
 
+	@Column(name = "cpu_benchmark", nullable = false)
+	private Integer cpuBenchmark;
+
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 	@JoinColumn(name = "id_cpu_family", nullable = false)
 	private CpuFamily familyOfThisCpu;
@@ -70,9 +73,6 @@ public class CPU extends Product {
 	@OneToMany(mappedBy = "cpuOfHisComputer")
 	private List<User> usersThatHaveThisCpu = new ArrayList<User>();
 
-	@OneToMany(mappedBy = "cpuThatHasBeenTested")
-	private List<CpuBenchmark> benchmarksOfThisCpu = new ArrayList<CpuBenchmark>();
-
 	@OneToMany(mappedBy = "cpuLow")
 	private List<Game> gamesWhereThisCpuIsLow = new ArrayList<Game>();
 
@@ -81,9 +81,6 @@ public class CPU extends Product {
 
 	@OneToMany(mappedBy = "cpuHigh")
 	private List<Game> gamesWhereThisCpuIsHigh = new ArrayList<Game>();
-
-	@Column(name = "id_to_map", nullable = false)
-	private Integer idToMap;
 
 	public CPU() {
 		super();
@@ -161,6 +158,14 @@ public class CPU extends Product {
 		this.l3Cache = l3Cache;
 	}
 
+	public Integer getCpuBenchmark() {
+		return cpuBenchmark;
+	}
+
+	public void setCpuBenchmark(Integer cpuBenchmark) {
+		this.cpuBenchmark = cpuBenchmark;
+	}
+
 	public CpuFamily getFamilyOfThisCpu() {
 		return familyOfThisCpu;
 	}
@@ -209,14 +214,6 @@ public class CPU extends Product {
 		this.usersThatHaveThisCpu = usersThatHaveThisCpu;
 	}
 
-	public List<CpuBenchmark> getBenchmarksOfThisCpu() {
-		return benchmarksOfThisCpu;
-	}
-
-	public void setBenchmarksOfThisCpu(List<CpuBenchmark> benchmarksOfThisCpu) {
-		this.benchmarksOfThisCpu = benchmarksOfThisCpu;
-	}
-
 	public List<Game> getGamesWhereThisCpuIsLow() {
 		return gamesWhereThisCpuIsLow;
 	}
@@ -241,28 +238,19 @@ public class CPU extends Product {
 		this.gamesWhereThisCpuIsHigh = gamesWhereThisCpuIsHigh;
 	}
 
-	public Integer getIdToMap() {
-		return idToMap;
-	}
-
-	public void setIdToMap(Integer idToMap) {
-		this.idToMap = idToMap;
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
 		result = prime * result + ((architectureOfThisCpu == null) ? 0 : architectureOfThisCpu.hashCode());
-		result = prime * result + ((benchmarksOfThisCpu == null) ? 0 : benchmarksOfThisCpu.hashCode());
 		result = prime * result + ((bitWidth == null) ? 0 : bitWidth.hashCode());
+		result = prime * result + ((cpuBenchmark == null) ? 0 : cpuBenchmark.hashCode());
 		result = prime * result + ((cpuSpeed == null) ? 0 : cpuSpeed.hashCode());
 		result = prime * result + ((familyOfThisCpu == null) ? 0 : familyOfThisCpu.hashCode());
 		result = prime * result + ((gamesWhereThisCpuIsHigh == null) ? 0 : gamesWhereThisCpuIsHigh.hashCode());
 		result = prime * result + ((gamesWhereThisCpuIsLow == null) ? 0 : gamesWhereThisCpuIsLow.hashCode());
 		result = prime * result + ((gamesWhereThisCpuIsMedium == null) ? 0 : gamesWhereThisCpuIsMedium.hashCode());
 		result = prime * result + ((gpusThatRecommendThisCpu == null) ? 0 : gpusThatRecommendThisCpu.hashCode());
-		result = prime * result + ((idToMap == null) ? 0 : idToMap.hashCode());
 		result = prime * result + ((integratedGpuOfThisCpu == null) ? 0 : integratedGpuOfThisCpu.hashCode());
 		result = prime * result + ((l1Cache == null) ? 0 : l1Cache.hashCode());
 		result = prime * result + ((l2Cache == null) ? 0 : l2Cache.hashCode());
@@ -290,15 +278,15 @@ public class CPU extends Product {
 				return false;
 		} else if (!architectureOfThisCpu.equals(other.architectureOfThisCpu))
 			return false;
-		if (benchmarksOfThisCpu == null) {
-			if (other.benchmarksOfThisCpu != null)
-				return false;
-		} else if (!benchmarksOfThisCpu.equals(other.benchmarksOfThisCpu))
-			return false;
 		if (bitWidth == null) {
 			if (other.bitWidth != null)
 				return false;
 		} else if (!bitWidth.equals(other.bitWidth))
+			return false;
+		if (cpuBenchmark == null) {
+			if (other.cpuBenchmark != null)
+				return false;
+		} else if (!cpuBenchmark.equals(other.cpuBenchmark))
 			return false;
 		if (cpuSpeed == null) {
 			if (other.cpuSpeed != null)
@@ -329,11 +317,6 @@ public class CPU extends Product {
 			if (other.gpusThatRecommendThisCpu != null)
 				return false;
 		} else if (!gpusThatRecommendThisCpu.equals(other.gpusThatRecommendThisCpu))
-			return false;
-		if (idToMap == null) {
-			if (other.idToMap != null)
-				return false;
-		} else if (!idToMap.equals(other.idToMap))
 			return false;
 		if (integratedGpuOfThisCpu == null) {
 			if (other.integratedGpuOfThisCpu != null)
@@ -392,13 +375,13 @@ public class CPU extends Product {
 	public String toString() {
 		return "CPU [cpuSpeed=" + cpuSpeed + ", turboSpeed=" + turboSpeed + ", physicalCores=" + physicalCores
 				+ ", threads=" + threads + ", tdp=" + tdp + ", bitWidth=" + bitWidth + ", l1Cache=" + l1Cache
-				+ ", l2Cache=" + l2Cache + ", l3Cache=" + l3Cache + ", familyOfThisCpu=" + familyOfThisCpu
-				+ ", socketForThisCpu=" + socketForThisCpu + ", architectureOfThisCpu=" + architectureOfThisCpu
-				+ ", integratedGpuOfThisCpu=" + integratedGpuOfThisCpu + ", gpusThatRecommendThisCpu="
-				+ gpusThatRecommendThisCpu + ", usersThatHaveThisCpu=" + usersThatHaveThisCpu + ", benchmarksOfThisCpu="
-				+ benchmarksOfThisCpu + ", gamesWhereThisCpuIsLow=" + gamesWhereThisCpuIsLow
-				+ ", gamesWhereThisCpuIsMedium=" + gamesWhereThisCpuIsMedium + ", gamesWhereThisCpuIsHigh="
-				+ gamesWhereThisCpuIsHigh + ", idToMap=" + idToMap + " Product = [ " + super.toString() + " ]]";
+				+ ", l2Cache=" + l2Cache + ", l3Cache=" + l3Cache + ", cpuBenchmark=" + cpuBenchmark
+				+ ", familyOfThisCpu=" + familyOfThisCpu + ", socketForThisCpu=" + socketForThisCpu
+				+ ", architectureOfThisCpu=" + architectureOfThisCpu + ", integratedGpuOfThisCpu="
+				+ integratedGpuOfThisCpu + ", gpusThatRecommendThisCpu=" + gpusThatRecommendThisCpu
+				+ ", usersThatHaveThisCpu=" + usersThatHaveThisCpu + ", gamesWhereThisCpuIsLow="
+				+ gamesWhereThisCpuIsLow + ", gamesWhereThisCpuIsMedium=" + gamesWhereThisCpuIsMedium
+				+ ", gamesWhereThisCpuIsHigh=" + gamesWhereThisCpuIsHigh + "]";
 	}
 
 }

@@ -13,19 +13,17 @@
 </head>
 <body>
 	<jsp:include page="/WEB-INF/jsp/body.jsp"></jsp:include>
-	<a href="?id=${id }&language=en">English</a>|
-	<a href="?id=${id }&language=al">Albanian</a>
 
 	<jsp:include page="/WEB-INF/jsp/navigation.jsp"></jsp:include>
 
 	<h1 style="text-align: center; color: #D10024;">
 		Error 404:
-		<spring:message code="cpuBenchmarkType.cpuBenchmarkTypeNotFound" />
+		<spring:message code="Cpus.NotFound" />
 	</h1>
 	<br />
 	<center>
 		<a style="text-align: center;"
-			href="<spring:url value="/cpuBenchmarkType/benchmarkTypes" />"
+			href="<spring:url value="/cpu/cpus?page=1" />"
 			class="btn btn-primary"> <spring:message
 				code="error.notFound.goBack" />
 		</a>

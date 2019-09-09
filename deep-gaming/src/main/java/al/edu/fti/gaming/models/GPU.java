@@ -75,6 +75,17 @@ public class GPU extends Product {
 	@Column(name = "open_gl", nullable = false)
 	private Double openGL;
 
+	@Column(name = "gpu_benchmark", nullable = false)
+	private Integer gpuBenchmark;
+
+	public Integer getGpuBenchmark() {
+		return gpuBenchmark;
+	}
+
+	public void setGpuBenchmark(Integer gpuBenchmark) {
+		this.gpuBenchmark = gpuBenchmark;
+	}
+
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 	@JoinColumn(name = "id_gpu_family", nullable = false)
 	private GpuFamily familyOfThisGpu;
@@ -101,9 +112,6 @@ public class GPU extends Product {
 
 	@OneToMany(mappedBy = "gpuOfHisComputer")
 	private List<User> usersThatHaveThisGpu = new ArrayList<User>();
-
-	@OneToMany(mappedBy = "gpuThatHasBeenTested")
-	private List<GpuBenchmark> benchmarksOfThisGpu = new ArrayList<GpuBenchmark>();
 
 	@OneToMany(mappedBy = "gpuLow")
 	private List<Game> gamesWhereThisGpuIsLow = new ArrayList<Game>();
@@ -318,14 +326,6 @@ public class GPU extends Product {
 		this.usersThatHaveThisGpu = usersThatHaveThisGpu;
 	}
 
-	public List<GpuBenchmark> getBenchmarksOfThisGpu() {
-		return benchmarksOfThisGpu;
-	}
-
-	public void setBenchmarksOfThisGpu(List<GpuBenchmark> benchmarksOfThisGpu) {
-		this.benchmarksOfThisGpu = benchmarksOfThisGpu;
-	}
-
 	public List<Game> getGamesWhereThisGpuIsLow() {
 		return gamesWhereThisGpuIsLow;
 	}
@@ -355,7 +355,6 @@ public class GPU extends Product {
 		final int prime = 31;
 		int result = super.hashCode();
 		result = prime * result + ((architectureOfThisGpu == null) ? 0 : architectureOfThisGpu.hashCode());
-		result = prime * result + ((benchmarksOfThisGpu == null) ? 0 : benchmarksOfThisGpu.hashCode());
 		result = prime * result + ((boostClock == null) ? 0 : boostClock.hashCode());
 		result = prime * result + ((cache == null) ? 0 : cache.hashCode());
 		result = prime * result + ((coreSpeed == null) ? 0 : coreSpeed.hashCode());
@@ -365,6 +364,7 @@ public class GPU extends Product {
 		result = prime * result + ((gamesWhereThisGpuIsHigh == null) ? 0 : gamesWhereThisGpuIsHigh.hashCode());
 		result = prime * result + ((gamesWhereThisGpuIsLow == null) ? 0 : gamesWhereThisGpuIsLow.hashCode());
 		result = prime * result + ((gamesWhereThisGpuIsMedium == null) ? 0 : gamesWhereThisGpuIsMedium.hashCode());
+		result = prime * result + ((gpuBenchmark == null) ? 0 : gpuBenchmark.hashCode());
 		result = prime * result + ((gpuSlotOfThisGpu == null) ? 0 : gpuSlotOfThisGpu.hashCode());
 		result = prime * result
 				+ ((maximumDirectXSupportedByThisGpu == null) ? 0 : maximumDirectXSupportedByThisGpu.hashCode());
@@ -400,11 +400,6 @@ public class GPU extends Product {
 			if (other.architectureOfThisGpu != null)
 				return false;
 		} else if (!architectureOfThisGpu.equals(other.architectureOfThisGpu))
-			return false;
-		if (benchmarksOfThisGpu == null) {
-			if (other.benchmarksOfThisGpu != null)
-				return false;
-		} else if (!benchmarksOfThisGpu.equals(other.benchmarksOfThisGpu))
 			return false;
 		if (boostClock == null) {
 			if (other.boostClock != null)
@@ -450,6 +445,11 @@ public class GPU extends Product {
 			if (other.gamesWhereThisGpuIsMedium != null)
 				return false;
 		} else if (!gamesWhereThisGpuIsMedium.equals(other.gamesWhereThisGpuIsMedium))
+			return false;
+		if (gpuBenchmark == null) {
+			if (other.gpuBenchmark != null)
+				return false;
+		} else if (!gpuBenchmark.equals(other.gpuBenchmark))
 			return false;
 		if (gpuSlotOfThisGpu == null) {
 			if (other.gpuSlotOfThisGpu != null)
@@ -542,6 +542,22 @@ public class GPU extends Product {
 		} else if (!usersThatHaveThisGpu.equals(other.usersThatHaveThisGpu))
 			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "GPU [tmu=" + tmu + ", textureRate=" + textureRate + ", rop=" + rop + ", pixelRate=" + pixelRate
+				+ ", shaderProcessingUnits=" + shaderProcessingUnits + ", rayTracingCores=" + rayTracingCores
+				+ ", tensorCores=" + tensorCores + ", driverSupport=" + driverSupport + ", memorySize=" + memorySize
+				+ ", memorySpeed=" + memorySpeed + ", memoryBus=" + memoryBus + ", memoryBandwidth=" + memoryBandwidth
+				+ ", cache=" + cache + ", coreSpeed=" + coreSpeed + ", boostClock=" + boostClock + ", tdp=" + tdp
+				+ ", shader=" + shader + ", openGL=" + openGL + ", gpuBenchmark=" + gpuBenchmark + ", familyOfThisGpu="
+				+ familyOfThisGpu + ", architectureOfThisGpu=" + architectureOfThisGpu + ", memoryTechnologyOfThisGpu="
+				+ memoryTechnologyOfThisGpu + ", maximumDirectXSupportedByThisGpu=" + maximumDirectXSupportedByThisGpu
+				+ ", gpuSlotOfThisGpu=" + gpuSlotOfThisGpu + ", cpuRecommendedForThisGpu=" + cpuRecommendedForThisGpu
+				+ ", usersThatHaveThisGpu=" + usersThatHaveThisGpu + ", gamesWhereThisGpuIsLow="
+				+ gamesWhereThisGpuIsLow + ", gamesWhereThisGpuIsMedium=" + gamesWhereThisGpuIsMedium
+				+ ", gamesWhereThisGpuIsHigh=" + gamesWhereThisGpuIsHigh + "]";
 	}
 
 }

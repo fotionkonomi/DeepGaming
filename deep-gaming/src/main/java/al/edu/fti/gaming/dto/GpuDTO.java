@@ -1,7 +1,14 @@
 
 package al.edu.fti.gaming.dto;
 
-public class GpuDTO extends ProductDTO {
+import java.io.Serializable;
+
+public class GpuDTO extends ProductDTO implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8070710386716560546L;
 
 	private Integer tmu;
 
@@ -22,6 +29,8 @@ public class GpuDTO extends ProductDTO {
 	private Integer memorySize;
 
 	private Integer memorySpeed;
+	
+	private Integer memoryBus;
 
 	private Integer memoryBandwidth;
 
@@ -237,6 +246,14 @@ public class GpuDTO extends ProductDTO {
 		this.cpuRecommendedForThisGpu = cpuRecommendedForThisGpu;
 	}
 
+	public Integer getMemoryBus() {
+		return memoryBus;
+	}
+
+	public void setMemoryBus(Integer memoryBus) {
+		this.memoryBus = memoryBus;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -252,6 +269,7 @@ public class GpuDTO extends ProductDTO {
 		result = prime * result
 				+ ((maximumDirectXSupportedByThisGpu == null) ? 0 : maximumDirectXSupportedByThisGpu.hashCode());
 		result = prime * result + ((memoryBandwidth == null) ? 0 : memoryBandwidth.hashCode());
+		result = prime * result + ((memoryBus == null) ? 0 : memoryBus.hashCode());
 		result = prime * result + ((memorySize == null) ? 0 : memorySize.hashCode());
 		result = prime * result + ((memorySpeed == null) ? 0 : memorySpeed.hashCode());
 		result = prime * result + ((memoryTechnologyOfThisGpu == null) ? 0 : memoryTechnologyOfThisGpu.hashCode());
@@ -327,6 +345,11 @@ public class GpuDTO extends ProductDTO {
 				return false;
 		} else if (!memoryBandwidth.equals(other.memoryBandwidth))
 			return false;
+		if (memoryBus == null) {
+			if (other.memoryBus != null)
+				return false;
+		} else if (!memoryBus.equals(other.memoryBus))
+			return false;
 		if (memorySize == null) {
 			if (other.memorySize != null)
 				return false;
@@ -395,5 +418,20 @@ public class GpuDTO extends ProductDTO {
 		return true;
 	}
 
+	@Override
+	public String toString() {
+		return "GpuDTO [tmu=" + tmu + ", textureRate=" + textureRate + ", rop=" + rop + ", pixelRate=" + pixelRate
+				+ ", shaderProcessingUnits=" + shaderProcessingUnits + ", rayTracingCores=" + rayTracingCores
+				+ ", tensorCores=" + tensorCores + ", driverSupport=" + driverSupport + ", memorySize=" + memorySize
+				+ ", memorySpeed=" + memorySpeed + ", memoryBus=" + memoryBus + ", memoryBandwidth=" + memoryBandwidth
+				+ ", cache=" + cache + ", coreSpeed=" + coreSpeed + ", boostClock=" + boostClock + ", tdp=" + tdp
+				+ ", shader=" + shader + ", openGL=" + openGL + ", familyOfThisGpu=" + familyOfThisGpu
+				+ ", architectureOfThisGpu=" + architectureOfThisGpu + ", memoryTechnologyOfThisGpu="
+				+ memoryTechnologyOfThisGpu + ", maximumDirectXSupportedByThisGpu=" + maximumDirectXSupportedByThisGpu
+				+ ", gpuSlotOfThisGpu=" + gpuSlotOfThisGpu + ", cpuRecommendedForThisGpu=" + cpuRecommendedForThisGpu
+				+ "]";
+	}
+
+	
 	
 }

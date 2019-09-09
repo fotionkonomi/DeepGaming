@@ -13,7 +13,9 @@ public interface CpuSocketService {
 	CpuSocketDTO getCpuSocketById(int id);
 
 	boolean update(CpuSocketDTO cpuSocketDTO);
-	
+
 	List<CpuSocketDTO> getCpuSocketsByCompany(String companyName);
-	
+
+
+
 }

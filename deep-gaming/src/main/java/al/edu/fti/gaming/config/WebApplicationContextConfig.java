@@ -1,6 +1,8 @@
 package al.edu.fti.gaming.config;
 
+import java.util.HashSet;
 import java.util.Locale;
+import java.util.Set;
 
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
@@ -22,6 +24,12 @@ import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 import org.springframework.web.util.UrlPathHelper;
+
+import al.edu.fti.gaming.validator.CpuCacheValidator;
+import al.edu.fti.gaming.validator.CpuCoresValidator;
+import al.edu.fti.gaming.validator.CpuSpeedValidator;
+import al.edu.fti.gaming.validator.CpuValidator;
+import al.edu.fti.gaming.validator.ProductPriceQuantityValidator;
 
 @Configuration
 @EnableWebMvc
@@ -94,10 +102,22 @@ public class WebApplicationContextConfig extends WebMvcConfigurerAdapter {
 		bean.setValidationMessageSource(messageSource());
 		return bean;
 	}
-	
+
 	@Override
 	public Validator getValidator() {
 		return validator();
+	}
+
+	@Bean
+	public CpuValidator cpuValidator() {
+		Set<Validator> springValidators = new HashSet<Validator>();
+		springValidators.add(new CpuSpeedValidator());
+		springValidators.add(new CpuCoresValidator());
+		springValidators.add(new CpuCacheValidator());
+		springValidators.add(new ProductPriceQuantityValidator());
+		CpuValidator cpuValidator = new CpuValidator();
+		cpuValidator.setSpringValidators(springValidators);
+		return cpuValidator;
 	}
 
 }

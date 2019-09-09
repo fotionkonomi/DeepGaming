@@ -2,6 +2,7 @@ package al.edu.fti.gaming.dto;
 
 import java.util.Date;
 
+import javax.validation.constraints.Min;
 import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.NotBlank;
@@ -13,8 +14,10 @@ public class ProductDTO extends IdNameDescriptionDTO {
 	
 	private Date releaseDate;
 
+	@Min(value = 1, message = "{validation.field.min.one}")
 	private Integer price;
 
+	@Min(value = 1, message = "{validation.field.min.one}")
 	private Integer quantity;
 
 	private Date uploadDate;
@@ -149,5 +152,6 @@ public class ProductDTO extends IdNameDescriptionDTO {
 		return "ProductDTO [releaseDate=" + releaseDate + ", price=" + price + ", quantity=" + quantity
 				+ ", uploadDate=" + uploadDate + ", editedDate=" + editedDate + ", hyperlink=" + hyperlink + "]";
 	}
+
 
 }

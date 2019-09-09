@@ -62,6 +62,7 @@ public class CpuConverter implements Converter {
 		cpu.setL1Cache(cpuDTO.getL1Cache());
 		cpu.setL2Cache(cpuDTO.getL2Cache());
 		cpu.setL3Cache(cpuDTO.getL3Cache());
+		cpu.setCpuBenchmark(cpuDTO.getCpuBenchmark());
 		cpu.setFamilyOfThisCpu((CpuFamily) cpuFamilyConverter.toModel(cpuDTO.getFamilyOfThisCpu()));
 		cpu.setSocketForThisCpu((CpuSocket) cpuSocketConverter.toModel(cpuDTO.getSocketOfThisCpu()));
 		cpu.setArchitectureOfThisCpu(
@@ -70,7 +71,6 @@ public class CpuConverter implements Converter {
 		// cpu.setIntegratedGpuOfThisCpu((GPU)
 		// gpuConverter.toModel(cpuDTO.getIntegratedGpuOfThisCpu()));
 
-		cpu.setIdToMap(cpuDTO.getIdToMap());
 
 		return cpu;
 	}
@@ -97,6 +97,7 @@ public class CpuConverter implements Converter {
 		cpuDTO.setL1Cache(cpu.getL1Cache());
 		cpuDTO.setL2Cache(cpu.getL2Cache());
 		cpuDTO.setL3Cache(cpu.getL3Cache());
+		cpuDTO.setCpuBenchmark(cpu.getCpuBenchmark());
 		cpuDTO.setFamilyOfThisCpu((CpuFamilyDTO) cpuFamilyConverter.toDTO(cpu.getFamilyOfThisCpu()));
 		cpuDTO.setSocketOfThisCpu((CpuSocketDTO) cpuSocketConverter.toDTO(cpu.getSocketForThisCpu()));
 		cpuDTO.setArchitectureOfThisCpu(
@@ -105,7 +106,6 @@ public class CpuConverter implements Converter {
 		// cpuDTO.setIntegratedGpuOfThisCpu((GpuDTO)
 		// gpuConverter.toDTO(cpu.getIntegratedGpuOfThisCpu()));
 
-		cpuDTO.setIdToMap(cpu.getIdToMap());
 
 		return cpuDTO;
 	}

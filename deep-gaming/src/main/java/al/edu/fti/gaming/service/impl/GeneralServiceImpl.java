@@ -10,10 +10,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import al.edu.fti.gaming.dto.CompanyDTO;
 import al.edu.fti.gaming.dto.IdNameDescriptionDTO;
@@ -34,6 +37,7 @@ public class GeneralServiceImpl implements GeneralService {
 		nameOfClass = nameOfClass.substring(0, indexOfDTO);
 		System.out.println(nameOfClass);
 		String imageLocation = path + "resources\\img\\" + nameOfClass + dtoObject.getId() + ".png";
+		System.out.println(imageLocation);
 		try {
 			if (addOrUpdate == false) {
 				File existingImage = new File(imageLocation);
@@ -79,5 +83,6 @@ public class GeneralServiceImpl implements GeneralService {
 		Date date = dateFormat.parse(productDTO.getDate());
 		productDTO.setReleaseDate(date);
 	}
+
 
 }

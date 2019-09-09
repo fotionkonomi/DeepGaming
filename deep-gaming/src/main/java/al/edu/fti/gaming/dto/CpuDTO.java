@@ -1,35 +1,56 @@
 package al.edu.fti.gaming.dto;
 
+import java.io.Serializable;
+
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
-public class CpuDTO extends ProductDTO {
+public class CpuDTO extends ProductDTO implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -479765007839766808L;
 
 	@NotNull(message = "{validation.field.required}")
+	@Min(value = 1, message = "{validation.field.min.one}")
 	private Double cpuSpeed;
 
 	@NotNull(message = "{validation.field.required}")
+	@Min(value = 1, message = "{validation.field.min.one}")
 	private Double turboSpeed;
 
 	@NotNull(message = "{validation.field.required}")
+	@Min(value = 1, message = "{validation.field.min.one}")
 	private Byte physicalCores;
 
 	@NotNull(message = "{validation.field.required}")
+	@Min(value = 1, message = "{validation.field.min.one}")
 	private Byte threads;
 
 	@NotNull(message = "{validation.field.required}")
+	@Min(value = 1, message = "{validation.field.min.one}")
 	private Integer tdp;
 
 	@NotNull(message = "{validation.field.required}")
+	@Min(value = 1, message = "{validation.field.min.one}")
 	private Integer bitWidth;
 
 	@NotNull(message = "{validation.field.required}")
+	@Min(value = 1, message = "{validation.field.min.one}")
 	private Integer l1Cache;
 
 	@NotNull(message = "{validation.field.required}")
+	@Min(value = 1, message = "{validation.field.min.one}")
 	private Integer l2Cache;
 
 	@NotNull(message = "{validation.field.required}")
+	@Min(value = 1, message = "{validation.field.min.one}")
 	private Integer l3Cache;
+
+	@NotNull(message = "{validation.field.required}")
+	@Min(value = 1, message = "{validation.field.min.one}")
+	private Integer cpuBenchmark;
 
 	private CpuFamilyDTO familyOfThisCpu;
 
@@ -117,6 +138,14 @@ public class CpuDTO extends ProductDTO {
 		this.l3Cache = l3Cache;
 	}
 
+	public Integer getCpuBenchmark() {
+		return cpuBenchmark;
+	}
+
+	public void setCpuBenchmark(Integer cpuBenchmark) {
+		this.cpuBenchmark = cpuBenchmark;
+	}
+
 	public CpuFamilyDTO getFamilyOfThisCpu() {
 		return familyOfThisCpu;
 	}
@@ -163,6 +192,7 @@ public class CpuDTO extends ProductDTO {
 		int result = super.hashCode();
 		result = prime * result + ((architectureOfThisCpu == null) ? 0 : architectureOfThisCpu.hashCode());
 		result = prime * result + ((bitWidth == null) ? 0 : bitWidth.hashCode());
+		result = prime * result + ((cpuBenchmark == null) ? 0 : cpuBenchmark.hashCode());
 		result = prime * result + ((cpuSpeed == null) ? 0 : cpuSpeed.hashCode());
 		result = prime * result + ((familyOfThisCpu == null) ? 0 : familyOfThisCpu.hashCode());
 		result = prime * result + ((idToMap == null) ? 0 : idToMap.hashCode());
@@ -196,6 +226,11 @@ public class CpuDTO extends ProductDTO {
 			if (other.bitWidth != null)
 				return false;
 		} else if (!bitWidth.equals(other.bitWidth))
+			return false;
+		if (cpuBenchmark == null) {
+			if (other.cpuBenchmark != null)
+				return false;
+		} else if (!cpuBenchmark.equals(other.cpuBenchmark))
 			return false;
 		if (cpuSpeed == null) {
 			if (other.cpuSpeed != null)
@@ -264,10 +299,10 @@ public class CpuDTO extends ProductDTO {
 	public String toString() {
 		return "CpuDTO [cpuSpeed=" + cpuSpeed + ", turboSpeed=" + turboSpeed + ", physicalCores=" + physicalCores
 				+ ", threads=" + threads + ", tdp=" + tdp + ", bitWidth=" + bitWidth + ", l1Cache=" + l1Cache
-				+ ", l2Cache=" + l2Cache + ", l3Cache=" + l3Cache + ", familyOfThisCpu=" + familyOfThisCpu
-				+ ", socketOfThisCpu=" + socketOfThisCpu + ", architectureOfThisCpu=" + architectureOfThisCpu
-				+ ", integratedGpuOfThisCpu=" + integratedGpuOfThisCpu + ", idToMap=" + idToMap + "]"
-				+ "\nProductDTO[ name = " + super.getName() + " description + " + super.getDescription();
+				+ ", l2Cache=" + l2Cache + ", l3Cache=" + l3Cache + ", cpuBenchmark=" + cpuBenchmark
+				+ ", familyOfThisCpu=" + familyOfThisCpu + ", socketOfThisCpu=" + socketOfThisCpu
+				+ ", architectureOfThisCpu=" + architectureOfThisCpu + ", integratedGpuOfThisCpu="
+				+ integratedGpuOfThisCpu + ", idToMap=" + idToMap + "]";
 	}
 
 }

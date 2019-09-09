@@ -19,14 +19,17 @@
 	<jsp:include page="/WEB-INF/jsp/navigation.jsp"></jsp:include>
 
 	<h1 style="text-align: center; color: #D10024;">
-		Error 404:
-		<c:if test="${error != null}">
-			<span>${error }</span>
-			<h3>${sorry }</h3>
-		</c:if>
-		<c:if test="${errors != null}">
-			<span>${errors }</span>
-		</c:if>
+		<center>
+			<c:if test="${error != null}">
+				<span>${error }</span>
+				<br />
+
+				<h3>${sorry }</h3>
+			</c:if>
+			<c:if test="${errors != null}">
+				<span>${errors }</span>
+			</c:if>
+		</center>
 	</h1>
 	<br />
 	<center>

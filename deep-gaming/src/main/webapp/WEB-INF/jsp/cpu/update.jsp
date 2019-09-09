@@ -14,9 +14,9 @@
 <body>
 	<jsp:include page="/WEB-INF/jsp/body.jsp"></jsp:include>
 	<a
-		href="?cpuFamily=${cpuFamily}&cpuArchitecture=${cpuArchitecture }&cpuSocket=${cpuSocket }&company=${company }&language=en">English</a>|
+		href="?id=${cpu.id }&language=en">English</a>|
 	<a
-		href="?cpuFamily=${cpuFamily}&cpuArchitecture=${cpuArchitecture }&cpuSocket=${cpuSocket }&company=${company }&language=al">Albanian</a>
+		href="?id=${cpu.id }&language=al">Albanian</a>
 
 	<jsp:include page="/WEB-INF/jsp/navigation.jsp"></jsp:include>
 
@@ -25,7 +25,7 @@
 		<form:errors path="*" cssClass="alert alert-danger" element="div" />
 
 		<form:form class="form-horizontal" method="POST"
-			modelAttribute="newCpu" enctype="multipart/form-data">
+			modelAttribute="cpu" enctype="multipart/form-data">
 			<fieldset>
 				<legend style="padding-top: 20px; font-size: 37px;">
 					<spring:message code="addCpu.form.legend" />

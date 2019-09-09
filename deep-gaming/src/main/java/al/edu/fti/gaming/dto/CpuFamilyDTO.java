@@ -1,13 +1,19 @@
 package al.edu.fti.gaming.dto;
 
-public class CpuFamilyDTO extends IdNameDescriptionDTO{
+import java.io.Serializable;
 
+public class CpuFamilyDTO extends IdNameDescriptionDTO implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6897967440675901748L;
 	private CompanyDTO companyOfThisCpuFamily;
 
 	public CpuFamilyDTO() {
 		super();
 	}
-	
+
 	public CompanyDTO getCompanyOfThisCpuFamily() {
 		return companyOfThisCpuFamily;
 	}
@@ -41,5 +47,4 @@ public class CpuFamilyDTO extends IdNameDescriptionDTO{
 		return true;
 	}
 
-	
 }
