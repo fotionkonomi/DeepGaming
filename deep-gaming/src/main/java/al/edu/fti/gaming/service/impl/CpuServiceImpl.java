@@ -85,7 +85,6 @@ public class CpuServiceImpl implements CpuService {
 
 		String company = getCompany(queryString);
 
-		System.out.println("Company" + company);
 
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("cpuFamily", cpuFamilyIdString);
@@ -95,7 +94,7 @@ public class CpuServiceImpl implements CpuService {
 
 		return mav;
 	}
-
+ 
 	private String getCpuFamilyStringId(String query) {
 		String queryString = query;
 		int indexOfCpuFamily = queryString.indexOf("cpuFamily=");
@@ -107,8 +106,8 @@ public class CpuServiceImpl implements CpuService {
 
 	private String getCpuArchitectureStringId(String query) {
 		String queryString = query;
-		int endOfFamilyParameter = queryString.indexOf("&");
-		queryString = queryString.substring(endOfFamilyParameter + 1);
+		int endOfArchitectureParameter = queryString.indexOf("&");
+		queryString = queryString.substring(endOfArchitectureParameter + 1);
 
 		int indexOfCpuArchitecture = 0;
 		int endOfCpuArchitectureParameter = queryString.indexOf("&");

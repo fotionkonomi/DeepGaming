@@ -43,11 +43,7 @@ import al.edu.fti.gaming.service.CpuFamilyService;
 import al.edu.fti.gaming.service.CpuService;
 import al.edu.fti.gaming.service.CpuSocketService;
 import al.edu.fti.gaming.service.GeneralService;
-import al.edu.fti.gaming.utils.CpuArchitectureEditor;
-import al.edu.fti.gaming.utils.CpuFamilyEditor;
-import al.edu.fti.gaming.utils.CpuSocketEditor;
 import al.edu.fti.gaming.utils.Messages;
-import al.edu.fti.gaming.validator.CpuValidator;
 
 @Controller
 @RequestMapping("/cpu")
@@ -61,18 +57,6 @@ public class CpuController implements HandlerExceptionResolver {
 
 	@Autowired
 	private CpuService cpuService;
-
-	@Autowired
-	private CpuFamilyEditor cpuFamilyEditor;
-
-	@Autowired
-	private CpuArchitectureEditor cpuArchitectureEditor;
-
-	@Autowired
-	private CpuSocketEditor cpuSocketEditor;
-
-	@Autowired
-	private CpuValidator cpuValidator;
 
 	@Autowired
 	private CpuArchitectureService cpuArchitectureService;
@@ -89,10 +73,6 @@ public class CpuController implements HandlerExceptionResolver {
 	@InitBinder /* Converts empty strings into null when a form is submitted */
 	public void initBinder(WebDataBinder binder) {
 		binder.registerCustomEditor(String.class, new StringTrimmerEditor(true));
-		binder.registerCustomEditor(CpuFamilyDTO.class, this.cpuFamilyEditor);
-		binder.registerCustomEditor(CpuArchitectureDTO.class, this.cpuArchitectureEditor);
-		binder.registerCustomEditor(CpuSocketDTO.class, this.cpuSocketEditor);
-		binder.setValidator(cpuValidator);
 	}
 
 	@RequestMapping("/chooseCompany")

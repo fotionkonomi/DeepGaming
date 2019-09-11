@@ -10,25 +10,25 @@ import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import al.edu.fti.gaming.dao.CpuRepository;
-import al.edu.fti.gaming.models.CPU;
+import al.edu.fti.gaming.dao.GpuRepository;
+import al.edu.fti.gaming.models.GPU;
 
 @Repository
-public class CpuRepositoryImpl implements CpuRepository {
+public class GpuRepositoryImpl implements GpuRepository {
 
 	@Autowired
 	private SessionFactory sessionFactory;
 
 	@Override
-	public int add(CPU cpu) {
+	public int add(GPU gpu) {
 		Session session = sessionFactory.openSession();
 		int idOrNotSuccessful;
 		Transaction tx = session.getTransaction();
 		try {
 			tx.begin();
-			session.save(cpu);
+			session.save(gpu);
 			tx.commit();
-			idOrNotSuccessful = cpu.getIdProduct();
+			idOrNotSuccessful = gpu.getIdProduct();
 		} catch (HibernateException e) {
 			e.printStackTrace();
 			tx.rollback();
@@ -39,17 +39,18 @@ public class CpuRepositoryImpl implements CpuRepository {
 		return idOrNotSuccessful;
 	}
 
-	public CPU getCpuById(int id) {
+	@Override
+	public GPU getGpuById(int id) {
 		Session session = sessionFactory.getCurrentSession();
-		Query query = session.createQuery("SELECT c FROM CPU c WHERE c.idProduct = :id");
+		Query query = session.createQuery("SELECT g FROM GPU g WHERE g.idProduct = :id");
 		query.setInteger("id", id);
-		return (CPU) query.uniqueResult();
+		return (GPU) query.uniqueResult();
 	}
 
 	@Override
-	public List<CPU> getAllCpusInStock(int page, int numberOfItemsOnThePage) {
+	public List<GPU> getAllGpusInStock(int page, int numberOfItemsOnThePage) {
 		Session session = sessionFactory.getCurrentSession();
-		Query query = session.createQuery("SELECT c FROM CPU c WHERE c.quantity is not NULL or c.quantity != 0");
+		Query query = session.createQuery("SELECT g FROM GPU g WHERE g.quantity is not NULL or g.quantity != 0");
 		if (page != 0) {
 			page = page * numberOfItemsOnThePage;
 		}
@@ -59,27 +60,28 @@ public class CpuRepositoryImpl implements CpuRepository {
 	}
 
 	@Override
-	public Long countOfCpusInStock() {
+	public Long countOfGpusInStock() {
 		Session session = sessionFactory.getCurrentSession();
-		Query query = session.createQuery("SELECT count(*) FROM CPU c where c.quantity is not NULL or c.quantity != 0");
+		Query query = session.createQuery("SELECT count(*) FROM GPU g where g.quantity is not NULL or g.quantity != 0");
 		return (Long) query.uniqueResult();
 	}
 
 	@Override
-	public List<CPU> getCpusByCpuFamily(Integer cpuFamilyId) {
+	public List<GPU> getGpuByGpuFamily(Integer gpuFamilyId) {
 		Session session = sessionFactory.getCurrentSession();
-		Query query = session.createQuery("SELECT c FROM CPU c WHERE c.familyOfThisCpu.idCpuFamily = :id");
-		query.setInteger("id", cpuFamilyId);
+		Query query = session.createQuery("SELECT g FROM GPU g WHERE g.familyOfThisCpu.idGpuFamily = :id");
+		query.setInteger("id", gpuFamilyId);
 		return query.list();
 	}
 
 	@Override
-	public void update(CPU cpu) {
+	public void update(GPU gpu) {
 		Session session = sessionFactory.openSession();
 		Transaction tx = session.getTransaction();
 		try {
 			tx.begin();
-			session.update(cpu);
+			session.update(gpu);
+
 			tx.commit();
 		} catch (HibernateException e) {
 

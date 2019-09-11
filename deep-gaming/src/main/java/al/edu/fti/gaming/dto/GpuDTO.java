@@ -3,7 +3,7 @@ package al.edu.fti.gaming.dto;
 
 import java.io.Serializable;
 
-public class GpuDTO extends ProductDTO implements Serializable{
+public class GpuDTO extends ProductDTO implements Serializable {
 
 	/**
 	 * 
@@ -29,7 +29,7 @@ public class GpuDTO extends ProductDTO implements Serializable{
 	private Integer memorySize;
 
 	private Integer memorySpeed;
-	
+
 	private Integer memoryBus;
 
 	private Integer memoryBandwidth;
@@ -39,6 +39,8 @@ public class GpuDTO extends ProductDTO implements Serializable{
 	private Integer coreSpeed;
 
 	private Integer boostClock;
+
+	private Integer gpuBenchmark;
 
 	private Integer tdp;
 
@@ -254,6 +256,14 @@ public class GpuDTO extends ProductDTO implements Serializable{
 		this.memoryBus = memoryBus;
 	}
 
+	public Integer getGpuBenchmark() {
+		return gpuBenchmark;
+	}
+
+	public void setGpuBenchmark(Integer gpuBenchmark) {
+		this.gpuBenchmark = gpuBenchmark;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -265,6 +275,7 @@ public class GpuDTO extends ProductDTO implements Serializable{
 		result = prime * result + ((cpuRecommendedForThisGpu == null) ? 0 : cpuRecommendedForThisGpu.hashCode());
 		result = prime * result + ((driverSupport == null) ? 0 : driverSupport.hashCode());
 		result = prime * result + ((familyOfThisGpu == null) ? 0 : familyOfThisGpu.hashCode());
+		result = prime * result + ((gpuBenchmark == null) ? 0 : gpuBenchmark.hashCode());
 		result = prime * result + ((gpuSlotOfThisGpu == null) ? 0 : gpuSlotOfThisGpu.hashCode());
 		result = prime * result
 				+ ((maximumDirectXSupportedByThisGpu == null) ? 0 : maximumDirectXSupportedByThisGpu.hashCode());
@@ -329,6 +340,11 @@ public class GpuDTO extends ProductDTO implements Serializable{
 			if (other.familyOfThisGpu != null)
 				return false;
 		} else if (!familyOfThisGpu.equals(other.familyOfThisGpu))
+			return false;
+		if (gpuBenchmark == null) {
+			if (other.gpuBenchmark != null)
+				return false;
+		} else if (!gpuBenchmark.equals(other.gpuBenchmark))
 			return false;
 		if (gpuSlotOfThisGpu == null) {
 			if (other.gpuSlotOfThisGpu != null)
@@ -424,14 +440,12 @@ public class GpuDTO extends ProductDTO implements Serializable{
 				+ ", shaderProcessingUnits=" + shaderProcessingUnits + ", rayTracingCores=" + rayTracingCores
 				+ ", tensorCores=" + tensorCores + ", driverSupport=" + driverSupport + ", memorySize=" + memorySize
 				+ ", memorySpeed=" + memorySpeed + ", memoryBus=" + memoryBus + ", memoryBandwidth=" + memoryBandwidth
-				+ ", cache=" + cache + ", coreSpeed=" + coreSpeed + ", boostClock=" + boostClock + ", tdp=" + tdp
-				+ ", shader=" + shader + ", openGL=" + openGL + ", familyOfThisGpu=" + familyOfThisGpu
-				+ ", architectureOfThisGpu=" + architectureOfThisGpu + ", memoryTechnologyOfThisGpu="
+				+ ", cache=" + cache + ", coreSpeed=" + coreSpeed + ", boostClock=" + boostClock + ", gpuBenchmark="
+				+ gpuBenchmark + ", tdp=" + tdp + ", shader=" + shader + ", openGL=" + openGL + ", familyOfThisGpu="
+				+ familyOfThisGpu + ", architectureOfThisGpu=" + architectureOfThisGpu + ", memoryTechnologyOfThisGpu="
 				+ memoryTechnologyOfThisGpu + ", maximumDirectXSupportedByThisGpu=" + maximumDirectXSupportedByThisGpu
 				+ ", gpuSlotOfThisGpu=" + gpuSlotOfThisGpu + ", cpuRecommendedForThisGpu=" + cpuRecommendedForThisGpu
 				+ "]";
 	}
 
-	
-	
 }
