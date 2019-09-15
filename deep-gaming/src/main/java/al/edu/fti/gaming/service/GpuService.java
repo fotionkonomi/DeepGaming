@@ -2,6 +2,7 @@ package al.edu.fti.gaming.service;
 
 import java.text.ParseException;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.web.servlet.ModelAndView;
 
@@ -30,4 +31,12 @@ public interface GpuService {
 	List<GpuDTO> getGpusByFamily(Integer gpuFamilyId);
 	
 	void update(GpuDTO gpuDTO, int id) throws ParseException;
+	
+	Map<Integer, String> getAllMemoryTechnologiesMap();
+	
+	Map<Integer, String> getAllGpuSlotsMap();
+	
+	Map<Integer, String> getDirectXsMap();
+	
+	Map<Integer, String> getAllCpusMap();
 }

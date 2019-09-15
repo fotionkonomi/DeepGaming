@@ -28,7 +28,7 @@
 			modelAttribute="cpu" enctype="multipart/form-data">
 			<fieldset>
 				<legend style="padding-top: 20px; font-size: 37px;">
-					<spring:message code="addCpu.form.legend" />
+					<spring:message code="updateCpu.form.legend" />
 				</legend>
 
 				<spring:message code="add.form.name.placeholder"

@@ -59,6 +59,7 @@ public class GpuConverter implements Converter {
 		gpu.setProductDescription(gpuDTO.getDescription());
 		gpu.setPrice(gpuDTO.getPrice());
 		gpu.setQuantity(gpuDTO.getQuantity());
+		gpu.setReleaseDate(gpuDTO.getReleaseDate());
 		gpu.setUploadDate(gpuDTO.getUploadDate());
 		gpu.setEditedDate(gpuDTO.getEditedDate());
 		gpu.setHyperlink(gpuDTO.getHyperlink());
@@ -103,6 +104,7 @@ public class GpuConverter implements Converter {
 		gpuDTO.setDescription(gpu.getProductDescription());
 		gpuDTO.setPrice(gpu.getPrice());
 		gpuDTO.setQuantity(gpu.getQuantity());
+		gpuDTO.setReleaseDate(gpu.getReleaseDate());
 		gpuDTO.setUploadDate(gpu.getUploadDate());
 		gpuDTO.setEditedDate(gpu.getEditedDate());
 		gpuDTO.setHyperlink(gpu.getHyperlink());

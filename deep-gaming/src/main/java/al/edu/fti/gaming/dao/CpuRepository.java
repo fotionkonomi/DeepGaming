@@ -18,4 +18,5 @@ public interface CpuRepository {
 	
 	void update(CPU cpu);
 	
+	List<CPU> getAllCpus();
 }

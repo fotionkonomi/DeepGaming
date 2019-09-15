@@ -8,6 +8,7 @@ import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.validation.Validator;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
@@ -29,6 +30,8 @@ import al.edu.fti.gaming.validator.CpuCacheValidator;
 import al.edu.fti.gaming.validator.CpuCoresValidator;
 import al.edu.fti.gaming.validator.CpuSpeedValidator;
 import al.edu.fti.gaming.validator.CpuValidator;
+import al.edu.fti.gaming.validator.GpuSpeedValidator;
+import al.edu.fti.gaming.validator.GpuValidator;
 import al.edu.fti.gaming.validator.ProductPriceQuantityValidator;
 
 @Configuration
@@ -96,8 +99,8 @@ public class WebApplicationContextConfig extends WebMvcConfigurerAdapter {
 		return resolver;
 	}
 
-	@Bean(name = "validator")
-	public LocalValidatorFactoryBean validator() {
+	@Bean
+	public LocalValidatorFactoryBean localValidatorFactoryBean() {
 		LocalValidatorFactoryBean bean = new LocalValidatorFactoryBean();
 		bean.setValidationMessageSource(messageSource());
 		return bean;
@@ -105,7 +108,7 @@ public class WebApplicationContextConfig extends WebMvcConfigurerAdapter {
 
 	@Override
 	public Validator getValidator() {
-		return validator();
+		return localValidatorFactoryBean();
 	}
 
 	@Bean
@@ -118,6 +121,16 @@ public class WebApplicationContextConfig extends WebMvcConfigurerAdapter {
 		CpuValidator cpuValidator = new CpuValidator();
 		cpuValidator.setSpringValidators(springValidators);
 		return cpuValidator;
+	}
+	
+	@Bean
+	public GpuValidator gpuValidator() {
+		Set<Validator> springValidators = new HashSet<Validator>();
+		springValidators.add(new GpuSpeedValidator());
+		springValidators.add(new ProductPriceQuantityValidator());
+		GpuValidator gpuValidator = new GpuValidator();
+		gpuValidator.setSpringValidators(springValidators);
+		return gpuValidator;
 	}
 
 }

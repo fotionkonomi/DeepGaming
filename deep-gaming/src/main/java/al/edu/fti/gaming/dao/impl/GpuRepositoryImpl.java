@@ -69,7 +69,7 @@ public class GpuRepositoryImpl implements GpuRepository {
 	@Override
 	public List<GPU> getGpuByGpuFamily(Integer gpuFamilyId) {
 		Session session = sessionFactory.getCurrentSession();
-		Query query = session.createQuery("SELECT g FROM GPU g WHERE g.familyOfThisCpu.idGpuFamily = :id");
+		Query query = session.createQuery("SELECT g FROM GPU g WHERE g.familyOfThisGpu.idGpuFamily = :id");
 		query.setInteger("id", gpuFamilyId);
 		return query.list();
 	}

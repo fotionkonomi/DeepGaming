@@ -72,7 +72,7 @@
 		$('#select').change(function() {
 			if ( $(this).val() != "") {
 				var action = $(this).val();
-				$('#a').attr('href', "chooseSocketArchitectureFamily?company=" + action);
+				$('#a').attr('href', "chooseSelects?company=" + action);
 				$('#a').attr('class', "btn btn-primary");
 			} else {
 				$('#a').removeAttr('href');

@@ -3,6 +3,10 @@ package al.edu.fti.gaming.dto;
 
 import java.io.Serializable;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+
 public class GpuDTO extends ProductDTO implements Serializable {
 
 	/**
@@ -10,54 +14,95 @@ public class GpuDTO extends ProductDTO implements Serializable {
 	 */
 	private static final long serialVersionUID = 8070710386716560546L;
 
+	@NotNull(message = "{validation.field.required}")
+	@Min(value = 1, message = "{validation.field.min.one}")
 	private Integer tmu;
 
+	@NotNull(message = "{validation.field.required}")
+	@Min(value = 1, message = "{validation.field.min.one}")
 	private Integer textureRate;
 
+	@NotNull(message = "{validation.field.required}")
+	@Min(value = 1, message = "{validation.field.min.one}")
 	private Integer rop;
 
+	@NotNull(message = "{validation.field.required}")
+	@Min(value = 1, message = "{validation.field.min.one}")
 	private Integer pixelRate;
 
+	@NotNull(message = "{validation.field.required}")
+	@Min(value = 1, message = "{validation.field.min.one}")
 	private Integer shaderProcessingUnits;
 
 	private Integer rayTracingCores;
 
 	private Integer tensorCores;
 
+	@NotNull(message = "{validation.field.required}")
+	@Min(value = 1, message = "{validation.field.min.one}")
+	@Max(value = 5, message = "{validation.value.five}")
 	private Double driverSupport;
 
+	@NotNull(message = "{validation.field.required}")
+	@Min(value = 1, message = "{validation.field.min.one}")
 	private Integer memorySize;
 
+	@NotNull(message = "{validation.field.required}")
+	@Min(value = 1, message = "{validation.field.min.one}")
 	private Integer memorySpeed;
 
+	@NotNull(message = "{validation.field.required}")
+	@Min(value = 1, message = "{validation.field.min.one}")
 	private Integer memoryBus;
 
+	@NotNull(message = "{validation.field.required}")
+	@Min(value = 1, message = "{validation.field.min.one}")
 	private Integer memoryBandwidth;
 
+	@NotNull(message = "{validation.field.required}")
+	@Min(value = 1, message = "{validation.field.min.one}")
 	private Integer cache;
 
+	@NotNull(message = "{validation.field.required}")
+	@Min(value = 1, message = "{validation.field.min.one}")
 	private Integer coreSpeed;
 
+	@NotNull(message = "{validation.field.required}")
+	@Min(value = 1, message = "{validation.field.min.one}")
 	private Integer boostClock;
 
+	@NotNull(message = "{validation.field.required}")
+	@Min(value = 1, message = "{validation.field.min.one}")
 	private Integer gpuBenchmark;
 
+	@NotNull(message = "{validation.field.required}")
+	@Min(value = 1, message = "{validation.field.min.one}")
 	private Integer tdp;
 
+	@NotNull(message = "{validation.field.required}")
+	@Min(value = 1, message = "{validation.field.min.one}")
+	@Max(value = 5, message = "{validation.value.five}")
 	private Double shader;
 
+	@NotNull(message = "{validation.field.required}")
+	@Min(value = 1, message = "{validation.field.min.one}")
+	@Max(value = 5, message = "{validation.value.five}")
 	private Double openGL;
 
 	private GpuFamilyDTO familyOfThisGpu;
 
 	private GpuArchitectureDTO architectureOfThisGpu;
 
+	@NotNull(message = "{validation.field.required}")
 	private GpuMemoryTechnologyDTO memoryTechnologyOfThisGpu;
 
+	@NotNull(message = "{validation.field.required}")
 	private DirectXDTO maximumDirectXSupportedByThisGpu;
 
+	@NotNull(message = "{validation.field.required}")
 	private GpuSlotDTO gpuSlotOfThisGpu;
 
+	@NotNull(message = "{validation.field.required}")
 	private CpuDTO cpuRecommendedForThisGpu;
 
 	public GpuDTO() {

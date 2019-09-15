@@ -19,6 +19,24 @@
 	<a href="?cpu1=${cpu1.id }&cpu2=${cpu2.id }&language=al">Albanian</a>|
 
 	<jsp:include page="/WEB-INF/jsp/navigation.jsp"></jsp:include>
+	<center>
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-6">
+					<img width="300px" height="300px"
+						src="<c:url value="/img/cpu${cpu1.id}.png">
+ </c:url>">
+				</div>
+
+				<div class="col-xs-6">
+					<img width="300px" height="300px"
+						src="<c:url value="/img/cpu${cpu2.id}.png">
+ </c:url>">
+				</div>
+
+			</div>
+		</div>
+	</center>
 	<div class="row">
 		<div class="col-md-12">
 
@@ -423,8 +441,7 @@
 										${cpu1.familyOfThisCpu.companyOfThisCpuFamily.name }
 										${cpu1.familyOfThisCpu.name } ${cpu1.name } and ${cpu2.familyOfThisCpu.companyOfThisCpuFamily.name }
 										${cpu2.familyOfThisCpu.name } ${cpu2.name } both
-										have ${cpu1.physicalCores} cores, which is not likely to be a
-										limiting factor for gaming.
+										have ${cpu1.physicalCores}
 										</c:if>
 
 										<c:if test="${cpu1.physicalCores > cpu2.physicalCores }">

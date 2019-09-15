@@ -90,4 +90,11 @@ public class CpuRepositoryImpl implements CpuRepository {
 		}
 	}
 
+	@Override
+	public List<CPU> getAllCpus() {
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session.createQuery("SELECT c FROM CPU c");
+		return query.list();
+	}
+
 }

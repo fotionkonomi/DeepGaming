@@ -3,23 +3,31 @@ package al.edu.fti.gaming.service.impl;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.servlet.ModelAndView;
 
 import al.edu.fti.gaming.converter.Converter;
 import al.edu.fti.gaming.dao.GpuRepository;
+import al.edu.fti.gaming.dto.CpuDTO;
+import al.edu.fti.gaming.dto.DirectXDTO;
 import al.edu.fti.gaming.dto.GpuArchitectureDTO;
 import al.edu.fti.gaming.dto.GpuDTO;
 import al.edu.fti.gaming.dto.GpuFamilyDTO;
+import al.edu.fti.gaming.dto.GpuMemoryTechnologyDTO;
 import al.edu.fti.gaming.dto.GpuSlotDTO;
 import al.edu.fti.gaming.exception.GpuNotFoundException;
 import al.edu.fti.gaming.exception.NoGpuFoundForGpuFamily;
 import al.edu.fti.gaming.exception.ProductsNotFoundException;
 import al.edu.fti.gaming.models.GPU;
+import al.edu.fti.gaming.service.CpuService;
+import al.edu.fti.gaming.service.DirectXService;
 import al.edu.fti.gaming.service.GeneralService;
 import al.edu.fti.gaming.service.GpuArchitectureService;
 import al.edu.fti.gaming.service.GpuFamilyService;
@@ -28,6 +36,7 @@ import al.edu.fti.gaming.service.GpuService;
 import al.edu.fti.gaming.service.GpuSlotService;
 
 @Service
+@Transactional
 public class GpuServiceImpl implements GpuService {
 
 	@Autowired
@@ -65,6 +74,15 @@ public class GpuServiceImpl implements GpuService {
 	@Autowired
 	private GeneralService generalService;
 
+	@Autowired
+	private GpuMemoryTechnologyService gpuMemoryTechnologyService;
+
+	@Autowired
+	private DirectXService directXService;
+
+	@Autowired
+	private CpuService cpuService;
+
 	@Override
 	public int add(GpuDTO gpuDTO) {
 		GPU gpu = (GPU) gpuConverter.toModel(gpuDTO);
@@ -81,14 +99,11 @@ public class GpuServiceImpl implements GpuService {
 
 		String gpuArchitectureIdString = getGpuArchitectureStringId(queryString);
 
-		String gpuSlotIdString = getGpuSlotStringId(queryString);
-
 		String company = getCompany(queryString);
 
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("gpuFamily", gpuFamilyIdString);
 		mav.addObject("gpuArchitecture", gpuArchitectureIdString);
-		mav.addObject("gpuSlot", gpuSlotIdString);
 		mav.addObject("company", company);
 
 		return mav;
@@ -117,7 +132,6 @@ public class GpuServiceImpl implements GpuService {
 		gpuDTO.setFamilyOfThisGpu(gpuFamilyService.getGpuFamilyById(getGpuFamilyId(queryString)));
 		gpuDTO.setArchitectureOfThisGpu(
 				gpuArchitectureService.getGpuArchitectureById(getGpuArchitectureId(queryString)));
-		gpuDTO.setGpuSlotOfThisGpu(gpuSlotService.getGpuSlotById(getGpuSlotId(queryString)));
 
 	}
 
@@ -167,9 +181,50 @@ public class GpuServiceImpl implements GpuService {
 		gpuDTO.setFamilyOfThisGpu((GpuFamilyDTO) gpuFamilyConverter.toDTO(gpu.getFamilyOfThisGpu()));
 		gpuDTO.setArchitectureOfThisGpu(
 				(GpuArchitectureDTO) gpuArchitectureConverter.toDTO(gpu.getArchitectureOfThisGpu()));
-		gpuDTO.setGpuSlotOfThisGpu((GpuSlotDTO) gpuConverter.toDTO(gpu.getGpuSlotOfThisGpu()));
+		gpuDTO.setGpuSlotOfThisGpu((GpuSlotDTO) gpuSlotConverter.toDTO(gpu.getGpuSlotOfThisGpu()));
 		gpuRepository.update((GPU) gpuConverter.toModel(gpuDTO));
 
+	}
+
+	@Override
+	public Map<Integer, String> getAllMemoryTechnologiesMap() {
+		List<GpuMemoryTechnologyDTO> allMemoryTechnologies = gpuMemoryTechnologyService.getAllGpuMemoryTechnologies();
+		Map<Integer, String> allMemoryTechnologiesMap = new HashMap<Integer, String>();
+		for (GpuMemoryTechnologyDTO gpuMemoryTechnologyDTO : allMemoryTechnologies) {
+			allMemoryTechnologiesMap.put(gpuMemoryTechnologyDTO.getId(), gpuMemoryTechnologyDTO.getName());
+		}
+		return allMemoryTechnologiesMap;
+	}
+
+	@Override
+	public Map<Integer, String> getDirectXsMap() {
+		List<DirectXDTO> allDirectXs = directXService.getAllDirectXs();
+		Map<Integer, String> allDirectXsMap = new HashMap<Integer, String>();
+		for (DirectXDTO directXDTO : allDirectXs) {
+			allDirectXsMap.put(directXDTO.getId(), directXDTO.getName());
+		}
+		return allDirectXsMap;
+	}
+
+	@Override
+	public Map<Integer, String> getAllGpuSlotsMap() {
+		List<GpuSlotDTO> allGpuSlots = gpuSlotService.getAllGpuSlots();
+		Map<Integer, String> allGpuSlotsMap = new HashMap<Integer, String>();
+		for (GpuSlotDTO gpuSlotDTO : allGpuSlots) {
+			allGpuSlotsMap.put(gpuSlotDTO.getId(), gpuSlotDTO.getName());
+		}
+		return allGpuSlotsMap;
+	}
+
+	@Override
+	public Map<Integer, String> getAllCpusMap() {
+		List<CpuDTO> allCpus = cpuService.getAllCpus();
+		Map<Integer, String> allCpusMap = new HashMap<Integer, String>();
+		for (CpuDTO cpuDTO : allCpus) {
+			allCpusMap.put(cpuDTO.getId(), cpuDTO.getFamilyOfThisCpu().getCompanyOfThisCpuFamily().getName() + " "
+					+ cpuDTO.getFamilyOfThisCpu().getName() + " " + cpuDTO.getName());
+		}
+		return allCpusMap;
 	}
 
 	private String getGpuFamilyStringId(String query) {
@@ -193,25 +248,9 @@ public class GpuServiceImpl implements GpuService {
 		return gpuArchitectureIdString;
 	}
 
-	private String getGpuSlotStringId(String query) {
-		String queryString = query;
-		for (int i = 0; i < 2; i++) {
-			int index = queryString.indexOf("&");
-			queryString = queryString.substring(index + 1);
-		}
-
-		int indexOfGpuSlot = queryString.indexOf("gpuSlot=");
-		int endOfGpuSlotParameter = queryString.indexOf("&");
-
-		String gpuSlotIdString = queryString.substring(indexOfGpuSlot + 8, endOfGpuSlotParameter);
-
-		return gpuSlotIdString;
-
-	}
-
 	private String getCompany(String query) {
 		String queryString = query;
-		for (int i = 0; i < 3; i++) {
+		for (int i = 0; i < 2; i++) {
 			int index = queryString.indexOf("&");
 			queryString = queryString.substring(index + 1);
 		}

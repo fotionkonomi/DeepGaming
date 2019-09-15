@@ -18,17 +18,17 @@
 	<section class="container">
 
 		<span id="defaultValue" hidden="true"><spring:message
-				code="addCpu.form.cpuFamily.option" /></span> <span id="defaultCpuValue"
+				code="addGpu.form.gpuFamily.option" /></span> <span id="defaultGpuValue"
 			hidden="true"><spring:message
-				code="compare.form.cpu.defOption" /></span> <span id="cpuId" hidden="true">${cpu.id }</span>
+				code="compare.form.gpu.defOption" /></span> <span id="gpuId" hidden="true">${gpu.id }</span>
 
 
 		<form id="form" action="">
 			<fieldset>
 				<center>
-					<spring:message code="select.cpuToBeCompared" />
-					${cpu.familyOfThisCpu.companyOfThisCpuFamily.name }
-					${cpu.familyOfThisCpu.name } ${cpu.name }
+					<spring:message code="select.gpuToBeCompared" />
+					${gpu.familyOfThisGpu.companyOfThisGpuFamily.name }
+					${gpu.familyOfThisGpu.name } ${gpu.name }
 				</center>
 
 				<br />
@@ -49,9 +49,9 @@
 				</div>
 				<br /> <br />
 
-				<div id="divCpuFamily" class="form-group" hidden="true">
+				<div id="divGpuFamily" class="form-group" hidden="true">
 					<label class="control-label col-lg-2 col-lg-2"><spring:message
-							code="addCpu.form.cpuFamily.label" /></label>
+							code="addGpu.form.gpuFamily.label" /></label>
 					<div class="col-lg-10">
 						<select id="selectFamily" class="form-control">
 
@@ -61,11 +61,11 @@
 
 				<br /> <br />
 
-				<div id="divCpu" class="form-group" hidden="true">
+				<div id="divGpu" class="form-group" hidden="true">
 					<label class="control-label col-lg-2 col-lg-2"><spring:message
-							code="add.form.compare.findCpu" /></label>
+							code="add.form.compare.findGpu" /></label>
 					<div class="col-lg-10">
-						<select id="selectCpu" class="form-control">
+						<select id="selectGpu" class="form-control">
 
 						</select>
 					</div>
@@ -95,24 +95,24 @@
 		$('#selectCompany')
 				.change(
 						function() {
-							$('#selectCpu').empty();
+							$('#selectGpu').empty();
 							$('#selectFamily').empty();
 							enableOrDisableNextButton();
 							var companyName = $(this).val();
-							$('#divCpu').attr("hidden", "true");
+							$('#divGpu').attr("hidden", "true");
 							if (companyName == "NoComp404") {
-								$('#divCpuFamily').attr("hidden", "true");
+								$('#divGpuFamily').attr("hidden", "true");
 								return;
 							}
 							$
 									.ajax({
 										method : 'GET',
-										url : "cpu-rest/" + companyName,
+										url : "gpu-rest/" + companyName,
 										success : function(data) {
-											$('#divCpuFamily').removeAttr(
+											$('#divGpuFamily').removeAttr(
 													"hidden");
-											var selectCpuFamily = $('#selectFamily'), option = "";
-											selectCpuFamily.empty();
+											var selectGpuFamily = $('#selectFamily'), option = "";
+											selectGpuFamily.empty();
 											option = "<option value='-999'>"
 													+ $('#defaultValue').text()
 													+ "</option>";
@@ -122,7 +122,7 @@
 														+ data[i].name
 														+ "</option>";
 											}
-											selectCpuFamily.append(option);
+											selectGpuFamily.append(option);
 										},
 										error : function() {
 										}
@@ -131,57 +131,57 @@
 		$('#selectFamily')
 				.change(
 						function() {
-							$('#selectCpu').empty();
+							$('#selectGpu').empty();
 							enableOrDisableNextButton();
-							var cpuFamily = $(this).val();
-							if (cpuFamily == "-999") {
-								$('#divCpu').attr("hidden", "true");
+							var gpuFamily = $(this).val();
+							if (gpuFamily == "-999") {
+								$('#divGpu').attr("hidden", "true");
 								return;
 							}
 							$
 									.ajax({
 										method : 'GET',
-										url : "cpu-rest/cpuFamily/" + cpuFamily,
+										url : "gpu-rest/gpuFamily/" + gpuFamily,
 										success : function(data) {
-											$('#divCpu').removeAttr("hidden");
-											var selectCpu = $('#selectCpu'), option = "";
-											selectCpu.empty();
+											$('#divGpu').removeAttr("hidden");
+											var selectGpu = $('#selectGpu'), option = "";
+											selectGpu.empty();
 											option = "<option value=''>"
-													+ $('#defaultCpuValue')
+													+ $('#defaultGpuValue')
 															.text()
 													+ "</option>";
 											for (var i = 0; i < data.length; i++) {
-												if (data[i].id == $('#cpuId')
+												if (data[i].id == $('#gpuId')
 														.text()) {
 													continue;
 												}
 												option = option
 														+ "<option value='" + data[i].id +"'>"
-														+ data[i].familyOfThisCpu.companyOfThisCpuFamily.name
+														+ data[i].familyOfThisGpu.companyOfThisGpuFamily.name
 														+ " "
-														+ data[i].familyOfThisCpu.name
+														+ data[i].familyOfThisGpu.name
 														+ " " + data[i].name
 														+ "</option>";
 											}
-											selectCpu.append(option);
+											selectGpu.append(option);
 										},
 										error : function() {
 										}
 									});
 						});
-		$('#selectCpu').change(function() {
+		$('#selectGpu').change(function() {
 			enableOrDisableNextButton();
 		});
 		function enableOrDisableNextButton() {
-			if ($('#selectCpu').val() == null || $('#selectCpu').val() == "") {
+			if ($('#selectGpu').val() == null || $('#selectGpu').val() == "") {
 				$('#a').attr("class", "btn btn-primary disabled");
 				$('#a').removeAttr("href");
 			} else {
 				$('#a').attr("class", "btn btn-primary");
 				$('#a').attr(
 						"href",
-						"compare?cpu1=" + $('#cpuId').text() + "&cpu2="
-								+ $('#selectCpu').val());
+						"compare?gpu1=" + $('#gpuId').text() + "&gpu2="
+								+ $('#selectGpu').val());
 			}
 		}
 	</script>

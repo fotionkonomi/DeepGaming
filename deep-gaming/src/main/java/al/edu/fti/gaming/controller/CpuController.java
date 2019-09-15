@@ -44,6 +44,7 @@ import al.edu.fti.gaming.service.CpuService;
 import al.edu.fti.gaming.service.CpuSocketService;
 import al.edu.fti.gaming.service.GeneralService;
 import al.edu.fti.gaming.utils.Messages;
+import al.edu.fti.gaming.validator.CpuValidator;
 
 @Controller
 @RequestMapping("/cpu")
@@ -57,6 +58,9 @@ public class CpuController implements HandlerExceptionResolver {
 
 	@Autowired
 	private CpuService cpuService;
+
+	@Autowired
+	private CpuValidator cpuValidator;
 
 	@Autowired
 	private CpuArchitectureService cpuArchitectureService;
@@ -73,11 +77,13 @@ public class CpuController implements HandlerExceptionResolver {
 	@InitBinder /* Converts empty strings into null when a form is submitted */
 	public void initBinder(WebDataBinder binder) {
 		binder.registerCustomEditor(String.class, new StringTrimmerEditor(true));
+		binder.setValidator(cpuValidator);
+
 	}
 
 	@RequestMapping("/chooseCompany")
 	public String chooseCompany(Model model) {
-		List<CompanyDTO> companies = companyService.getAllCompanies();
+		List<CompanyDTO> companies = companyService.getAllCompaniesThatHaveCpuFamilies();
 		model.addAttribute("companies", companies);
 		return "cpu/chooseCompany";
 	}
@@ -118,12 +124,13 @@ public class CpuController implements HandlerExceptionResolver {
 			cpuSocketDTO = null;
 		}
 
+		// MOS VENDOSEN FAMILJE CPU TE KOMPANIVE TE NDRYSHME
 		if (cpuFamilyDTO == null || cpuArchitectureDTO == null || cpuSocketDTO == null
 				|| !cpuFamilyDTO.getCompanyOfThisCpuFamily()
 						.equals(cpuArchitectureDTO.getCompanyOfThisCpuArchitecture())
 				|| !cpuFamilyDTO.getCompanyOfThisCpuFamily().equals(cpuSocketDTO.getCompanyOfThisSocket())
-				|| !cpuArchitectureDTO.getCompanyOfThisCpuArchitecture()
-						.equals(cpuSocketDTO.getCompanyOfThisSocket())) {
+				|| !cpuArchitectureDTO.getCompanyOfThisCpuArchitecture().equals(cpuSocketDTO.getCompanyOfThisSocket())
+				|| !cpuFamilyDTO.getCompanyOfThisCpuFamily().getName().equals(company)) {
 			model.addAttribute("cpuFamilies", cpuFamilyService.getCpuFamiliesByCompany(company));
 			model.addAttribute("cpuArchitectures", cpuArchitectureService.getCpuArchitecturesByCompany(company));
 			model.addAttribute("cpuSockets", cpuSocketService.getCpuSocketsByCompany(company));
@@ -219,16 +226,16 @@ public class CpuController implements HandlerExceptionResolver {
 	@RequestMapping("/update")
 	public String update(@RequestParam("id") int cpuId, Model model) {
 		CpuDTO cpuDTO = cpuService.getCpuById(cpuId);
-		model.addAttribute("cpu", cpuDTO );
+		model.addAttribute("cpu", cpuDTO);
 		return "cpu/update";
 	}
 
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
-	public String updateCompany(@ModelAttribute("cpu") @Valid CpuDTO cpuDTO, BindingResult result,
+	public String updateCpu(@ModelAttribute("cpu") @Valid CpuDTO cpuDTO, BindingResult result,
 			HttpServletRequest request, @RequestParam("id") int id) throws ParseException {
 		List<ObjectError> listOfErrorsWithoutImageError = generalService.listOfErrorsWithoutImageError(
 				result.getAllErrors(), cpuDTO.getImage(), messages.get("al.edu.fti.gaming.validator.image"));
-		
+
 		if (!listOfErrorsWithoutImageError.isEmpty()) {
 			return "/cpu/update";
 		} else {
@@ -237,13 +244,11 @@ public class CpuController implements HandlerExceptionResolver {
 				generalService.imageProcessing(cpuDTO, request.getSession().getServletContext().getRealPath("/"),
 						false);
 			}
-		    cpuService.update(cpuDTO, id);
-				return "redirect:/cpu/details?id=" + cpuDTO.getId();
-			
+			cpuService.update(cpuDTO, id);
+			return "redirect:/cpu/details?id=" + cpuDTO.getId();
 
 		}
 	}
-
 
 	@ExceptionHandler(ProductsNotFoundException.class)
 	public String handleNoProductsFound(Model model, HttpServletRequest request, ProductsNotFoundException exception) {
@@ -260,14 +265,6 @@ public class CpuController implements HandlerExceptionResolver {
 
 	@ExceptionHandler(CpuNotFoundException.class)
 	public String handleNoProductsFound(Model model, HttpServletRequest request, CpuNotFoundException exception) {
-		String queryString = request.getQueryString();
-		int indexOfCpu = queryString.indexOf("cpu=");
-		int finalIndex = queryString.indexOf("&");
-		if (finalIndex == -1) {
-			finalIndex = queryString.length();
-		}
-		String cpu = queryString.substring(indexOfCpu + 4, finalIndex);
-		model.addAttribute("cpu", cpu);
 		return "cpu/noProductsFound";
 	}
 

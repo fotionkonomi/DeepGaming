@@ -30,4 +30,6 @@ public interface CpuService {
 	List<CpuDTO> getCpusByCpuFamily(Integer cpuFamilyId);
 
 	void update(CpuDTO cpuDTO, int id) throws ParseException;
+	
+	List<CpuDTO> getAllCpus();
 }

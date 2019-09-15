@@ -35,9 +35,7 @@ public class GeneralServiceImpl implements GeneralService {
 		String nameOfClass = dtoObject.getClass().getSimpleName().toLowerCase();
 		int indexOfDTO = nameOfClass.indexOf("dto");
 		nameOfClass = nameOfClass.substring(0, indexOfDTO);
-		System.out.println(nameOfClass);
 		String imageLocation = path + "resources\\img\\" + nameOfClass + dtoObject.getId() + ".png";
-		System.out.println(imageLocation);
 		try {
 			if (addOrUpdate == false) {
 				File existingImage = new File(imageLocation);

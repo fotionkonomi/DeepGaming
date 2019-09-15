@@ -232,5 +232,10 @@ public class CpuServiceImpl implements CpuService {
 		cpuDTO.setSocketOfThisCpu((CpuSocketDTO) cpuSocketConverter.toDTO(cpu.getSocketForThisCpu()));
 		cpuRepository.update((CPU) cpuConverter.toModel(cpuDTO));
 	}
+	
+	@Override
+	public List<CpuDTO> getAllCpus() {
+		return convertList(cpuRepository.getAllCpus());
+	}
 
 }

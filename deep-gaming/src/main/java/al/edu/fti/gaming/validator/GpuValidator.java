@@ -6,27 +6,26 @@ import java.util.Set;
 import javax.validation.ConstraintViolation;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
-import al.edu.fti.gaming.dto.CpuDTO;
+import al.edu.fti.gaming.dto.GpuDTO;
 
 
-public class CpuValidator implements Validator {
+public class GpuValidator implements Validator {
 
 	@Autowired
 	private javax.validation.Validator beanValidator;
 	
 	private Set<Validator> springValidators;
 	
-	public CpuValidator() {
+	public GpuValidator() {
 		setSpringValidators(new HashSet<Validator>());
 	}
 	
 	@Override
 	public boolean supports(Class<?> clazz) {
-		return CpuDTO.class.isAssignableFrom(clazz);
+		return GpuDTO.class.isAssignableFrom(clazz);
 	}
 
 	@Override
