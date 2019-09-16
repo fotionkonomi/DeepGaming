@@ -107,7 +107,6 @@ public class Role implements Serializable, IModel {
 		result = prime * result + ((roleDescription == null) ? 0 : roleDescription.hashCode());
 		result = prime * result + ((roleId == null) ? 0 : roleId.hashCode());
 		result = prime * result + ((roleName == null) ? 0 : roleName.hashCode());
-		result = prime * result + ((users == null) ? 0 : users.hashCode());
 		return result;
 	}
 
@@ -135,11 +134,7 @@ public class Role implements Serializable, IModel {
 				return false;
 		} else if (!roleName.equals(other.roleName))
 			return false;
-		if (users == null) {
-			if (other.users != null)
-				return false;
-		} else if (!users.equals(other.users))
-			return false;
+	
 		return true;
 	}
 

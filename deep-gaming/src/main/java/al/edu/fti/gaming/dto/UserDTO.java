@@ -2,7 +2,7 @@ package al.edu.fti.gaming.dto;
 
 import java.util.Date;
 
-public class UserDTO implements IDto{
+public class UserDTO implements IDto {
 
 	private Integer idUser;
 
@@ -11,20 +11,24 @@ public class UserDTO implements IDto{
 	private String lastName;
 
 	private String email;
+	
+	private String username;
 
 	private String password;
-
-	private Boolean gender;
 
 	private Date dateOfBirth;
 
 	private Date dateRegistered;
+	
+	private Date dateEdited;
 
 	private CpuDTO cpuOfHisComputer;
 
 	private GpuDTO gpuOfHisComputer;
 
 	private Double ramSizeOfHisComputer;
+
+	private String date;
 
 	public UserDTO() {
 		super();
@@ -70,14 +74,6 @@ public class UserDTO implements IDto{
 		this.password = password;
 	}
 
-	public Boolean getGender() {
-		return gender;
-	}
-
-	public void setGender(Boolean gender) {
-		this.gender = gender;
-	}
-
 	public Date getDateOfBirth() {
 		return dateOfBirth;
 	}
@@ -118,21 +114,47 @@ public class UserDTO implements IDto{
 		this.ramSizeOfHisComputer = ramSizeOfHisComputer;
 	}
 
+	public String getDate() {
+		return date;
+	}
+
+	public void setDate(String date) {
+		this.date = date;
+	}
+	
+	public Date getDateEdited() {
+		return dateEdited;
+	}
+
+	public void setDateEdited(Date dateEdited) {
+		this.dateEdited = dateEdited;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((cpuOfHisComputer == null) ? 0 : cpuOfHisComputer.hashCode());
+		result = prime * result + ((date == null) ? 0 : date.hashCode());
+		result = prime * result + ((dateEdited == null) ? 0 : dateEdited.hashCode());
 		result = prime * result + ((dateOfBirth == null) ? 0 : dateOfBirth.hashCode());
 		result = prime * result + ((dateRegistered == null) ? 0 : dateRegistered.hashCode());
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
-		result = prime * result + ((gender == null) ? 0 : gender.hashCode());
 		result = prime * result + ((gpuOfHisComputer == null) ? 0 : gpuOfHisComputer.hashCode());
 		result = prime * result + ((idUser == null) ? 0 : idUser.hashCode());
 		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
 		result = prime * result + ((password == null) ? 0 : password.hashCode());
 		result = prime * result + ((ramSizeOfHisComputer == null) ? 0 : ramSizeOfHisComputer.hashCode());
+		result = prime * result + ((username == null) ? 0 : username.hashCode());
 		return result;
 	}
 
@@ -149,6 +171,16 @@ public class UserDTO implements IDto{
 			if (other.cpuOfHisComputer != null)
 				return false;
 		} else if (!cpuOfHisComputer.equals(other.cpuOfHisComputer))
+			return false;
+		if (date == null) {
+			if (other.date != null)
+				return false;
+		} else if (!date.equals(other.date))
+			return false;
+		if (dateEdited == null) {
+			if (other.dateEdited != null)
+				return false;
+		} else if (!dateEdited.equals(other.dateEdited))
 			return false;
 		if (dateOfBirth == null) {
 			if (other.dateOfBirth != null)
@@ -169,11 +201,6 @@ public class UserDTO implements IDto{
 			if (other.firstName != null)
 				return false;
 		} else if (!firstName.equals(other.firstName))
-			return false;
-		if (gender == null) {
-			if (other.gender != null)
-				return false;
-		} else if (!gender.equals(other.gender))
 			return false;
 		if (gpuOfHisComputer == null) {
 			if (other.gpuOfHisComputer != null)
@@ -200,7 +227,15 @@ public class UserDTO implements IDto{
 				return false;
 		} else if (!ramSizeOfHisComputer.equals(other.ramSizeOfHisComputer))
 			return false;
+		if (username == null) {
+			if (other.username != null)
+				return false;
+		} else if (!username.equals(other.username))
+			return false;
 		return true;
 	}
+
+
+	
 
 }

@@ -49,9 +49,6 @@ public class User implements Serializable, IModel {
 	@Column(name = "password", nullable = false, length = 255)
 	private String password;
 
-	@Column(name = "gender")
-	private Boolean gender;
-
 	@Column(name = "date_of_birth", nullable = false, columnDefinition = "DATETIME")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dateOfBirth;
@@ -79,6 +76,12 @@ public class User implements Serializable, IModel {
 	@JoinTable(name = "user_role", joinColumns = { @JoinColumn(name = "id_user") }, inverseJoinColumns = {
 			@JoinColumn(name = "id_role") })
 	private Set<Role> roles = new HashSet<Role>();
+
+	public void addRole(Role role) {
+		this.roles.add(role);
+		role.getUsers().add(this);
+
+	}
 
 	public Integer getIdUser() {
 		return idUser;
@@ -126,14 +129,6 @@ public class User implements Serializable, IModel {
 
 	public void setPassword(String password) {
 		this.password = password;
-	}
-
-	public Boolean getGender() {
-		return gender;
-	}
-
-	public void setGender(Boolean gender) {
-		this.gender = gender;
 	}
 
 	public Date getDateOfBirth() {
@@ -202,13 +197,11 @@ public class User implements Serializable, IModel {
 		result = prime * result + ((dateRegistered == null) ? 0 : dateRegistered.hashCode());
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
-		result = prime * result + ((gender == null) ? 0 : gender.hashCode());
 		result = prime * result + ((gpuOfHisComputer == null) ? 0 : gpuOfHisComputer.hashCode());
 		result = prime * result + ((idUser == null) ? 0 : idUser.hashCode());
 		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
 		result = prime * result + ((password == null) ? 0 : password.hashCode());
 		result = prime * result + ((ramSizeOfHisComputer == null) ? 0 : ramSizeOfHisComputer.hashCode());
-		result = prime * result + ((roles == null) ? 0 : roles.hashCode());
 		result = prime * result + ((username == null) ? 0 : username.hashCode());
 		return result;
 	}
@@ -252,11 +245,6 @@ public class User implements Serializable, IModel {
 				return false;
 		} else if (!firstName.equals(other.firstName))
 			return false;
-		if (gender == null) {
-			if (other.gender != null)
-				return false;
-		} else if (!gender.equals(other.gender))
-			return false;
 		if (gpuOfHisComputer == null) {
 			if (other.gpuOfHisComputer != null)
 				return false;
@@ -282,11 +270,7 @@ public class User implements Serializable, IModel {
 				return false;
 		} else if (!ramSizeOfHisComputer.equals(other.ramSizeOfHisComputer))
 			return false;
-		if (roles == null) {
-			if (other.roles != null)
-				return false;
-		} else if (!roles.equals(other.roles))
-			return false;
+		
 		if (username == null) {
 			if (other.username != null)
 				return false;
@@ -298,10 +282,9 @@ public class User implements Serializable, IModel {
 	@Override
 	public String toString() {
 		return "User [idUser=" + idUser + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
-				+ ", username=" + username + ", gender=" + gender + ", dateOfBirth=" + dateOfBirth + ", dateRegistered="
-				+ dateRegistered + ", dateEdited=" + dateEdited + ", cpuOfHisComputer=" + cpuOfHisComputer
-				+ ", gpuOfHisComputer=" + gpuOfHisComputer + ", ramSizeOfHisComputer=" + ramSizeOfHisComputer
-				+ ", roles=" + roles + "]";
+				+ ", username=" + username + ", dateOfBirth=" + dateOfBirth + ", dateRegistered=" + dateRegistered
+				+ ", dateEdited=" + dateEdited + ", cpuOfHisComputer=" + cpuOfHisComputer + ", gpuOfHisComputer="
+				+ gpuOfHisComputer + ", ramSizeOfHisComputer=" + ramSizeOfHisComputer + ", roles=" + roles + "]";
 	}
 
 }
