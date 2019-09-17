@@ -9,5 +9,9 @@ public interface UserService {
 	int add(UserDTO userDTO) throws ParseException;
 	
     void convertStringToDate(UserDTO userDTO) throws ParseException;
+    
+    boolean doesEmailExist(String email);
+    
+    boolean doesUsernameExist(String username);
 }
 

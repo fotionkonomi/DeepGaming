@@ -16,5 +16,7 @@ public interface GpuRepository {
 	
 	List<GPU> getGpuByGpuFamily(Integer gpuFamilyId);
 	
+	List<GPU> getAllGpus();
+	
 	void update(GPU gpu);
 } 

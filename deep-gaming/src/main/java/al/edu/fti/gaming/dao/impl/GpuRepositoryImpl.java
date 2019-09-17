@@ -92,4 +92,11 @@ public class GpuRepositoryImpl implements GpuRepository {
 		}
 	}
 
+	@Override
+	public List<GPU> getAllGpus() {
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session.createQuery("SELECT g FROM GPU g");
+		return query.list();
+	}
+
 }

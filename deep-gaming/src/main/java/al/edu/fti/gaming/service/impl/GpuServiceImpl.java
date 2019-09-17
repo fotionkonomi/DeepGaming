@@ -83,6 +83,9 @@ public class GpuServiceImpl implements GpuService {
 	@Autowired
 	private CpuService cpuService;
 
+	@Autowired
+	private GpuService gpuService;
+
 	@Override
 	public int add(GpuDTO gpuDTO) {
 		GPU gpu = (GPU) gpuConverter.toModel(gpuDTO);
@@ -227,6 +230,17 @@ public class GpuServiceImpl implements GpuService {
 		return allCpusMap;
 	}
 
+	@Override
+	public Map<Integer, String> getAllGpusMap() {
+		List<GpuDTO> allGpus = gpuService.getAllGpus();
+		Map<Integer, String> allGpusMap = new HashMap<Integer, String>();
+		for (GpuDTO gpuDTO : allGpus) {
+			allGpusMap.put(gpuDTO.getId(), gpuDTO.getFamilyOfThisGpu().getCompanyOfThisGpuFamily().getName() + " "
+					+ gpuDTO.getFamilyOfThisGpu().getName() + " " + gpuDTO.getName());
+		}
+		return allGpusMap;
+	}
+
 	private String getGpuFamilyStringId(String query) {
 		String queryString = query;
 		int indexOfGpuFamily = queryString.indexOf("gpuFamily=");
@@ -272,6 +286,11 @@ public class GpuServiceImpl implements GpuService {
 			gpuDTOs.add(gpuDTO);
 		}
 		return gpuDTOs;
+	}
+
+	@Override
+	public List<GpuDTO> getAllGpus() {
+		return convertList(gpuRepository.getAllGpus());
 	}
 
 }

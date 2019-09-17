@@ -60,4 +60,16 @@ public class UserRepositoryImpl implements UserRepository {
 			return null;
 		}
 	}
+
+	@Override
+	public boolean doesEmailExist(String email) {
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session.createQuery("SELECT u FROM User u WHERE u.email = :email");
+		query.setString("email", email);
+		if ((User) query.uniqueResult() == null) {
+			return false;
+		} else {
+			return true;
+		}
+	}
 }

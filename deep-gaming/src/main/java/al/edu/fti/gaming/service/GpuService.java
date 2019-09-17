@@ -28,6 +28,8 @@ public interface GpuService {
 	
 	Long countOfGpusInStock();
 	
+	List<GpuDTO> getAllGpus();
+	
 	List<GpuDTO> getGpusByFamily(Integer gpuFamilyId);
 	
 	void update(GpuDTO gpuDTO, int id) throws ParseException;
@@ -39,4 +41,6 @@ public interface GpuService {
 	Map<Integer, String> getDirectXsMap();
 	
 	Map<Integer, String> getAllCpusMap();
+	
+	Map<Integer, String> getAllGpusMap();
 }

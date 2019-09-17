@@ -9,4 +9,6 @@ public interface UserRepository {
 	boolean update(User user);
 	
 	User findUserByUsername(String username);
+	
+	boolean doesEmailExist(String email);
 }

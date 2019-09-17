@@ -49,11 +49,15 @@
 							<span class="focus-input100-1"></span> <span
 								class="focus-input100-2"></span>
 						</div>
-						
-							<div class="wrap-input100 validate-input"
+
+						<div class="wrap-input100 validate-input"
 							data-validate="Valid email is required: ex@abc.xyz">
 							<form:input class="input100" path="username" type="text"
 								name="username" placeholder="Username" />
+							<center>
+								<form:errors path="username"
+									style="font-family:monospace; color:red;" />
+							</center>
 							<span class="focus-input100-1"></span> <span
 								class="focus-input100-2"></span>
 						</div>
@@ -62,6 +66,10 @@
 							data-validate="Valid email is required: ex@abc.xyz">
 							<form:input class="input100" path="email" type="email"
 								name="email" placeholder="Email" />
+							<center>
+								<form:errors path="email"
+									style="font-family:monospace; color:red;" />
+							</center>
 							<span class="focus-input100-1"></span> <span
 								class="focus-input100-2"></span>
 						</div>
@@ -69,7 +77,7 @@
 
 						<div class="wrap-input100 validate-input"
 							data-validate="Valid email is required: ex@abc.xyz">
-							<form:input type="date" id="dateOfBirth" 
+							<form:input type="date" id="dateOfBirth"
 								placeholder="Date Of Birth" path="date"
 								class="form-control input100" />
 							<span class="focus-input100-1"></span> <span
@@ -78,10 +86,29 @@
 
 						<div class="wrap-input100 rs1 validate-input"
 							data-validate="Password is required">
-							<form:input class="input100" path="password" type="password" name="pass"
-								placeholder="Password" /> <span class="focus-input100-1"></span>
-							<span class="focus-input100-2"></span>
+							<form:input class="input100" path="password" type="password"
+								name="pass" placeholder="Password" />
+							<span class="focus-input100-1"></span> <span
+								class="focus-input100-2"></span>
 						</div>
+						
+						<div class="form-group">
+							<label class="control-label col-lg-2 col-lg-2"><spring:message
+									code="addGpu.form.cpu.label" /></label>
+							<div class="col-lg-10">
+								<form:select path="cpuRecommendedForThisGpu"
+									class="form-control">
+									<form:option value="">
+										<spring:message code="addGpu.form.cpu.default" />
+									</form:option>
+									<form:options items="${cpus}" />
+								</form:select>
+								<form:errors path="cpuRecommendedForThisGpu"
+									cssClass="text-danger" />
+
+							</div>
+						</div>
+
 
 						<div class="container-login100-form-btn m-t-20">
 							<input type="submit" value="Sign Up" class="login100-form-btn">

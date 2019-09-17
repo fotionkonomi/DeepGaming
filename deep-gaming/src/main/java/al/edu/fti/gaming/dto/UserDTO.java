@@ -2,18 +2,32 @@ package al.edu.fti.gaming.dto;
 
 import java.util.Date;
 
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotEmpty;
+
+import al.edu.fti.gaming.validator.UniqueEmail;
+import al.edu.fti.gaming.validator.UniqueUsername;
+
 public class UserDTO implements IDto {
 
 	private Integer idUser;
 
+	@NotEmpty(message = "{validation.field.required}")
 	private String firstName;
 
+	@NotEmpty(message = "{validation.field.required}")
 	private String lastName;
 
+	@NotEmpty(message = "{validation.field.required}")
+	@UniqueEmail
 	private String email;
 	
+	@NotEmpty(message = "{validation.field.required}")
+	@UniqueUsername
 	private String username;
 
+	@NotEmpty(message = "{validation.field.required}")
 	private String password;
 
 	private Date dateOfBirth;
@@ -28,6 +42,7 @@ public class UserDTO implements IDto {
 
 	private Double ramSizeOfHisComputer;
 
+	@NotEmpty(message = "{validation.field.required}")
 	private String date;
 
 	public UserDTO() {

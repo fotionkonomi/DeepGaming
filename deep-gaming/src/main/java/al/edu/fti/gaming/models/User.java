@@ -72,7 +72,7 @@ public class User implements Serializable, IModel {
 	@Column(name = "ram_size")
 	private Double ramSizeOfHisComputer;
 
-	@ManyToMany(cascade = { CascadeType.ALL })
+	@ManyToMany(fetch = FetchType.EAGER, cascade = { CascadeType.ALL })
 	@JoinTable(name = "user_role", joinColumns = { @JoinColumn(name = "id_user") }, inverseJoinColumns = {
 			@JoinColumn(name = "id_role") })
 	private Set<Role> roles = new HashSet<Role>();

@@ -35,7 +35,6 @@ import al.edu.fti.gaming.dto.GpuDTO;
 import al.edu.fti.gaming.dto.GpuFamilyDTO;
 import al.edu.fti.gaming.dto.GpuMemoryTechnologyDTO;
 import al.edu.fti.gaming.dto.GpuSlotDTO;
-import al.edu.fti.gaming.exception.CpuNotFoundException;
 import al.edu.fti.gaming.exception.GpuArchitectureNotFoundException;
 import al.edu.fti.gaming.exception.GpuNotFoundException;
 import al.edu.fti.gaming.exception.ProductsNotFoundException;

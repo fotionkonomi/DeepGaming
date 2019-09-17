@@ -10,6 +10,8 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.context.support.ResourceBundleMessageSource;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.Validator;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
@@ -50,6 +52,11 @@ public class WebApplicationContextConfig extends WebMvcConfigurerAdapter {
 		resolver.setDefaultLocale(new Locale("en"));
 		return resolver;
 	}
+	
+	@Bean
+	public PasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
 
 	@Bean
 	public MessageSource messageSource() {
@@ -66,6 +73,9 @@ public class WebApplicationContextConfig extends WebMvcConfigurerAdapter {
 		resolver.setSuffix(".jsp");
 		return resolver;
 	}
+	
+	
+	
 
 	@Override
 	public void addResourceHandlers(final ResourceHandlerRegistry registry) {

@@ -9,7 +9,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
@@ -19,30 +19,36 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private UserDetailsService userDetailsService;
 
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+
 	@Bean
 	public AuthenticationProvider authProvider() {
 		DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
 		provider.setUserDetailsService(userDetailsService);
-		provider.setPasswordEncoder(NoOpPasswordEncoder.getInstance());
-//		provider.setPasswordEncoder(new BCryptPasswordEncoder());
+		provider.setPasswordEncoder(passwordEncoder);
 		return provider;
 	}
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 
-		http.csrf().disable().authorizeRequests().antMatchers("/company/*").permitAll()
-		
-		.and().authorizeRequests()
-		.antMatchers("/css/**").permitAll()
-		
-		.and().formLogin().loginPage("/login").permitAll()
-		
-		.and().authorizeRequests().anyRequest().authenticated()
-		
-		.and().logout().invalidateHttpSession(true).clearAuthentication(true)
-		.logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/logout-success")
-		.permitAll();
+		http.csrf().disable().authorizeRequests().antMatchers("/signup").permitAll().and().authorizeRequests()
+				.antMatchers("/*").access("hasAuthority('User')").and().authorizeRequests().antMatchers("/**/update/**")
+				.access("hasAuthority('Admin')").and().authorizeRequests().antMatchers("/**/add/**")
+				.access("hasAuthority('Admin')")
+
+				.and().authorizeRequests().antMatchers("/css/**").permitAll().and().authorizeRequests()
+				.antMatchers("/img/**").permitAll().and().authorizeRequests().antMatchers("/fonts/**").permitAll().and()
+				.authorizeRequests().antMatchers("/js/**").permitAll()
+
+				.and().formLogin().loginPage("/login").permitAll()
+
+				.and().authorizeRequests().anyRequest().authenticated()
+
+				.and().logout().invalidateHttpSession(true).clearAuthentication(true)
+				.logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/logout-success")
+				.permitAll();
 
 	}
 
