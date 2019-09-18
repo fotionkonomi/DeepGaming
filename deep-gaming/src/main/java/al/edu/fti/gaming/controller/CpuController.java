@@ -12,6 +12,8 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -32,6 +34,7 @@ import al.edu.fti.gaming.dto.CpuArchitectureDTO;
 import al.edu.fti.gaming.dto.CpuDTO;
 import al.edu.fti.gaming.dto.CpuFamilyDTO;
 import al.edu.fti.gaming.dto.CpuSocketDTO;
+import al.edu.fti.gaming.dto.UserDTO;
 import al.edu.fti.gaming.exception.CpuArchitectureNotFoundException;
 import al.edu.fti.gaming.exception.CpuFamilyNotFoundException;
 import al.edu.fti.gaming.exception.CpuNotFoundException;
@@ -43,6 +46,7 @@ import al.edu.fti.gaming.service.CpuFamilyService;
 import al.edu.fti.gaming.service.CpuService;
 import al.edu.fti.gaming.service.CpuSocketService;
 import al.edu.fti.gaming.service.GeneralService;
+import al.edu.fti.gaming.service.UserService;
 import al.edu.fti.gaming.utils.Messages;
 import al.edu.fti.gaming.validator.CpuValidator;
 
@@ -70,6 +74,9 @@ public class CpuController implements HandlerExceptionResolver {
 
 	@Autowired
 	private CpuFamilyService cpuFamilyService;
+
+	@Autowired
+	private UserService userService;
 
 	@Autowired
 	private Messages messages;
@@ -191,6 +198,9 @@ public class CpuController implements HandlerExceptionResolver {
 		if (numberOfCpus > pageNumbers.size() * numberOfItemsOnThePage) {
 			pageNumbers.add(pageNumbers.size() + 1);
 		}
+		UserDetails userLoggedIn = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		UserDTO user = userService.findUserByUsername(userLoggedIn.getUsername());
+		model.addAttribute("userCpu", user.getCpuOfHisComputer());
 		model.addAttribute("numberOfItemsOnThePage", numberOfItemsOnThePage);
 		model.addAttribute("currentPage", currentPage);
 		model.addAttribute("pageNumbers", pageNumbers);

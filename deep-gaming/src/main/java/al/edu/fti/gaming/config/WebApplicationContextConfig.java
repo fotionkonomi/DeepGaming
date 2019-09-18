@@ -14,7 +14,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.Validator;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
+import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
+import org.springframework.web.servlet.DispatcherServlet;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -24,6 +26,7 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
+import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 import org.springframework.web.util.UrlPathHelper;
@@ -52,7 +55,7 @@ public class WebApplicationContextConfig extends WebMvcConfigurerAdapter {
 		resolver.setDefaultLocale(new Locale("en"));
 		return resolver;
 	}
-	
+
 	@Bean
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
@@ -64,6 +67,8 @@ public class WebApplicationContextConfig extends WebMvcConfigurerAdapter {
 		resource.addBasenames("messages");
 		return resource;
 	}
+	
+
 
 	@Bean
 	public InternalResourceViewResolver getInternalResourceViewResolver() {
@@ -73,9 +78,6 @@ public class WebApplicationContextConfig extends WebMvcConfigurerAdapter {
 		resolver.setSuffix(".jsp");
 		return resolver;
 	}
-	
-	
-	
 
 	@Override
 	public void addResourceHandlers(final ResourceHandlerRegistry registry) {
@@ -132,7 +134,7 @@ public class WebApplicationContextConfig extends WebMvcConfigurerAdapter {
 		cpuValidator.setSpringValidators(springValidators);
 		return cpuValidator;
 	}
-	
+
 	@Bean
 	public GpuValidator gpuValidator() {
 		Set<Validator> springValidators = new HashSet<Validator>();

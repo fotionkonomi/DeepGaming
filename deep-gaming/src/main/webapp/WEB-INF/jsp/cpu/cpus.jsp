@@ -30,7 +30,7 @@
 					</div>
 					<div class="product-body">
 						<p class="product-category">Cpu</p>
-						
+
 
 						<h3 class="product-name">
 							<a href="<spring:url value="/cpu/details?id=${cpu.id} " />">${cpu.familyOfThisCpu.companyOfThisCpuFamily.name }
@@ -38,11 +38,18 @@
 						</h3>
 						<h4 class="product-price">$${cpu.price }</h4>
 						<div class="product-btns">
-							<button id="${cpu.id }" onclick="pageRedirect(${cpu.id});" class="add-to-compare">
-								<i class="fa fa-exchange"></i><span class="tooltipp">add
-									to compare</span>
+							<button id="${cpu.id }" onclick="pageRedirect(${cpu.id});"
+								class="add-to-compare">
+								<i class="fa fa-exchange"></i><span class="tooltipp"><spring:message code="details.compare" /></span>
 							</button>
-							
+							<c:if test="${userCpu != null }">
+								<button id="${cpu.id }"
+									onclick="compareWithYourCpu(${cpu.id}, ${userCpu.id });"
+									class="add-to-compare">
+									<i class="fa fa-arrows-h"></i><span class="tooltipp"><spring:message code="compareWithYourCpu" /> </span>
+								</button>
+							</c:if>
+
 						</div>
 
 
@@ -83,6 +90,10 @@
 <script>
 function pageRedirect(id) {
     window.location.href = "/deep-gaming/cpu/chooseCpuToCompare?cpu="+ id;
+  }
+  
+function compareWithYourCpu(id, userCpuId) {
+    window.location.href = "/deep-gaming/cpu/compare?cpu1="+ id + "&cpu2=" + userCpuId;
   }
 </script>
 

@@ -19,7 +19,7 @@ public class RoleRepositoryImpl implements RoleRepository {
 	public Role getAdminRole() {
 		Session session = sessionFactory.getCurrentSession();
 		Query query = session.createQuery("SELECT r FROM Role r WHERE r.roleName = :roleName");
-		query.setString("roleName", "User");
+		query.setString("roleName", "Admin");
 		return (Role) query.uniqueResult();
 	}
 
@@ -27,7 +27,7 @@ public class RoleRepositoryImpl implements RoleRepository {
 	public Role getUserRole() {
 		Session session = sessionFactory.getCurrentSession();
 		Query query = session.createQuery("SELECT r FROM Role r WHERE r.roleName = :roleName");
-		query.setString("roleName", "Admin");
+		query.setString("roleName", "User");
 		return (Role) query.uniqueResult();
 	}
 }

@@ -39,9 +39,15 @@
 						<h4 class="product-price">$${gpu.price }</h4>
 						<div class="product-btns">
 							<button id="${gpu.id }" onclick="pageRedirect(${gpu.id});" class="add-to-compare">
-								<i class="fa fa-exchange"></i><span class="tooltipp">add
-									to compare</span>
+								<i class="fa fa-exchange"></i><span class="tooltipp"><spring:message code="details.compare" /></span>
 							</button>
+							<c:if test="${userGpu != null }">
+								<button id="${cpu.id }"
+									onclick="compareWithYourGpu(${gpu.id}, ${userGpu.id });"
+									class="add-to-compare">
+									<i class="fa fa-arrows-h"></i><span class="tooltipp"><spring:message code="compareWithYourGpu" /> </span>
+								</button>
+							</c:if>
 							
 						</div>
 
@@ -83,6 +89,10 @@
 <script>
 function pageRedirect(id) {
     window.location.href = "/deep-gaming/gpu/chooseGpuToCompare?gpu="+ id;
+  }
+  
+function compareWithYourGpu(id, userGpuId) {
+    window.location.href = "/deep-gaming/gpu/compare?gpu1="+ id + "&gpu2=" + userGpuId;
   }
 </script>
 

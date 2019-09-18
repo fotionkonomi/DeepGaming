@@ -1,15 +1,19 @@
 package al.edu.fti.gaming.dto;
 
+import java.io.Serializable;
 import java.util.Date;
-
-import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
 import al.edu.fti.gaming.validator.UniqueEmail;
 import al.edu.fti.gaming.validator.UniqueUsername;
 
-public class UserDTO implements IDto {
+public class UserDTO implements IDto, Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5896890447306204615L;
 
 	private Integer idUser;
 
@@ -22,7 +26,7 @@ public class UserDTO implements IDto {
 	@NotEmpty(message = "{validation.field.required}")
 	@UniqueEmail
 	private String email;
-	
+
 	@NotEmpty(message = "{validation.field.required}")
 	@UniqueUsername
 	private String username;
@@ -33,7 +37,7 @@ public class UserDTO implements IDto {
 	private Date dateOfBirth;
 
 	private Date dateRegistered;
-	
+
 	private Date dateEdited;
 
 	private CpuDTO cpuOfHisComputer;
@@ -136,7 +140,7 @@ public class UserDTO implements IDto {
 	public void setDate(String date) {
 		this.date = date;
 	}
-	
+
 	public Date getDateEdited() {
 		return dateEdited;
 	}
@@ -249,8 +253,5 @@ public class UserDTO implements IDto {
 			return false;
 		return true;
 	}
-
-
-	
 
 }

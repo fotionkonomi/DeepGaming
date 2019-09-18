@@ -440,8 +440,10 @@
 										<c:if test="${cpu1.physicalCores == cpu2.physicalCores }">
 										${cpu1.familyOfThisCpu.companyOfThisCpuFamily.name }
 										${cpu1.familyOfThisCpu.name } ${cpu1.name } and ${cpu2.familyOfThisCpu.companyOfThisCpuFamily.name }
-										${cpu2.familyOfThisCpu.name } ${cpu2.name } both
-										have ${cpu1.physicalCores}
+										${cpu2.familyOfThisCpu.name } ${cpu2.name } <spring:message
+												code="Both" />
+										<spring:message
+												code="have" /> ${cpu1.physicalCores}
 										</c:if>
 
 										<c:if test="${cpu1.physicalCores > cpu2.physicalCores }">
@@ -474,7 +476,7 @@ ${cpu1.familyOfThisCpu.companyOfThisCpuFamily.name }
 									<p style="font-size: 16px;">
 										<c:if
 											test="${cpu1.threads > cpu1.physicalCores && cpu2.threads > cpu2.physicalCores }">
-											<spring:message code="both" /> ${cpu1.familyOfThisCpu.companyOfThisCpuFamily.name }
+											<spring:message code="Both" /> ${cpu1.familyOfThisCpu.companyOfThisCpuFamily.name }
 										${cpu1.familyOfThisCpu.name } ${cpu1.name } <spring:message
 												code="and" /> ${cpu2.familyOfThisCpu.companyOfThisCpuFamily.name }
 										${cpu2.familyOfThisCpu.name } ${cpu2.name } <spring:message
@@ -535,7 +537,7 @@ ${cpu1.familyOfThisCpu.companyOfThisCpuFamily.name }
 											</c:if>
 
 											<c:if test="${cpu1.cpuSpeed == cpu2.cpuSpeed }">
-												<spring:message code="both" />${cpu1.familyOfThisCpu.companyOfThisCpuFamily.name }
+												<spring:message code="Both" />${cpu1.familyOfThisCpu.companyOfThisCpuFamily.name }
 										${cpu1.familyOfThisCpu.name } ${cpu1.name } <spring:message
 													code="and" /> ${cpu2.familyOfThisCpu.companyOfThisCpuFamily.name }
 										${cpu2.familyOfThisCpu.name } ${cpu2.name } <spring:message

@@ -21,6 +21,8 @@
 	href="<c:url value="css/utilLogin.css" />" />
 <link rel="stylesheet" type="text/css"
 	href="<c:url value="css/mainLogin.css" />" />
+<link type="text/css" rel="stylesheet"
+	href="<c:url value="/css/bootstrap.min.css"/>" />
 
 <!--===============================================================================================-->
 </head>
@@ -77,9 +79,11 @@
 
 						<div class="wrap-input100 validate-input"
 							data-validate="Valid email is required: ex@abc.xyz">
-							<form:input type="date" id="dateOfBirth"
+
+							<form:input type="text" id="dateOfBirth"
 								placeholder="Date Of Birth" path="date"
-								class="form-control input100" />
+								class="form-control input100 textbox-n"
+								onfocus="(this.type='date') " />
 							<span class="focus-input100-1"></span> <span
 								class="focus-input100-2"></span>
 						</div>
@@ -91,38 +95,55 @@
 							<span class="focus-input100-1"></span> <span
 								class="focus-input100-2"></span>
 						</div>
-						
+						<br />
+						<hr>
+						<center>
+							<h3 style="font-family: monospace;">Your Computer</h3>
+							<p>*You can leave these fields empty</p>
+						</center>
 						<div class="form-group">
-							<label class="control-label col-lg-2 col-lg-2"><spring:message
-									code="addGpu.form.cpu.label" /></label>
-							<div class="col-lg-10">
-								<form:select path="cpuRecommendedForThisGpu"
-									class="form-control">
+
+							<div class="col-lg-12">
+								<form:select path="cpuOfHisComputer" class="form-control">
 									<form:option value="">
-										<spring:message code="addGpu.form.cpu.default" />
+										<spring:message code="signup.form.cpu.default" />
 									</form:option>
 									<form:options items="${cpus}" />
 								</form:select>
-								<form:errors path="cpuRecommendedForThisGpu"
-									cssClass="text-danger" />
+								<form:errors path="cpuOfHisComputer" cssClass="text-danger" />
 
 							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-lg-12">
+								<form:select path="gpuOfHisComputer" class="form-control">
+									<form:option value="">
+										<spring:message code="signup.form.gpu.default" />
+									</form:option>
+									<form:options items="${gpus}" />
+								</form:select>
+								<form:errors path="gpuOfHisComputer" cssClass="text-danger" />
+
+							</div>
+
+						</div>
+
+						<div class="wrap-input100 validate-input">
+							<form:input class="input100" path="ramSizeOfHisComputer"
+								type="number" step="0.1" min="0" name="lastName"
+								placeholder="Ram size of your computer in GB" />
+							<span class="focus-input100-1"></span> <span
+								class="focus-input100-2"></span>
 						</div>
 
 
 						<div class="container-login100-form-btn m-t-20">
 							<input type="submit" value="Sign Up" class="login100-form-btn">
 						</div>
-
-						<br>
-						<div class="text-center">
-							<span class="txt1"> Create an account? </span>
-
-
-						</div>
-					</form>
 				</div>
+				</form>
 			</div>
+		</div>
 		</div>
 	</form:form>
 

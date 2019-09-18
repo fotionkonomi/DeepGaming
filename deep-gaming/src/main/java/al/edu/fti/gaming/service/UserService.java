@@ -13,5 +13,7 @@ public interface UserService {
     boolean doesEmailExist(String email);
     
     boolean doesUsernameExist(String username);
+    
+    UserDTO findUserByUsername(String username);
 }
 

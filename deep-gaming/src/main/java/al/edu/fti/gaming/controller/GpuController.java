@@ -12,6 +12,8 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -35,18 +37,16 @@ import al.edu.fti.gaming.dto.GpuDTO;
 import al.edu.fti.gaming.dto.GpuFamilyDTO;
 import al.edu.fti.gaming.dto.GpuMemoryTechnologyDTO;
 import al.edu.fti.gaming.dto.GpuSlotDTO;
+import al.edu.fti.gaming.dto.UserDTO;
 import al.edu.fti.gaming.exception.GpuArchitectureNotFoundException;
 import al.edu.fti.gaming.exception.GpuNotFoundException;
 import al.edu.fti.gaming.exception.ProductsNotFoundException;
 import al.edu.fti.gaming.service.CompanyService;
-import al.edu.fti.gaming.service.CpuService;
-import al.edu.fti.gaming.service.DirectXService;
 import al.edu.fti.gaming.service.GeneralService;
 import al.edu.fti.gaming.service.GpuArchitectureService;
 import al.edu.fti.gaming.service.GpuFamilyService;
-import al.edu.fti.gaming.service.GpuMemoryTechnologyService;
 import al.edu.fti.gaming.service.GpuService;
-import al.edu.fti.gaming.service.GpuSlotService;
+import al.edu.fti.gaming.service.UserService;
 import al.edu.fti.gaming.utils.CpuEditor;
 import al.edu.fti.gaming.utils.DirectXEditor;
 import al.edu.fti.gaming.utils.GpuMemoryTechnologyEditor;
@@ -69,24 +69,13 @@ public class GpuController implements HandlerExceptionResolver {
 
 	@Autowired
 	private GpuArchitectureService gpuArchitectureService;
-
-	@Autowired
-	private GpuSlotService gpuSlotService;
-
+	
 	@Autowired
 	private GpuFamilyService gpuFamilyService;
 
 	@Autowired
-	private GpuMemoryTechnologyService gpuMemoryTechnologyService;
-
-	@Autowired
-	private DirectXService directXService;
-
-	@Autowired
 	private Messages messages;
 
-	@Autowired
-	private CpuService cpuService;
 
 	@Autowired
 	private GpuValidator gpuValidator;
@@ -102,6 +91,9 @@ public class GpuController implements HandlerExceptionResolver {
 
 	@Autowired
 	private CpuEditor cpuEditor;
+
+	@Autowired
+	private UserService userService;
 
 	@InitBinder /* Converts empty strings into null when a form is submitted */
 	public void initBinder(WebDataBinder binder) {
@@ -150,6 +142,9 @@ public class GpuController implements HandlerExceptionResolver {
 		if (numberOfGpus > pageNumbers.size() * numberOfItemsOnThePage) {
 			pageNumbers.add(pageNumbers.size() + 1);
 		}
+		UserDetails userLoggedIn = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		UserDTO user = userService.findUserByUsername(userLoggedIn.getUsername());
+		model.addAttribute("userGpu", user.getGpuOfHisComputer());
 		model.addAttribute("numberOfItemsOnThePage", numberOfItemsOnThePage);
 		model.addAttribute("currentPage", currentPage);
 		model.addAttribute("pageNumbers", pageNumbers);
@@ -157,7 +152,7 @@ public class GpuController implements HandlerExceptionResolver {
 		model.addAttribute("gpus", gpuService.getAllGpusInStock(currentPage, numberOfItemsOnThePage));
 		return "gpu/gpus";
 	}
-	
+
 	@RequestMapping("/chooseGpuToCompare")
 	public String chooseGpuToCompare(Model model, @RequestParam("gpu") int gpuId) {
 		GpuDTO gpuDTO = gpuService.getGpuById(gpuId);

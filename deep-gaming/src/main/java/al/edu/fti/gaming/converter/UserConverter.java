@@ -37,8 +37,12 @@ public class UserConverter implements Converter {
 		userDTO.setDateOfBirth(user.getDateOfBirth());
 		userDTO.setDateRegistered(user.getDateRegistered());
 		userDTO.setDateEdited(user.getDateEdited());
-		userDTO.setCpuOfHisComputer((CpuDTO) cpuConverter.toDTO(user.getCpuOfHisComputer()));
-		userDTO.setGpuOfHisComputer((GpuDTO) gpuConverter.toDTO(user.getGpuOfHisComputer()));
+		if (user.getCpuOfHisComputer() != null) {
+			userDTO.setCpuOfHisComputer((CpuDTO) cpuConverter.toDTO(user.getCpuOfHisComputer()));
+		}
+		if (user.getGpuOfHisComputer() != null) {
+			userDTO.setGpuOfHisComputer((GpuDTO) gpuConverter.toDTO(user.getGpuOfHisComputer()));
+		}
 		userDTO.setRamSizeOfHisComputer(user.getRamSizeOfHisComputer());
 		return userDTO;
 

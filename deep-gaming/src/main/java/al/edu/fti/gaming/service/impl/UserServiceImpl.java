@@ -74,4 +74,14 @@ public class UserServiceImpl implements UserService {
 
 	}
 
+	@Override
+	public UserDTO findUserByUsername(String username) {
+		User user = userRepository.findUserByUsername(username);
+		if (user != null) {
+			return (UserDTO)userConverter.toDTO(user);
+		} else {
+			return null;
+		}
+	}
+
 }
