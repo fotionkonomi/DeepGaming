@@ -31,10 +31,6 @@ public class Game extends Product{
 	private Double ramHigh;
 	
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
-	@JoinColumn(name = "id_game_franchise", nullable = false)
-	private GameFranchise franchiseOfThisGame;
-	
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 	@JoinColumn(name = "id_cpu_low", nullable = false)
 	private CPU cpuLow;
 	

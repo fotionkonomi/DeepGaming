@@ -6,10 +6,8 @@ public class MotherboardDTO extends ProductDTO {
 	private Integer maximumRamSpeed;
 	private CompanyDTO companyOfThisMotherboard;
 	private CpuSocketDTO cpuSocketOfThisMotherboard;
-	private ChipsetDTO chipsetOfThisMotherboard;
-	private RamMemoryTechnologyDTO memoryTechnologyOfThisMotherboard;
 	private MotherboardFormFactorDTO formFactorOfThisMotherboard;
-	
+
 	public MotherboardDTO() {
 		super();
 	}
@@ -46,22 +44,6 @@ public class MotherboardDTO extends ProductDTO {
 		this.cpuSocketOfThisMotherboard = cpuSocketOfThisMotherboard;
 	}
 
-	public ChipsetDTO getChipsetOfThisMotherboard() {
-		return chipsetOfThisMotherboard;
-	}
-
-	public void setChipsetOfThisMotherboard(ChipsetDTO chipsetOfThisMotherboard) {
-		this.chipsetOfThisMotherboard = chipsetOfThisMotherboard;
-	}
-
-	public RamMemoryTechnologyDTO getMemoryTechnologyOfThisMotherboard() {
-		return memoryTechnologyOfThisMotherboard;
-	}
-
-	public void setMemoryTechnologyOfThisMotherboard(RamMemoryTechnologyDTO memoryTechnologyOfThisMotherboard) {
-		this.memoryTechnologyOfThisMotherboard = memoryTechnologyOfThisMotherboard;
-	}
-
 	public MotherboardFormFactorDTO getFormFactorOfThisMotherboard() {
 		return formFactorOfThisMotherboard;
 	}
@@ -71,17 +53,21 @@ public class MotherboardDTO extends ProductDTO {
 	}
 
 	@Override
+	public String toString() {
+		return "MotherboardDTO [maximumRamCapacity=" + maximumRamCapacity + ", maximumRamSpeed=" + maximumRamSpeed
+				+ ", companyOfThisMotherboard=" + companyOfThisMotherboard + ", cpuSocketOfThisMotherboard="
+				+ cpuSocketOfThisMotherboard + ", formFactorOfThisMotherboard=" + formFactorOfThisMotherboard + "]";
+	}
+
+	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + ((chipsetOfThisMotherboard == null) ? 0 : chipsetOfThisMotherboard.hashCode());
 		result = prime * result + ((companyOfThisMotherboard == null) ? 0 : companyOfThisMotherboard.hashCode());
 		result = prime * result + ((cpuSocketOfThisMotherboard == null) ? 0 : cpuSocketOfThisMotherboard.hashCode());
 		result = prime * result + ((formFactorOfThisMotherboard == null) ? 0 : formFactorOfThisMotherboard.hashCode());
 		result = prime * result + ((maximumRamCapacity == null) ? 0 : maximumRamCapacity.hashCode());
 		result = prime * result + ((maximumRamSpeed == null) ? 0 : maximumRamSpeed.hashCode());
-		result = prime * result
-				+ ((memoryTechnologyOfThisMotherboard == null) ? 0 : memoryTechnologyOfThisMotherboard.hashCode());
 		return result;
 	}
 
@@ -94,11 +80,6 @@ public class MotherboardDTO extends ProductDTO {
 		if (getClass() != obj.getClass())
 			return false;
 		MotherboardDTO other = (MotherboardDTO) obj;
-		if (chipsetOfThisMotherboard == null) {
-			if (other.chipsetOfThisMotherboard != null)
-				return false;
-		} else if (!chipsetOfThisMotherboard.equals(other.chipsetOfThisMotherboard))
-			return false;
 		if (companyOfThisMotherboard == null) {
 			if (other.companyOfThisMotherboard != null)
 				return false;
@@ -123,11 +104,6 @@ public class MotherboardDTO extends ProductDTO {
 			if (other.maximumRamSpeed != null)
 				return false;
 		} else if (!maximumRamSpeed.equals(other.maximumRamSpeed))
-			return false;
-		if (memoryTechnologyOfThisMotherboard == null) {
-			if (other.memoryTechnologyOfThisMotherboard != null)
-				return false;
-		} else if (!memoryTechnologyOfThisMotherboard.equals(other.memoryTechnologyOfThisMotherboard))
 			return false;
 		return true;
 	}

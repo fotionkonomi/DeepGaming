@@ -89,52 +89,8 @@ public class Company implements IModel, Serializable {
 	 */
 	private List<CpuSocket> cpuSocketsOfThisCompany = new ArrayList<>();
 
-	@OneToMany(mappedBy = "companyThatCreatedThisChipset")
-	private List<Chipset> chipsetsOfThisCompany = new ArrayList<>();
-
 	@OneToMany(mappedBy = "companyOfThisMotherboard")
 	private List<Motherboard> motherboardsOfThisCompany = new ArrayList<Motherboard>();
-
-	@OneToMany(mappedBy = "companyOfThisPowerSupply")
-	private List<PowerSupply> powerSuppliesOfThisCompany = new ArrayList<PowerSupply>();
-
-	@OneToMany(mappedBy = "companyOfThisStorage")
-	private List<Storage> storagesOfThisCompany = new ArrayList<Storage>();
-
-	@OneToMany(mappedBy = "ramSticksCompany")
-	private List<Ram> ramsOfThisCompany = new ArrayList<Ram>();
-
-	@OneToMany(mappedBy = "companyOfThisOS")
-	private List<OperatingSystemType> operatingSystemsOfThisCompany = new ArrayList<OperatingSystemType>();
-
-	public Company(Integer idCompany, String companyName, String companyDescription, String hyperlink,
-			List<CpuFamily> cpuFamiliesOfThisCompany, List<GpuFamily> gpuFamiliesOfThisCompany,
-			List<CpuArchitecture> cpuArchitecturesOfThisCompany, List<GpuArchitecture> gpuArchitecturesOfThisCompany,
-			List<CpuSocket> cpuSocketsOfThisCompany, List<Chipset> chipsetsOfThisCompany,
-			List<Motherboard> motherboardsOfThisCompany, List<PowerSupply> powerSuppliesOfThisCompany,
-			List<Storage> storagesOfThisCompany, List<Ram> ramsOfThisCompany,
-			List<OperatingSystemType> operatingSystemsOfThisCompany) {
-		super();
-		this.idCompany = idCompany;
-		this.companyName = companyName;
-		this.companyDescription = companyDescription;
-		this.hyperlink = hyperlink;
-		this.cpuFamiliesOfThisCompany = cpuFamiliesOfThisCompany;
-		this.gpuFamiliesOfThisCompany = gpuFamiliesOfThisCompany;
-		this.cpuArchitecturesOfThisCompany = cpuArchitecturesOfThisCompany;
-		this.gpuArchitecturesOfThisCompany = gpuArchitecturesOfThisCompany;
-		this.cpuSocketsOfThisCompany = cpuSocketsOfThisCompany;
-		this.chipsetsOfThisCompany = chipsetsOfThisCompany;
-		this.motherboardsOfThisCompany = motherboardsOfThisCompany;
-		this.powerSuppliesOfThisCompany = powerSuppliesOfThisCompany;
-		this.storagesOfThisCompany = storagesOfThisCompany;
-		this.ramsOfThisCompany = ramsOfThisCompany;
-		this.operatingSystemsOfThisCompany = operatingSystemsOfThisCompany;
-	}
-
-	public Company() {
-
-	}
 
 	public Integer getIdCompany() {
 		return idCompany;
@@ -208,14 +164,6 @@ public class Company implements IModel, Serializable {
 		this.cpuSocketsOfThisCompany = cpuSocketsOfThisCompany;
 	}
 
-	public List<Chipset> getChipsetsOfThisCompany() {
-		return chipsetsOfThisCompany;
-	}
-
-	public void setChipsetsOfThisCompany(List<Chipset> chipsetsOfThisCompany) {
-		this.chipsetsOfThisCompany = chipsetsOfThisCompany;
-	}
-
 	public List<Motherboard> getMotherboardsOfThisCompany() {
 		return motherboardsOfThisCompany;
 	}
@@ -224,47 +172,10 @@ public class Company implements IModel, Serializable {
 		this.motherboardsOfThisCompany = motherboardsOfThisCompany;
 	}
 
-	public List<PowerSupply> getPowerSuppliesOfThisCompany() {
-		return powerSuppliesOfThisCompany;
-	}
-
-	public void setPowerSuppliesOfThisCompany(List<PowerSupply> powerSuppliesOfThisCompany) {
-		this.powerSuppliesOfThisCompany = powerSuppliesOfThisCompany;
-	}
-
-	public List<Storage> getStoragesOfThisCompany() {
-		return storagesOfThisCompany;
-	}
-
-	public void setStoragesOfThisCompany(List<Storage> storagesOfThisCompany) {
-		this.storagesOfThisCompany = storagesOfThisCompany;
-	}
-
-	public List<Ram> getRamsOfThisCompany() {
-		return ramsOfThisCompany;
-	}
-
-	public void setRamsOfThisCompany(List<Ram> ramsOfThisCompany) {
-		this.ramsOfThisCompany = ramsOfThisCompany;
-	}
-
-	public List<OperatingSystemType> getOperatingSystemsOfThisCompany() {
-		return operatingSystemsOfThisCompany;
-	}
-
-	public void setOperatingSystemsOfThisCompany(List<OperatingSystemType> operatingSystemsOfThisCompany) {
-		this.operatingSystemsOfThisCompany = operatingSystemsOfThisCompany;
-	}
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((chipsetsOfThisCompany == null) ? 0 : chipsetsOfThisCompany.hashCode());
 		result = prime * result + ((companyDescription == null) ? 0 : companyDescription.hashCode());
 		result = prime * result + ((companyName == null) ? 0 : companyName.hashCode());
 		result = prime * result
@@ -277,11 +188,6 @@ public class Company implements IModel, Serializable {
 		result = prime * result + ((hyperlink == null) ? 0 : hyperlink.hashCode());
 		result = prime * result + ((idCompany == null) ? 0 : idCompany.hashCode());
 		result = prime * result + ((motherboardsOfThisCompany == null) ? 0 : motherboardsOfThisCompany.hashCode());
-		result = prime * result
-				+ ((operatingSystemsOfThisCompany == null) ? 0 : operatingSystemsOfThisCompany.hashCode());
-		result = prime * result + ((powerSuppliesOfThisCompany == null) ? 0 : powerSuppliesOfThisCompany.hashCode());
-		result = prime * result + ((ramsOfThisCompany == null) ? 0 : ramsOfThisCompany.hashCode());
-		result = prime * result + ((storagesOfThisCompany == null) ? 0 : storagesOfThisCompany.hashCode());
 		return result;
 	}
 
@@ -294,11 +200,6 @@ public class Company implements IModel, Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Company other = (Company) obj;
-		if (chipsetsOfThisCompany == null) {
-			if (other.chipsetsOfThisCompany != null)
-				return false;
-		} else if (!chipsetsOfThisCompany.equals(other.chipsetsOfThisCompany))
-			return false;
 		if (companyDescription == null) {
 			if (other.companyDescription != null)
 				return false;
@@ -349,27 +250,17 @@ public class Company implements IModel, Serializable {
 				return false;
 		} else if (!motherboardsOfThisCompany.equals(other.motherboardsOfThisCompany))
 			return false;
-		if (operatingSystemsOfThisCompany == null) {
-			if (other.operatingSystemsOfThisCompany != null)
-				return false;
-		} else if (!operatingSystemsOfThisCompany.equals(other.operatingSystemsOfThisCompany))
-			return false;
-		if (powerSuppliesOfThisCompany == null) {
-			if (other.powerSuppliesOfThisCompany != null)
-				return false;
-		} else if (!powerSuppliesOfThisCompany.equals(other.powerSuppliesOfThisCompany))
-			return false;
-		if (ramsOfThisCompany == null) {
-			if (other.ramsOfThisCompany != null)
-				return false;
-		} else if (!ramsOfThisCompany.equals(other.ramsOfThisCompany))
-			return false;
-		if (storagesOfThisCompany == null) {
-			if (other.storagesOfThisCompany != null)
-				return false;
-		} else if (!storagesOfThisCompany.equals(other.storagesOfThisCompany))
-			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Company [idCompany=" + idCompany + ", companyName=" + companyName + ", companyDescription="
+				+ companyDescription + ", hyperlink=" + hyperlink + ", cpuFamiliesOfThisCompany="
+				+ cpuFamiliesOfThisCompany + ", gpuFamiliesOfThisCompany=" + gpuFamiliesOfThisCompany
+				+ ", cpuArchitecturesOfThisCompany=" + cpuArchitecturesOfThisCompany
+				+ ", gpuArchitecturesOfThisCompany=" + gpuArchitecturesOfThisCompany + ", cpuSocketsOfThisCompany="
+				+ cpuSocketsOfThisCompany + ", motherboardsOfThisCompany=" + motherboardsOfThisCompany + "]";
 	}
 
 }

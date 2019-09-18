@@ -12,7 +12,6 @@ import org.springframework.stereotype.Repository;
 
 import al.edu.fti.gaming.dao.DirectXRepository;
 import al.edu.fti.gaming.models.DirectX;
-import al.edu.fti.gaming.models.OperatingSystemType;
 
 @Repository
 public class DirectXRepositoryImpl implements DirectXRepository {

@@ -47,15 +47,7 @@ public class Motherboard extends Product {
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 	@JoinColumn(name = "id_cpu_socket", nullable = false)
 	private CpuSocket cpuSocketOfThisMotherboard;
-
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
-	@JoinColumn(name = "id_chipset", nullable = false)
-	private Chipset chipsetOfThisMotherboard;
-
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
-	@JoinColumn(name = "id_ram_memory_technology", nullable = false)
-	private RamMemoryTechnology memoryTechnologyOfThisMotherboard;
-
+	
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 	@JoinColumn(name = "id_motherboard_form_factor", nullable = false)
 	private MotherboardFormFactor formFactorOfThisMotherboard;
