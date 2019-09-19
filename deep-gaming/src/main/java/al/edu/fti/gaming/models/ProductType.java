@@ -2,6 +2,7 @@ package al.edu.fti.gaming.models;
 
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -13,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -29,10 +31,8 @@ public class ProductType implements Serializable, IModel {
 	@Column(name = "product_type", length = 30)
 	private String productType;
 
-	@ManyToMany(cascade = { CascadeType.ALL })
-	@JoinTable(name = "product_productType", joinColumns = {
-			@JoinColumn(name = "id_product_type") }, inverseJoinColumns = { @JoinColumn(name = "id_product") })
-	private Set<Product> products = new HashSet<Product>();
+	@OneToMany(mappedBy = "productType")
+	private List<Product> products;
 
 	public Integer getIdProductType() {
 		return idProductType;
@@ -50,11 +50,11 @@ public class ProductType implements Serializable, IModel {
 		this.productType = productType;
 	}
 
-	public Set<Product> getProducts() {
+	public List<Product> getProducts() {
 		return products;
 	}
 
-	public void setProducts(Set<Product> products) {
+	public void setProducts(List<Product> products) {
 		this.products = products;
 	}
 

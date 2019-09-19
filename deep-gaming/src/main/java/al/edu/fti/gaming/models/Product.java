@@ -5,14 +5,18 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -56,19 +60,12 @@ public class Product implements Serializable, IModel {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date editedDate;
 
-//	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
-//	@JoinColumn(name = "suggested_by")
-//	private User suggestedBy;
-//
-//	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
-//	@JoinColumn(name = "approved_by")
-//	private User approvedBy;
-
 	@Column(name = "hyperlink", nullable = false, length = 255)
 	private String hyperlink;
 
-	@ManyToMany(mappedBy = "products")
-	private Set<ProductType> productTypes = new HashSet<ProductType>();
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+	@JoinColumn(name = "id_product_type", nullable = false)
+	private ProductType productType;
 
 	public Product() {
 		super();
@@ -146,99 +143,12 @@ public class Product implements Serializable, IModel {
 		this.hyperlink = hyperlink;
 	}
 
-	public Set<ProductType> getProductTypes() {
-		return productTypes;
+	public ProductType getProductType() {
+		return productType;
 	}
 
-	public void setProductTypes(Set<ProductType> productTypes) {
-		this.productTypes = productTypes;
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((editedDate == null) ? 0 : editedDate.hashCode());
-		result = prime * result + ((hyperlink == null) ? 0 : hyperlink.hashCode());
-		result = prime * result + ((idProduct == null) ? 0 : idProduct.hashCode());
-		result = prime * result + ((price == null) ? 0 : price.hashCode());
-		result = prime * result + ((productDescription == null) ? 0 : productDescription.hashCode());
-		result = prime * result + ((productName == null) ? 0 : productName.hashCode());
-		result = prime * result + ((productTypes == null) ? 0 : productTypes.hashCode());
-		result = prime * result + ((quantity == null) ? 0 : quantity.hashCode());
-		result = prime * result + ((releaseDate == null) ? 0 : releaseDate.hashCode());
-		result = prime * result + ((uploadDate == null) ? 0 : uploadDate.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Product other = (Product) obj;
-		if (editedDate == null) {
-			if (other.editedDate != null)
-				return false;
-		} else if (!editedDate.equals(other.editedDate))
-			return false;
-		if (hyperlink == null) {
-			if (other.hyperlink != null)
-				return false;
-		} else if (!hyperlink.equals(other.hyperlink))
-			return false;
-		if (idProduct == null) {
-			if (other.idProduct != null)
-				return false;
-		} else if (!idProduct.equals(other.idProduct))
-			return false;
-		if (price == null) {
-			if (other.price != null)
-				return false;
-		} else if (!price.equals(other.price))
-			return false;
-		if (productDescription == null) {
-			if (other.productDescription != null)
-				return false;
-		} else if (!productDescription.equals(other.productDescription))
-			return false;
-		if (productName == null) {
-			if (other.productName != null)
-				return false;
-		} else if (!productName.equals(other.productName))
-			return false;
-		if (productTypes == null) {
-			if (other.productTypes != null)
-				return false;
-		} else if (!productTypes.equals(other.productTypes))
-			return false;
-		if (quantity == null) {
-			if (other.quantity != null)
-				return false;
-		} else if (!quantity.equals(other.quantity))
-			return false;
-		if (releaseDate == null) {
-			if (other.releaseDate != null)
-				return false;
-		} else if (!releaseDate.equals(other.releaseDate))
-			return false;
-		if (uploadDate == null) {
-			if (other.uploadDate != null)
-				return false;
-		} else if (!uploadDate.equals(other.uploadDate))
-			return false;
-		return true;
-	}
-
-	@Override
-	public String toString() {
-		return "Product [idProduct=" + idProduct + ", productName=" + productName + ", productDescription="
-				+ productDescription + ", releaseDate=" + releaseDate + ", price=" + price + ", quantity=" + quantity
-				+ ", uploadDate=" + uploadDate + ", editedDate=" + editedDate + ", hyperlink=" + hyperlink
-				+ ", productTypes=" + productTypes + "]";
+	public void setProductType(ProductType productType) {
+		this.productType = productType;
 	}
 
 }
