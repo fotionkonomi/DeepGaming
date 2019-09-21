@@ -31,8 +31,8 @@ public class ProductType implements Serializable, IModel {
 	@Column(name = "product_type", length = 30)
 	private String productType;
 
-	@OneToMany(mappedBy = "productType")
-	private List<Product> products;
+//	@OneToMany(mappedBy = "productType")
+//	private List<Product> products;
 
 	public Integer getIdProductType() {
 		return idProductType;
@@ -50,55 +50,55 @@ public class ProductType implements Serializable, IModel {
 		this.productType = productType;
 	}
 
-	public List<Product> getProducts() {
-		return products;
-	}
-
-	public void setProducts(List<Product> products) {
-		this.products = products;
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((idProductType == null) ? 0 : idProductType.hashCode());
-		result = prime * result + ((productType == null) ? 0 : productType.hashCode());
-		result = prime * result + ((products == null) ? 0 : products.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		ProductType other = (ProductType) obj;
-		if (idProductType == null) {
-			if (other.idProductType != null)
-				return false;
-		} else if (!idProductType.equals(other.idProductType))
-			return false;
-		if (productType == null) {
-			if (other.productType != null)
-				return false;
-		} else if (!productType.equals(other.productType))
-			return false;
-		if (products == null) {
-			if (other.products != null)
-				return false;
-		} else if (!products.equals(other.products))
-			return false;
-		return true;
-	}
-
-	@Override
-	public String toString() {
-		return "ProductType [idProductType=" + idProductType + ", productType=" + productType + ", products=" + products
-				+ "]";
-	}
+//	public List<Product> getProducts() {
+//		return products;
+//	}
+//
+//	public void setProducts(List<Product> products) {
+//		this.products = products;
+//	}
+//
+//	@Override
+//	public int hashCode() {
+//		final int prime = 31;
+//		int result = 1;
+//		result = prime * result + ((idProductType == null) ? 0 : idProductType.hashCode());
+//		result = prime * result + ((productType == null) ? 0 : productType.hashCode());
+//		result = prime * result + ((products == null) ? 0 : products.hashCode());
+//		return result;
+//	}
+//
+//	@Override
+//	public boolean equals(Object obj) {
+//		if (this == obj)
+//			return true;
+//		if (obj == null)
+//			return false;
+//		if (getClass() != obj.getClass())
+//			return false;
+//		ProductType other = (ProductType) obj;
+//		if (idProductType == null) {
+//			if (other.idProductType != null)
+//				return false;
+//		} else if (!idProductType.equals(other.idProductType))
+//			return false;
+//		if (productType == null) {
+//			if (other.productType != null)
+//				return false;
+//		} else if (!productType.equals(other.productType))
+//			return false;
+//		if (products == null) {
+//			if (other.products != null)
+//				return false;
+//		} else if (!products.equals(other.products))
+//			return false;
+//		return true;
+//	}
+//
+//	@Override
+//	public String toString() {
+//		return "ProductType [idProductType=" + idProductType + ", productType=" + productType + ", products=" + products
+//				+ "]";
+//	}
 
 }

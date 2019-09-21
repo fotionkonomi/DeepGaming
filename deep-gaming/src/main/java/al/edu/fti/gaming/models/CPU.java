@@ -50,6 +50,9 @@ public class CPU extends Product {
 
 	@Column(name = "cpu_benchmark", nullable = false)
 	private Integer cpuBenchmark;
+	
+	@OneToMany(mappedBy = "cpuOfHisComputer")
+	private List<User> usersThatHaveThisCpu = new ArrayList<User>();
 
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 	@JoinColumn(name = "id_cpu_family", nullable = false)
@@ -69,9 +72,6 @@ public class CPU extends Product {
 
 	@OneToMany(mappedBy = "cpuRecommendedForThisGpu")
 	private List<GPU> gpusThatRecommendThisCpu = new ArrayList<GPU>();
-
-	@OneToMany(mappedBy = "cpuOfHisComputer")
-	private List<User> usersThatHaveThisCpu = new ArrayList<User>();
 
 	@OneToMany(mappedBy = "cpuLow")
 	private List<Game> gamesWhereThisCpuIsLow = new ArrayList<Game>();

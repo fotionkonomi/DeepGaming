@@ -7,7 +7,8 @@ public class MotherboardDTO extends ProductDTO {
 	private CompanyDTO companyOfThisMotherboard;
 	private CpuSocketDTO cpuSocketOfThisMotherboard;
 	private MotherboardFormFactorDTO formFactorOfThisMotherboard;
-
+	private GpuSlotDTO gpuSlotOfThisMotherboard;
+	
 	public MotherboardDTO() {
 		super();
 	}
@@ -106,6 +107,14 @@ public class MotherboardDTO extends ProductDTO {
 		} else if (!maximumRamSpeed.equals(other.maximumRamSpeed))
 			return false;
 		return true;
+	}
+
+	public GpuSlotDTO getGpuSlotOfThisMotherboard() {
+		return gpuSlotOfThisMotherboard;
+	}
+
+	public void setGpuSlotOfThisMotherboard(GpuSlotDTO gpuSlotOfThisMotherboard) {
+		this.gpuSlotOfThisMotherboard = gpuSlotOfThisMotherboard;
 	}
 
 }

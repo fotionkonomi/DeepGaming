@@ -52,10 +52,9 @@ public class Motherboard extends Product {
 	@JoinColumn(name = "id_motherboard_form_factor", nullable = false)
 	private MotherboardFormFactor formFactorOfThisMotherboard;
 
-	@ManyToMany(cascade = { CascadeType.ALL })
-	@JoinTable(name = "motherboard_gpu_slot", joinColumns = {
-			@JoinColumn(name = "id_motherboard") }, inverseJoinColumns = { @JoinColumn(name = "id_gpu_slot") })
-	private Set<GpuSlot> gpuSlotsOfThisMotherborad = new HashSet<GpuSlot>();
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE )
+	@JoinColumn(name = "id_gpu_slot", nullable = false)
+	private GpuSlot gpuSlot;
 
 	// Motherboard_Storage
 
