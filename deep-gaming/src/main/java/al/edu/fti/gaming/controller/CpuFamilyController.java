@@ -27,11 +27,8 @@ import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.ModelAndView;
 
 import al.edu.fti.gaming.dto.CompanyDTO;
-import al.edu.fti.gaming.dto.CpuArchitectureDTO;
 import al.edu.fti.gaming.dto.CpuFamilyDTO;
-import al.edu.fti.gaming.exception.CpuArchitectureNotFoundException;
 import al.edu.fti.gaming.exception.CpuFamilyNotFoundException;
-import al.edu.fti.gaming.exception.NoCpuArchitecturesFoundForCompanyException;
 import al.edu.fti.gaming.exception.NoCpuFamilyFoundForCompanyException;
 import al.edu.fti.gaming.service.CompanyService;
 import al.edu.fti.gaming.service.CpuFamilyService;

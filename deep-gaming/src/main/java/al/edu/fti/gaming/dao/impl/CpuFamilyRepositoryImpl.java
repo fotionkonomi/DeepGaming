@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import al.edu.fti.gaming.dao.CpuFamilyRepository;
-import al.edu.fti.gaming.models.CpuArchitecture;
 import al.edu.fti.gaming.models.CpuFamily;
 
 @Repository

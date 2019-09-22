@@ -23,9 +23,7 @@ import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.ModelAndView;
 
 import al.edu.fti.gaming.dto.GpuMemoryTechnologyDTO;
-import al.edu.fti.gaming.dto.GpuSlotDTO;
 import al.edu.fti.gaming.exception.GpuMemoryTechnologyNotFoundException;
-import al.edu.fti.gaming.exception.GpuSlotNotFoundException;
 import al.edu.fti.gaming.service.GeneralService;
 import al.edu.fti.gaming.service.GpuMemoryTechnologyService;
 import al.edu.fti.gaming.utils.Messages;

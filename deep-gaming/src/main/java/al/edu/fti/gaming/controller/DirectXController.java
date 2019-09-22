@@ -24,10 +24,7 @@ import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.ModelAndView;
 
 import al.edu.fti.gaming.dto.DirectXDTO;
-import al.edu.fti.gaming.dto.EsrbRatingsDTO;
 import al.edu.fti.gaming.exception.DirectXNotFoundException;
-import al.edu.fti.gaming.exception.EsrbRatingNotFoundException;
-import al.edu.fti.gaming.models.CPU;
 import al.edu.fti.gaming.service.DirectXService;
 import al.edu.fti.gaming.service.GeneralService;
 import al.edu.fti.gaming.utils.Messages;

@@ -10,11 +10,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import al.edu.fti.gaming.converter.Converter;
 import al.edu.fti.gaming.dao.GpuFamilyRepository;
-import al.edu.fti.gaming.dto.CpuFamilyDTO;
 import al.edu.fti.gaming.dto.GpuFamilyDTO;
 import al.edu.fti.gaming.exception.GpuFamilyNotFoundException;
 import al.edu.fti.gaming.exception.NoGpuFamilyFoundForCompanyException;
-import al.edu.fti.gaming.models.CpuFamily;
 import al.edu.fti.gaming.models.GpuFamily;
 import al.edu.fti.gaming.service.GpuFamilyService;
 

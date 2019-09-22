@@ -9,9 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import al.edu.fti.gaming.converter.Converter;
-import al.edu.fti.gaming.dao.CompanyRepository;
 import al.edu.fti.gaming.dao.CpuFamilyRepository;
-import al.edu.fti.gaming.dto.CpuArchitectureDTO;
 import al.edu.fti.gaming.dto.CpuFamilyDTO;
 import al.edu.fti.gaming.exception.CpuFamilyNotFoundException;
 import al.edu.fti.gaming.exception.NoCpuFamilyFoundForCompanyException;

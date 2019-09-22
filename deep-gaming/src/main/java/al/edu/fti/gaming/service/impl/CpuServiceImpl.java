@@ -50,7 +50,6 @@ public class CpuServiceImpl implements CpuService {
 	@Qualifier("cpuSocketConverter")
 	private Converter cpuSocketConverter;	
 	
-	
 	@Autowired
 	private CpuFamilyService cpuFamilyService;
 

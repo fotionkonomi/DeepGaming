@@ -9,14 +9,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import al.edu.fti.gaming.converter.Converter;
-import al.edu.fti.gaming.dao.CompanyRepository;
 import al.edu.fti.gaming.dao.CpuArchitectureRepository;
 import al.edu.fti.gaming.dto.CpuArchitectureDTO;
-import al.edu.fti.gaming.dto.CpuSocketDTO;
 import al.edu.fti.gaming.exception.CpuArchitectureNotFoundException;
 import al.edu.fti.gaming.exception.NoCpuArchitecturesFoundForCompanyException;
 import al.edu.fti.gaming.models.CpuArchitecture;
-import al.edu.fti.gaming.models.CpuSocket;
 import al.edu.fti.gaming.service.CpuArchitectureService;
 
 @Service
