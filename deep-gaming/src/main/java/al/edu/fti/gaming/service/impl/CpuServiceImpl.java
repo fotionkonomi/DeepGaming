@@ -26,6 +26,7 @@ import al.edu.fti.gaming.service.CpuFamilyService;
 import al.edu.fti.gaming.service.CpuService;
 import al.edu.fti.gaming.service.CpuSocketService;
 import al.edu.fti.gaming.service.GeneralService;
+import al.edu.fti.gaming.service.ProductTypeService;
 
 @Service
 @Transactional
@@ -61,6 +62,9 @@ public class CpuServiceImpl implements CpuService {
 
 	@Autowired
 	private GeneralService generalService;
+	
+	@Autowired
+	private ProductTypeService productTypeService;
 
 	@Override
 	public int add(CpuDTO cpuDTO) {
@@ -166,6 +170,7 @@ public class CpuServiceImpl implements CpuService {
 	@Override
 	public void preCpuSave(CpuDTO cpuDTO, String queryString) throws ParseException {
 		generalService.convertStringToDate(cpuDTO);
+		cpuDTO.setProductType(productTypeService.getCpuProductType());
 		cpuDTO.setUploadDate(new Date());
 		cpuDTO.setEditedDate(new Date());
 		cpuDTO.setFamilyOfThisCpu(cpuFamilyService.getCpuFamilyById(getCpuFamilyId(queryString)));

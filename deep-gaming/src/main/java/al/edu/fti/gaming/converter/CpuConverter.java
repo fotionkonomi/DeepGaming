@@ -4,16 +4,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
+import al.edu.fti.gaming.controller.ProductTypeConverter;
 import al.edu.fti.gaming.dto.CpuArchitectureDTO;
 import al.edu.fti.gaming.dto.CpuDTO;
 import al.edu.fti.gaming.dto.CpuFamilyDTO;
 import al.edu.fti.gaming.dto.CpuSocketDTO;
 import al.edu.fti.gaming.dto.IDto;
+import al.edu.fti.gaming.dto.ProductTypeDTO;
 import al.edu.fti.gaming.models.CPU;
 import al.edu.fti.gaming.models.CpuArchitecture;
 import al.edu.fti.gaming.models.CpuFamily;
 import al.edu.fti.gaming.models.CpuSocket;
 import al.edu.fti.gaming.models.IModel;
+import al.edu.fti.gaming.models.ProductType;
 
 @Component
 public class CpuConverter implements Converter {
@@ -30,6 +33,9 @@ public class CpuConverter implements Converter {
 	@Qualifier("cpuArchitectureConverter")
 	private Converter cpuArchitectureConverter;
 
+	@Autowired
+	@Qualifier("productTypeConverter")
+	private ProductTypeConverter productTypeConverter;
 	/*
 	 * ------------ DONT FORGET ----------------
 	 * 
@@ -67,10 +73,9 @@ public class CpuConverter implements Converter {
 		cpu.setSocketForThisCpu((CpuSocket) cpuSocketConverter.toModel(cpuDTO.getSocketOfThisCpu()));
 		cpu.setArchitectureOfThisCpu(
 				(CpuArchitecture) cpuArchitectureConverter.toModel(cpuDTO.getArchitectureOfThisCpu()));
-
+		cpu.setProductType((ProductType) productTypeConverter.toModel(cpuDTO.getProductType()));
 		// cpu.setIntegratedGpuOfThisCpu((GPU)
 		// gpuConverter.toModel(cpuDTO.getIntegratedGpuOfThisCpu()));
-
 
 		return cpu;
 	}
@@ -102,10 +107,9 @@ public class CpuConverter implements Converter {
 		cpuDTO.setSocketOfThisCpu((CpuSocketDTO) cpuSocketConverter.toDTO(cpu.getSocketForThisCpu()));
 		cpuDTO.setArchitectureOfThisCpu(
 				(CpuArchitectureDTO) cpuArchitectureConverter.toDTO(cpu.getArchitectureOfThisCpu()));
-		
+		cpuDTO.setProductType((ProductTypeDTO) productTypeConverter.toDTO(cpu.getProductType()));
 		// cpuDTO.setIntegratedGpuOfThisCpu((GpuDTO)
 		// gpuConverter.toDTO(cpu.getIntegratedGpuOfThisCpu()));
-
 
 		return cpuDTO;
 	}

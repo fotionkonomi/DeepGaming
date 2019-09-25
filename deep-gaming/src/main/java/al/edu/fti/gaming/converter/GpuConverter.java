@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
+import al.edu.fti.gaming.controller.ProductTypeConverter;
 import al.edu.fti.gaming.dto.CpuDTO;
 import al.edu.fti.gaming.dto.DirectXDTO;
 import al.edu.fti.gaming.dto.GpuArchitectureDTO;
@@ -12,6 +13,7 @@ import al.edu.fti.gaming.dto.GpuFamilyDTO;
 import al.edu.fti.gaming.dto.GpuMemoryTechnologyDTO;
 import al.edu.fti.gaming.dto.GpuSlotDTO;
 import al.edu.fti.gaming.dto.IDto;
+import al.edu.fti.gaming.dto.ProductTypeDTO;
 import al.edu.fti.gaming.models.CPU;
 import al.edu.fti.gaming.models.DirectX;
 import al.edu.fti.gaming.models.GPU;
@@ -20,6 +22,7 @@ import al.edu.fti.gaming.models.GpuFamily;
 import al.edu.fti.gaming.models.GpuMemoryTechnology;
 import al.edu.fti.gaming.models.GpuSlot;
 import al.edu.fti.gaming.models.IModel;
+import al.edu.fti.gaming.models.ProductType;
 
 @Component
 public class GpuConverter implements Converter {
@@ -47,6 +50,10 @@ public class GpuConverter implements Converter {
 	@Autowired
 	@Qualifier("cpuConverter")
 	private CpuConverter cpuConverter;
+
+	@Autowired
+	@Qualifier("productTypeConverter")
+	private ProductTypeConverter productTypeConverter;
 
 	@Override
 	public IModel toModel(IDto dtoObject) {
@@ -91,6 +98,7 @@ public class GpuConverter implements Converter {
 				(DirectX) directXConverter.toModel(gpuDTO.getMaximumDirectXSupportedByThisGpu()));
 		gpu.setGpuSlotOfThisGpu((GpuSlot) gpuSlotConverter.toModel(gpuDTO.getGpuSlotOfThisGpu()));
 		gpu.setCpuRecommendedForThisGpu((CPU) cpuConverter.toModel(gpuDTO.getCpuRecommendedForThisGpu()));
+		gpu.setProductType((ProductType) productTypeConverter.toModel(gpuDTO.getProductType()));
 
 		return gpu;
 	}
@@ -137,6 +145,8 @@ public class GpuConverter implements Converter {
 				(DirectXDTO) directXConverter.toDTO(gpu.getMaximumDirectXSupportedByThisGpu()));
 		gpuDTO.setGpuSlotOfThisGpu((GpuSlotDTO) gpuSlotConverter.toDTO(gpu.getGpuSlotOfThisGpu()));
 		gpuDTO.setCpuRecommendedForThisGpu((CpuDTO) cpuConverter.toDTO(gpu.getCpuRecommendedForThisGpu()));
+		gpuDTO.setProductType((ProductTypeDTO) productTypeConverter.toDTO(gpu.getProductType()));
+
 		return gpuDTO;
 	}
 

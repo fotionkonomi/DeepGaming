@@ -11,7 +11,6 @@ import org.hibernate.validator.constraints.URL;
 
 public class ProductDTO extends IdNameDescriptionDTO {
 
-	
 	private Date releaseDate;
 
 	@Min(value = 1, message = "{validation.field.min.one}")
@@ -31,6 +30,8 @@ public class ProductDTO extends IdNameDescriptionDTO {
 	@Pattern(regexp = "(20\\d{2})-(\\d{2})-(\\d{2})", message = "{date.validator}")
 	@NotEmpty(message = "{validation.field.required}")
 	private String date;
+
+	private ProductTypeDTO productType;
 
 	public ProductDTO() {
 		super();
@@ -92,66 +93,12 @@ public class ProductDTO extends IdNameDescriptionDTO {
 		this.hyperlink = hyperlink;
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = super.hashCode();
-		result = prime * result + ((editedDate == null) ? 0 : editedDate.hashCode());
-		result = prime * result + ((hyperlink == null) ? 0 : hyperlink.hashCode());
-		result = prime * result + ((price == null) ? 0 : price.hashCode());
-		result = prime * result + ((quantity == null) ? 0 : quantity.hashCode());
-		result = prime * result + ((releaseDate == null) ? 0 : releaseDate.hashCode());
-		result = prime * result + ((uploadDate == null) ? 0 : uploadDate.hashCode());
-		return result;
+	public ProductTypeDTO getProductType() {
+		return productType;
 	}
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (!super.equals(obj))
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		ProductDTO other = (ProductDTO) obj;
-		if (editedDate == null) {
-			if (other.editedDate != null)
-				return false;
-		} else if (!editedDate.equals(other.editedDate))
-			return false;
-		if (hyperlink == null) {
-			if (other.hyperlink != null)
-				return false;
-		} else if (!hyperlink.equals(other.hyperlink))
-			return false;
-		if (price == null) {
-			if (other.price != null)
-				return false;
-		} else if (!price.equals(other.price))
-			return false;
-		if (quantity == null) {
-			if (other.quantity != null)
-				return false;
-		} else if (!quantity.equals(other.quantity))
-			return false;
-		if (releaseDate == null) {
-			if (other.releaseDate != null)
-				return false;
-		} else if (!releaseDate.equals(other.releaseDate))
-			return false;
-		if (uploadDate == null) {
-			if (other.uploadDate != null)
-				return false;
-		} else if (!uploadDate.equals(other.uploadDate))
-			return false;
-		return true;
+	public void setProductType(ProductTypeDTO productType) {
+		this.productType = productType;
 	}
-
-	@Override
-	public String toString() {
-		return "ProductDTO [releaseDate=" + releaseDate + ", price=" + price + ", quantity=" + quantity
-				+ ", uploadDate=" + uploadDate + ", editedDate=" + editedDate + ", hyperlink=" + hyperlink + "]";
-	}
-
 
 }

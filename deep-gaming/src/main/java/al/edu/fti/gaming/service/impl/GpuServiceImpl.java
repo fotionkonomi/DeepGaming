@@ -34,6 +34,7 @@ import al.edu.fti.gaming.service.GpuFamilyService;
 import al.edu.fti.gaming.service.GpuMemoryTechnologyService;
 import al.edu.fti.gaming.service.GpuService;
 import al.edu.fti.gaming.service.GpuSlotService;
+import al.edu.fti.gaming.service.ProductTypeService;
 
 @Service
 @Transactional
@@ -86,6 +87,9 @@ public class GpuServiceImpl implements GpuService {
 	@Autowired
 	private GpuService gpuService;
 
+	@Autowired
+	private ProductTypeService productTypeService;
+
 	@Override
 	public int add(GpuDTO gpuDTO) {
 		GPU gpu = (GPU) gpuConverter.toModel(gpuDTO);
@@ -130,6 +134,7 @@ public class GpuServiceImpl implements GpuService {
 	@Override
 	public void preGpuSave(GpuDTO gpuDTO, String queryString) throws ParseException {
 		generalService.convertStringToDate(gpuDTO);
+		gpuDTO.setProductType(productTypeService.getGpuProductType());
 		gpuDTO.setUploadDate(new Date());
 		gpuDTO.setEditedDate(new Date());
 		gpuDTO.setFamilyOfThisGpu(gpuFamilyService.getGpuFamilyById(getGpuFamilyId(queryString)));
