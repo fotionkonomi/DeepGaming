@@ -23,7 +23,7 @@
 						alt="${category.name}"> <br /> <br />
 					
 					<a style="text-align: center;"
-						href="<spring:url value="/categoryofgames/update?id=${category.id }" />"
+						href="<spring:url value="/categoryOfGames/update?id=${category.id }" />"
 						class="btn btn-primary"> <spring:message
 							code="details.update" />
 					</a>

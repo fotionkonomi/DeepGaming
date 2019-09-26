@@ -21,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 import al.edu.fti.gaming.dto.CpuDTO;
 import al.edu.fti.gaming.dto.GpuDTO;
 import al.edu.fti.gaming.dto.UserDTO;
+import al.edu.fti.gaming.service.CpuService;
 import al.edu.fti.gaming.service.GpuService;
 import al.edu.fti.gaming.service.UserService;
 import al.edu.fti.gaming.utils.CpuEditor;
@@ -42,6 +43,9 @@ public class SignupController {
 	@Autowired
 	private UserService userService;
 
+	@Autowired
+	private CpuService cpuService;
+
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
 		binder.registerCustomEditor(String.class, new StringTrimmerEditor(true));
@@ -54,7 +58,7 @@ public class SignupController {
 	public String signup(Model model) {
 		UserDTO userDTO = new UserDTO();
 		model.addAttribute("newUser", userDTO);
-		model.addAttribute("cpus", gpuService.getAllCpusMap());
+		model.addAttribute("cpus", cpuService.getAllCpusMap());
 		model.addAttribute("gpus", gpuService.getAllGpusMap());
 		return "signup";
 	}
@@ -65,7 +69,7 @@ public class SignupController {
 		ModelAndView mav = new ModelAndView();
 		if (result.hasErrors()) {
 			mav.setViewName("signup");
-			mav.addObject("cpus", gpuService.getAllCpusMap());
+			mav.addObject("cpus", cpuService.getAllCpusMap());
 			mav.addObject("gpus", gpuService.getAllGpusMap());
 			return mav;
 		}

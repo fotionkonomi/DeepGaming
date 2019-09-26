@@ -3,7 +3,9 @@ package al.edu.fti.gaming.service.impl;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -38,19 +40,19 @@ public class CpuServiceImpl implements CpuService {
 	@Autowired
 	@Qualifier("cpuConverter")
 	private Converter cpuConverter;
-	
+
 	@Autowired
 	@Qualifier("cpuFamilyConverter")
 	private Converter cpuFamilyConverter;
-	
+
 	@Autowired
 	@Qualifier("cpuArchitectureConverter")
 	private Converter cpuArchitectureConverter;
 
 	@Autowired
 	@Qualifier("cpuSocketConverter")
-	private Converter cpuSocketConverter;	
-	
+	private Converter cpuSocketConverter;
+
 	@Autowired
 	private CpuFamilyService cpuFamilyService;
 
@@ -62,7 +64,7 @@ public class CpuServiceImpl implements CpuService {
 
 	@Autowired
 	private GeneralService generalService;
-	
+
 	@Autowired
 	private ProductTypeService productTypeService;
 
@@ -88,7 +90,6 @@ public class CpuServiceImpl implements CpuService {
 
 		String company = getCompany(queryString);
 
-
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("cpuFamily", cpuFamilyIdString);
 		mav.addObject("cpuArchitecture", cpuArchitectureIdString);
@@ -97,7 +98,7 @@ public class CpuServiceImpl implements CpuService {
 
 		return mav;
 	}
- 
+
 	private String getCpuFamilyStringId(String query) {
 		String queryString = query;
 		int indexOfCpuFamily = queryString.indexOf("cpuFamily=");
@@ -232,14 +233,25 @@ public class CpuServiceImpl implements CpuService {
 		cpuDTO.setEditedDate(new Date());
 		cpuDTO.setUploadDate(cpu.getUploadDate());
 		cpuDTO.setFamilyOfThisCpu((CpuFamilyDTO) cpuFamilyConverter.toDTO(cpu.getFamilyOfThisCpu()));
-		cpuDTO.setArchitectureOfThisCpu((CpuArchitectureDTO) cpuArchitectureConverter.toDTO(cpu.getArchitectureOfThisCpu()));
+		cpuDTO.setArchitectureOfThisCpu(
+				(CpuArchitectureDTO) cpuArchitectureConverter.toDTO(cpu.getArchitectureOfThisCpu()));
 		cpuDTO.setSocketOfThisCpu((CpuSocketDTO) cpuSocketConverter.toDTO(cpu.getSocketForThisCpu()));
 		cpuRepository.update((CPU) cpuConverter.toModel(cpuDTO));
 	}
-	
+
 	@Override
 	public List<CpuDTO> getAllCpus() {
 		return convertList(cpuRepository.getAllCpus());
 	}
 
+	@Override
+	public Map<Integer, String> getAllCpusMap() {
+		List<CpuDTO> allCpus = getAllCpus();
+		Map<Integer, String> allCpusMap = new HashMap<Integer, String>();
+		for (CpuDTO cpuDTO : allCpus) {
+			allCpusMap.put(cpuDTO.getId(), cpuDTO.getFamilyOfThisCpu().getCompanyOfThisCpuFamily().getName() + " "
+					+ cpuDTO.getFamilyOfThisCpu().getName() + " " + cpuDTO.getName());
+		}
+		return allCpusMap;
+	}
 }

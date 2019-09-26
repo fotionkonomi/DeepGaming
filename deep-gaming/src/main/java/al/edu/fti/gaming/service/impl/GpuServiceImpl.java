@@ -195,47 +195,6 @@ public class GpuServiceImpl implements GpuService {
 	}
 
 	@Override
-	public Map<Integer, String> getAllMemoryTechnologiesMap() {
-		List<GpuMemoryTechnologyDTO> allMemoryTechnologies = gpuMemoryTechnologyService.getAllGpuMemoryTechnologies();
-		Map<Integer, String> allMemoryTechnologiesMap = new HashMap<Integer, String>();
-		for (GpuMemoryTechnologyDTO gpuMemoryTechnologyDTO : allMemoryTechnologies) {
-			allMemoryTechnologiesMap.put(gpuMemoryTechnologyDTO.getId(), gpuMemoryTechnologyDTO.getName());
-		}
-		return allMemoryTechnologiesMap;
-	}
-
-	@Override
-	public Map<Integer, String> getDirectXsMap() {
-		List<DirectXDTO> allDirectXs = directXService.getAllDirectXs();
-		Map<Integer, String> allDirectXsMap = new HashMap<Integer, String>();
-		for (DirectXDTO directXDTO : allDirectXs) {
-			allDirectXsMap.put(directXDTO.getId(), directXDTO.getName());
-		}
-		return allDirectXsMap;
-	}
-
-	@Override
-	public Map<Integer, String> getAllGpuSlotsMap() {
-		List<GpuSlotDTO> allGpuSlots = gpuSlotService.getAllGpuSlots();
-		Map<Integer, String> allGpuSlotsMap = new HashMap<Integer, String>();
-		for (GpuSlotDTO gpuSlotDTO : allGpuSlots) {
-			allGpuSlotsMap.put(gpuSlotDTO.getId(), gpuSlotDTO.getName());
-		}
-		return allGpuSlotsMap;
-	}
-
-	@Override
-	public Map<Integer, String> getAllCpusMap() {
-		List<CpuDTO> allCpus = cpuService.getAllCpus();
-		Map<Integer, String> allCpusMap = new HashMap<Integer, String>();
-		for (CpuDTO cpuDTO : allCpus) {
-			allCpusMap.put(cpuDTO.getId(), cpuDTO.getFamilyOfThisCpu().getCompanyOfThisCpuFamily().getName() + " "
-					+ cpuDTO.getFamilyOfThisCpu().getName() + " " + cpuDTO.getName());
-		}
-		return allCpusMap;
-	}
-
-	@Override
 	public Map<Integer, String> getAllGpusMap() {
 		List<GpuDTO> allGpus = gpuService.getAllGpus();
 		Map<Integer, String> allGpusMap = new HashMap<Integer, String>();

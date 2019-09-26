@@ -51,6 +51,7 @@ public class CompanyController implements HandlerExceptionResolver {
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public String processForm(@ModelAttribute("newCompany") @Valid CompanyDTO companyDTO, BindingResult result,
 			HttpServletRequest request) {
+		
 		if (result.hasErrors()) {
 			return "/company/addCompany";
 		}

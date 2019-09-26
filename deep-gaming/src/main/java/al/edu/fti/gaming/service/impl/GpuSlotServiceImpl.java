@@ -1,7 +1,9 @@
 package al.edu.fti.gaming.service.impl;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -65,4 +67,13 @@ public class GpuSlotServiceImpl implements GpuSlotService {
 		return gpuSlotDTOs;
 	}
 
+	@Override
+	public Map<Integer, String> getAllGpuSlotsMap() {
+		List<GpuSlotDTO> allGpuSlots = getAllGpuSlots();
+		Map<Integer, String> allGpuSlotsMap = new HashMap<Integer, String>();
+		for (GpuSlotDTO gpuSlotDTO : allGpuSlots) {
+			allGpuSlotsMap.put(gpuSlotDTO.getId(), gpuSlotDTO.getName());
+		}
+		return allGpuSlotsMap;
+	}
 }

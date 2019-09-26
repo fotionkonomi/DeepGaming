@@ -1,7 +1,9 @@
 package al.edu.fti.gaming.service.impl;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -68,5 +70,17 @@ public class GpuMemoryTechnologyServiceImpl implements GpuMemoryTechnologyServic
 		}
 		return gpuMemoryTechnologyDTOs;
 	}
+	
+
+	@Override
+	public Map<Integer, String> getAllMemoryTechnologiesMap() {
+		List<GpuMemoryTechnologyDTO> allMemoryTechnologies = getAllGpuMemoryTechnologies();
+		Map<Integer, String> allMemoryTechnologiesMap = new HashMap<Integer, String>();
+		for (GpuMemoryTechnologyDTO gpuMemoryTechnologyDTO : allMemoryTechnologies) {
+			allMemoryTechnologiesMap.put(gpuMemoryTechnologyDTO.getId(), gpuMemoryTechnologyDTO.getName());
+		}
+		return allMemoryTechnologiesMap;
+	}
+
 
 }

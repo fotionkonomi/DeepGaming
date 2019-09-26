@@ -5,5 +5,7 @@ public class CategoryOfGameDTO extends IdNameDescriptionDTO  {
 	public CategoryOfGameDTO() {
 		super();
 	}
+	
+	
 
 }

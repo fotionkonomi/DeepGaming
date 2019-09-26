@@ -1,7 +1,9 @@
 package al.edu.fti.gaming.service.impl;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -92,6 +94,16 @@ public class CategoryOfGameServiceImpl implements CategoryOfGameService {
 
 	public static Logger getLogger() {
 		return LOGGER;
+	}
+
+	@Override
+	public Map<Integer, String> getAllCategoryOfGamesMap() {
+		List<CategoryOfGameDTO> allCategories = getAllCategories();
+		Map<Integer, String> allCategoriesMap = new HashMap<Integer, String>();
+		for (CategoryOfGameDTO categoryOfGameDTO : allCategories) {
+			allCategoriesMap.put(categoryOfGameDTO.getId(), categoryOfGameDTO.getName());
+		}
+		return allCategoriesMap;
 	}
 
 }

@@ -2,6 +2,7 @@ package al.edu.fti.gaming.service;
 
 import java.text.ParseException;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.web.servlet.ModelAndView;
 
@@ -32,4 +33,7 @@ public interface CpuService {
 	void update(CpuDTO cpuDTO, int id) throws ParseException;
 	
 	List<CpuDTO> getAllCpus();
+	
+	Map<Integer, String> getAllCpusMap();
+
 }

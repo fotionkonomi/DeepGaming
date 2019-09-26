@@ -1,11 +1,11 @@
 package al.edu.fti.gaming.dto;
 
 import java.io.Serializable;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 public class GameDTO extends ProductDTO implements IDto, Serializable {
 
-	
 	/**
 	 * 
 	 */
@@ -33,8 +33,8 @@ public class GameDTO extends ProductDTO implements IDto, Serializable {
 
 	private EsrbRatingsDTO esrbRating;
 
-	private Set<CategoryOfGameDTO> categoryOfGames;
-	
+	private List<CategoryOfGameDTO> categoryOfGames = new ArrayList<>();
+
 	public Double getRamLow() {
 		return ramLow;
 	}
@@ -123,11 +123,11 @@ public class GameDTO extends ProductDTO implements IDto, Serializable {
 		this.esrbRating = esrbRating;
 	}
 
-	public Set<CategoryOfGameDTO> getCategoryOfGames() {
+	public List<CategoryOfGameDTO> getCategoryOfGames() {
 		return categoryOfGames;
 	}
 
-	public void setCategoryOfGames(Set<CategoryOfGameDTO> categoryOfGames) {
+	public void setCategoryOfGames(List<CategoryOfGameDTO> categoryOfGames) {
 		this.categoryOfGames = categoryOfGames;
 	}
 

@@ -1,7 +1,9 @@
 package al.edu.fti.gaming.service.impl;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -65,6 +67,15 @@ public class EsrbRatingsServiceImpl implements EsrbRatingsService {
 			esrbRatingsDTOs.add(esrbRatingsDTO);
 		}
 		return esrbRatingsDTOs;
+	}
+
+	@Override
+	public Map<Integer, String> getAllEsrbRatingsMap() {
+		Map<Integer, String> allEsrbRatingsMap = new HashMap<Integer, String>();
+		for (EsrbRatingsDTO esrbRatingsDTO : getAllEsrbRatingsDTO()) {
+			allEsrbRatingsMap.put(esrbRatingsDTO.getId(), esrbRatingsDTO.getDescription());
+		}
+		return allEsrbRatingsMap;
 	}
 
 }

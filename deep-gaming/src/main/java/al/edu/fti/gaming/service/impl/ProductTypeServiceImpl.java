@@ -2,12 +2,14 @@ package al.edu.fti.gaming.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
 
 import al.edu.fti.gaming.controller.ProductTypeConverter;
 import al.edu.fti.gaming.dao.ProductTypeRepository;
 import al.edu.fti.gaming.dto.ProductTypeDTO;
 import al.edu.fti.gaming.service.ProductTypeService;
 
+@Service
 public class ProductTypeServiceImpl implements ProductTypeService {
 
 	@Autowired

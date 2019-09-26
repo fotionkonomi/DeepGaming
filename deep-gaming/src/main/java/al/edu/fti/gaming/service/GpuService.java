@@ -34,13 +34,5 @@ public interface GpuService {
 	
 	void update(GpuDTO gpuDTO, int id) throws ParseException;
 	
-	Map<Integer, String> getAllMemoryTechnologiesMap();
-	
-	Map<Integer, String> getAllGpuSlotsMap();
-	
-	Map<Integer, String> getDirectXsMap();
-	
-	Map<Integer, String> getAllCpusMap();
-	
 	Map<Integer, String> getAllGpusMap();
 }

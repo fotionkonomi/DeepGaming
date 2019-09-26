@@ -1,7 +1,9 @@
 package al.edu.fti.gaming.service.impl;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -57,6 +59,16 @@ public class DirectXServiceImpl implements DirectXService {
 		return this.directXRepository.update((DirectX) directXConverter.toModel(directXDTO));
 	}
 
+	@Override
+	public Map<Integer, String> getDirectXsMap() {
+		List<DirectXDTO> allDirectXs = getAllDirectXs();
+		Map<Integer, String> allDirectXsMap = new HashMap<Integer, String>();
+		for (DirectXDTO directXDTO : allDirectXs) {
+			allDirectXsMap.put(directXDTO.getId(), directXDTO.getName());
+		}
+		return allDirectXsMap;
+	}
+	
 	private List<DirectXDTO> convertList(List<DirectX> directXModels) {
 		List<DirectXDTO> directXDTOs = new ArrayList<DirectXDTO>();
 		for (DirectX directX : directXModels) {

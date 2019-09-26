@@ -42,10 +42,14 @@ import al.edu.fti.gaming.exception.GpuArchitectureNotFoundException;
 import al.edu.fti.gaming.exception.GpuNotFoundException;
 import al.edu.fti.gaming.exception.ProductsNotFoundException;
 import al.edu.fti.gaming.service.CompanyService;
+import al.edu.fti.gaming.service.CpuService;
+import al.edu.fti.gaming.service.DirectXService;
 import al.edu.fti.gaming.service.GeneralService;
 import al.edu.fti.gaming.service.GpuArchitectureService;
 import al.edu.fti.gaming.service.GpuFamilyService;
+import al.edu.fti.gaming.service.GpuMemoryTechnologyService;
 import al.edu.fti.gaming.service.GpuService;
+import al.edu.fti.gaming.service.GpuSlotService;
 import al.edu.fti.gaming.service.UserService;
 import al.edu.fti.gaming.utils.CpuEditor;
 import al.edu.fti.gaming.utils.DirectXEditor;
@@ -68,14 +72,25 @@ public class GpuController implements HandlerExceptionResolver {
 	private GpuService gpuService;
 
 	@Autowired
+	private DirectXService directXService;
+
+	@Autowired
 	private GpuArchitectureService gpuArchitectureService;
-	
+
 	@Autowired
 	private GpuFamilyService gpuFamilyService;
 
 	@Autowired
 	private Messages messages;
 
+	@Autowired
+	private CpuService cpuService;
+
+	@Autowired
+	private GpuSlotService gpuSlotService;
+
+	@Autowired
+	private GpuMemoryTechnologyService gpuMemoryTechnologyService;
 
 	@Autowired
 	private GpuValidator gpuValidator;
@@ -195,10 +210,10 @@ public class GpuController implements HandlerExceptionResolver {
 		model.addAttribute("gpuFamily", gpuFamily);
 		model.addAttribute("gpuArchitecture", gpuArchitecture);
 		model.addAttribute("company", company);
-		model.addAttribute("gpuMemoryTechnologies", gpuService.getAllMemoryTechnologiesMap());
-		model.addAttribute("gpuSlots", gpuService.getAllGpuSlotsMap());
-		model.addAttribute("directXs", gpuService.getDirectXsMap());
-		model.addAttribute("cpus", gpuService.getAllCpusMap());
+		model.addAttribute("gpuMemoryTechnologies", gpuMemoryTechnologyService.getAllMemoryTechnologiesMap());
+		model.addAttribute("gpuSlots", gpuSlotService.getAllGpuSlotsMap());
+		model.addAttribute("directXs", directXService.getDirectXsMap());
+		model.addAttribute("cpus", cpuService.getAllCpusMap());
 		GpuDTO gpuDTO = new GpuDTO();
 		model.addAttribute("newGpu", gpuDTO);
 		return "/gpu/addGpu";
@@ -210,10 +225,10 @@ public class GpuController implements HandlerExceptionResolver {
 		ModelAndView mav;
 		if (result.hasErrors()) {
 			mav = gpuService.getModelWithRequestParameters(request.getQueryString());
-			mav.addObject("gpuMemoryTechnologies", gpuService.getAllMemoryTechnologiesMap());
-			mav.addObject("gpuSlots", gpuService.getAllGpuSlotsMap());
-			mav.addObject("directXs", gpuService.getDirectXsMap());
-			mav.addObject("cpus", gpuService.getAllCpusMap());
+			mav.addObject("gpuMemoryTechnologies", gpuMemoryTechnologyService.getAllMemoryTechnologiesMap());
+			mav.addObject("gpuSlots", gpuSlotService.getAllGpuSlotsMap());
+			mav.addObject("directXs", directXService.getDirectXsMap());
+			mav.addObject("cpus", cpuService.getAllCpusMap());
 			mav.setViewName("gpu/addGpu");
 			return mav;
 		}
@@ -246,10 +261,10 @@ public class GpuController implements HandlerExceptionResolver {
 	public String update(@RequestParam("id") int gpuId, Model model) {
 		GpuDTO gpuDTO = gpuService.getGpuById(gpuId);
 		model.addAttribute("gpu", gpuDTO);
-		model.addAttribute("gpuMemoryTechnologies", gpuService.getAllMemoryTechnologiesMap());
-		model.addAttribute("gpuSlots", gpuService.getAllGpuSlotsMap());
-		model.addAttribute("directXs", gpuService.getDirectXsMap());
-		model.addAttribute("cpus", gpuService.getAllCpusMap());
+		model.addAttribute("gpuMemoryTechnologies", gpuMemoryTechnologyService.getAllMemoryTechnologiesMap());
+		model.addAttribute("gpuSlots", gpuSlotService.getAllGpuSlotsMap());
+		model.addAttribute("directXs", directXService.getDirectXsMap());
+		model.addAttribute("cpus", cpuService.getAllCpusMap());
 		return "gpu/update";
 	}
 
@@ -261,10 +276,10 @@ public class GpuController implements HandlerExceptionResolver {
 				result.getAllErrors(), gpuDTO.getImage(), messages.get("al.edu.fti.gaming.validator.image"));
 
 		if (!listOfErrorsWithoutImageError.isEmpty()) {
-			mav.addObject("gpuMemoryTechnologies", gpuService.getAllMemoryTechnologiesMap());
-			mav.addObject("gpuSlots", gpuService.getAllGpuSlotsMap());
-			mav.addObject("directXs", gpuService.getDirectXsMap());
-			mav.addObject("cpus", gpuService.getAllCpusMap());
+			mav.addObject("gpuMemoryTechnologies", gpuMemoryTechnologyService.getAllMemoryTechnologiesMap());
+			mav.addObject("gpuSlots", gpuSlotService.getAllGpuSlotsMap());
+			mav.addObject("directXs", directXService.getDirectXsMap());
+			mav.addObject("cpus", cpuService.getAllCpusMap());
 			mav.setViewName("gpu/update");
 			return mav;
 		} else {

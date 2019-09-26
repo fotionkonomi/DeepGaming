@@ -1,6 +1,8 @@
 package al.edu.fti.gaming.converter;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -113,6 +115,11 @@ public class GameConverter implements Converter {
 		gameDTO.setGpuHigh((GpuDTO) gpuConverter.toDTO(game.getGpuHigh()));
 		gameDTO.setDirectXMinimum((DirectXDTO) directXConverter.toDTO(game.getDirectXMinimum()));
 		gameDTO.setEsrbRating((EsrbRatingsDTO) esrbRatingsConverter.toDTO(game.getEsrbRating()));
+		List<CategoryOfGameDTO> addingCategtoryOfGames = new ArrayList<CategoryOfGameDTO>();
+		for (CategoryOfGame categoryOfGame : game.getCategoriesOfThisGame()) {
+			addingCategtoryOfGames.add((CategoryOfGameDTO) categoryOfGamesConverter.toDTO(categoryOfGame));
+		}
+		gameDTO.setCategoryOfGames(addingCategtoryOfGames);
 		return gameDTO;
 	}
 
