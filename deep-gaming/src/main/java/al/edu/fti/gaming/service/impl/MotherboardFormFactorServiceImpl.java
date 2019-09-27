@@ -1,7 +1,9 @@
 package al.edu.fti.gaming.service.impl;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -67,6 +69,15 @@ public class MotherboardFormFactorServiceImpl implements MotherboardFormFactorSe
 					.add((MotherboardFormFactorDTO) motherboardFormFactorConverter.toDTO(motherboardFormFactor));
 		}
 		return motherboardFormFactorDTOs;
+	}
+
+	@Override
+	public Map<Integer, String> getAllMotherboardFormFactorsMap() {
+		Map<Integer, String> allMotherboardFormFactorsMap = new HashMap<Integer, String>();
+		for (MotherboardFormFactorDTO motherboardFormFactorDTO : getAllMotherboardFormFactors()) {
+			allMotherboardFormFactorsMap.put(motherboardFormFactorDTO.getId(), motherboardFormFactorDTO.getName());
+		}
+		return allMotherboardFormFactorsMap;
 	}
 
 }

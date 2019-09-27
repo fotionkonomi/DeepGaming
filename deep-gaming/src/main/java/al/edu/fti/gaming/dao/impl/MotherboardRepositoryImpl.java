@@ -1,6 +1,7 @@
 package al.edu.fti.gaming.dao.impl;
 
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -35,5 +36,13 @@ public class MotherboardRepositoryImpl implements MotherboardRepository {
 		}
 		return idOrNotSuccessful;
 
+	}
+
+	@Override
+	public Motherboard getMotherboardById(int id) {
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session.createQuery("SELECT m FROM Motherboard m WHERE m.idProduct = :idProduct");
+		query.setInteger("idProduct", id);
+		return (Motherboard) query.uniqueResult();
 	}
 }

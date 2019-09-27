@@ -1,6 +1,7 @@
 package al.edu.fti.gaming.service;
 
 import java.util.List;
+import java.util.Map;
 
 import al.edu.fti.gaming.dto.CpuSocketDTO;
 
@@ -16,6 +17,6 @@ public interface CpuSocketService {
 
 	List<CpuSocketDTO> getCpuSocketsByCompany(String companyName);
 
-
+	Map<Integer, String> getAllCpuSocketsMap();
 
 }

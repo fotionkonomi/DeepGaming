@@ -15,10 +15,15 @@ public class CompanyEditor extends PropertyEditorSupport {
 
 	@Override
 	public void setAsText(String text) {
-		Integer id = Integer.parseInt(text);
-		CompanyDTO companyDTO = this.companyService.getCompanyById(id);
+		try {
+			System.out.println(text);
+			Integer id = Integer.parseInt(text);
+			CompanyDTO companyDTO = this.companyService.getCompanyById(id);
 
-		this.setValue(companyDTO);
+			this.setValue(companyDTO);
+		} catch (NumberFormatException e) {
+			return;
+		}
 	}
 
 }

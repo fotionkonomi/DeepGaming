@@ -105,14 +105,6 @@ public class GameController {
 	public ModelAndView processForm(@ModelAttribute("newGame") @Valid GameDTO gameDTO, BindingResult result,
 			HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
-		System.out.println(gameDTO.getCategoryOfGames().isEmpty());
-		for (CategoryOfGameDTO categoryOfGameDTO : gameDTO.getCategoryOfGames()) {
-			if (categoryOfGameDTO != null) {
-				System.out.println("Teeest" + categoryOfGameDTO.getName());
-			} else {
-				System.out.println("null");
-			}
-		}
 		if (result.hasErrors()) {
 			mav.addObject("newGame", gameDTO);
 			mav.addObject("allCpus", cpuService.getAllCpusMap());

@@ -1,7 +1,9 @@
 package al.edu.fti.gaming.service.impl;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,9 +69,19 @@ public class CpuSocketServiceImpl implements CpuSocketService {
 		return convertList(cpuSocketModels);
 	}
 
+	@Override
+	public Map<Integer, String> getAllCpuSocketsMap() {
+		List<CpuSocketDTO> allCpuSockets = getAllCpuSockets();
+		Map<Integer, String> allCpuSocketsMap = new HashMap<Integer, String>();
+		for (CpuSocketDTO cpuSocketDTO : allCpuSockets) {
+			allCpuSocketsMap.put(cpuSocketDTO.getId(), cpuSocketDTO.getName());
+		}
+		return allCpuSocketsMap;
+	}
+
 	private List<CpuSocketDTO> convertList(List<CpuSocket> cpuSocketModels) {
 		List<CpuSocketDTO> cpuSocketDTOs = new ArrayList<CpuSocketDTO>();
-		for(CpuSocket cpuSocket : cpuSocketModels) {
+		for (CpuSocket cpuSocket : cpuSocketModels) {
 			CpuSocketDTO cpuSocketDTO = (CpuSocketDTO) cpuSocketConverter.toDTO(cpuSocket);
 			if (cpuSocketDTO != null) {
 				cpuSocketDTOs.add(cpuSocketDTO);
