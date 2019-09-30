@@ -21,7 +21,7 @@
 	<br />
 	<center>
 		<a style="text-align: center;"
-			href="<spring:url value="/cpu/cpus?page=1" />"
+			href="<spring:url value="/motherboard/motherboards?page=1" />"
 			class="btn btn-primary"> <spring:message
 				code="error.notFound.goBack" />
 		</a>

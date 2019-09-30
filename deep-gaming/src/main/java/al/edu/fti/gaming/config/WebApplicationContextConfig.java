@@ -33,6 +33,7 @@ import al.edu.fti.gaming.validator.CpuSpeedValidator;
 import al.edu.fti.gaming.validator.CpuValidator;
 import al.edu.fti.gaming.validator.GpuSpeedValidator;
 import al.edu.fti.gaming.validator.GpuValidator;
+import al.edu.fti.gaming.validator.MotherboardValidator;
 import al.edu.fti.gaming.validator.ProductPriceQuantityValidator;
 
 @Configuration
@@ -63,8 +64,6 @@ public class WebApplicationContextConfig extends WebMvcConfigurerAdapter {
 		resource.addBasenames("messages");
 		return resource;
 	}
-	
-
 
 	@Bean
 	public InternalResourceViewResolver getInternalResourceViewResolver() {
@@ -139,6 +138,15 @@ public class WebApplicationContextConfig extends WebMvcConfigurerAdapter {
 		GpuValidator gpuValidator = new GpuValidator();
 		gpuValidator.setSpringValidators(springValidators);
 		return gpuValidator;
+	}
+
+	@Bean
+	public MotherboardValidator motherboardValidator() {
+		Set<Validator> springValidators = new HashSet<>();
+		springValidators.add(new ProductPriceQuantityValidator());
+		MotherboardValidator motherboardValidator = new MotherboardValidator();
+		motherboardValidator.setSpringValidators(springValidators);
+		return motherboardValidator;
 	}
 
 }

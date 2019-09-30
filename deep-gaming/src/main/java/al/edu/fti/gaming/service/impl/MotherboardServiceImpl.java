@@ -1,7 +1,9 @@
 package al.edu.fti.gaming.service.impl;
 
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -12,6 +14,7 @@ import al.edu.fti.gaming.converter.MotherboardConverter;
 import al.edu.fti.gaming.dao.MotherboardRepository;
 import al.edu.fti.gaming.dto.MotherboardDTO;
 import al.edu.fti.gaming.exception.MotherboardNotFoundException;
+import al.edu.fti.gaming.exception.ProductsNotFoundException;
 import al.edu.fti.gaming.models.Motherboard;
 import al.edu.fti.gaming.service.GeneralService;
 import al.edu.fti.gaming.service.MotherboardService;
@@ -44,13 +47,6 @@ public class MotherboardServiceImpl implements MotherboardService {
 		return retVal;
 	}
 
-	@Override
-	public void preMotherboardSave(MotherboardDTO motherboardDTO) throws ParseException {
-		generalService.convertStringToDate(motherboardDTO);
-		motherboardDTO.setProductType(productTypeService.getMotherboardProductType());
-		motherboardDTO.setUploadDate(new Date());
-		motherboardDTO.setEditedDate(new Date());
-	}
 
 	@Override
 	public MotherboardDTO getMotherboardById(int id) {
@@ -60,5 +56,50 @@ public class MotherboardServiceImpl implements MotherboardService {
 		} else {
 			return (MotherboardDTO) motherboardConverter.toDTO(motherboard);
 		}
+	}
+
+	@Override
+	public Long countMotherboardsInStock() {
+		return motherboardRepository.countMotherboardsInStock();
+	}
+
+	@Override
+	public List<MotherboardDTO> getAllMotherboardsInStock(int page, int numberOfItemsOnThePage) {
+		page--;
+		List<Motherboard> motherboardModels = motherboardRepository.getAllMotherboardsInStock(page,
+				numberOfItemsOnThePage);
+		if (motherboardModels == null || motherboardModels.isEmpty()) {
+			throw new ProductsNotFoundException();
+		}
+		return convertList(motherboardModels);
+	}
+
+	private List<MotherboardDTO> convertList(List<Motherboard> motherboardModels) {
+		List<MotherboardDTO> motherboardDTOs = new ArrayList<MotherboardDTO>();
+		for (Motherboard motherboard : motherboardModels) {
+			MotherboardDTO motherboardDTO = (MotherboardDTO) motherboardConverter.toDTO(motherboard);
+			motherboardDTOs.add(motherboardDTO);
+		}
+		return motherboardDTOs;
+	}
+
+	@Override
+	public void update(MotherboardDTO motherboardDTO, int id) throws ParseException {
+		Motherboard motherboard = motherboardRepository.getMotherboardById(id);
+		motherboardDTO.setId(id);
+		generalService.convertStringToDate(motherboardDTO);
+		motherboardDTO.setProductType(productTypeService.getMotherboardProductType());
+		motherboardDTO.setEditedDate(new Date());
+		motherboardDTO.setUploadDate(motherboard.getUploadDate());
+		motherboardRepository.update((Motherboard) motherboardConverter.toModel(motherboardDTO));
+	}
+	
+
+	@Override
+	public void preMotherboardSave(MotherboardDTO motherboardDTO) throws ParseException {
+		generalService.convertStringToDate(motherboardDTO);
+		motherboardDTO.setProductType(productTypeService.getMotherboardProductType());
+		motherboardDTO.setUploadDate(new Date());
+		motherboardDTO.setEditedDate(new Date());
 	}
 }

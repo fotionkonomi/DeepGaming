@@ -48,7 +48,7 @@ public class MotherboardConverter implements Converter {
 		Motherboard motherboard = new Motherboard();
 		MotherboardDTO motherboardDTO = (MotherboardDTO) dtoObject;
 		if (motherboardDTO.getId() != null) {
-			motherboard.setIdProduct(motherboard.getIdProduct());
+			motherboard.setIdProduct(motherboardDTO.getId());
 		}
 		motherboard.setProductName(motherboardDTO.getName());
 		motherboard.setProductDescription(motherboardDTO.getDescription());

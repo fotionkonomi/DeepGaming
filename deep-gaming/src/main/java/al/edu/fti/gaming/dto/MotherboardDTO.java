@@ -1,14 +1,30 @@
 package al.edu.fti.gaming.dto;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+
 public class MotherboardDTO extends ProductDTO {
 
+	@NotNull(message = "{validation.field.required}")
+	@Min(value = 1, message = "{validation.field.min.one}")
 	private Double maximumRamCapacity;
+
+	@NotNull(message = "{validation.field.required}")
+	@Min(value = 1, message = "{validation.field.min.one}")
 	private Integer maximumRamSpeed;
+
+	@NotNull(message = "{validation.field.required}")
 	private CompanyDTO companyOfThisMotherboard;
+
+	@NotNull(message = "{validation.field.required}")
 	private CpuSocketDTO cpuSocketOfThisMotherboard;
+
+	@NotNull(message = "{validation.field.required}")
 	private MotherboardFormFactorDTO formFactorOfThisMotherboard;
+
+	@NotNull(message = "{validation.field.required}")
 	private GpuSlotDTO gpuSlotOfThisMotherboard;
-	
+
 	public MotherboardDTO() {
 		super();
 	}

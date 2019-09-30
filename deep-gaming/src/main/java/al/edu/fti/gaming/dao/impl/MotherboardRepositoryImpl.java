@@ -1,5 +1,7 @@
 package al.edu.fti.gaming.dao.impl;
 
+import java.util.List;
+
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -44,5 +46,44 @@ public class MotherboardRepositoryImpl implements MotherboardRepository {
 		Query query = session.createQuery("SELECT m FROM Motherboard m WHERE m.idProduct = :idProduct");
 		query.setInteger("idProduct", id);
 		return (Motherboard) query.uniqueResult();
+	}
+
+	@Override
+	public Long countMotherboardsInStock() {
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session
+				.createQuery("SELECT count(*) FROM Motherboard m WHERE m.quantity is not NULL or m.quantity != 0");
+		return (Long) query.uniqueResult();
+	}
+
+	@Override
+	public List<Motherboard> getAllMotherboardsInStock(int page, int numberOfItemsOnThePage) {
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session
+				.createQuery("SELECT m FROM Motherboard m WHERE m.quantity is not NULL or m.quantity != 0");
+		if (page != 0) {
+			page = page * numberOfItemsOnThePage;
+		}
+		query.setFirstResult(page);
+		query.setMaxResults(numberOfItemsOnThePage);
+
+		return query.list();
+	}
+
+	@Override
+	public void update(Motherboard motherboard) {
+		Session session = sessionFactory.openSession();
+		Transaction tx = session.getTransaction();
+		try {
+			tx.begin();
+			session.update(motherboard);
+			tx.commit();
+		} catch (HibernateException e) {
+
+			e.printStackTrace();
+			tx.rollback();
+		} finally {
+			session.close();
+		}		
 	}
 }

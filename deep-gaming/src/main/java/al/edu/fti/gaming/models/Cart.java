@@ -29,15 +29,47 @@ public class Cart implements IModel, Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_cart")
 	private Integer idCart;
-	
+
 	@OneToMany(mappedBy = "cart")
 	private List<CartItem> cartItems = new ArrayList<CartItem>();
-	
+
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 	@JoinColumn(name = "id_user", nullable = false)
 	private User user;
-	
+
 	@Column(name = "reserved", nullable = false)
 	private Integer reserved;
-	
+
+	public Integer getIdCart() {
+		return idCart;
+	}
+
+	public void setIdCart(Integer idCart) {
+		this.idCart = idCart;
+	}
+
+	public List<CartItem> getCartItems() {
+		return cartItems;
+	}
+
+	public void setCartItems(List<CartItem> cartItems) {
+		this.cartItems = cartItems;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public Integer getReserved() {
+		return reserved;
+	}
+
+	public void setReserved(Integer reserved) {
+		this.reserved = reserved;
+	}
+
 }

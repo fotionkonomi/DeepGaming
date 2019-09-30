@@ -270,11 +270,13 @@ public class CpuController implements HandlerExceptionResolver {
 		}
 		String pageValue = queryString.substring(indexOfPage + 5, finalIndex);
 		model.addAttribute("page", pageValue);
+		model.addAttribute("noProductInThisPage", messages.get("Cpus.NotFound"));
 		return "cpu/noProductsFound";
 	}
 
 	@ExceptionHandler(CpuNotFoundException.class)
 	public String handleNoProductsFound(Model model, HttpServletRequest request, CpuNotFoundException exception) {
+		model.addAttribute("noProductInThisPage", messages.get("cpu.noCpuFound"));
 		return "cpu/noProductsFound";
 	}
 

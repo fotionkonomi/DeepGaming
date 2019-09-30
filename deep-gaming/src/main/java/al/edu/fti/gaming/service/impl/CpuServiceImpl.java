@@ -201,16 +201,6 @@ public class CpuServiceImpl implements CpuService {
 		return convertList(cpuModels);
 	}
 
-	private List<CpuDTO> convertList(List<CPU> cpuModels) {
-		List<CpuDTO> cpuDTOs = new ArrayList<CpuDTO>();
-		for (CPU cpu : cpuModels) {
-			CpuDTO cpuDTO = (CpuDTO) cpuConverter.toDTO(cpu);
-			cpuDTOs.add(cpuDTO);
-		}
-		return cpuDTOs;
-
-	}
-
 	@Override
 	public Long countOfCpusInStock() {
 		return cpuRepository.countOfCpusInStock();
@@ -253,5 +243,15 @@ public class CpuServiceImpl implements CpuService {
 					+ cpuDTO.getFamilyOfThisCpu().getName() + " " + cpuDTO.getName());
 		}
 		return allCpusMap;
+	}
+
+	private List<CpuDTO> convertList(List<CPU> cpuModels) {
+		List<CpuDTO> cpuDTOs = new ArrayList<CpuDTO>();
+		for (CPU cpu : cpuModels) {
+			CpuDTO cpuDTO = (CpuDTO) cpuConverter.toDTO(cpu);
+			cpuDTOs.add(cpuDTO);
+		}
+		return cpuDTOs;
+
 	}
 }

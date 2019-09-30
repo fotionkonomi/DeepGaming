@@ -70,6 +70,15 @@
 							href="<spring:url value="/company/details?id=${motherboard.companyOfThisMotherboard.id }" />">${motherboard.companyOfThisMotherboard.name }</a></li>
 					</ul>
 
+					<ul class="product-links">
+
+						<li><spring:message code="details.motherboard.formFactor" /></li>
+						<li><a
+							href="<spring:url value="/motherboardFormFactor/details?id=${motherboard.formFactorOfThisMotherboard.id }" /> ">${motherboard.formFactorOfThisMotherboard.name }
+						</a></li>
+
+					</ul>
+
 					<br />
 					<div>
 						<spring:message code="details.moreInformation" />
@@ -77,6 +86,7 @@
 								code="details.clickHere" />
 						</a>
 					</div>
+
 				</div>
 			</div>
 
@@ -114,6 +124,16 @@
 												<div class="table100">
 													<table>
 														<tbody>
+															<tr>
+																<td class="column1"><spring:message
+																		code="addMotherboard.form.cpuSocket.label" /></td>
+																<td class="column2">${motherboard.cpuSocketOfThisMotherboard.name }</td>
+															</tr>
+															<tr>
+																<td class="column1"><spring:message
+																		code="addMotherboard.form.gpuSlotOfThisMotherboard.label" /></td>
+																<td class="column2">${motherboard.gpuSlotOfThisMotherboard.name }</td>
+															</tr>
 															<tr>
 																<td class="column1"><spring:message
 																		code="add.form.maximumRamCapacity.label" /></td>
