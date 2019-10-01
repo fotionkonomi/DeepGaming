@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import al.edu.fti.gaming.converter.GameConverter;
 import al.edu.fti.gaming.dao.GameRepository;
 import al.edu.fti.gaming.dto.GameDTO;
+import al.edu.fti.gaming.exception.GameNotFoundException;
 import al.edu.fti.gaming.models.Game;
 import al.edu.fti.gaming.service.GameService;
 
@@ -31,5 +32,15 @@ public class GameServiceImpl implements GameService {
 		}
 		return retVal;
 
+	}
+	
+	@Override
+	public GameDTO getGameById(int id) {
+		Game game = gameRepository.getGameById(id);
+		if(game == null) {
+			throw new GameNotFoundException(id);
+		} else {
+			return (GameDTO)gameConverter.toDTO(game);
+		}
 	}
 }

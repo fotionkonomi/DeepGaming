@@ -6,5 +6,5 @@ public interface GameRepository {
 
 	int add(Game game);
 	
-	
+	Game getGameById(int id);
 }

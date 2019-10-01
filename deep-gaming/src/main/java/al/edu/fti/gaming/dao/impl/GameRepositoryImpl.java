@@ -1,6 +1,7 @@
 package al.edu.fti.gaming.dao.impl;
 
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -35,5 +36,13 @@ public class GameRepositoryImpl implements GameRepository {
 		}
 		return idOrNotSuccessful;
 
+	}
+
+	@Override
+	public Game getGameById(int id) {
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session.createQuery("SELECT g FROM Game g WHERE g.idProduct = :id");
+		query.setInteger("id", id);
+		return (Game) query.uniqueResult();
 	}
 }
