@@ -40,13 +40,15 @@
 						<div class="product-btns">
 							<button id="${cpu.id }" onclick="pageRedirect(${cpu.id});"
 								class="add-to-compare">
-								<i class="fa fa-exchange"></i><span class="tooltipp"><spring:message code="details.compare" /></span>
+								<i class="fa fa-exchange"></i><span class="tooltipp"><spring:message
+										code="details.compare" /></span>
 							</button>
 							<c:if test="${userCpu != null }">
 								<button id="${cpu.id }"
 									onclick="compareWithYourCpu(${cpu.id}, ${userCpu.id });"
 									class="add-to-compare">
-									<i class="fa fa-arrows-h"></i><span class="tooltipp"><spring:message code="compareWithYourCpu" /> </span>
+									<i class="fa fa-arrows-h"></i><span class="tooltipp"><spring:message
+											code="compareWithYourCpu" /> </span>
 								</button>
 							</c:if>
 
@@ -55,10 +57,16 @@
 
 					</div>
 					<div class="add-to-cart">
-						<button class="add-to-cart-btn">
-							<i class="fa fa-shopping-cart"></i>
-							<spring:message code="details.product.addToCart" />
-						</button>
+						<c:if test="${cpu.quantity > 0 }">
+							<button class="add-to-cart-btn" onclick="addCartItem(${cpu.id});">
+								<i class="fa fa-shopping-cart"></i>
+								<spring:message code="details.product.addToCart" />
+							</button>
+						</c:if>
+
+						<c:if test="${cpu.quantity == 0 }">
+							<h3 style="color:red;">Out Of Stock</h3>
+						</c:if>
 					</div>
 				</div>
 			</div>
@@ -86,6 +94,7 @@
 	<jsp:include page="/WEB-INF/jsp/scripts.jsp" />
 </body>
 <jsp:include page="/WEB-INF/jsp/footer.jsp" />
+<script src="<c:url value="/js/cart.js"></c:url>"></script>
 
 <script>
 function pageRedirect(id) {

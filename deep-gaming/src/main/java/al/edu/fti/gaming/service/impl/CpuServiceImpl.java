@@ -19,6 +19,7 @@ import al.edu.fti.gaming.dto.CpuArchitectureDTO;
 import al.edu.fti.gaming.dto.CpuDTO;
 import al.edu.fti.gaming.dto.CpuFamilyDTO;
 import al.edu.fti.gaming.dto.CpuSocketDTO;
+import al.edu.fti.gaming.dto.ProductTypeDTO;
 import al.edu.fti.gaming.exception.CpuNotFoundException;
 import al.edu.fti.gaming.exception.NoCpuFoundForCpuFamily;
 import al.edu.fti.gaming.exception.ProductsNotFoundException;
@@ -52,6 +53,10 @@ public class CpuServiceImpl implements CpuService {
 	@Autowired
 	@Qualifier("cpuSocketConverter")
 	private Converter cpuSocketConverter;
+
+	@Autowired
+	@Qualifier("productTypeConverter")
+	private Converter productTypeConverter;
 
 	@Autowired
 	private CpuFamilyService cpuFamilyService;
@@ -221,6 +226,7 @@ public class CpuServiceImpl implements CpuService {
 		cpuDTO.setId(cpu.getIdProduct());
 		generalService.convertStringToDate(cpuDTO);
 		cpuDTO.setEditedDate(new Date());
+		cpuDTO.setProductType((ProductTypeDTO) productTypeConverter.toDTO(cpu.getProductType()));
 		cpuDTO.setUploadDate(cpu.getUploadDate());
 		cpuDTO.setFamilyOfThisCpu((CpuFamilyDTO) cpuFamilyConverter.toDTO(cpu.getFamilyOfThisCpu()));
 		cpuDTO.setArchitectureOfThisCpu(

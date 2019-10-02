@@ -39,15 +39,26 @@
 								${motherboard.name }</a>
 						</h3>
 						<h4 class="product-price">$${motherboard.price }</h4>
-					
+
 
 
 					</div>
 					<div class="add-to-cart">
-						<button class="add-to-cart-btn">
-							<i class="fa fa-shopping-cart"></i>
-							<spring:message code="details.product.addToCart" />
-						</button>
+						<c:if test="${motherboard.quantity > 0 }">
+
+							<button class="add-to-cart-btn"
+								onclick="addCartItem(${motherboard.id});">
+								<i class="fa fa-shopping-cart"></i>
+								<spring:message code="details.product.addToCart" />
+							</button>
+						</c:if>
+
+						<c:if test="${motherboard.quantity == 0 }">
+							<h3 style="color: red;">Out Of Stock</h3>
+
+						</c:if>
+
+
 					</div>
 				</div>
 			</div>
@@ -62,7 +73,8 @@
 						href="<spring:url value="/motherboard/motherboards?page=${page } " />">${page }</a></li>
 				</c:if>
 				<c:if test="${page != currentPage }">
-					<li><a href="<spring:url value="/motherboard/motherboards?page=${page } " />">${page }</a></li>
+					<li><a
+						href="<spring:url value="/motherboard/motherboards?page=${page } " />">${page }</a></li>
 				</c:if>
 			</c:forEach>
 
@@ -76,5 +88,6 @@
 </body>
 <jsp:include page="/WEB-INF/jsp/footer.jsp" />
 
+<script src="<c:url value="/js/cart.js"></c:url>"></script>
 
 </html>

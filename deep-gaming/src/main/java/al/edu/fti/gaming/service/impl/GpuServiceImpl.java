@@ -22,6 +22,7 @@ import al.edu.fti.gaming.dto.GpuDTO;
 import al.edu.fti.gaming.dto.GpuFamilyDTO;
 import al.edu.fti.gaming.dto.GpuMemoryTechnologyDTO;
 import al.edu.fti.gaming.dto.GpuSlotDTO;
+import al.edu.fti.gaming.dto.ProductTypeDTO;
 import al.edu.fti.gaming.exception.GpuNotFoundException;
 import al.edu.fti.gaming.exception.NoGpuFoundForGpuFamily;
 import al.edu.fti.gaming.exception.ProductsNotFoundException;
@@ -62,6 +63,10 @@ public class GpuServiceImpl implements GpuService {
 	@Autowired
 	@Qualifier("gpuMemoryTechnologyConverter")
 	private Converter gpuMemoryTechnologyConverter;
+	
+	@Autowired
+	@Qualifier("productTypeConverter")
+	private Converter productTypeConverter;
 
 	@Autowired
 	private GpuFamilyService gpuFamilyService;
@@ -185,6 +190,7 @@ public class GpuServiceImpl implements GpuService {
 		gpuDTO.setId(gpu.getIdProduct());
 		generalService.convertStringToDate(gpuDTO);
 		gpuDTO.setEditedDate(new Date());
+		gpuDTO.setProductType((ProductTypeDTO) productTypeConverter.toDTO(gpu.getProductType()));
 		gpuDTO.setUploadDate(gpu.getUploadDate());
 		gpuDTO.setFamilyOfThisGpu((GpuFamilyDTO) gpuFamilyConverter.toDTO(gpu.getFamilyOfThisGpu()));
 		gpuDTO.setArchitectureOfThisGpu(

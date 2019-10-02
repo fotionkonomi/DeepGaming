@@ -35,4 +35,6 @@ public class CartController {
 		model.addAttribute("cart", cartDTO);
 		return "/cart/details";
 	}
+	
+	
 }

@@ -1,6 +1,7 @@
 package al.edu.fti.gaming.dto;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class CartDTO implements Serializable, IDto {
 
@@ -12,8 +13,10 @@ public class CartDTO implements Serializable, IDto {
 	private Integer id;
 
 	private UserDTO user;
-	
+
 	private Integer reserved;
+
+	private List<CartItemDTO> cartItemDTOs;
 
 	public Integer getId() {
 		return id;
@@ -37,6 +40,14 @@ public class CartDTO implements Serializable, IDto {
 
 	public void setReserved(Integer reserved) {
 		this.reserved = reserved;
+	}
+
+	public List<CartItemDTO> getCartItemDTOs() {
+		return cartItemDTOs;
+	}
+
+	public void setCartItemDTOs(List<CartItemDTO> cartItemDTOs) {
+		this.cartItemDTOs = cartItemDTOs;
 	}
 
 }

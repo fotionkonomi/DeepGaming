@@ -30,7 +30,7 @@
 					</div>
 					<div class="product-body">
 						<p class="product-category">Gpu</p>
-						
+
 
 						<h3 class="product-name">
 							<a href="<spring:url value="/gpu/details?id=${gpu.id} " />">${gpu.familyOfThisGpu.companyOfThisGpuFamily.name }
@@ -38,26 +38,36 @@
 						</h3>
 						<h4 class="product-price">$${gpu.price }</h4>
 						<div class="product-btns">
-							<button id="${gpu.id }" onclick="pageRedirect(${gpu.id});" class="add-to-compare">
-								<i class="fa fa-exchange"></i><span class="tooltipp"><spring:message code="details.compare" /></span>
+							<button id="${gpu.id }" onclick="pageRedirect(${gpu.id});"
+								class="add-to-compare">
+								<i class="fa fa-exchange"></i><span class="tooltipp"><spring:message
+										code="details.compare" /></span>
 							</button>
 							<c:if test="${userGpu != null }">
 								<button id="${cpu.id }"
 									onclick="compareWithYourGpu(${gpu.id}, ${userGpu.id });"
 									class="add-to-compare">
-									<i class="fa fa-arrows-h"></i><span class="tooltipp"><spring:message code="compareWithYourGpu" /> </span>
+									<i class="fa fa-arrows-h"></i><span class="tooltipp"><spring:message
+											code="compareWithYourGpu" /> </span>
 								</button>
 							</c:if>
-							
+
 						</div>
 
 
 					</div>
 					<div class="add-to-cart">
-						<button class="add-to-cart-btn">
-							<i class="fa fa-shopping-cart"></i>
-							<spring:message code="details.product.addToCart" />
-						</button>
+						<c:if test="${gpu.quantity > 0 }">
+
+							<button class="add-to-cart-btn" onclick="addCartItem(${gpu.id});">
+								<i class="fa fa-shopping-cart"></i>
+								<spring:message code="details.product.addToCart" />
+							</button>
+						</c:if>
+
+						<c:if test="${gpu.quantity == 0 }">
+							<h3 style="color: red;">Out Of Stock</h3>
+						</c:if>
 					</div>
 				</div>
 			</div>
@@ -85,6 +95,7 @@
 	<jsp:include page="/WEB-INF/jsp/scripts.jsp" />
 </body>
 <jsp:include page="/WEB-INF/jsp/footer.jsp" />
+<script src="<c:url value="/js/cart.js"></c:url>"></script>
 
 <script>
 function pageRedirect(id) {

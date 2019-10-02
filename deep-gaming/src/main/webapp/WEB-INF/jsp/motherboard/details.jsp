@@ -45,7 +45,7 @@
 							<h3 class="product-price">$${motherboard.price }</h3>
 							<div class="add-to-cart">
 
-								<button class="add-to-cart-btn">
+								<button class="add-to-cart-btn" onclick="addCartItem(${motherboard.id});">
 									<i class="fa fa-shopping-cart"></i>
 									<spring:message code="details.product.addToCart" />
 								</button>
@@ -196,6 +196,7 @@
 	<jsp:include page="/WEB-INF/jsp/scripts.jsp" />
 </body>
 <jsp:include page="/WEB-INF/jsp/footer.jsp" />
+		<script src="<c:url value="/js/cart.js"></c:url>"></script>
 
 
 
