@@ -20,9 +20,9 @@
 
 	<c:forEach items="${reservations }" var="cart">
 		<center>
-			<h2>Reserved by : ${cart.user.username }</h2>
+			<h2 class="table${cart.id }">Reserved by : ${cart.user.username }</h2>
 		</center>
-		<table class="table table-hover">
+		<table class="table table-hover table${cart.id }">
 			<tr>
 				<th>Product</th>
 				<th>Unit price</th>
@@ -51,8 +51,8 @@
 				<td></td>
 				<td>
 					<button id="reserve" type="button" class="btn btn-danger"
-						onclick="deleteAllCartItems(${cart.id})">Cancel Reservation
-					</button>
+						onclick="cancelReservation(${cart.id});">Cancel
+						Reservation</button>
 				</td>
 				<td>
 
@@ -71,6 +71,7 @@
 
 	<jsp:include page="/WEB-INF/jsp/scripts.jsp" />
 
+	<script src="<c:url value="/js/cart.js"></c:url>"></script>
 
 
 </body>

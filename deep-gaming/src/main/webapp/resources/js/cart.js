@@ -76,3 +76,41 @@ function reserve() {
 		});
 	}
 }
+
+function confirmPurchase(idCart) {
+	var result = confirm("Are you sure ?");
+	if(result) {
+		$.ajax({
+			method: "PUT",
+			url: "/deep-gaming/cart-rest/confirmPurchase/" + idCart,
+			success: function() {
+				$(".table" + idCart).css("background", "green");
+				$(".table" + idCart).fadeOut(1000, function() {
+					$(this).remove();
+				});
+			},
+			error: function() {
+				alert("Error");
+			}
+		});
+	}
+}
+
+function cancelReservation(idCart) {
+	var result = confirm("Are you sure ? ");
+	if(result) {
+		$.ajax({
+			method: "DELETE",
+			url: "/deep-gaming/cart-rest/cancelReservation/" + idCart,
+			success: function() {
+				$(".table" + idCart).css("background", "tomato");
+				$(".table" + idCart).fadeOut(1000, function() {
+					$(this).remove();
+				});
+			},
+			error: function() {
+				alert("Error");
+			}
+		});
+	}
+}

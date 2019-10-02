@@ -58,13 +58,13 @@ public class CartRepositoryImpl implements CartRepository {
 		query.setInteger("id", id);
 		return (CartItem) query.uniqueResult();
 	}
-	
+
 	@Override
 	public void deleteCartItem(CartItem cartItem) {
 		Session session = sessionFactory.getCurrentSession();
 		session.delete(cartItem);
 	}
-	
+
 	@Override
 	public void updateCart(Cart cart) {
 		Session session = sessionFactory.getCurrentSession();
@@ -77,5 +77,13 @@ public class CartRepositoryImpl implements CartRepository {
 		Query query = session.createQuery("SELECT c FROM Cart c WHERE c.reserved = :reserved");
 		query.setInteger("reserved", 1);
 		return query.list();
+	}
+
+	@Override
+	public Cart getCartById(int id) {
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session.createQuery("SELECT c FROM Cart c WHERE c.id = :id");
+		query.setInteger("id", id);
+		return (Cart) query.uniqueResult();
 	}
 }

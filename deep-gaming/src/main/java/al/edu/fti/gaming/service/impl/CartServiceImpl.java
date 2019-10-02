@@ -143,4 +143,11 @@ public class CartServiceImpl implements CartService {
 		cartDTO.setReserved(2);
 		cartRepository.updateCart((Cart) cartConverter.toModel(cartDTO));
 	}
+
+	@Override
+	public CartDTO getCartById(int id) {
+		CartDTO cartDTO = (CartDTO) cartConverter.toDTO(cartRepository.getCartById(id));
+		cartDTO.setCartItemDTOs(cartItemsOfACart(cartDTO));
+		return cartDTO;
+	}
 }

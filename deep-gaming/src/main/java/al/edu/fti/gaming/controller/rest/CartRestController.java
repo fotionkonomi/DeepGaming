@@ -80,7 +80,13 @@ public class CartRestController {
 	
 	@PutMapping(value = "/confirmPurchase/{cartId}")
 	public void confirmPurchase(@PathVariable("cartId") Integer id) {
-//		CartDTO cartDTO = cartService.
-//		cartService.confirmPurchase(cartDTO);
+		CartDTO cartDTO = cartService.getCartById(id);
+		cartService.confirmPurchase(cartDTO);
+	}
+	
+	@DeleteMapping(value = "/cancelReservation/{cartId}")
+	public void cancelReservation(@PathVariable("cartId") Integer id) {
+		CartDTO cartDTO = cartService.getCartById(id);
+		cartService.deleteAllCartItemsForACart(cartDTO);
 	}
 }

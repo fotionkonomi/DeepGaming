@@ -30,6 +30,8 @@ public interface CartService {
 	void reserve(CartDTO cartDTO);
 
 	List<CartDTO> getAllReservations();
-	
+
 	void confirmPurchase(CartDTO cartDTO);
+
+	CartDTO getCartById(int id);
 }

@@ -24,5 +24,5 @@ public interface CartRepository {
 	
 	List<Cart> getAllReservations();
  
-	
+	Cart getCartById(int id);
 }
