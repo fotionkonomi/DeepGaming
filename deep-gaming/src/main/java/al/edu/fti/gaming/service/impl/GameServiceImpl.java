@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import al.edu.fti.gaming.converter.GameConverter;
 import al.edu.fti.gaming.dao.GameRepository;
 import al.edu.fti.gaming.dto.GameDTO;
+import al.edu.fti.gaming.dto.GpuDTO;
 import al.edu.fti.gaming.exception.GameNotFoundException;
 import al.edu.fti.gaming.exception.ProductsNotFoundException;
 import al.edu.fti.gaming.models.Game;
@@ -87,5 +88,16 @@ public class GameServiceImpl implements GameService {
 			gameDTOs.add((GameDTO) gameConverter.toDTO(game));
 		}
 		return gameDTOs;
+	}
+
+	@Override
+	public void update(GameDTO gameDTO, int id) throws ParseException {
+		Game game = gameRepository.getGameById(id);
+		gameDTO.setId(game.getIdProduct());
+		generalService.convertStringToDate(gameDTO);
+		gameDTO.setEditedDate(new Date());
+		gameDTO.setProductType(productTypeService.getGameProductType());
+		
+		gameRepository.update((Game) gameConverter.toModel(gameDTO));
 	}
 }

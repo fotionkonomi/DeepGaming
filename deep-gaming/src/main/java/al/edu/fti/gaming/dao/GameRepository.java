@@ -14,4 +14,6 @@ public interface GameRepository {
 	
 	Long countGames();
 	
+	void update(Game game);
+	
 }

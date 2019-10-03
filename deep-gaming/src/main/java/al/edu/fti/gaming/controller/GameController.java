@@ -113,7 +113,7 @@ public class GameController {
 			HttpServletRequest request) throws ParseException {
 		ModelAndView mav = new ModelAndView();
 		if (result.hasErrors()) {
-			
+
 			mav.addObject("newGame", gameDTO);
 			mav.addObject("allCpus", cpuService.getAllCpusMap());
 			mav.addObject("allGpus", gpuService.getAllGpusMap());
@@ -190,11 +190,12 @@ public class GameController {
 			return mav;
 		} else {
 			if (listOfErrorsWithoutImageError.size() == result.getAllErrors().size()) {
-				generalService.imageProcessing(gameDTO,
-						request.getSession().getServletContext().getRealPath("/"), false);
+				generalService.imageProcessing(gameDTO, request.getSession().getServletContext().getRealPath("/"),
+						false);
 			}
-			//meService
-			return null;
+			gameService.update(gameDTO, id);
+			mav.setViewName("redirect:/game/details?id=" + gameDTO.getId());
+			return mav;
 		}
 	}
 

@@ -69,4 +69,18 @@ public class GameRepositoryImpl implements GameRepository {
 		return query.list();
 	}
 
+	@Override
+	public void update(Game game) {
+		Session session = sessionFactory.openSession();
+		try {
+			session.getTransaction().begin();
+			session.update(game);
+			session.getTransaction().commit();
+		} catch (HibernateException e) {
+			session.getTransaction().rollback();
+		} finally {
+			session.close();
+		}
+	}
+
 }
