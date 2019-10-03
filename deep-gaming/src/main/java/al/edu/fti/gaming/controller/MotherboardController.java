@@ -122,8 +122,7 @@ public class MotherboardController {
 			return mav;
 		}
 		motherboardService.preMotherboardSave(motherboardDTO);
-		int add = motherboardService.add(motherboardDTO);
-		System.out.println("Added : " + add);
+		motherboardService.add(motherboardDTO);
 		generalService.imageProcessing(motherboardDTO, request.getSession().getServletContext().getRealPath("/"), true);
 		mav.setViewName("redirect:/motherboard/details?id=" + motherboardDTO.getId());
 		return mav;

@@ -62,15 +62,12 @@
 
 						<!-- Cart -->
 						<div class="dropdown">
-							<a class="dropdown-toggle" data-toggle="dropdown"
+							<a class="dropdown-toggle"  href="<spring:url value="/cart/details" />"
 								aria-expanded="true"> <i class="fa fa-shopping-cart"></i> <span>Your
 									Cart</span>
 							</a>
 						
-								<div class="cart-btns">
-									<a href="<spring:url value="/cart/details" />">View Cart</a> 
-										
-								</div>
+								
 							</div>
 						</div>
 						<!-- /Cart -->

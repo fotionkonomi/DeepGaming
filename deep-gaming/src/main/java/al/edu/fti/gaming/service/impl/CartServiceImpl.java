@@ -108,7 +108,7 @@ public class CartServiceImpl implements CartService {
 	@Override
 	public void deleteCartItem(CartItemDTO cartItem) {
 		ProductDTO productDTO = cartItem.getProduct();
-		productDTO.setQuantity(productDTO.getQuantity() - 1);
+		productDTO.setQuantity(productDTO.getQuantity() + 1);
 		productRepository.updateProduct((Product) productConverter.toModel(productDTO));
 		cartRepository.deleteCartItem((CartItem) cartItemConverter.toModel(cartItem));
 	}

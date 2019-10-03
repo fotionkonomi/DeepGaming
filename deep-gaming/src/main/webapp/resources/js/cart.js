@@ -6,9 +6,11 @@ function addCartItem(idProduct) {
 	$.ajax({
 		method : 'POST',
 		url : "/deep-gaming/cart-rest/addItem/" + idProduct,
-		success : function() {
+		success : function(data) {
 			alert("Product added successfully to the cart");
-			location.reload();
+			if(data == 0) {
+				location.reload();
+			}
 
 		},
 		error : function() {
@@ -29,7 +31,6 @@ function deleteCartItem(idCartItem) {
 				$('#row' + idCartItem).fadeOut(1000, function() {
 					$(this).remove();
 				});
-
 			},
 			error: function() {
 				alert("Error");

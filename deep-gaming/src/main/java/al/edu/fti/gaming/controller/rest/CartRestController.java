@@ -33,8 +33,8 @@ public class CartRestController {
 	private ProductService productService;
 	
 	
-	@PostMapping(value = "/addItem/{productId}")
-	public void addCartItem(@PathVariable("productId") Integer productId) {
+	@PostMapping(value = "/addItem/{productId}", produces = "application/json")
+	public Integer addCartItem(@PathVariable("productId") Integer productId) {
 		UserDetails userLoggedIn = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		UserDTO user = userService.findUserByUsername(userLoggedIn.getUsername());
 		CartDTO cartDTO;
@@ -54,6 +54,7 @@ public class CartRestController {
 			cartItemDTO.setIdCart(cartDTO);
 		}
 		cartService.addCartItem(cartItemDTO);
+		return productDTO.getQuantity() - 1;
 	}
 	
 	@DeleteMapping(value = "/deleteItem/{cartItemId}")

@@ -18,54 +18,46 @@
 	<!-- store products -->
 	<div class="row">
 		<!-- product -->
-		<c:forEach items="${gpus }" var="gpu">
+		<c:forEach items="${games }" var="game">
 
 			<div class="col-md-4 col-xs-6">
 				<div class="product">
 					<div class="product-img">
-						<img src="<c:url value="/img/gpu${gpu.id}.png">
+						<img src="<c:url value="/img/game${game.id}.png">
  </c:url>"
 							height="300px" alt="">
 
 					</div>
 					<div class="product-body">
-						<p class="product-category">Gpu</p>
+						<p class="product-category"><spring:message code="category.game" /></p>
 
 
 						<h3 class="product-name">
-							<a href="<spring:url value="/gpu/details?id=${gpu.id} " />">${gpu.familyOfThisGpu.companyOfThisGpuFamily.name }
-								${gpu.familyOfThisGpu.name } ${gpu.name }</a>
+							<a href="<spring:url value="/game/details?id=${game.id} " />">${game.name}</a>
 						</h3>
-						<h4 class="product-price">$${gpu.price }</h4>
+						<h4 class="product-price">$${game.price }</h4>
 						<div class="product-btns">
-							<button id="${gpu.id }" onclick="pageRedirect(${gpu.id});"
+							<button id="${game.id }"
 								class="add-to-compare">
 								<i class="fa fa-exchange"></i><span class="tooltipp"><spring:message
 										code="details.compare" /></span>
 							</button>
-							<c:if test="${userGpu != null }">
-								<button id="${gpu.id }"
-									onclick="compareWithYourGpu(${gpu.id}, ${userGpu.id });"
-									class="add-to-compare">
-									<i class="fa fa-arrows-h"></i><span class="tooltipp"><spring:message
-											code="compareWithYourGpu" /> </span>
-								</button>
-							</c:if>
+							
 
 						</div>
 
 
 					</div>
 					<div class="add-to-cart">
-						<c:if test="${gpu.quantity > 0 }">
+						<c:if test="${game.quantity > 0 }">
 
-							<button class="add-to-cart-btn" onclick="addCartItem(${gpu.id});">
+							<button class="add-to-cart-btn" onclick="addCartItem(${game.id});">
 								<i class="fa fa-shopping-cart"></i>
 								<spring:message code="details.product.addToCart" />
 							</button>
 						</c:if>
 
-						<c:if test="${gpu.quantity == 0 }">
+						<c:if test="${game.quantity == 0 }">
 							<h3 style="color: red;">Out Of Stock</h3>
 						</c:if>
 					</div>
@@ -79,10 +71,10 @@
 			<c:forEach items="${pageNumbers}" var="page">
 				<c:if test="${page == currentPage }">
 					<li class="active"><a
-						href="<spring:url value="/gpu/gpus?page=${page } " />">${page }</a></li>
+						href="<spring:url value="/game/games?page=${page } " />">${page }</a></li>
 				</c:if>
 				<c:if test="${page != currentPage }">
-					<li><a href="<spring:url value="/gpu/gpus?page=${page } " />">${page }</a></li>
+					<li><a href="<spring:url value="/game/games?page=${page } " />">${page }</a></li>
 				</c:if>
 			</c:forEach>
 
@@ -97,14 +89,6 @@
 <jsp:include page="/WEB-INF/jsp/footer.jsp" />
 <script src="<c:url value="/js/cart.js"></c:url>"></script>
 
-<script>
-function pageRedirect(id) {
-    window.location.href = "/deep-gaming/gpu/chooseGpuToCompare?gpu="+ id;
-  }
-  
-function compareWithYourGpu(id, userGpuId) {
-    window.location.href = "/deep-gaming/gpu/compare?gpu1="+ id + "&gpu2=" + userGpuId;
-  }
-</script>
+
 
 </html>

@@ -1,0 +1,217 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+
+<html>
+<head>
+<jsp:include page="/WEB-INF/jsp/head.jsp" />
+<link type="text/css" rel="stylesheet"
+	href="<c:url value="/css/table.css"/>" />
+
+</head>
+<body>
+	<jsp:include page="/WEB-INF/jsp/body.jsp"></jsp:include>
+	<a href="?id=${game.id }&language=en">English</a>|
+	<a href="?id=${game.id }&language=al">Albanian</a>
+
+	<jsp:include page="/WEB-INF/jsp/navigation.jsp"></jsp:include>
+
+	<div class="section">
+		<!-- container -->
+		<div class="container">
+			<div class="col-md-5 col-md-push-2" style="left: 0.5%">
+				<div class="product-preview">
+					<img width="300px" height="300px"
+						src="<c:url value="/img/game${game.id}.png">
+ </c:url>"
+						alt="${game.name}"> <br /> <a style="text-align: center;"
+						href="<spring:url value="/game/update?id=${game.id }" />"
+						class="btn btn-primary"> <spring:message code="details.update" />
+					</a>
+				</div>
+			</div>
+			<!-- /Product main img -->
+
+
+			<!-- Product details -->
+			<div class="col-md-5" style="width: 58%">
+				<div class="product-details">
+					<h2 style="color: #D10024;" class="product-name">${game.name }</h2>
+
+					<div>
+						<c:if test="${game.price != null && game.quantity != 0}">
+							<h3 class="product-price">$${game.price }</h3>
+							<div class="add-to-cart">
+
+								<button class="add-to-cart-btn"
+									onclick="addCartItem(${game.id});">
+									<i class="fa fa-shopping-cart"></i>
+									<spring:message code="details.product.addToCart" />
+								</button>
+							</div>
+						</c:if>
+						<c:if
+							test="${game.price == null || (game.price != null && game.quantity == 0)}">
+							<h3 class="product-price">
+								<spring:message code="details.product.notInStock" />
+							</h3>
+						</c:if>
+
+					</div>
+
+
+
+					<div></div>
+					<div></div>
+
+					<ul class="product-links">
+						<li><spring:message code="details.game.gameCategories" /></li>
+
+						<c:forEach items="${game.categoryOfGames }" var="category">
+							<li><a
+								href="<spring:url value="/categoryOfGames/details?id=${category.id }" />">${category.name}</a>
+							</li>
+						</c:forEach>
+
+
+					</ul>
+
+
+					<br />
+					<div>
+						<spring:message code="details.moreInformation" />
+						<a href="${game.hyperlink }"> <spring:message
+								code="details.clickHere" />
+						</a>
+					</div>
+
+				</div>
+			</div>
+
+			<!-- Product tab -->
+			<div class="col-md-12">
+				<div id="product-tab">
+					<!-- product tab nav -->
+					<ul class="tab-nav">
+						<li class="active"><a data-toggle="tab" href="#tab1"><spring:message
+									code="add.form.description.label" /></a></li>
+						<li><a data-toggle="tab" href="#tab2"><spring:message
+									code="systemRequirements" /></a></li>
+					</ul>
+					<!-- /product tab nav -->
+
+					<!-- product tab content -->
+					<div class="tab-content">
+						<!-- tab1  -->
+						<div id="tab1" class="tab-pane fade in active">
+							<div class="row">
+								<div class="col-md-12">
+									<p>${game.description }</p>
+								</div>
+							</div>
+						</div>
+						<!-- /tab1  -->
+
+						<!-- tab2  -->
+						<div id="tab2" class="tab-pane fade in">
+							<div class="row">
+								<div class="col-md-12">
+									<div class="limiter">
+										<div class="container-table100">
+											<div class="wrap-table100">
+												<div class="table100">
+													<table>
+														<tbody>
+															<tr>
+																<td class="column1"><spring:message
+																		code="addGame.form.cpuLow.label" /></td>
+																<td class="column2">${game.cpuLow.familyOfThisCpu.companyOfThisCpuFamily.name }
+																	${game.cpuLow.familyOfThisCpu.name  }
+																	${game.cpuLow.name  }</td>
+															</tr>
+															<tr>
+																<td class="column1"><spring:message
+																		code="add.form.ramLow.label" /></td>
+																<td class="column2">${game.ramLow }GB</td>
+															</tr>
+															<tr>
+																<td class="column1"><spring:message
+																		code="addGame.form.gpuLow.label" /></td>
+																<td class="column2">${game.gpuLow.familyOfThisGpu.companyOfThisGpuFamily.name }
+																	${game.gpuLow.familyOfThisGpu.name  }
+																	${game.gpuLow.name  }</td>
+															</tr>
+
+															<tr>
+																<td class="column1"><spring:message
+																		code="addGame.form.cpuMedium.label" /></td>
+																<td class="column2">${game.cpuMedium.familyOfThisCpu.companyOfThisCpuFamily.name }
+																	${game.cpuMedium.familyOfThisCpu.name  }
+																	${game.cpuMedium.name  }</td>
+															</tr>
+															<tr>
+																<td class="column1"><spring:message
+																		code="add.form.ramMedium.label" /></td>
+																<td class="column2">${game.ramMedium }GB</td>
+															</tr>
+															<tr>
+																<td class="column1"><spring:message
+																		code="addGame.form.gpuMedium.label" /></td>
+																<td class="column2">${game.gpuMedium.familyOfThisGpu.companyOfThisGpuFamily.name }
+																	${game.gpuMedium.familyOfThisGpu.name  }
+																	${game.gpuMedium.name  }</td>
+															</tr>
+
+															<tr>
+																<td class="column1"><spring:message
+																		code="addGame.form.cpuHigh.label" /></td>
+																<td class="column2">${game.cpuHigh.familyOfThisCpu.companyOfThisCpuFamily.name }
+																	${game.cpuHigh.familyOfThisCpu.name  }
+																	${game.cpuHigh.name  }</td>
+															</tr>
+															<tr>
+																<td class="column1"><spring:message
+																		code="add.form.ramHigh.label" /></td>
+																<td class="column2">${game.ramHigh }GB</td>
+															</tr>
+															<tr>
+																<td class="column1"><spring:message
+																		code="addGame.form.gpuHigh.label" /></td>
+																<td class="column2">${game.gpuHigh.familyOfThisGpu.companyOfThisGpuFamily.name }
+																	${game.gpuHigh.familyOfThisGpu.name  }
+																	${game.gpuHigh.name  }</td>
+															</tr>
+
+
+															<tr>
+																<td class="column1"><spring:message
+																		code="add.form.releaseDate.label" /></td>
+																<td class="column2">${game.releaseDate }</td>
+
+
+															</tr>
+
+
+														</tbody>
+													</table>
+												</div>
+											</div>
+										</div>
+										<!-- /tab2  -->
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<jsp:include page="/WEB-INF/jsp/scripts.jsp" />
+</body>
+<jsp:include page="/WEB-INF/jsp/footer.jsp" />
+<script src="<c:url value="/js/cart.js"></c:url>"></script>
+
+
+
+</html>

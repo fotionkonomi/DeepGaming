@@ -20,15 +20,15 @@
 
 	<c:forEach items="${reservations }" var="cart">
 		<center>
-			<h2 class="table${cart.id }">Reserved by : ${cart.user.username }</h2>
+			<h2 class="table${cart.id }"><spring:message code="details.cart.reservedBy" />${cart.user.username }</h2>
 		</center>
 		<table class="table table-hover table${cart.id }">
 			<tr>
-				<th>Product</th>
-				<th>Unit price</th>
-				<th>Quantity</th>
-				<th>Price</th>
-				<th>Action</th>
+				<th><spring:message code="details.cart.product" /></th>
+				<th><spring:message code="details.cart.unitPrice" /></th>
+				<th><spring:message code="details.cart.quantity" /></th>
+				<th><spring:message code="details.cart.price" /></th>
+				<th><spring:message code="details.cart.action" /></th>
 			</tr>
 
 			<c:forEach items="${cart.cartItemDTOs }" var="cartItem">
@@ -39,7 +39,7 @@
 					<td>$${cartItem.quantity * cartItem.product.price}</td>
 					<td>
 						<button class="btn btn-danger delete-btn" id=${cartItem.id }
-							onclick="deleteCartItem(${cartItem.id});">Delete item</button>
+							onclick="deleteCartItem(${cartItem.id});"><spring:message code="details.cart.deleteItem" /></button>
 					</td>
 				</tr>
 
@@ -51,15 +51,15 @@
 				<td></td>
 				<td>
 					<button id="reserve" type="button" class="btn btn-danger"
-						onclick="cancelReservation(${cart.id});">Cancel
-						Reservation</button>
+						onclick="cancelReservation(${cart.id});">
+						<spring:message code="details.cart.cancelReservation" /></button>
 				</td>
 				<td>
 
 					<button id="reserve" type="button" class="btn btn-info"
 						onclick="confirmPurchase(${cart.id});">
-						<span class="glyphicon glyphicon-shopping-cart"></span> Confirm
-						Purchase
+						<span class="glyphicon glyphicon-shopping-cart"></span><spring:message code="details.cart.confirmPurchase" /> 
+						
 					</button>
 				</td>
 			</tr>

@@ -16,30 +16,19 @@
 		<c:if test="${not empty cart.cartItemDTOs }">
 			<button id="clearAll" class="btn btn-danger pull-left"
 				onclick="deleteAllCartItems();">
-				<span class="glyphicon glyphicon-remove-sign"></span> Clear Cart
+				<span class="glyphicon glyphicon-remove-sign"></span> <spring:message code="details.cart.clearCart" />
 			</button>
 		</c:if>
 	</div>
 	<table class="table table-hover">
 		<tr>
-			<th>Product</th>
-			<th>Unit price</th>
-			<th>Quantity</th>
-			<th>Price</th>
-			<th>Action</th>
+			<th><spring:message code="details.cart.product" /></th>
+			<th><spring:message code="details.cart.unitPrice" /></th>
+			<th><spring:message code="details.cart.quantity" /></th>
+			<th><spring:message code="details.cart.price" /></th>
+			<th><spring:message code="details.cart.action" /></th>
 		</tr>
-		<%-- 			<c:forEach var=""> --%>
-		<!-- 			<tr ng-repeat="item in cart.cartItems"> -->
-		<!-- 				<td>{{item.product.productId}}-{{item.product.name}}</td> -->
-		<!-- 				<td>{{item.product.unitPrice}}</td> -->
-		<!-- 				<td>{{item.quantity}}</td> -->
-		<!-- 				<td>{{item.totalPrice}}</td> -->
-		<!-- 				<td><a href="#" class="label label-danger" -->
-		<!-- 					ng-click="removeFromCart(item.product.productId)"> <span -->
-		<!-- 						class="glyphicon glyphicon-remove" /></span> Remove -->
-		<!-- 				</a></td> -->
-		<!-- 			</tr> -->
-		<%-- 			</c:forEach> --%>
+		
 		<c:forEach items="${cart.cartItemDTOs }" var="cartItem">
 			<tr class="itemRows" id="row${cartItem.id }">
 				<td>${cartItem.product.name }</td>
@@ -48,7 +37,7 @@
 				<td>$${cartItem.quantity * cartItem.product.price}</td>
 				<td>
 					<button class="btn btn-danger delete-btn" id=${cartItem.id }
-						onclick="deleteCartItem(${cartItem.id});">Delete item</button>
+						onclick="deleteCartItem(${cartItem.id});"><spring:message code="details.cart.deleteItem" /></button>
 				</td>
 			</tr>
 		</c:forEach>
@@ -62,7 +51,7 @@
 				<td>
 
 					<button id="reserve" type="button" class="btn btn-info" onclick="reserve();">
-						<span class="glyphicon glyphicon-shopping-cart"></span> Reserve
+						<span class="glyphicon glyphicon-shopping-cart"></span> <spring:message code="details.cart.reserve" />
 					</button>
 				</td>
 			</tr>
@@ -71,7 +60,7 @@
 
 
 	<a href="<spring:url value="/" />" class="btn btn-default"> <span
-		class="glyphicon-hand-left glyphicon"></span> Continue shopping
+		class="glyphicon-hand-left glyphicon"></span> <spring:message code="details.cart.continueShopping" />
 	</a>
 
 	<jsp:include page="/WEB-INF/jsp/scripts.jsp" />

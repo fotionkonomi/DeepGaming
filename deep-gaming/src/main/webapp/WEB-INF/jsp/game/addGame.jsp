@@ -108,6 +108,21 @@
 					</div>
 				</div>
 
+				<spring:message code="add.form.releaseDate.placeholder"
+					var="releaseDatePlaceholder" />
+
+
+				<div class="form-group">
+					<label class="control-label col-lg-2 col-lg-2" for="releaseDate"><spring:message
+							code="add.form.releaseDate.label" /></label>
+					<div class="col-lg-10">
+						<form:input type="date" id="releaseDate"
+							placeholder="${releaseDatePlaceholder}" path="date"
+							class="form-control" />
+						<form:errors path="date" cssClass="text-danger" />
+
+					</div>
+				</div>
 
 				<div class="form-group">
 					<label class="control-label col-lg-2 col-lg-2"><spring:message
@@ -179,7 +194,7 @@
 							<form:option value="">
 								<spring:message code="addGame.form.gpu.default" />
 							</form:option>
-							<form:options items="${allgpus}" />
+							<form:options items="${allGpus}" />
 						</form:select>
 						<form:errors path="gpuMedium" cssClass="text-danger" />
 
