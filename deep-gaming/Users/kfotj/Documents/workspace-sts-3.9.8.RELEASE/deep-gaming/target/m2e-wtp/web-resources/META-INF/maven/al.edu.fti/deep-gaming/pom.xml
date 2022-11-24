@@ -18,7 +18,7 @@
 		<springframework.version>4.3.0.RELEASE</springframework.version>
 		<javax.servlet-api>3.1.0</javax.servlet-api>
 		<javax.servlet-jstl>1.2</javax.servlet-jstl>
-		<hibernate.version>4.3.5.Final</hibernate.version>
+		<hibernate.version>5.3.20.Final</hibernate.version>
 	</properties>
 
 	<build>
